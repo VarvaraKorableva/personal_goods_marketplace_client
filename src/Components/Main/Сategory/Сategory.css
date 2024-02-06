@@ -1,0 +1,31 @@
+.category-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    width: 110px;
+    height: 140px;
+    margin: 5px;
+    cursor: pointer;
+
+}
+
+.category-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.category-pic:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+.category-title {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.category-title:hover {
+    opacity: 0.7;
+}
