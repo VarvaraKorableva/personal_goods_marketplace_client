@@ -1,11 +1,22 @@
 import './Сategory.css'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+function Category({category, onChooseCategory}) {
 
-function Category({category}) {
+    let { slug } = useParams();
+
+    function handleChoose() {
+        onChooseCategory(category.category_id)
+        console.log(category.category_id)
+    }
+
     return (
-        <li className="category-container">
-            <img src={category.image_url} className="category-pic"></img>
-            <p className="category-title">{category.name}</p>
+        <li className="category-container" >
+            <Link to={`/category/${category.slug}`} onClick={handleChoose} className="category__link">
+                <img src={category.image_url} className="category-pic"></img>
+                <p className="category-title">{category.name}</p>
+            </Link>
         </li>
     )
 }

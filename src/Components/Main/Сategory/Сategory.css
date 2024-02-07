@@ -25,8 +25,14 @@
 
 .category-title {
     font-size: 12px;
+    margin-bottom: 0;
 }
 
 .category-title:hover {
     opacity: 0.7;
+}
+
+.category__link {
+    text-decoration: none;
+    color: black;
 }
