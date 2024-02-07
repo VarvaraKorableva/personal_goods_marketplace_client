@@ -9,7 +9,7 @@ function MainCategories({}) {
             "name": "Clothes, shoes, accessories",
             "is_good": true,
             "parent_id": null,
-            "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+            "image_url": "https://images.unsplash.com/photo-1511556820780-d912e42b4980?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fENsb3RoZXMlMkMlMjBzaG9lcyUyQyUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww"
         },
         {
             "category_id": 3,
@@ -58,7 +58,7 @@ function MainCategories({}) {
             "name": "Products for children",
             "is_good": true,
             "parent_id": null,
-            "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+            "image_url": "https://images.unsplash.com/photo-1484820540004-14229fe36ca4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fFByb2R1Y3RzJTIwZm9yJTIwY2hpbGRyZW58ZW58MHx8MHx8fDA%3D"
         },
         {
             "category_id": 10,
@@ -149,7 +149,7 @@ function MainCategories({}) {
             "name": "Animals",
             "is_good": true,
             "parent_id": null,
-            "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+            "image_url": "https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGRvZ3N8ZW58MHx8MHx8fDA%3D"
         },
         {
             "category_id": 23,
@@ -184,7 +184,7 @@ function MainCategories({}) {
             "name": "Transport and spare parts",
             "is_good": true,
             "parent_id": null,
-            "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+            "image_url": "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODB8fGNhcnxlbnwwfHwwfHx8MA%3D%3D"
         },
         {
             "category_id": 28,
@@ -212,7 +212,7 @@ function MainCategories({}) {
             "name": "Services",
             "is_good": false,
             "parent_id": null,
-            "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+            "image_url": "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fFNlcnZpY2VzfGVufDB8fDB8fHww"
         },
         {
             "category_id": 32,
@@ -374,6 +374,55 @@ function MainCategories({}) {
             "is_good": false,
             "parent_id": 31,
             "image_url": "https://images.unsplash.com/photo-1618278559289-d2070c065a17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODN8fGNhdCUyMG9uJTIwZ3JleSUyMGJhY2tncmF1bmR8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            "category_id": 56,
+            "name": "Books",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1463320726281-696a485928c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fGJvb2tzfGVufDB8fDB8fHww"
+        },
+        {
+            "category_id": 57,
+            "name": "Plants",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1521334884684-d80222895322?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBsYW50c3xlbnwwfHwwfHx8MA%3D%3D"
+        },
+        {
+            "category_id": 58,
+            "name": "Art",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFydHxlbnwwfHwwfHx8MA%3D%3D"
+        },
+        {
+            "category_id": 59,
+            "name": "Handmade",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1632649027900-389e810204e6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aGFuZG1hZGV8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+            "category_id": 60,
+            "name": "Homemade food",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1500816558239-6b91f4256ead?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvbWVtYWRlJTIwZm9vZHxlbnwwfHwwfHx8MA%3D%3D"
+        },
+        {
+            "category_id": 61,
+            "name": "Furniture",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnVybml0dXJlfGVufDB8fDB8fHww"
+        },
+        {
+            "category_id": 62,
+            "name": "Electronics",
+            "is_good": true,
+            "parent_id": null,
+            "image_url": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fGVsZWN0cm9uaWNzJTIwc3RvcmV8ZW58MHx8MHx8fDA%3D"
         }
     ]
 

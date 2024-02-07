@@ -6,6 +6,7 @@ import { LanguageContext, LanguageProvider } from './contexts/TranslationContext
 import Registration from './Components/Registration/Registration'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
+import Footer from './Components/Footer/Footer'
 import './App.css'
 
 function App() {
@@ -191,7 +192,7 @@ function App() {
     
       <Footer/>*/}
       </Routes>
-
+      <Footer></Footer>
     </div>
     </CurrentUserContext.Provider>  
     </LanguageProvider>

@@ -36,10 +36,8 @@ return (
       {isLoggin ?//&& location.pathname === `/users/`${userId}
         <div className='header_wrapper'>
           <button className='header_add-announcement-btn'>Place an ad</button>
-          <button className='header_LogOut-btn' onClick={signOut}>{translatedContext.logout}</button>
-          
+          <button className='header_add-announcement-btn'>My page</button>
         </div>
-        
       :  
       isLoggin ?
         <div className='header_wrapper'>
