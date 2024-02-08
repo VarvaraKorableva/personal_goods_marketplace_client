@@ -60,13 +60,10 @@ function App() {
     })
     .then((data) => {
       setCurrentUser(data)
-      
-    })  
-    .then(() => {
       setMyAds([]);
       setIsLoggin(true)
       navigate(`/`)
-    }) 
+    })  
     .catch((err) => {
       if (err.status === 409 || 11000) {
         setIsError(true)
@@ -81,6 +78,41 @@ function App() {
       }
     })
   }
+
+  function handleLoginSubmit(userData){
+    Api.authorize({
+      password: userData.password, 
+      email: userData.email
+    })
+    .then ((res) => {
+      setCurrentUser(res)
+      setIsLoggin(true)
+      Api.getCategory()
+        .then((data) => {
+          setCategories(data)
+          navigate(`/`)
+        })
+    })  
+    .catch((err) => {
+      console.log(err)
+      if (err.status === 401 || 11000) {
+        setIsLoginError(true)
+        setErrorLoginMessage('One of the two does not fit.');
+        setTimeout(function(){
+          setErrorLoginMessage('')
+          //setIsLoginError(false)
+        }, 4000)
+      } else {
+        setIsLoginError(true)
+        setErrorLoginMessage('The server encountered an error. Please try again later.')
+        setTimeout(function(){
+          setErrorLoginMessage('')
+          //setIsLoginError(false)
+        }, 5000)
+      }
+      //401
+    })
+}
 
   function handleAddAdSubmit(formData) {
     /*axios.post('http://localhost:3000/dreams', formData, {
@@ -135,7 +167,7 @@ function App() {
         <Route
         path="/signin"
         element={
-        <Login
+        <Login onLogin={handleLoginSubmit}
         />
         }>
         </Route>
@@ -244,6 +276,7 @@ function App() {
         isOpen={isAddAdPopup}
         onClose={closeAllPopups}
         onAddAd={handleAddAdSubmit}
+        categories={categories}
       /> 
       <Footer></Footer>
     </div>

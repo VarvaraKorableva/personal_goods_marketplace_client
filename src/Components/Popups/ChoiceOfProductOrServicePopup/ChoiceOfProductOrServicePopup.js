@@ -13,10 +13,10 @@ return (
       type="button" 
       onClick={onClose}>
     </button>
-    <h2 className="add-dream-popup__title"></h2>
-    <div className='add-dream-popup__form'>
-        <button onClick={onAdBtn}>Goods</button>
-        <button>Services</button>
+    <h2 className="popup__title-ChoiceOfProductOrServicePopup">What ad would you like to add?</h2>
+    <div className='popup__container-ChoiceOfProductOrServicePopup'>
+        <button onClick={onAdBtn} className='popup_choice_btn'>Goods</button>
+        <button className='popup_choice_btn'>Services</button>
     </div>  
     </div>
     </div>

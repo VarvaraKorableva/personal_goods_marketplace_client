@@ -4,12 +4,14 @@ import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/Popups/addAdPopup'
 
-function AddAdPopup({onClose, isOpen, onAddDream}) {
+function AddAdPopup({onClose, isOpen, onAddDream, categories}) {
+
+  //добавить сити как колонку в айтемс !!!!
     /*
     title, owner_id, category_id, city_id, 
     price, size, color, condition, 
     year_of_manufacture, description
-    */
+    */ 
 
   const [isValid, setIsValid] = React.useState(false)
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
@@ -23,16 +25,20 @@ function AddAdPopup({onClose, isOpen, onAddDream}) {
   const [errorImg, setErrorImg] = React.useState(true)
   const [errorPrice, setErrorPrice] = React.useState(true)
   const [errorDreamLink, setErrorDreamLink] = React.useState(true)
-
-  const [name, setName] = React.useState('')
+  
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState('')
+  const [title, setTitle] = React.useState('')
+  const [city, setCity] = React.useState('')
   const [img, setImg] = React.useState(null)
   const [price, setPrice] = React.useState('')
-  const [dreamLink, setDreamLink] = React.useState('')
+  const [description, setDescription] = React.useState('')
   const [buttonText, setButtonText] = React.useState('Upload picture');
 
   const addDreamRef = React.useRef(null);
 
   const currentUser = React.useContext(CurrentUserContext)
+  const owner_id = currentUser.user_id
+
   const { language } = React.useContext(LanguageContext)
 
   const { en, rus, hebrew } = choose;
@@ -56,90 +62,32 @@ function AddAdPopup({onClose, isOpen, onAddDream}) {
     setImg(e.target.files[0]);
   }
 
-  function handleDreamLinkChange(e) {
-    /*const validLink = /^(http|https):\/\/[^\s/$.?#].[^\s]*$/;
-    const inputLink = e.target.value;
-    
-    if (validLink.test(inputLink)) {
-      setDreamLink(inputLink);
-      setErrorDreamLink(false);
-      setErrorDreamLinkMessage('');
-    } else if (e.target.value === ""){
-      setErrorDreamLink(false);
-      setErrorDreamLinkMessage('');
-      setDreamLink('');
-    } else {
-      setErrorDreamLink(true);
-      setErrorDreamLinkMessage(translatedContext.errorDreamLinkMessage.invalidLink);
-      setDreamLink('');
-    }*/
+  function handledesDriptionChange(e) {
+
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (img) {
-      const userId = currentUser._id;
-      const formData = new FormData();
-      
-      formData.append('userId', userId);
-      formData.append('name', name);
-      formData.append('image', img);
-      formData.append('price', price);
-      formData.append('dreamLink', dreamLink);
-  
-      onAddDream(formData);
-
-
-      setName('')
-      setImg(null)
-      setPrice('')
-      setDreamLink('')
-
-      setErrorName(true)
-      setErrorImg(true)
-      setErrorPrice(true)
-      setErrorDreamLink(true)
-      onClose()
-      handleFormReset()
-      setIsValid(false)
-    } else {
-      console.log('Файл не выбран');
-    }
+      onAddDream({
+        title,
+        owner_id,
+        category_id: selectedCategoryId,
+        city,
+        price,
+        description
+      });
   }
 
   const handleFormReset = () => {
     formRef.current.reset();
   };
 
-  const handleNameChange = (e) => {
-    /*const validName = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u.test(
-      e.target.value
-    )
-    if (!e.target.value.length) {
-      setErrorNameMessage(translatedContext.errorNameMessage.nameFieldMustBeFilledIn)
-      setErrorName(true);
-      setIsValid(false)
-     } else if (e.target.value.length < 2) {
-      setErrorNameMessage(translatedContext.errorNameMessage.nameMustBeAtLeastCharactersLong)
-      setErrorName(true);
-      setIsValid(false)
-     } else if (!validName) {
-      setErrorNameMessage(translatedContext.errorNameMessage.nameShouldOnlyContainLatinLettersCyrillicLettersSpacesOrHyphens)
-      setErrorName(true);
-      setIsValid(false)
-     } else if (e.target.value.length > 30) {
-      setErrorNameMessage(translatedContext.errorNameMessage.nameShouldNotExceedCharacters)
-      setErrorName(true);
-      setIsValid(false)
-     } else {
-      setErrorNameMessage('')
-      setErrorName(false);
-     }
-     setName(e.target.value[0].toUpperCase() + e.target.value.slice(1));*/
+  const handleTitleChange = (e) => {
+
   }
 
   const handlePriceChange = (e) => {
-    const inputValue = e.target.value;
+    /*const inputValue = e.target.value;
     const numericValue = Number(inputValue);
   
     if (isNaN(numericValue) || inputValue.includes(' ')) {
@@ -166,30 +114,18 @@ function AddAdPopup({onClose, isOpen, onAddDream}) {
       setErrorPriceMessage('');
       setErrorPrice(false);
       setPrice(e.target.value.replaceAll(' ', '')) //чтобы создать расстояние между цифрами- 20 000
-    }
+    }*/
+  };
+
+  const handleCityChange = (e) => {
+
+  }
+
+  const handleSelectChange = (e) => {
+    setSelectedCategoryId(e.target.value)
   };
 
   function checkValid(img) {
-  /*if (!img) {
-    return setIsValid(false)
-    //setImg(null)
-    
-  }
-
-  const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-  const isValidExtension = allowedExtensions.test(img.name);
-
-  if (!isValidExtension) {
-    setImg(null)
-    setErrorImg(true);
-    setErrorImgMessage(translatedContext.img.errorImgMessage);
-    setButtonText(translatedContext.img.buttonTextUploadPictureOfYourDream)
-    //setIsValid(false);
-  } else {
-    setErrorImg(false);
-    setErrorImgMessage('');
-    setButtonText(translatedContext.img.buttonTextUploaded)
-  }*/
 }
 
 React.useEffect(() => {
@@ -216,41 +152,65 @@ return (
     </button>
     <h2 className="add-dream-popup__title">{translatedContext.popupName}</h2>
       <form 
-        ref={formRef}
         className='add-dream-popup__form'
-        onSubmit={handleSubmit}
-        encType="multipart/form-data">
+        onSubmit={handleSubmit}>
+        <label className='add-dream-popup__inputname'>Choise category<span className='add-dream-popup__inputname-span'>*</span></label> 
+
+        <select className='popup__select' onChange={handleSelectChange}>
+          {categories.filter((category) => (category.is_good)).map((item) => (
+            <option key={item.category_id} value={item.category_id}>{item.name}</option>
+          ))}
+        </select>
+
         <label className='add-dream-popup__inputname'>{translatedContext.nameOfDream}<span className='add-dream-popup__inputname-span'>*</span>  
           <input
             className='add-dream-popup__input'
-            name='name'
+            name='title'
             type='text'
-            onInput={handleNameChange}
-            onChange={handleNameChange}
+            value={title}
+            //onInput={handleTitleChange}
+            onChange={handleTitleChange}
           ></input>
         </label>
         <span className='add-dream-popup__inputmistake'>{errorNameMessage}</span>
-        <label className='add-dream-popup__inputname'>{translatedContext.linkToDream}
+
+        <label className='add-dream-popup__inputname'>Add a description here</label>
           <input
             className='add-dream-popup__input'
-            name='dreamLink'
-            type='url'
-            onInput={handleDreamLinkChange}
-            onChange={handleDreamLinkChange}
+            name='description'
+            type='text'
+            value={description}
+            //onInput={handledesDriptionChange}
+            onChange={handledesDriptionChange}
           ></input>
-         </label>
+         
         <span className='add-dream-popup__inputmistake'>{errorDreamLinkMessage}</span>
-        <label className='add-dream-popup__inputname'>{translatedContext.priceOfDream}<span className='add-dream-popup__inputname-span'>*</span>
+
+        <label className='add-dream-popup__inputname'>Price<span className='add-dream-popup__inputname-span'>*</span>
           <input
             className='add-dream-popup__input'
             name='price'
             type='text'
-            onInput={handlePriceChange}
+            value={price}
+            //onInput={handlePriceChange}
             onChange={handlePriceChange}
           ></input>
         </label>
         <span className='add-dream-popup__inputmistake'>{errorPriceMessage}</span>
-        <label className='add-dream-popup__inputname'>{translatedContext.pictureOfDream}<span className='add-dream-popup__inputname-span'>*</span>
+
+        <label className='add-dream-popup__inputname'>Where can you give the goods (city)<span className='add-dream-popup__inputname-span'>*</span>
+          <input
+            className='add-dream-popup__input'
+            name='city'
+            type='text'
+            value={city}
+            //onInput={handleCityChange}
+            onChange={handleCityChange}
+          ></input>
+        </label>
+        <span className='add-dream-popup__inputmistake'>{errorPriceMessage}</span>
+
+        <label className='add-dream-popup__inputname'>Add pictures</label>
         <button 
           onClick={() => addDreamRef.current.click()}
           className='add-dream-popup__input-btn'
@@ -267,10 +227,9 @@ return (
           hidden
         ></input>
 
-        </label>
         <span className='add-dream-popup__inputmistake'>{errorImgMessage}</span>
         <button 
-          className={`${isValid? 'add-dream-popup__btn_active': 'add-dream-popup__btn'}`}
+          className={`${isValid? 'add-ad-popup__btn_active': 'add-ad-popup__btn'}`}
           type='submit'
           disabled={!isValid}  
           >
