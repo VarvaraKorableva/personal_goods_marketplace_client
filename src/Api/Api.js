@@ -8,8 +8,8 @@ export const checkResponse = (res) => {
     }
 };
 
-export const register = ( {username, email, password, phone} ) => {
-  return fetch(`${BASE_URL}/signup`, {
+export const register = ( {username, email, password} ) => {
+  return fetch(`${BASE_URL}/users/signup`, {
     credentials: 'include',
     method: 'POST',
     headers: {
@@ -19,8 +19,7 @@ export const register = ( {username, email, password, phone} ) => {
     body: JSON.stringify({
       username: username,
       email: email,
-      password: password,
-      phone: phone, 
+      password: password
       })
   }).then((res) => {
     console.log(res);
@@ -29,7 +28,7 @@ export const register = ( {username, email, password, phone} ) => {
 }; 
 
 export const authorize = ( {email, password} ) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${BASE_URL}/users/signin`, {
       credentials: 'include',
       method: "POST",
       headers: {

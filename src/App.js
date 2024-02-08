@@ -12,6 +12,8 @@ import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
 import Category from './Components/Main/Сategory/Сategory';
+import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
+import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
@@ -23,12 +25,14 @@ function App() {
   const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
   const [isError, setIsError] = React.useState(false)
   const [isLoginError, setIsLoginError] = React.useState(false)
+  const [isAddAdPopup, setIsAddAdPopup] = React.useState(false)
+  const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
 
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
 
-  const userId = currentUser._id
+  const userId = currentUser.user_id
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -50,16 +54,18 @@ function App() {
 
   function handleRegSubmit(userData) {
     Api.register({
-      password: userData.password,
+      username:userData.username,
       email: userData.email,
-      name:userData.name
+      password: userData.password,
     })
     .then((data) => {
-      setCurrentUser(data.user)
+      setCurrentUser(data)
+      
     })  
     .then(() => {
       setMyAds([]);
       setIsLoggin(true)
+      navigate(`/`)
     }) 
     .catch((err) => {
       if (err.status === 409 || 11000) {
@@ -76,17 +82,52 @@ function App() {
     })
   }
 
+  function handleAddAdSubmit(formData) {
+    /*axios.post('http://localhost:3000/dreams', formData, {
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then((res) => {
+        setDreams([res.data, ...dreams]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });*/
+  }
+
+  function handleAddAdClick(){
+    setIsAddAdPopup(true)
+  }
+
+  function handleChoiceOfProductOrServicePopupClick(){
+    setIsChoiceOfProductOrServicePopup(true)
+  }
+
+  function closeAllPopups() {
+    setIsAddAdPopup(false)
+    setIsChoiceOfProductOrServicePopup(false)
+    /*setIsAddNewDatePopup(false)
+    setIsLanguageChangePopup(false)
+    setIsEditDreamPopup(false)
+    setSelectedDream({})
+    setSelectedMotan({})*/
+  }
+
   return (
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
     <div className='App'>
-      <Header></Header>
+      <Header isLoggin={isLoggin} onAdPopup={handleChoiceOfProductOrServicePopupClick}></Header>
 
       <Routes>
         <Route
         path="/signup"
         element={
-        <Registration
+        <Registration onRegister={handleRegSubmit}
         />
         }>
         </Route>
@@ -112,25 +153,18 @@ function App() {
             <Main subCategories={subCategories}/>
           }
         />
-{/*
+
         <Route
-        exact path={`/users/${userId}`}
-        element={
-          <ProtectedRoute isLoggin={isLoggin}>
-            <MyPage
-              addPopupOpen={handleAddDreamClick}
-              OnDeleteMyDream={handleDeleteDream}
-              OnEditMyDream={handleEditDreamClick}
-              dreams={dreams}
-              onCardClick={handleDreamClick}
-              onImgToChangeAvatar={handleChangeAvatarClick}
-              addDreams={addDreams}
-              limit={limit}
-            />
-          </ProtectedRoute>
-        }>
+          exact path={`/users/${userId}`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <MyPage
+              
+              />
+            </ProtectedRoute>
+          }>
         </Route>  
-        
+{/*        
         <Route 
         path='/users/:id' 
         element={
@@ -201,6 +235,16 @@ function App() {
     
       <Footer/>*/}
       </Routes>
+      <ChoiceOfProductOrServicePopup
+        isOpen={isChoiceOfProductOrServicePopup}
+        onClose={closeAllPopups}
+        onAdBtn={handleAddAdClick}
+      /> 
+      <AddAdPopup
+        isOpen={isAddAdPopup}
+        onClose={closeAllPopups}
+        onAddAd={handleAddAdSubmit}
+      /> 
       <Footer></Footer>
     </div>
     </CurrentUserContext.Provider>  

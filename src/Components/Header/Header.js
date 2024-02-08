@@ -5,11 +5,11 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 
-function Header({signOut, onChangeLanguageClick}) {
+function Header({isLoggin, signOut, onChangeLanguageClick, onAdPopup}) {
   
 const currentUser = React.useContext(CurrentUserContext)
-const isLoggin = true
-//const userId = currentUser._id
+
+const userId = currentUser.user_id
 
 const location = useLocation();
 
@@ -26,6 +26,10 @@ if (language === 'en') {
   translatedContext = hebrew;
 }
 
+function handleAddAdClick() {
+  onAdPopup()
+}
+
 return (
   <div className='header_container'>
     <div className='header'>
@@ -35,8 +39,10 @@ return (
     <div className='header__langpic-container'>
       {isLoggin ?//&& location.pathname === `/users/`${userId}
         <div className='header_wrapper'>
-          <button className='header_add-announcement-btn'>Place an ad</button>
-          <button className='header_add-announcement-btn'>My page</button>
+          <button className='header_add-announcement-btn' onClick={handleAddAdClick}>Place an ad</button>
+          <Link to={`/users/${userId}`}>
+            <button className='header_add-announcement-btn'>My page</button>
+          </Link>
         </div>
       :  
       isLoggin ?
