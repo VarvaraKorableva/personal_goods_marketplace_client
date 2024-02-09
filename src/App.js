@@ -60,6 +60,10 @@ function App() {
     setSubCategories(categories.filter((item) => item.parent_id === category_id))
   } 
 
+  function goToCategory(slug) {
+    setSubCategories(categories.filter((item) => item.slug === slug))
+  } 
+
   function handleRegSubmit(userData) {
     Api.register({
       username:userData.username,
@@ -206,7 +210,9 @@ function App() {
         <Route 
           path='/category/:slug' 
           element={
-            <CategoryPage subCategories={subCategories}/>
+            <CategoryPage 
+              categories={categories}
+            />
           }
         />
 
@@ -217,7 +223,6 @@ function App() {
               <MyPage
                 getMyItems={getMyItems}
                 myAds={myAds}
-              
               />
             </ProtectedRoute>
           }>
