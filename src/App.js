@@ -14,6 +14,7 @@ import './App.css'
 import Category from './Components/Main/Сategory/Сategory';
 import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
+import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
@@ -27,6 +28,8 @@ function App() {
   const [isLoginError, setIsLoginError] = React.useState(false)
   const [isAddAdPopup, setIsAddAdPopup] = React.useState(false)
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
+  const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
+  const [popupMessage, setPopupMessage] = React.useState('')
 
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
@@ -85,7 +88,8 @@ function App() {
       email: userData.email
     })
     .then ((res) => {
-      setCurrentUser(res)
+      console.log(res.user[0])
+      setCurrentUser(res.user[0])
       setIsLoggin(true)
       Api.getCategory()
         .then((data) => {
@@ -112,23 +116,31 @@ function App() {
       }
       //401
     })
-}
+  }
 
-  function handleAddAdSubmit(formData) {
-    /*axios.post('http://localhost:3000/dreams', formData, {
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+  function getMyItems(owner_id) {
+    Api.getUserItems(owner_id)
+    .then((res) => {
+      setMyAds(res)
     })
-      .then((res) => {
-        setDreams([res.data, ...dreams]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      });*/
+  }
+
+  function handleAddAdSubmit(data) {
+    Api.createItem(data)
+    .then((res)=> {
+      closeAllPopups()
+      setPopupMessage("Ad added successful!")
+      openSuccessfulActionPopup()
+    })
+    .catch((err)=> {
+      closeAllPopups()
+      setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
+    })
+  }
+
+  function openSuccessfulActionPopup() {
+    setSuccessfulActionPopup(true)
   }
 
   function handleAddAdClick(){
@@ -142,11 +154,8 @@ function App() {
   function closeAllPopups() {
     setIsAddAdPopup(false)
     setIsChoiceOfProductOrServicePopup(false)
-    /*setIsAddNewDatePopup(false)
-    setIsLanguageChangePopup(false)
-    setIsEditDreamPopup(false)
-    setSelectedDream({})
-    setSelectedMotan({})*/
+    setSuccessfulActionPopup(false)
+    setPopupMessage("")
   }
 
   return (
@@ -191,6 +200,8 @@ function App() {
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
+                getMyItems={getMyItems}
+                myAds={myAds}
               
               />
             </ProtectedRoute>
@@ -278,6 +289,12 @@ function App() {
         onAddAd={handleAddAdSubmit}
         categories={categories}
       /> 
+
+      <SuccessfulActionPopup 
+        isOpen={isSuccessfulActionPopup}
+        onClose={closeAllPopups}
+        popupMessage={popupMessage}
+      />
       <Footer></Footer>
     </div>
     </CurrentUserContext.Provider>  

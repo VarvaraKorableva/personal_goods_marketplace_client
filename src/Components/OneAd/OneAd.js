@@ -1,6 +1,11 @@
 function OneAd({item}) {
     return(
-        <li></li>
+        <li>
+            <p>{item.title}</p>
+            <p>{item.description}</p>
+            <p>{item.price}</p>
+
+        </li>
     )
 }
 

@@ -5,11 +5,11 @@ function ChoiceOfProductOrServicePopup({onClose, isOpen, onAdBtn}) {
 
 return (
     
-    <div className={`add-dream-popup ${isOpen && 'add-dream-popup__opened'}`}>
+    <div className={`popup ${isOpen && 'popup__opened'}`}>
 
-    <div className="add-dream-popup__container">
+    <div className="popup__container">
     <button 
-      className="add-dream-popup__close-button" 
+      className="popup__close-button" 
       type="button" 
       onClick={onClose}>
     </button>

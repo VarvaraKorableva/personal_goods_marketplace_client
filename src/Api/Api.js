@@ -44,7 +44,7 @@ export const authorize = ( {email, password} ) => {
 };
 
 export const getContent = () => {
-    return fetch(`${BASE_URL}/users/me`, {
+    return fetch(`${BASE_URL}/items`, {
         credentials: 'include',
         method: "GET",
         headers: {
@@ -67,3 +67,80 @@ export const getCategory = () => {
     })
         .then(checkResponse) 
 };
+
+export const createItem = (data) => {
+  return fetch(`${BASE_URL}/items`, {
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category_id: data.category_id,
+      title: data.title,
+      owner_id: data.owner_id,
+      city: data.city,
+      price: data.price,
+      description: data.description,
+      size: data.size,
+      color: data.color, 
+      condition: data.condition,        
+    })
+  })
+    .then(checkResponse);
+}
+
+export const getUserItems = (owner_id) => {
+  return fetch(`${BASE_URL}/items/userId/${owner_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const getItemsByCategory = (category_id) => {
+  return fetch(`${BASE_URL}/items/categoryId/${category_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const getLastForty = () => {
+  return fetch(`${BASE_URL}/items/all`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const deleteItem = (item_id) => {
+  return fetch(`${BASE_URL}/items/${item_id}`, {
+      credentials: 'include',
+      method: "DELETE",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+/*
+item_router.get('/categoryId/:category_id', getAllItemsByCategoryId)
+item_router.get('/userId/:owner_id', getAllItemsByUserId)
+item_router.get('/all', getAllItems) //установить лимит на 40 последних 
+item_router.post('/', createItem)
+item_router.delete('/item_id', deleteItem)*/

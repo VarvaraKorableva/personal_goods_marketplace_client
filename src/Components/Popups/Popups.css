@@ -1,10 +1,10 @@
-.add-dream-popup__container {
+.popup__container {
     display: flex;
     flex-direction: column;
     position: relative;
   }
   
-  .add-dream-popup {
+  .popup {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,7 +21,7 @@
       box-sizing: border-box;
   }
   
-  .add-dream-popup__opened {
+  .popup__opened {
       display: flex;
       margin: auto;
       justify-content: center;
@@ -39,7 +39,7 @@
       transition: visibility 1s, opacity 1s;
     }
   
-    .add-dream-popup__close-button {
+    .popup__close-button {
       background-image: url(../../images/Close_Icon.png);
       width: 32px;
       height: 32px;
@@ -56,22 +56,22 @@
     }
 
     @media screen and (max-width: 600px) {
-      .add-dream-popup__close-button {
+      .popup__close-button {
         right: -30px;
         top: -10px;
       }
     }  
     
-    .add-dream-popup__close-button:hover {
+    .popup__close-button:hover {
       opacity: 60%;
       transition: 0.5s ease;
     }
   
-    .add-dream-popup__title {
+    .popup__title {
       color: #fff;
     }
   
-    .add-dream-popup__form {
+    .popup__form {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -89,7 +89,7 @@
     }
     
     @media screen and (max-width: 600px) {
-      .add-dream-popup__form {
+      .popup__form {
         width: calc(282px - (22px*2));
         min-height: calc(322px - (25px*2));
         padding-left: 22px;
@@ -99,7 +99,7 @@
       }
     }  
   
-    .add-dream-popup__input {
+    .popup__input {
       color: black;
       width: 100%;
       height: 46px;
@@ -114,17 +114,17 @@
       box-sizing: border-box;
     }
     
-    .add-dream-popup__input:hover {
+    .popup__input:hover {
       border: 2px solid rgba(0, 0, 0, 0.6);
     } 
   
-    .add-dream-popup__input::placeholder {
+    .popup__input::placeholder {
       color: rgba(0, 0, 0, 0.6);
       font-size: 12px;
       padding: 3px;
     }
   
-  .add-dream-popup__input-btn {
+  .popup__input-btn {
       color: rgba(0, 0, 0, 0.6);
       width: 100%;
       height: 46px;
@@ -139,7 +139,7 @@
       box-sizing: border-box;
   }
   
-  .add-dream-popup__input-btn:hover {
+  .popup__input-btn:hover {
     font-weight: 600;
     color: rgba(0, 0, 0, 0.8);
   }
@@ -159,13 +159,13 @@
   }
   
   @media screen and (max-width: 450px) {
-    .add-ad-popup__btn {
+    .popup__btn {
       width: 100%;
       font-size: 12px;
     }
   }
   
-  .add-ad-popup__btn_active {
+  .popup__btn_active {
     background-color: black;
     color: #fff;
     cursor: pointer;
@@ -182,27 +182,27 @@
     transition: 1s;
   }
   
-  .add-ad-popup__btn_active:hover {
+  .popup__btn_active:hover {
     opacity: 0.7;
     transition: 1s;
   }
   
-  .add-dream-popup__inputmistake {
+  .popup__inputmistake {
     font-size: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
     color: rgb(181, 71, 71);
   }
   
-  .add-dream-popup__inputname {
+  .popup__inputname {
     font-size: 10px;
   }
   
-  .add-dream-popup__inputname-span {
+  .popup__inputname-span {
     color: rgb(181, 71, 71);
   }
   
-  .add-dream-popup__input-lucky-Message {
+  .popup__input-lucky-Message {
     font-size: 10px;
     margin-bottom: 0;
     margin-top: 10px;
@@ -273,3 +273,96 @@
       box-sizing: border-box;
       margin-bottom: 20px;
 }
+
+.popup__message-container {
+  display: flex;
+  justify-content: center;
+  width: calc(430px - (36px*2));
+  height: fit-content;
+  background-color: #fff;
+  color: black;
+  border-radius: 10px;
+  padding-left: 36px;
+  padding-right: 36px;
+  padding-bottom: 37px;
+  padding-top: 34px;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__message-container {
+    width: calc(282px - (22px*2));
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+}  
+
+.popup__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: visibility 1s, opacity 1s;
+    box-sizing: border-box;
+}
+
+.popup__opened {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 1s, opacity 1s;
+  }
+
+  .popup__close-button-successfulActionPopup {
+    background-image: url(../../images/Close_Icon.png);
+    width: 32px;
+    height: 32px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .popup__close-button-successfulActionPopup {
+      right: -10px;
+      top: -10px;
+    }
+  }  
+  
+  .popup__close-button-successfulActionPopup-button:hover {
+    opacity: 60%;
+    transition: 0.5s ease;
+  }

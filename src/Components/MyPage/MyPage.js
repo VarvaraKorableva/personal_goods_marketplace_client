@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import OneAd from '../OneAd/OneAd'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 
-function MyPage() {
+function MyPage({getMyItems, myAds}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
-    const listings = []
+    //const listings = []
+
+    useEffect(()=> {
+        getMyItems(userId)
+    },[])
+
     return(
         <section>
             <div className="myPage__container">
@@ -19,8 +24,8 @@ function MyPage() {
                 <div className="myPage__listings-wrapper">
                     <h3 className="myPage__title">My listings</h3>
                     <ul className="myPage-listings-container">
-                        {listings.map((item) => (
-                            <OneAd item={item}/>
+                        {myAds.map((item) => (
+                            <OneAd key={item.item_id} item={item}/>
                         ))}
                     </ul>
                 </div>
