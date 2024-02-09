@@ -8,6 +8,7 @@ import Registration from './Components/Registration/Registration'
 import Login from './Components/Login/Login'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
+import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
@@ -26,14 +27,17 @@ function App() {
   const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
   const [isError, setIsError] = React.useState(false)
   const [isLoginError, setIsLoginError] = React.useState(false)
+
   const [isAddAdPopup, setIsAddAdPopup] = React.useState(false)
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
+  
 
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
+  const [lastFourtyItems, setLastFoutryItems] = React.useState([])
 
   const userId = currentUser.user_id
   const navigate = useNavigate()
@@ -49,6 +53,7 @@ function App() {
 
   React.useEffect(()=>{
     getCategory()
+    getLastFourtyItems()
   },[])
 
   function chooseCategory(category_id) {
@@ -118,6 +123,13 @@ function App() {
     })
   }
 
+  function getLastFourtyItems() {
+    Api.getLastForty()
+    .then((res) => {
+      setLastFoutryItems(res)
+    })
+  }
+
   function getMyItems(owner_id) {
     Api.getUserItems(owner_id)
     .then((res) => {
@@ -184,14 +196,17 @@ function App() {
         <Route
           path="/"
           element={
-            <Main categories={categories} onChooseCategory={chooseCategory}/>
+            <Main 
+              categories={categories} 
+              onChooseCategory={chooseCategory}
+              lastFourtyItems={lastFourtyItems}/>
           }
         />
 
         <Route 
           path='/category/:slug' 
           element={
-            <Main subCategories={subCategories}/>
+            <CategoryPage subCategories={subCategories}/>
           }
         />
 

@@ -1,0 +1,95 @@
+.oneAdd__container {
+    list-style-type: none;
+    /*width: 200px;
+    height: 300px;*/
+    border: 2px solid rgb(119, 118, 118);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    align-items: center;
+}
+.oneAdd__main-pic {
+    width: 190px;
+    object-fit: cover; 
+    height: 150px;
+    border: 1px solid rgb(119, 118, 118);
+}
+.oneAdd__text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.oneAdd__title-and-like-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.oneAdd__title {
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 80%;
+}
+.oneAdd__like-btn {
+    background-image: url('../../images/emptyheart.png');
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.oneAdd__like-btn:hover {
+    background-image: url('../../images/like.png');
+}
+
+.oneAdd__delete-btn {
+    background-image: url('../../images/deleteBtn.png');
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.oneAdd__delete-btn:hover {
+    opacity: 0.7;
+}
+
+.oneAdd__price {
+    margin: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 12px;
+}
+.oneAdd__city {
+    margin: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 12px;
+}
+
+.oneAdd__time {
+    margin: 0;
+    margin-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 12px;
+}
