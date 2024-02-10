@@ -2,13 +2,18 @@ import React from 'react'
 //import { useParams } from 'react-router-dom'
 import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import { Link } from 'react-router-dom'
 
-function OneAd({item}) {
+
+function OneAd({item, getItemById}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
-    
+    function handleClick() {
+        //onItemClick(item)
+        getItemById(item.item_id)
+    }
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -44,12 +49,12 @@ function OneAd({item}) {
     return(
         <li className="oneAdd__container">
             <div>
-                <img className="oneAdd__main-pic"></img>
+                <img className="oneAdd__main-pic" alt = {item.title}></img>
             </div>
             
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
-                    <p className="oneAdd__title">{item.title}</p>
+                    <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
                     {currentUser.user_id === item.owner_id ?
                         <button className="oneAdd__delete-btn"></button>
                         :

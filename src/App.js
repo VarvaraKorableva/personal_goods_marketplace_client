@@ -12,6 +12,7 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
 import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
@@ -38,6 +39,7 @@ function App() {
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  const [selectedItem, setSelectedItem] = React.useState([])
 
   const userId = currentUser.user_id
   const navigate = useNavigate()
@@ -155,6 +157,20 @@ function App() {
     })
   }
 
+  function getItemById(item_id) {
+    Api.getItemById(item_id)
+    .then((res)=> {
+      setSelectedItem(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function handleItemClick(item) {
+    setSelectedItem(item);
+  }
+
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
@@ -203,7 +219,9 @@ function App() {
             <Main 
               categories={categories} 
               onChooseCategory={chooseCategory}
-              lastFourtyItems={lastFourtyItems}/>
+              getItemById={getItemById}
+              lastFourtyItems={lastFourtyItems}
+              />
           }
         />
 
@@ -212,6 +230,16 @@ function App() {
           element={
             <CategoryPage 
               categories={categories}
+            />
+          }
+        />
+
+        <Route 
+          path='/items/:item_id' 
+          element={
+            <CardPage 
+              selectedItem={selectedItem}
+              getItemById={getItemById}
             />
           }
         />

@@ -115,6 +115,18 @@ export const getItemsByCategory = (category_id) => {
       .then(checkResponse) 
 };
 
+export const getItemById = (item_id) => {
+  return fetch(`${BASE_URL}/items/all/${item_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
 export const getLastForty = () => {
   return fetch(`${BASE_URL}/items/all`, {
       credentials: 'include',
