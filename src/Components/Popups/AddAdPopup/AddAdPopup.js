@@ -62,9 +62,9 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
   function handledesDriptionChange(e) {
     setDescription(e.target.value)
   }
-  console.log(owner_id)
+ 
   function handleSubmit(e) {
-    console.log(owner_id)
+
     e.preventDefault();
       onAddAd({
         title,
