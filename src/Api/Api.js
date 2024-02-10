@@ -178,6 +178,18 @@ export const addToFavorites = ( {favorite_collector_id, item_id} ) => {
   })
       .then(checkResponse)
 };
+
+export const getMyFavorites = (favorite_collector_id) => {
+  return fetch(`${BASE_URL}/favoriteItems/${favorite_collector_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
 ///favoriteItems
 //favorite_collector_id, item_id
 /*

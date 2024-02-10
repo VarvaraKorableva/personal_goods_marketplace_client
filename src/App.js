@@ -12,6 +12,7 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
@@ -190,10 +191,10 @@ function App() {
     })
   }
 
-  function addToFavorites(favorite_collector_id, item_id ) {
-    Api.addToFavorites(favorite_collector_id, item_id )
+  function addToFavorites(favorite_collector_id, item_id) {
+    Api.addToFavorites({favorite_collector_id, item_id})
     .then((res) => {
-      setFovorite(res)
+      //setFovorite((prev) => res)
     })
     .catch((err) => {
       console.log(err)
@@ -201,6 +202,15 @@ function App() {
   }
 //////Передать функцию во все айтомы + в мейн
 
+  function getMyFavorites(favorite_collector_id) {
+    Api.getMyFavorites(favorite_collector_id)
+    .then((res) => {
+      setFovorite(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -256,6 +266,7 @@ function App() {
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
               lastFourtyItems={lastFourtyItems}
+              addToFavorites={addToFavorites}
               />
           }
         />
@@ -277,6 +288,7 @@ function App() {
               getItemById={getItemById}
               getUserById={getUserById}
               userInfo={userInfo}
+              addToFavorites={addToFavorites}
             />
           }
         />
@@ -298,6 +310,7 @@ function App() {
           path={`/users/:owner_id`}
           element={
             <UserPage
+              addToFavorites={addToFavorites}
               getUserById={getUserById}
               userInfo={userInfo}
               myAds={myAds}
@@ -306,13 +319,23 @@ function App() {
           />
           }>
         </Route>
+
+        <Route 
+          path='/my_favorites' 
+          element={
+            <MyFavoritesPage 
+              getMyFavorites={getMyFavorites}
+              favorite={favorite}
+            />
+          }
+        />
 {/*         <Route
         path="*"
         element={
           <NotFoundPage />
         }>
         </Route>
-
+MyFavoritesPage
       </Routes>
 
     <AddAvatarPopap 
@@ -320,24 +343,8 @@ function App() {
       onClose={closeAllPopups}
       handleAddAvatar={handleAddAvatar}/>
 
-    <AddDreamPopup
-      isOpen={isAddDreamPopup}
-      onClose={closeAllPopups}
-      onAddDream={handleAddDreamSubmit}
-    />  
-
-    <EditDreamPopup
-      isOpen={isEditDreamPopup}
-      onClose={closeAllPopups}
-    />
-
     <ImagePopup 
       dream={selectedDream}
-      onClose={closeAllPopups}
-    />
-
-    <MotanOpenPopap
-      motan={selectedMotan}
       onClose={closeAllPopups}
     />
 
@@ -345,12 +352,6 @@ function App() {
       onClose={closeAllPopups}
       isOpen={isChangeAvatarPopup}
       handleUpdateAvatarSubmit={handleUpdateAvatar}
-    />
-
-    <AddNewDatePopap
-      isOpen={isAddNewDatePopup}
-      onClose={closeAllPopups}
-      onAddDate={handleAddNewDateSubmit}
     />
 
     <LanguageChangePopup

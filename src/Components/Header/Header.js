@@ -39,9 +39,15 @@ return (
     <div className='header__langpic-container'>
       {isLoggin ?//&& location.pathname === `/users/`${userId}
         <div className='header_wrapper'>
+          
           <button className='header_add-announcement-btn' onClick={handleAddAdClick}>Place an ad</button>
-          <Link to={`/users/${userId}`}>
+          
+          <Link to={`/users/${userId}`} className='header_link'>
             <button className='header_add-announcement-btn'>My page</button>
+          </Link>
+
+          <Link  to={`/my_favorites`} className='header_link'>
+            <button className='header_favorite-btn'></button>
           </Link>
         </div>
       :  
@@ -65,7 +71,7 @@ return (
       :
       <></>
       }
-      <button className='header__langpic' onClick={onChangeLanguageClick}></button>
+      
     </div>
     </div>
   </div>  
@@ -73,3 +79,7 @@ return (
 }
 
 export default Header;
+
+/*
+<button className='header__langpic' onClick={onChangeLanguageClick}></button>
+*/

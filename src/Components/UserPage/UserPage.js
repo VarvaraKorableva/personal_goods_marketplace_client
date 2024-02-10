@@ -15,8 +15,6 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById}) {
     if(userInfo.length === 0 || myAds.length === 0) {
         return <p>Loading ...</p>;
     }
-
-    console.log(myAds)
     
     return(
         <>

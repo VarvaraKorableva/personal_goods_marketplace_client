@@ -5,14 +5,18 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 
 
-function OneAd({item, getItemById, deleteMyAd}) {
+function OneAd({item, getItemById, deleteMyAd, addToFavorites}) {
 
     const currentUser = React.useContext(CurrentUserContext)
-    //const userId = currentUser.user_id
+    const favorite_collector_id = currentUser.user_id
 
     function handleClick() {
         //onItemClick(item)
         getItemById(item.item_id)
+    }
+
+    function handleAddToFavourite() {
+        addToFavorites(favorite_collector_id, item.item_id)
     }
 
     function handleDeleteMyitem() {
@@ -62,7 +66,7 @@ function OneAd({item, getItemById, deleteMyAd}) {
                     {currentUser.user_id === item.owner_id ?
                         <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
                         :
-                        <button className="oneAdd__like-btn"></button>
+                        <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>
                     }
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
