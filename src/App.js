@@ -12,6 +12,7 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
 import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
@@ -40,6 +41,8 @@ function App() {
   const [subCategories, setSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [selectedItem, setSelectedItem] = React.useState([])
+  const [userInfo, setUserInfo] = React.useState([])
+  const [favorite, setFovorite] = React.useState([])
 
   const userId = currentUser.user_id
   const navigate = useNavigate()
@@ -167,6 +170,38 @@ function App() {
     })
   }
 
+  function getUserById(user_id) {
+    Api.getUserById(user_id)
+    .then((res) => {
+      setUserInfo(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function deleteMyAd(item_id) {
+    Api.deleteItem(item_id)
+    .then((res) => {
+      setMyAds((state) => state.filter((item) => item.item_id !== item_id))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function addToFavorites(favorite_collector_id, item_id ) {
+    Api.addToFavorites(favorite_collector_id, item_id )
+    .then((res) => {
+      setFovorite(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+//////Передать функцию во все айтомы + в мейн
+
+
   function handleItemClick(item) {
     setSelectedItem(item);
   }
@@ -240,6 +275,8 @@ function App() {
             <CardPage 
               selectedItem={selectedItem}
               getItemById={getItemById}
+              getUserById={getUserById}
+              userInfo={userInfo}
             />
           }
         />
@@ -251,27 +288,25 @@ function App() {
               <MyPage
                 getMyItems={getMyItems}
                 myAds={myAds}
+                deleteMyAd={deleteMyAd}
               />
             </ProtectedRoute>
           }>
         </Route>  
-{/*        
+       
         <Route 
-        path='/users/:id' 
-        element={
-          <OneUserPage
-            friends={friends}
-            isLoggin={isLoggin}
-            onFriendCardClick={handleMotanClick}
-            addSubscribe={addSubscribe}
-            getAllSubscriptions={getAllSubscriptions}
-            allMySubscriptions={allMySubscriptions}
-            deleteSubscription={deleteSubscription}
-            showLoading={showLoading}
+          path={`/users/:owner_id`}
+          element={
+            <UserPage
+              getUserById={getUserById}
+              userInfo={userInfo}
+              myAds={myAds}
+              getMyItems={getMyItems}
+              getItemById={getItemById}
           />
-        }>
+          }>
         </Route>
-        <Route
+{/*         <Route
         path="*"
         element={
           <NotFoundPage />

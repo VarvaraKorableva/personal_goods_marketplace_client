@@ -127,6 +127,18 @@ export const getItemById = (item_id) => {
       .then(checkResponse) 
 };
 
+export const getUserById = (user_id) => {
+  return fetch(`${BASE_URL}/users/${user_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
 export const getLastForty = () => {
   return fetch(`${BASE_URL}/items/all`, {
       credentials: 'include',
@@ -150,7 +162,27 @@ export const deleteItem = (item_id) => {
   })
       .then(checkResponse) 
 };
+
+export const addToFavorites = ( {favorite_collector_id, item_id} ) => {
+  return fetch(`${BASE_URL}/favoriteItems`, {
+      credentials: 'include',
+      method: "POST",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ 
+        favorite_collector_id,
+        item_id
+      })
+  })
+      .then(checkResponse)
+};
+///favoriteItems
+//favorite_collector_id, item_id
 /*
+
+/:user_id
 item_router.get('/categoryId/:category_id', getAllItemsByCategoryId)
 item_router.get('/userId/:owner_id', getAllItemsByUserId)
 item_router.get('/all', getAllItems) //установить лимит на 40 последних 
