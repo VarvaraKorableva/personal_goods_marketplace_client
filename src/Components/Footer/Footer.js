@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer className="footer-container">
             <div className="footer">
-                <button className='footer_LogOut-btn'>logout</button>
+                <p className='footer__title'>Created 2024 by Varvara korableva</p>
             </div>
         </footer>
     )

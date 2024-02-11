@@ -12,6 +12,7 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
@@ -77,7 +78,7 @@ function App() {
       password: userData.password,
     })
     .then((data) => {
-      setCurrentUser(data)
+      setCurrentUser(data.user)
       setMyAds([]);
       setIsLoggin(true)
       navigate(`/`)
@@ -103,9 +104,8 @@ function App() {
       email: userData.email
     })
     .then ((res) => {
-      console.log(res.user[0])
-      setCurrentUser(res.user[0])
       setIsLoggin(true)
+      setCurrentUser(res.user[0])
       Api.getCategory()
         .then((data) => {
           setCategories(data)
@@ -251,11 +251,11 @@ function App() {
         </Route>
 
         <Route
-        path="/signin"
-        element={
-        <Login onLogin={handleLoginSubmit}
-        />
-        }>
+          path="/signin"
+          element={
+            <Login onLogin={handleLoginSubmit}
+            />
+          }>
         </Route>
 
         <Route
@@ -267,7 +267,7 @@ function App() {
               getItemById={getItemById}
               lastFourtyItems={lastFourtyItems}
               addToFavorites={addToFavorites}
-              />
+            />
           }
         />
 
@@ -326,16 +326,17 @@ function App() {
             <MyFavoritesPage 
               getMyFavorites={getMyFavorites}
               favorite={favorite}
+              lastFourtyItems={lastFourtyItems}
             />
           }
         />
-{/*         <Route
-        path="*"
-        element={
-          <NotFoundPage />
-        }>
+        <Route
+          path="*"
+          element={
+            <NotFoundPage />
+          }>
         </Route>
-MyFavoritesPage
+{/*MyFavoritesPage
       </Routes>
 
     <AddAvatarPopap 

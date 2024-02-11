@@ -1,10 +1,15 @@
 .myPage__info-container {
     display: flex;
+    max-width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
 }
 
 .myPage__info-wrapper {
     display: flex;
     flex-direction: column;
+    margin: 10px;
 }
 
 .myPage__avatar {
@@ -12,6 +17,7 @@
     height: 200px;
     border-radius: 50%;
     border: 1px solid black;
+    margin: 10px;
 }
 
 .myPage__name {
@@ -31,4 +37,7 @@
     box-sizing: border-box;
     justify-content: center;
 }
-      
+
+.myPage__info-container {
+
+}
