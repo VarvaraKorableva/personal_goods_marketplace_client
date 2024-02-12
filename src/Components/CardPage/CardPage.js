@@ -18,7 +18,7 @@ function CardPage({ selectedItem, getItemById, getUserById, userInfo, addToFavor
     }
 
     function handleAddToFavorites() {
-        addToFavorites(favorite_collector_id, item_id)
+        addToFavorites(favorite_collector_id, item_id, selectedItem)
     }
 
     return(

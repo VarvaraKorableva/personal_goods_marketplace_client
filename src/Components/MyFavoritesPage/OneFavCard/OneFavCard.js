@@ -1,7 +1,19 @@
 import './OneFavCard.css'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
-function OneFavCard({item}) {
+function OneFavCard({item, deleteFromFavorites, favorite}) {
+
+    if(favorite.length === 0) {
+        return <p>Loading ...</p>;
+    }
+
+    let favorite_items_id = favorite.filter((f) => f.item_id === item.item_id)[0].favorite_items_id
+
+    function handleDeleteFavorite() {
+        deleteFromFavorites(favorite_items_id)
+    }
+
     function formatDate(dateString) {
         const date = new Date(dateString);
         const currentDate = new Date();
@@ -42,7 +54,7 @@ function OneFavCard({item}) {
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
                     <Link to={`/items/${item.item_id}`} className="oneAdd__title">{item.title}</Link>
-                        <button className="oneAdd__delete-btn"></button>
+                        <button className="oneAdd__delete-btn" onClick={handleDeleteFavorite}></button>
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
                 <p className="oneAdd__city">{item.city}</p>

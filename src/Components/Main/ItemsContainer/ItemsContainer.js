@@ -1,7 +1,8 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
 
-function ItemsContainer({lastFourtyItems, getItemById, addToFavorites}) {
+function ItemsContainer({lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite}) {
+
     return(
         <ul className="itemsContainer-listings-container">
             {lastFourtyItems.map((item) => (
@@ -10,6 +11,8 @@ function ItemsContainer({lastFourtyItems, getItemById, addToFavorites}) {
                     item={item} 
                     getItemById={getItemById} 
                     addToFavorites={addToFavorites}
+                    deleteFromFavorites={deleteFromFavorites}
+                    favorite={favorite}
                 />
             ))}
         </ul>

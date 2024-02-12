@@ -163,7 +163,19 @@ export const deleteItem = (item_id) => {
       .then(checkResponse) 
 };
 
-export const addToFavorites = ( {favorite_collector_id, item_id} ) => {
+export const deleteFromFavoritesServer = (favorite_items_id) => {
+  return fetch(`${BASE_URL}/favoriteItems/${favorite_items_id}`, {
+      credentials: 'include',
+      method: "DELETE",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const addToFavoritesServer = ( {favorite_collector_id, item_id} ) => {
   return fetch(`${BASE_URL}/favoriteItems`, {
       credentials: 'include',
       method: "POST",

@@ -45,8 +45,11 @@ function App() {
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([])
   const [favorite, setFovorite] = React.useState([])
+  const [favoriteItems, setFavoriteItems] = React.useState([])
 
   const userId = currentUser.user_id
+  const favorite_collector_id = currentUser.user_id
+
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -61,6 +64,7 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
+    //getMyFavorites(favorite_collector_id)
   },[])
 
   function chooseCategory(category_id) {
@@ -191,16 +195,31 @@ function App() {
     })
   }
 
-  function addToFavorites(favorite_collector_id, item_id) {
-    Api.addToFavorites({favorite_collector_id, item_id})
-    .then((res) => {
-      //setFovorite((prev) => res)
-    })
+  function addToFavorites(favorite_collector_id, item_id, item) {
+    const isLiked = favorite.some((i) => i.item_id === item_id);
+    if (isLiked) {
+      console.log("Этот элемент уже в избранном!");
+    }
+    Api.addToFavoritesServer({ favorite_collector_id, item_id })
+      .then((res) => {
+        setFovorite([res, ...favorite])
+        console.log("Элемент успешно добавлен в избранное!")
+      })
     .catch((err) => {
       console.log(err)
     })
   }
-//////Передать функцию во все айтомы + в мейн
+
+  function deleteFromFavorites(favorite_items_id) {
+    console.log('from app => ', favorite_items_id)
+    Api.deleteFromFavoritesServer(favorite_items_id)
+    .then((res)=> {
+      setFovorite(prevFavorite => prevFavorite.filter((f) => f.favorite_items_id !== favorite_items_id));
+    })
+    .catch((err)=> {
+      console.log(err)
+    })
+  }
 
   function getMyFavorites(favorite_collector_id) {
     Api.getMyFavorites(favorite_collector_id)
@@ -211,6 +230,8 @@ function App() {
       console.log(err)
     })
   }
+/*
+*/
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -267,6 +288,9 @@ function App() {
               getItemById={getItemById}
               lastFourtyItems={lastFourtyItems}
               addToFavorites={addToFavorites}
+              //deleteFromFavorites={deleteFromFavorites}
+              favorite={favorite}
+              favoriteItems={favoriteItems}
             />
           }
         />
@@ -289,6 +313,7 @@ function App() {
               getUserById={getUserById}
               userInfo={userInfo}
               addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
             />
           }
         />
@@ -311,6 +336,7 @@ function App() {
           element={
             <UserPage
               addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
               getUserById={getUserById}
               userInfo={userInfo}
               myAds={myAds}
@@ -327,6 +353,9 @@ function App() {
               getMyFavorites={getMyFavorites}
               favorite={favorite}
               lastFourtyItems={lastFourtyItems}
+              favoriteItems={favoriteItems}
+              deleteFromFavorites={deleteFromFavorites}
+              getMyFavorites={getMyFavorites}
             />
           }
         />
@@ -336,32 +365,6 @@ function App() {
             <NotFoundPage />
           }>
         </Route>
-{/*MyFavoritesPage
-      </Routes>
-
-    <AddAvatarPopap 
-      isOpen={isAddAvatarPopap}
-      onClose={closeAllPopups}
-      handleAddAvatar={handleAddAvatar}/>
-
-    <ImagePopup 
-      dream={selectedDream}
-      onClose={closeAllPopups}
-    />
-
-    <PopapChangeAvatar
-      onClose={closeAllPopups}
-      isOpen={isChangeAvatarPopup}
-      handleUpdateAvatarSubmit={handleUpdateAvatar}
-    />
-
-    <LanguageChangePopup
-      isOpen={isLanguageChangePopup}
-      onClose={closeAllPopups}
-    />
-
-    
-      <Footer/>*/}
       </Routes>
       <ChoiceOfProductOrServicePopup
         isOpen={isChoiceOfProductOrServicePopup}

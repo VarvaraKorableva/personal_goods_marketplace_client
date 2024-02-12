@@ -3,8 +3,8 @@ import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
 
-function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById}) {
-
+function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites}) {
+    
     const owner_id = useParams()
 
     React.useEffect(() => {
@@ -26,7 +26,7 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById}) {
                 <h3>All ads</h3>
                 <ul className="userPage-listings-container">
                     {myAds.map((item) => (
-                        <OneAd key={item.item_id} item={item} getItemById={getItemById}/>
+                        <OneAd key={item.item_id} item={item} getItemById={getItemById} addToFavorites={addToFavorites}/>
                     ))}
                 </ul>
             </div>

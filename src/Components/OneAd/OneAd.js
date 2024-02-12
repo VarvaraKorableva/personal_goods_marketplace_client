@@ -5,10 +5,14 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 
 
-function OneAd({item, getItemById, deleteMyAd, addToFavorites}) {
-
+function OneAd({item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
+
+    //const isOwn = card.owner._id === currentUser._id;
+    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+    //const isLiked = favoriteItems.some((i) => i.id === item.item_id)
+    //console.log(favoriteItems)
 
     function handleClick() {
         //onItemClick(item)
@@ -16,8 +20,12 @@ function OneAd({item, getItemById, deleteMyAd, addToFavorites}) {
     }
 
     function handleAddToFavourite() {
-        addToFavorites(favorite_collector_id, item.item_id)
+        addToFavorites(favorite_collector_id, item.item_id, item)
     }
+/*
+    function handleDeleteFromfavorite() {
+        deleteFromFavorites()
+    }*/
 
     function handleDeleteMyitem() {
         deleteMyAd(item.item_id)
