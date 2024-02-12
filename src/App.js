@@ -25,7 +25,7 @@ function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
 
-  const [isLoading, setIsLoading] = React.useState(false)
+  //const [isLoading, setIsLoading] = React.useState(false)
   const [showLoading, setShowLoading] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState('')
   const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
@@ -187,6 +187,7 @@ function App() {
     Api.getUserById(user_id)
     .then((res) => {
       setUserInfo(res)
+      console.log(res) 
     })
     .catch((err) => {
       console.log(err)
@@ -273,6 +274,32 @@ function App() {
     setPopupMessage("")
   }
 
+  function handleLogout() {
+    //Api.logout()
+    //.then((res)=>{
+      setIsLoggin(false)
+      navigate(`/`)
+    //})
+    //.coach((err) => {
+    //  console.log(err)
+    //})
+  }
+/*
+  function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split('=');
+      if (cookieName.trim() === name) {
+        return decodeURIComponent(cookieValue);
+      }
+    }
+    return null;
+  }
+  
+  // Пример использования:
+  const token = getCookie('jwt');
+  console.log(token);*/
+
   return (
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
@@ -322,6 +349,8 @@ function App() {
               categories={categories}
               startToSearch={startToSearch}
               categoryItemsSearch={categoryItemsSearch}
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
             />
           }
         />
@@ -336,6 +365,7 @@ function App() {
               userInfo={userInfo}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
+              
             />
           }
         />
@@ -348,6 +378,7 @@ function App() {
                 getMyItems={getMyItems}
                 myAds={myAds}
                 deleteMyAd={deleteMyAd}
+                handleLogout={handleLogout}
               />
             </ProtectedRoute>
           }>

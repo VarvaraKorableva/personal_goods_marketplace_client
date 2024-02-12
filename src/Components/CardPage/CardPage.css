@@ -1,18 +1,30 @@
 .cardPage__favorite-btn {
     border-radius: 30px;
-    height: 30px;
+    height: 35px;
+    width: 125px;
     cursor: pointer;
     background-color: transparent;
     border: 2px solid black;
-    margin: 10px;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .cardPage__write-message-btn {
     border-radius: 30px;
-    height: 30px;
+    height: 35px;
+    width: 125px;
     cursor: pointer;
     background-color: transparent;
     border: 2px solid black;
-    margin: 10px;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .cardPage__favorite-btn:hover {
@@ -35,9 +47,51 @@
 
 .cardPage-container {
     display: flex;
+    border-bottom: 1px solid #999;
+    padding-bottom: 20px;
 }
 
 .cardPage-info-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.cardPage-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    max-width: 1100px;
+    padding: 20px;
+    box-shadow: 0 3px 6px #999;
+}
+
+.cardPage-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.cardPage-info {
+    font-weight: 600;
+}
+
+.cardPage-link {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    opacity: 0.7;
+}
+
+.cardPage-link:hover {
+    opacity: 1;
+}
+
+.cardPage__btn-container {
+    display: flex;
 }

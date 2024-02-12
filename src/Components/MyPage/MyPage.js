@@ -4,12 +4,18 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {Link} from 'react-router-dom'
 import './MyPage.css'
 
-function MyPage({getMyItems, myAds, deleteMyAd}) {
+function MyPage({getMyItems, myAds, deleteMyAd, handleLogout}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
-    const listings = []
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
+    function onLogout() {
+        handleLogout()
+    }
 
     useEffect(()=> {
         getMyItems(userId)
@@ -53,7 +59,7 @@ function MyPage({getMyItems, myAds, deleteMyAd}) {
                 </div>
 
                 <div>
-                    <button>Log out</button>
+                    <button onClick={onLogout}>Log out</button>
                 </div>
 
             </div>

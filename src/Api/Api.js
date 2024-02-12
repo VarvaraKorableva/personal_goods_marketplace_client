@@ -202,6 +202,21 @@ export const getMyFavorites = (favorite_collector_id) => {
   })
       .then(checkResponse) 
 };
+
+export const logout = () => {
+  return fetch(`${BASE_URL}/logout`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+
+///logout
 ///favoriteItems
 //favorite_collector_id, item_id
 /*

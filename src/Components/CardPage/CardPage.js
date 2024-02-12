@@ -9,20 +9,24 @@ function CardPage({ selectedItem, getItemById, getUserById, userInfo, addToFavor
     const favorite_collector_id = currentUser.user_id
 
     useEffect(() => {
-        getItemById(item_id);
-        //getUserById(selectedItem[0].owner_id)
-    }, []);//item_id
+        getItemById(item_id)
+    }, []); 
+
 
     if(selectedItem.length === 0) {
         return <p>Loading ...</p>;
-    }
+    } 
 
     function handleAddToFavorites() {
         addToFavorites(favorite_collector_id, item_id, selectedItem)
     }
 
+
+    //getUserById(selectedItem[0].owner_id)
+
     return(
-        <section>
+        <section className="cardPage-section">
+            <div className="cardPage-main-container">
             <div className="cardPage-container">
                 <div className="cardPage-img-container">
                     <img alt={selectedItem[0].title}></img>
@@ -30,25 +34,25 @@ function CardPage({ selectedItem, getItemById, getUserById, userInfo, addToFavor
 
                 <div className="cardPage-info-container">
                     <div>
-                        <p>{selectedItem[0].title}</p>
-                        <p>{selectedItem[0].price}</p>
-                        <p>{selectedItem[0].city}</p>
-                    </div>
-                
-                
-                    <div>
-                        <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
-                        <button className='cardPage__write-message-btn'>Write a message</button>
+                        <p>Name: <span className="cardPage-info">{selectedItem[0].title}</span></p>
+                        <p>Price: <span className="cardPage-info">{selectedItem[0].price}</span></p>
+                        <p>City: <span className="cardPage-info">{selectedItem[0].city}</span></p>
                     </div>
 
                     <div className="cardPage__info-about-user">
-                        <p>Seller</p>
-                        <p>Reviews</p>
-                        <Link to={`/users/${selectedItem[0].owner_id}`}>See all user ads</Link>
+                        <p>Saller: {userInfo.username}</p>
+                        
+                        <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">See all user ads &rarr;</Link>
+                    </div>
+
+                    <div className="cardPage__btn-container">
+                        <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
+                        <button className='cardPage__write-message-btn'>Write a message</button>
                     </div>
                 </div>
             </div>
-            <p>{selectedItem[0].description}</p>
+            <p><span className="cardPage-info">Description:</span> {selectedItem[0].description}</p>
+            </div>
         </section>
     );
 }

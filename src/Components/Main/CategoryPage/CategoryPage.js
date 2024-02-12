@@ -1,11 +1,13 @@
-//CategoryPage.js
+import React from 'react';
 import MainCategories from '../MainCategories/MainCategories'
 import MainSearchEngine from '../MainSearchEngine/MainSearchEngine'
 import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
-import React from 'react';
+import OneAd from '../../OneAd/OneAd.js'
 
-function CategoryPage({categories, startToSearch, categoryItemsSearch}) {
+import './CategoryPage.css'
+
+function CategoryPage({categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
     let { slug } = useParams();
@@ -27,9 +29,14 @@ function CategoryPage({categories, startToSearch, categoryItemsSearch}) {
             <MainSearchEngine startToSearch={startToSearch}/>
             <MainCategories categoryFromPage={categoryFromPage}/>
             <h2 className='main__title'> ads</h2>
-            <ul>
+            <ul className='categoryPage-listings-container'>
                 {categoryItemsSearch.map((item) => (
-                    <li key={item.item_id}>{item.title}</li>
+                    <OneAd 
+                        key={item.item_id} 
+                        item={item}>
+                        addToFavorites={addToFavorites}
+                        deleteFromFavorites={deleteFromFavorites}    
+                    </OneAd>
                 ))}
             </ul>
         </section>
