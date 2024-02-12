@@ -5,7 +5,7 @@ import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
 import React from 'react';
 
-function CategoryPage({categories}) {
+function CategoryPage({categories, startToSearch, categoryItemsSearch}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
     let { slug } = useParams();
@@ -24,12 +24,19 @@ function CategoryPage({categories}) {
 
     return(
         <section>
-            <MainSearchEngine/>
+            <MainSearchEngine startToSearch={startToSearch}/>
             <MainCategories categoryFromPage={categoryFromPage}/>
             <h2 className='main__title'> ads</h2>
+            <ul>
+                {categoryItemsSearch.map((item) => (
+                    <li key={item.item_id}>{item.title}</li>
+                ))}
+            </ul>
         </section>
     )
 }
+//не писала функцию для фильтрации - нет стейта
+//лайки
 
 export default CategoryPage;
 

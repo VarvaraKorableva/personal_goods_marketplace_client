@@ -42,6 +42,9 @@ function App() {
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+
+  const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
+  const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([])
   const [favorite, setFovorite] = React.useState([])
@@ -64,11 +67,15 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
-    //getMyFavorites(favorite_collector_id)
+    
   },[])
-
+//при нажатии на категорию вызываем функцию, аргументом передаем категори_айди+
+//функция которая передает в стейт все айтомы в этой категории
+//нужно получить все айтомы и все категории, их профильтровать на категори_айди,
+//стейт должен получиться только из айтомов соответствующей категории
   function chooseCategory(category_id) {
     setSubCategories(categories.filter((item) => item.parent_id === category_id))
+    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
   } 
 
   function goToCategory(slug) {
@@ -141,6 +148,7 @@ function App() {
     Api.getLastForty()
     .then((res) => {
       setLastFoutryItems(res)
+      setItemsAfterSearch(res)
     })
   }
 
@@ -230,8 +238,17 @@ function App() {
       console.log(err)
     })
   }
-/*
-*/
+
+  function startToSearch(keyWord) {
+    const keywordLowerCase = keyWord.toLowerCase()
+    console.log(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)));
+
+    //itemsAfterSearch, 
+    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    //console.log(categories.filter((category) => category.name.includes(keyWord)))
+    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
+    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
+}
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -286,11 +303,14 @@ function App() {
               categories={categories} 
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
-              lastFourtyItems={lastFourtyItems}
+              lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
+              startToSearch={startToSearch}
               //deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
+
+              itemsAfterSearch={itemsAfterSearch}
             />
           }
         />
@@ -300,6 +320,8 @@ function App() {
           element={
             <CategoryPage 
               categories={categories}
+              startToSearch={startToSearch}
+              categoryItemsSearch={categoryItemsSearch}
             />
           }
         />

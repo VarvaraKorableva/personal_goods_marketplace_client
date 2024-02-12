@@ -21,7 +21,11 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
   const [errorPrice, setErrorPrice] = React.useState(true)
   const [errorDreamLink, setErrorDreamLink] = React.useState(true)
   
-  const [selectedCategoryId, setSelectedCategoryId] = React.useState()
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
+
+  const [subCategory, setSubCategory] = React.useState([])
+
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
   const [img, setImg] = React.useState(null)
@@ -30,7 +34,6 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
   const [size, setSize] = React.useState('')
   const [color, setColor] = React.useState('')
   const [condition, setCondition] = React.useState('')
-  //const [owner_id, setOwner_id] = React.useState(currentUser.user_id)
 
   const [buttonText, setButtonText] = React.useState('Upload picture');
 
@@ -48,12 +51,6 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
   } else if (language === 'hebrew') {
     translatedContext = hebrew;
   }
-/*
-  React.useEffect(() => {
-    setButtonText(translatedContext.img.buttonTextUploadPictureOfYourDream);
-  }, [isOpen]);
-
-  const formRef = React.useRef(null);*/
 
   function handleImgLinkChange(e) {
     setImg(e.target.files[0]);
@@ -64,8 +61,13 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
   }
  
   function handleSubmit(e) {
-
     e.preventDefault();
+    let id = null
+    if(selectedSubCategoryId === null || selectedSubCategoryId === ""){
+      id = Number(selectedCategoryId)
+    } else 
+    {id = Number(selectedSubCategoryId)}
+
       onAddAd({
         title,
         owner_id,
@@ -77,11 +79,18 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
         color, 
         condition,
       });
+
+      setSelectedCategoryId(null)
+      setSelectedSubCategoryId(null)
+      setTitle('')
+      setCity('')
+      setImg(null)
+      setPrice('')
+      setDescription('')
+      setSize('')
+      setColor('')
+      setCondition('')
   }
-/*
-  const handleFormReset = () => {
-    formRef.current.reset();
-  };*/
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value)
@@ -125,23 +134,15 @@ function AddAdPopup({onClose, isOpen, onAddAd, categories}) {
 
   const handleSelectChange = (e) => {
     setSelectedCategoryId(e.target.value)
+
+    setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
   };
 
-  function checkValid(img) {
-}
-/*
-React.useEffect(() => {
-  checkValid(img)
-}, [img]);
-
-React.useEffect(() => {
-  if (errorName || errorImg || errorPrice) {
-    setIsValid(false)
-  } else {
-    setIsValid(true)
+  const handleSubCategoryChange = (e) => {
+    setSelectedSubCategoryId(e.target.value)
   }
-}, [errorPrice, errorName, errorImg])
-*/
+
+
 return (
     
     <div className={`popup ${isOpen && 'popup__opened'}`}>
@@ -156,13 +157,23 @@ return (
       <form 
         className='popup__form'
         onSubmit={handleSubmit}>
-        <label className='popup__inputname'>Choise category<span className='popup__inputname-span'>*</span></label> 
+        <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
         <select className='popup__select' onChange={handleSelectChange}>
           <option value="">Select a category</option>
-          {categories.filter((category) => (category.is_good)).map((item) => (
-            <option key={item.category_id} value={item.category_id}>{item.name}</option>
-          ))}
+            {categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name}</option>
+            ))}
+        </select>
+
+        <label className='popup__inputname'>Choise a sub category</label>
+        <select className='popup__select' onChange={handleSubCategoryChange}>
+          <option value="">Select a sub category</option>
+            {subCategory
+              .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+              .map((item) => (
+                <option key={item.category_id} value={item.category_id}>{item.name}</option>
+            ))}
         </select>
 
         <label className='popup__inputname'>{translatedContext.nameOfDream}<span className='popup__inputname-span'>*</span>  
