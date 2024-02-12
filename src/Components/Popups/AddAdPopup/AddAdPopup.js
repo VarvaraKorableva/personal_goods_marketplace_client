@@ -159,6 +159,7 @@ return (
         <label className='popup__inputname'>Choise category<span className='popup__inputname-span'>*</span></label> 
 
         <select className='popup__select' onChange={handleSelectChange}>
+          <option value="">Select a category</option>
           {categories.filter((category) => (category.is_good)).map((item) => (
             <option key={item.category_id} value={item.category_id}>{item.name}</option>
           ))}

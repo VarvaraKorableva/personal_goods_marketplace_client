@@ -12,6 +12,10 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
+import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
+import UserPage from './Components/UserPage/UserPage'
+import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
 import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
@@ -38,8 +42,14 @@ function App() {
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  const [selectedItem, setSelectedItem] = React.useState([])
+  const [userInfo, setUserInfo] = React.useState([])
+  const [favorite, setFovorite] = React.useState([])
+  const [favoriteItems, setFavoriteItems] = React.useState([])
 
   const userId = currentUser.user_id
+  const favorite_collector_id = currentUser.user_id
+
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -54,6 +64,7 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
+    //getMyFavorites(favorite_collector_id)
   },[])
 
   function chooseCategory(category_id) {
@@ -71,7 +82,7 @@ function App() {
       password: userData.password,
     })
     .then((data) => {
-      setCurrentUser(data)
+      setCurrentUser(data.user)
       setMyAds([]);
       setIsLoggin(true)
       navigate(`/`)
@@ -97,9 +108,8 @@ function App() {
       email: userData.email
     })
     .then ((res) => {
-      console.log(res.user[0])
-      setCurrentUser(res.user[0])
       setIsLoggin(true)
+      setCurrentUser(res.user[0])
       Api.getCategory()
         .then((data) => {
           setCategories(data)
@@ -155,6 +165,78 @@ function App() {
     })
   }
 
+  function getItemById(item_id) {
+    Api.getItemById(item_id)
+    .then((res)=> {
+      setSelectedItem(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function getUserById(user_id) {
+    Api.getUserById(user_id)
+    .then((res) => {
+      setUserInfo(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function deleteMyAd(item_id) {
+    Api.deleteItem(item_id)
+    .then((res) => {
+      setMyAds((state) => state.filter((item) => item.item_id !== item_id))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function addToFavorites(favorite_collector_id, item_id, item) {
+    const isLiked = favorite.some((i) => i.item_id === item_id);
+    if (isLiked) {
+      console.log("Этот элемент уже в избранном!");
+    }
+    Api.addToFavoritesServer({ favorite_collector_id, item_id })
+      .then((res) => {
+        setFovorite([res, ...favorite])
+        console.log("Элемент успешно добавлен в избранное!")
+      })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function deleteFromFavorites(favorite_items_id) {
+    console.log('from app => ', favorite_items_id)
+    Api.deleteFromFavoritesServer(favorite_items_id)
+    .then((res)=> {
+      setFovorite(prevFavorite => prevFavorite.filter((f) => f.favorite_items_id !== favorite_items_id));
+    })
+    .catch((err)=> {
+      console.log(err)
+    })
+  }
+
+  function getMyFavorites(favorite_collector_id) {
+    Api.getMyFavorites(favorite_collector_id)
+    .then((res) => {
+      setFovorite(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+/*
+*/
+
+  function handleItemClick(item) {
+    setSelectedItem(item);
+  }
+
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
@@ -190,11 +272,11 @@ function App() {
         </Route>
 
         <Route
-        path="/signin"
-        element={
-        <Login onLogin={handleLoginSubmit}
-        />
-        }>
+          path="/signin"
+          element={
+            <Login onLogin={handleLoginSubmit}
+            />
+          }>
         </Route>
 
         <Route
@@ -203,7 +285,13 @@ function App() {
             <Main 
               categories={categories} 
               onChooseCategory={chooseCategory}
-              lastFourtyItems={lastFourtyItems}/>
+              getItemById={getItemById}
+              lastFourtyItems={lastFourtyItems}
+              addToFavorites={addToFavorites}
+              //deleteFromFavorites={deleteFromFavorites}
+              favorite={favorite}
+              favoriteItems={favoriteItems}
+            />
           }
         />
 
@@ -216,6 +304,20 @@ function App() {
           }
         />
 
+        <Route 
+          path='/items/:item_id' 
+          element={
+            <CardPage 
+              selectedItem={selectedItem}
+              getItemById={getItemById}
+              getUserById={getUserById}
+              userInfo={userInfo}
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
+            />
+          }
+        />
+
         <Route
           exact path={`/users/${userId}`}
           element={
@@ -223,80 +325,46 @@ function App() {
               <MyPage
                 getMyItems={getMyItems}
                 myAds={myAds}
+                deleteMyAd={deleteMyAd}
               />
             </ProtectedRoute>
           }>
         </Route>  
-{/*        
+       
         <Route 
-        path='/users/:id' 
-        element={
-          <OneUserPage
-            friends={friends}
-            isLoggin={isLoggin}
-            onFriendCardClick={handleMotanClick}
-            addSubscribe={addSubscribe}
-            getAllSubscriptions={getAllSubscriptions}
-            allMySubscriptions={allMySubscriptions}
-            deleteSubscription={deleteSubscription}
-            showLoading={showLoading}
+          path={`/users/:owner_id`}
+          element={
+            <UserPage
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
+              getUserById={getUserById}
+              userInfo={userInfo}
+              myAds={myAds}
+              getMyItems={getMyItems}
+              getItemById={getItemById}
           />
-        }>
+          }>
         </Route>
+
+        <Route 
+          path='/my_favorites' 
+          element={
+            <MyFavoritesPage 
+              getMyFavorites={getMyFavorites}
+              favorite={favorite}
+              lastFourtyItems={lastFourtyItems}
+              favoriteItems={favoriteItems}
+              deleteFromFavorites={deleteFromFavorites}
+              getMyFavorites={getMyFavorites}
+            />
+          }
+        />
         <Route
-        path="*"
-        element={
-          <NotFoundPage />
-        }>
+          path="*"
+          element={
+            <NotFoundPage />
+          }>
         </Route>
-
-      </Routes>
-
-    <AddAvatarPopap 
-      isOpen={isAddAvatarPopap}
-      onClose={closeAllPopups}
-      handleAddAvatar={handleAddAvatar}/>
-
-    <AddDreamPopup
-      isOpen={isAddDreamPopup}
-      onClose={closeAllPopups}
-      onAddDream={handleAddDreamSubmit}
-    />  
-
-    <EditDreamPopup
-      isOpen={isEditDreamPopup}
-      onClose={closeAllPopups}
-    />
-
-    <ImagePopup 
-      dream={selectedDream}
-      onClose={closeAllPopups}
-    />
-
-    <MotanOpenPopap
-      motan={selectedMotan}
-      onClose={closeAllPopups}
-    />
-
-    <PopapChangeAvatar
-      onClose={closeAllPopups}
-      isOpen={isChangeAvatarPopup}
-      handleUpdateAvatarSubmit={handleUpdateAvatar}
-    />
-
-    <AddNewDatePopap
-      isOpen={isAddNewDatePopup}
-      onClose={closeAllPopups}
-      onAddDate={handleAddNewDateSubmit}
-    />
-
-    <LanguageChangePopup
-      isOpen={isLanguageChangePopup}
-      onClose={closeAllPopups}
-    />
-
-    
-      <Footer/>*/}
       </Routes>
       <ChoiceOfProductOrServicePopup
         isOpen={isChoiceOfProductOrServicePopup}

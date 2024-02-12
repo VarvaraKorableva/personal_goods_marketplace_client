@@ -39,9 +39,15 @@ return (
     <div className='header__langpic-container'>
       {isLoggin ?//&& location.pathname === `/users/`${userId}
         <div className='header_wrapper'>
+          
           <button className='header_add-announcement-btn' onClick={handleAddAdClick}>Place an ad</button>
-          <Link to={`/users/${userId}`}>
+          
+          <Link to={`/users/${userId}`} className='header_link'>
             <button className='header_add-announcement-btn'>My page</button>
+          </Link>
+
+          <Link  to={`/my_favorites`} className='header_link'>
+            <button className='header_favorite-btn'></button>
           </Link>
         </div>
       :  
@@ -53,19 +59,27 @@ return (
         </div>
          
       :
-      !isLoggin  || location.pathname === '/signup'?
+      !isLoggin  && location.pathname === '/signup'?
       <Link to="/signin" className='header_login-link'>
-        <p className='header_login-link'>{translatedContext.login}</p>
+        <p>{translatedContext.login}</p>
       </Link>
       :
-      !isLoggin || location.pathname === '/signin'?
+      !isLoggin && location.pathname === '/signin'?
       <Link to="/signup" className='header_registraion-link'>
-        <p className='header_registraion-link'>{translatedContext.registration}</p>
+        <p>{translatedContext.registraion}</p>
       </Link>
       :
-      <></>
+      <div className='header__links-container'>
+        <Link to="/signin" className='header_registraion-link'>
+          <p>{translatedContext.login}</p>
+        </Link>
+        <Link to="/signup" className='header_registraion-link'>
+          <p>{translatedContext.registraion}</p>
+        </Link>
+      </div>
+
       }
-      <button className='header__langpic' onClick={onChangeLanguageClick}></button>
+      
     </div>
     </div>
   </div>  
@@ -73,3 +87,7 @@ return (
 }
 
 export default Header;
+
+/*
+<button className='header__langpic' onClick={onChangeLanguageClick}></button>
+*/

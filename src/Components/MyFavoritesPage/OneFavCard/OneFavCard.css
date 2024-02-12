@@ -35,24 +35,9 @@
     overflow: hidden;
     max-width: 80%;
 }
-.oneAdd__like-btn {
-    background-image: url('../../images/emptyheart.png');
-    width: 25px;
-    height: 25px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.oneAdd__like-btn:hover {
-    background-image: url('../../images/like.png');
-}
 
 .oneAdd__delete-btn {
-    background-image: url('../../images/deleteBtn.png');
+    background-image: url('../../../images/deleteBtn.png');
     width: 25px;
     height: 25px;
     background-position: center;

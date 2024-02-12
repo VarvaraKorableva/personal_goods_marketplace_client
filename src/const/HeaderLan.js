@@ -2,8 +2,7 @@ const en = {
     logout: 'LogOut',
     mypage: 'My Page',
     login: 'LogIn',
-
-    registraion: 'Registraion',
+    registraion: 'SignUp',
 }
 
 const rus = {

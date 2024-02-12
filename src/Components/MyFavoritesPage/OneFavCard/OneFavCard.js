@@ -1,34 +1,17 @@
-import React from 'react'
-//import { useParams } from 'react-router-dom'
-import './OneAd.css'
-import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import './OneFavCard.css'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
+function OneFavCard({item, deleteFromFavorites, favorite}) {
 
-function OneAd({item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
-    const currentUser = React.useContext(CurrentUserContext)
-    const favorite_collector_id = currentUser.user_id
-
-    //const isOwn = card.owner._id === currentUser._id;
-    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    //const isLiked = favoriteItems.some((i) => i.id === item.item_id)
-    //console.log(favoriteItems)
-
-    function handleClick() {
-        //onItemClick(item)
-        getItemById(item.item_id)
+    if(favorite.length === 0) {
+        return <p>Loading ...</p>;
     }
 
-    function handleAddToFavourite() {
-        addToFavorites(favorite_collector_id, item.item_id, item)
-    }
-/*
-    function handleDeleteFromfavorite() {
-        deleteFromFavorites()
-    }*/
+    let favorite_items_id = favorite.filter((f) => f.item_id === item.item_id)[0].favorite_items_id
 
-    function handleDeleteMyitem() {
-        deleteMyAd(item.item_id)
+    function handleDeleteFavorite() {
+        deleteFromFavorites(favorite_items_id)
     }
 
     function formatDate(dateString) {
@@ -61,8 +44,8 @@ function OneAd({item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorit
     // Пример использования
     //const itemCreatedAt = "2024-02-09T07:04:05.187Z"; // Полученное время из базы данных
     const formattedTime = formatDate(item.created_at)
-
-    return(
+    
+    return (
         <li className="oneAdd__container">
             <div>
                 <img className="oneAdd__main-pic" alt = {item.title}></img>
@@ -70,12 +53,8 @@ function OneAd({item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorit
             
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
-                    <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
-                    {currentUser.user_id === item.owner_id ?
-                        <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
-                        :
-                        <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>
-                    }
+                    <Link to={`/items/${item.item_id}`} className="oneAdd__title">{item.title}</Link>
+                        <button className="oneAdd__delete-btn" onClick={handleDeleteFavorite}></button>
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
                 <p className="oneAdd__city">{item.city}</p>
@@ -86,4 +65,4 @@ function OneAd({item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorit
     )
 }
 
-export default OneAd;
+export default OneFavCard;

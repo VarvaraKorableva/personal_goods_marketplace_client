@@ -75,6 +75,7 @@
     cursor: pointer;
     margin: 0;
     margin-left: 5px;
+    margin-right: 10px;
     text-decoration: none;
     font-size: 12px;
     font-weight: 700;
@@ -103,6 +104,7 @@
     margin-left: 5px;
     font-size: 12px;
     font-weight: 700;
+    margin-right: 10px;
   }
   .header_registraion-link:hover{
     opacity: 0.5;
@@ -188,4 +190,32 @@
   background-color: black;
   opacity: 0.9;
   color: #fff;
+}
+
+.header_favorite-btn {
+  background-image: url(../../images/like.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.header_favorite-btn:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+  
+}
+
+.header_link{ 
+  text-decoration: none;
+}
+
+.header__links-container {
+  display: flex;
 }
