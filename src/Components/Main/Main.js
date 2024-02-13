@@ -3,7 +3,7 @@ import MainCategories from './MainCategories/MainCategories'
 import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
 
-function Main({itemsAfterSearch, startToSearch, favorite, categories, onChooseCategory, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favoriteItems}) {
+function Main({isLoggin, itemsAfterSearch, startToSearch, favorite, categories, onChooseCategory, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favoriteItems}) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -26,6 +26,8 @@ function Main({itemsAfterSearch, startToSearch, favorite, categories, onChooseCa
                 deleteFromFavorites={deleteFromFavorites}
                 favorite={favorite}
                 favoriteItems={favoriteItems}
+
+                isLoggin={isLoggin}
             />
         </section>
     )

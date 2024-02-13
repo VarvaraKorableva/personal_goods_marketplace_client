@@ -12,6 +12,8 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+
+import ThirdCategoryPage from './Components/Main/ThirdCategoryPage/ThirdCategoryPage'
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
@@ -41,12 +43,13 @@ function App() {
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
+  const [thirdSubCategories, setThirdSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
   const [selectedItem, setSelectedItem] = React.useState([])
-  const [userInfo, setUserInfo] = React.useState([])
+  const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
 
@@ -76,6 +79,12 @@ function App() {
   function chooseCategory(category_id) {
     setSubCategories(categories.filter((item) => item.parent_id === category_id))
     setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
+  } 
+
+  function chooseThirdCategory(category_id) {
+    setThirdSubCategories(categories.filter((item) => item.parent_id === category_id))
+    console.log(categories.filter((item) => item.parent_id === category_id))
+    //setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
   } 
 
   function goToCategory(slug) {
@@ -278,6 +287,7 @@ function App() {
     //Api.logout()
     //.then((res)=>{
       setIsLoggin(false)
+      setCurrentUser({})
       navigate(`/`)
     //})
     //.coach((err) => {
@@ -330,6 +340,7 @@ function App() {
               categories={categories} 
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
+
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
               startToSearch={startToSearch}
@@ -338,6 +349,8 @@ function App() {
               favoriteItems={favoriteItems}
 
               itemsAfterSearch={itemsAfterSearch}
+
+              isLoggin={isLoggin}
             />
           }
         />
@@ -347,6 +360,20 @@ function App() {
           element={
             <CategoryPage 
               categories={categories}
+              startToSearch={startToSearch}
+              categoryItemsSearch={categoryItemsSearch}
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
+              chooseThirdCategory={chooseThirdCategory}
+            />
+          }
+        />
+
+        <Route 
+          path='/third-category-page/:slug' 
+          element={
+            <ThirdCategoryPage 
+              thirdSubCategories={thirdSubCategories}
               startToSearch={startToSearch}
               categoryItemsSearch={categoryItemsSearch}
               addToFavorites={addToFavorites}

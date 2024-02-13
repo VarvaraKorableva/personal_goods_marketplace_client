@@ -1,0 +1,30 @@
+.thirdCategorySearchEngine-form {
+    display: flex;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.thirdCategorySearchEngine-input {
+    width: 75%;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+.thirdCategorySearchEngine-btn {
+    width: 20%;
+    border-radius: 10px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.thirdCategorySearchEngine-btn:hover {
+    opacity: 0.8;
+}

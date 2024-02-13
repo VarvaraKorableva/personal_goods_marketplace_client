@@ -17,11 +17,13 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToF
     }
     
     return(
-        <>
-            <h3>UserPage</h3>
+        <section className='userPage_main-container'>
             <p>{userInfo[0].username}</p>
-            <p>Reiting</p>
-            <p>Write a message to {userInfo[0].username}</p>
+            <div className='userPage__message-container'>
+                <p>Write a message to {userInfo[0].username}</p>
+                <div className='userPage__message-pic'></div> 
+            </div>
+
             <div>
                 <h3>All ads</h3>
                 <ul className="userPage-listings-container">
@@ -30,7 +32,7 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToF
                     ))}
                 </ul>
             </div>
-        </>
+        </section>
 
     )
 }

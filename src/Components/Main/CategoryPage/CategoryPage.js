@@ -7,7 +7,7 @@ import OneAd from '../../OneAd/OneAd.js'
 
 import './CategoryPage.css'
 
-function CategoryPage({categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites}) {
+function CategoryPage({chooseThirdCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
     let { slug } = useParams();
@@ -27,7 +27,7 @@ function CategoryPage({categories, startToSearch, categoryItemsSearch, addToFavo
     return(
         <section>
             <MainSearchEngine startToSearch={startToSearch}/>
-            <MainCategories categoryFromPage={categoryFromPage}/>
+            <MainCategories categoryFromPage={categoryFromPage} chooseThirdCategory={chooseThirdCategory}/>
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
                 {categoryItemsSearch.map((item) => (
