@@ -55,7 +55,7 @@ function App() {
 
   const userId = currentUser.user_id
   const favorite_collector_id = currentUser.user_id
-
+  
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -392,7 +392,7 @@ function App() {
               userInfo={userInfo}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
-              
+              isLoggin={isLoggin}
             />
           }
         />
@@ -406,6 +406,7 @@ function App() {
                 myAds={myAds}
                 deleteMyAd={deleteMyAd}
                 handleLogout={handleLogout}
+                isLoggin={isLoggin}
               />
             </ProtectedRoute>
           }>
@@ -422,12 +423,13 @@ function App() {
               myAds={myAds}
               getMyItems={getMyItems}
               getItemById={getItemById}
+              isLoggin={isLoggin}
           />
           }>
         </Route>
 
         <Route 
-          path='/my_favorites' 
+          path='/my_favorites' //закрытый роут !!!!
           element={
             <MyFavoritesPage 
               getMyFavorites={getMyFavorites}

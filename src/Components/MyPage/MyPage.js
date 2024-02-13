@@ -4,7 +4,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {Link} from 'react-router-dom'
 import './MyPage.css'
 
-function MyPage({getMyItems, myAds, deleteMyAd, handleLogout}) {
+function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -36,7 +36,7 @@ function MyPage({getMyItems, myAds, deleteMyAd, handleLogout}) {
                     <h3 className="myPage__title">My listings</h3>
                     <ul className="myPage-listings-container">
                         {myAds.map((item) => (
-                            <OneAd key={item.item_id} item={item} deleteMyAd={deleteMyAd}/>
+                            <OneAd key={item.item_id} item={item} deleteMyAd={deleteMyAd} isLoggin={isLoggin}/>
                         ))}
                     </ul>
                 </div>

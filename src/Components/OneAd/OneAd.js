@@ -3,6 +3,7 @@ import React from 'react'
 import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
+
 //Написать если isLoggin фалс то при нажатии на лайк редирект на страницу логина
 
 function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
@@ -71,11 +72,12 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
                     <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
-                    {currentUser.user_id === item.owner_id ?
+                    {isLoggin? 
+                        (currentUser.user_id === item.owner_id ?
                         <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
                         :
-                        <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>
-                    }
+                        <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>)
+                    : <></>}
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
                 <p className="oneAdd__city">{item.city}</p>

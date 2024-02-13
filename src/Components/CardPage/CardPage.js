@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
 import * as Api from '../../Api/Api'
 
-function CardPage({ selectedItem, getItemById, addToFavorites }) {
+function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin }) {
     let { item_id } = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
@@ -50,11 +50,16 @@ function CardPage({ selectedItem, getItemById, addToFavorites }) {
                         <div className="cardPage__info-about-user">
                             <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">See all user ads &rarr;</Link>                       
                         </div>
+                        {
+                            isLoggin?
+                                <div className="cardPage__btn-container">
+                                    <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
+                                    <button className='cardPage__write-message-btn'>Write a message</button>
+                                </div>
+                            :
+                            <></>
+                        }
 
-                        <div className="cardPage__btn-container">
-                            <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
-                            <button className='cardPage__write-message-btn'>Write a message</button>
-                        </div>
                     </div>
                 </div>
                 {selectedItem[0].description.length <= 0 ? 
