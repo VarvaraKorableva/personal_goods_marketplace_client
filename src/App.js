@@ -8,13 +8,12 @@ import Registration from './Components/Registration/Registration'
 import Login from './Components/Login/Login'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
-import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
+import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import './App.css'
 
 import AddAdPage from './Components/AddAdPage/AddAdPage'
-import ThirdCategoryPage from './Components/Main/ThirdCategoryPage/ThirdCategoryPage'
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
@@ -39,31 +38,48 @@ function App() {
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
   
-
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
+
+  const [categoriesToRender, setCategoriesToRender] = React.useState([])
+  
   const [subCategories, setSubCategories] = React.useState([])
   const [thirdSubCategories, setThirdSubCategories] = React.useState([])
+
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  const [items, setItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
+
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
+
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
-
+  
   const [isGood, setIsGood] = React.useState(true)
 
   const userId = currentUser.user_id
   const favorite_collector_id = currentUser.user_id
-  
   const navigate = useNavigate()
 
   async function getCategory() {
     try {
       const res = await Api.getCategory();
       setCategories(res);
+      setCategoriesToRender(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getLastFourtyItems() {
+    try {
+      const res = await Api.getLastForty();
+      setLastFoutryItems(res)
+      setItems(res)
+      setItemsAfterSearch(res) 
     } catch (err) {
       console.log(err);
     }
@@ -72,25 +88,23 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
-    
   },[])
-//при нажатии на категорию вызываем функцию, аргументом передаем категори_айди+
-//функция которая передает в стейт все айтомы в этой категории
-//нужно получить все айтомы и все категории, их профильтровать на категори_айди,
-//стейт должен получиться только из айтомов соответствующей категории
-  function chooseCategory(category_id) {
-    setSubCategories(categories.filter((item) => item.parent_id === category_id))
-    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
-  } 
 
-  function chooseThirdCategory(category_id) {
-    setThirdSubCategories(categories.filter((item) => item.parent_id === category_id))
-    console.log(categories.filter((item) => item.parent_id === category_id))
-    //setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
-  } 
+  function chooseCategory(category) {
+    setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
 
-  function goToCategory(slug) {
-    setSubCategories(categories.filter((item) => item.slug === slug))
+
+    //const allItemsInCategory = lastFourtyItems.filter((i) => i.category_id === category.category_id)
+
+    /*const categoryIdArr = [category.category_id]
+    const arr = categories.filter((item) => item.parent_id === category.category_id)
+    arr.forEach((item) => (categoryIdArr.push(item.category_id)))*/
+
+    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
+
+  /*
+    console.log(category)
+    console.log(lastFourtyItems)*/
   } 
 
   function handleRegSubmit(userData) {
@@ -128,11 +142,7 @@ function App() {
     .then ((res) => {
       setIsLoggin(true)
       setCurrentUser(res.user[0])
-      Api.getCategory()
-        .then((data) => {
-          setCategories(data)
-          navigate(`/`)
-        })
+      navigate(`/`)
     })  
     .catch((err) => {
       console.log(err)
@@ -151,15 +161,6 @@ function App() {
           //setIsLoginError(false)
         }, 5000)
       }
-      //401
-    })
-  }
-
-  function getLastFourtyItems() {
-    Api.getLastForty()
-    .then((res) => {
-      setLastFoutryItems(res)
-      setItemsAfterSearch(res)
     })
   }
 
@@ -253,14 +254,19 @@ function App() {
 
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
-    console.log(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)));
-
-    //itemsAfterSearch, 
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
     //console.log(categories.filter((category) => category.name.includes(keyWord)))
     //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
     //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
-}
+  }
+
+  function startToSearchSecondPage (keyWord) {
+    const keywordLowerCase = keyWord.toLowerCase()
+    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    //console.log(categories.filter((category) => category.name.includes(keyWord)))
+    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
+    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
+  }
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -298,21 +304,35 @@ function App() {
     //  console.log(err)
     //})
   }
-/*
+
   function getCookie(name) {
-    const cookies = document.cookie.split(';');
+    //const cookies = document.Cookies.split(';');
+    /*
     for (let cookie of cookies) {
       const [cookieName, cookieValue] = cookie.split('=');
       if (cookieName.trim() === name) {
         return decodeURIComponent(cookieValue);
       }
     }
-    return null;
+    return null;*/
+    console.log(document.Cookies)
   }
   
   // Пример использования:
-  const token = getCookie('jwt');
-  console.log(token);*/
+  //const token = getCookie('jwt');
+  //console.log(token);
+
+  React.useEffect(() => {
+      const favoriteItemsResult = lastFourtyItems.filter(item =>
+        favorite.some(favoriteItem => favoriteItem.item_id === item.item_id)
+      );
+      setFavoriteItems(favoriteItemsResult);
+    }, [lastFourtyItems, favorite]);
+  
+  React.useEffect(() => {
+      getMyFavorites(favorite_collector_id)
+  },[favorite_collector_id])
+  
 
   return (
     <LanguageProvider>
@@ -341,19 +361,17 @@ function App() {
           path="/"
           element={
             <Main 
-              categories={categories} 
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
-
+              categories={categories}
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
               startToSearch={startToSearch}
               //deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
-
+              //categoryItemsSearch={categoryItemsSearch} 
               itemsAfterSearch={itemsAfterSearch}
-
               isLoggin={isLoggin}
             />
           }
@@ -363,25 +381,16 @@ function App() {
           path='/category/:slug' 
           element={
             <CategoryPage 
+              chooseCategory={chooseCategory}
+              categoriesToRender={categoriesToRender}
               categories={categories}
-              startToSearch={startToSearch}
-              categoryItemsSearch={categoryItemsSearch}
-              addToFavorites={addToFavorites}
-              deleteFromFavorites={deleteFromFavorites}
-              chooseThirdCategory={chooseThirdCategory}
-            />
-          }
-        />
 
-        <Route 
-          path='/third-category-page/:slug' 
-          element={
-            <ThirdCategoryPage 
-              thirdSubCategories={thirdSubCategories}
-              startToSearch={startToSearch}
-              categoryItemsSearch={categoryItemsSearch}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
+
+              startToSearch={startToSearch}
+              lastFourtyItems={lastFourtyItems}
+              categoryItemsSearch={categoryItemsSearch} 
             />
           }
         />
@@ -397,6 +406,7 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
+              favoriteItems={favoriteItems}
             />
           }
         />

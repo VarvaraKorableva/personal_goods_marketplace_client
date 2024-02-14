@@ -4,30 +4,44 @@ import MainSearchEngine from '../MainSearchEngine/MainSearchEngine'
 import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
+import Category from '../Сategory/Сategory'
 
 import './CategoryPage.css'
 
-function CategoryPage({chooseThirdCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites}) {
+function CategoryPage({lastFourtyItems,  chooseCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
     
-    const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
+    const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
     let { slug } = useParams();
 
     React.useEffect(() => {
-        const myCategory = categories.find((item) => item.slug === slug);
-        if (categories.length > 0 && myCategory) {
+        const myCategory = categoriesToRender.find((item) => item.slug === slug);
+        if (categoriesToRender.length > 0 && myCategory) {
             const filteredCategories = categories.filter((item) => item.parent_id === myCategory.category_id);
             setCategoryFromPage(filteredCategories);
         }
-    }, [categories, slug]);
+    }, [categoriesToRender, slug]);
 
-    if(categories.length === 0) {
-        return <p>Loading ...</p>
+    console.log(categoryFromPage)
+
+    if(categoryFromPage.length <= 0) {
+       return <p>Loading ...</p>
     }
 
+    console.log('categoryItemsSearch =>', categoryItemsSearch)
     return(
-        <section>
+        <section className='categoryPage-main-container'>
             <MainSearchEngine startToSearch={startToSearch}/>
-            <MainCategories categoryFromPage={categoryFromPage} chooseThirdCategory={chooseThirdCategory}/>
+
+            <ul className='categoryPage-categories-container'>
+                {categoriesToRender.map((subCategory) => (
+                    <Category 
+                        key={subCategory.category_id} 
+                        category={subCategory} 
+                        onChooseCategory={chooseCategory}
+                    />
+                  ))
+                }
+            </ul>
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
                 {categoryItemsSearch.map((item) => (
@@ -46,6 +60,14 @@ function CategoryPage({chooseThirdCategory, categories, startToSearch, categoryI
 //лайки
 
 export default CategoryPage;
+
+/*
+            <MainCategories 
+                categoriesToRender={categoryFromPage} 
+                //chooseNextCategory={chooseNextCategory}
+                chooseCategory={chooseCategory}
+            />
+*/
 
 /*function CategoryPage({categories, subCategories, goToCategory}) {
 

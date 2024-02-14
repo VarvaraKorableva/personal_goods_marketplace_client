@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
 import * as Api from '../../Api/Api'
 
-function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin }) {
+function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems }) {
     let { item_id } = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
@@ -31,6 +31,8 @@ function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin }) {
     function handleAddToFavorites() {
         addToFavorites(favorite_collector_id, item_id, selectedItem)
     }
+
+    const isLiked = favoriteItems.some((i) => i.item_id === selectedItem.item_id)
 
     return(
         <section className="cardPage-section">

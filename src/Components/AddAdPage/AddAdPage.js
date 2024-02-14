@@ -27,6 +27,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [subCategory, setSubCategory] = React.useState([])
 
   const [thirdSubCategory, setThirdSubCategory] = React.useState([])
+  const [thirdSubCategoryId, setThirdSubCategoryId] = React.useState(null)
+  const [thirdCategoryId, setThirdCategoryId] = React.useState(null)
 
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
@@ -61,19 +63,20 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   function handledesDriptionChange(e) {
     setDescription(e.target.value)
   }
- 
+
   function handleSubmit(e) {
     e.preventDefault();
     let id = null
     if(selectedSubCategoryId === null || selectedSubCategoryId === ""){
       id = Number(selectedCategoryId)
-    } else 
+    } 
+    else 
     {id = Number(selectedSubCategoryId)}
 
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(selectedCategoryId),
+        category_id: Number(id),//selectedCategoryId
         city,
         price,
         description,
@@ -84,6 +87,44 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
       setSelectedCategoryId(null)
       setSelectedSubCategoryId(null)
+      setTitle('')
+      setCity('')
+      setImg(null)
+      setPrice('')
+      setDescription('')
+      setSize('')
+      setColor('')
+      setCondition('')
+  }
+
+  function handleServicesSubmit(e) {
+    e.preventDefault();
+    let id = null
+    if(thirdCategoryId === null || thirdCategoryId === ""){
+      id = Number(thirdSubCategoryId)
+    } 
+    else 
+    {id = Number(thirdCategoryId)}
+    console.log('id =>', id)
+    console.log('thirdSubCategoryId =>', thirdSubCategoryId)
+    console.log('thirdCategoryId =>', thirdCategoryId)
+
+      onAddAd({
+        title,
+        owner_id: owner_id,
+        category_id: Number(id), //thirdSubCategoryId),
+        city,
+        price,
+        description,
+        size, 
+        color, 
+        condition,
+      });
+
+      setSelectedCategoryId(null)
+      setSelectedSubCategoryId(null)
+      setThirdSubCategoryId(null)
+      setThirdCategoryId(null)
       setTitle('')
       setCity('')
       setImg(null)
@@ -112,8 +153,13 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   };
 
   const handleSelectServicesChange = (e) => {
+    setThirdSubCategoryId(e.target.value)
     setThirdSubCategory(categories.filter((category) => category.parent_id == e.target.value))
   };
+
+  const handleThirdCategoryIdChange = (e) => {
+    setThirdCategoryId(e.target.value)
+  }
 
   const handleSubCategoryChange = (e) => {
     setSelectedSubCategoryId(e.target.value)
@@ -234,18 +280,18 @@ return (
     <h2 className="addAdPage__title">Ad new service</h2>
     <form 
       className='addAdPage__form'
-      onSubmit={handleSubmit}>
+      onSubmit={handleServicesSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
       <select className='popup__select' onChange={handleSelectServicesChange}>
         <option value="">Select a category</option>
-          {categories.filter((category) => (category.is_good === false && (category.parent_id !== null))).map((item) => (
+          {categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
             <option key={item.category_id} value={item.category_id}>{item.name}</option>
           ))}
       </select>
 
       <label className='popup__inputname'>Choise a sub category</label>
-      <select className='popup__select' onChange={handleSubCategoryChange}>
+      <select className='popup__select' onChange={handleThirdCategoryIdChange}>
         <option value="">Select a sub category</option>
           {thirdSubCategory
             .filter((category) => category.is_good === false && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории

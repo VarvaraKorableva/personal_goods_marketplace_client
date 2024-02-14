@@ -10,23 +10,20 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
-    //const isOwn = card.owner._id === currentUser._id;
-    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    //const isLiked = favoriteItems.some((i) => i.id === item.item_id)
-    //console.log(favoriteItems)
-
+     const isLiked = false
+/*
+   favoriteItems.length === 0? 
+    (isLiked = false) 
+    : */
+    //const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
+    
     function handleClick() {
-        //onItemClick(item)
         getItemById(item.item_id)
     }
 
     function handleAddToFavourite() {
         addToFavorites(favorite_collector_id, item.item_id, item)
     }
-/*
-    function handleDeleteFromfavorite() {
-        deleteFromFavorites()
-    }*/
 
     function handleDeleteMyitem() {
         deleteMyAd(item.item_id)
@@ -76,7 +73,7 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
                         (currentUser.user_id === item.owner_id ?
                         <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
                         :
-                        <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>)
+                        <button className={isLiked? "oneAdd__like-btn_activ" :"oneAdd__like-btn"} onClick={handleAddToFavourite}></button>)
                     : <></>}
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
