@@ -76,7 +76,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(selectedCategoryId),
+        category_id: Number(id),//selectedCategoryId
         city,
         price,
         description,
@@ -105,11 +105,14 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     } 
     else 
     {id = Number(thirdCategoryId)}
+    console.log('id =>', id)
+    console.log('thirdSubCategoryId =>', thirdSubCategoryId)
+    console.log('thirdCategoryId =>', thirdCategoryId)
 
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(thirdSubCategoryId),
+        category_id: Number(id), //thirdSubCategoryId),
         city,
         price,
         description,

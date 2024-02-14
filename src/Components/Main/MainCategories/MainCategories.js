@@ -2,9 +2,9 @@ import Category from '../Сategory/Сategory'
 //import SubCategory from '../SubCategory/SubCategory'
 import './MainCategories.css'
 
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-function MainCategories({categoryFromPage, categories, onChooseCategory, categoriesToRender, chooseNextCategory}) {
+function MainCategories({ categories, onChooseCategory, categoriesToRender}) {
   const location = useLocation();
 
   return (
@@ -16,8 +16,8 @@ function MainCategories({categoryFromPage, categories, onChooseCategory, categor
             ))
           )
         :
-          (categoryFromPage.map((subCategory) => (
-            <Category key={subCategory.category_id} category={subCategory} onChooseCategory={chooseNextCategory}></Category>
+          (categoriesToRender.map((subCategory) => (
+            <Category key={subCategory.category_id} category={subCategory} onChooseCategory={onChooseCategory}></Category> 
           )))
       }
      </ul>

@@ -38,24 +38,26 @@ function App() {
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
   
-
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
 
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
-
+  
   const [subCategories, setSubCategories] = React.useState([])
   const [thirdSubCategories, setThirdSubCategories] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  const [items, setItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
+
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
+
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
-
+  
   const [isGood, setIsGood] = React.useState(true)
 
   const userId = currentUser.user_id
@@ -76,7 +78,8 @@ function App() {
     try {
       const res = await Api.getLastForty();
       setLastFoutryItems(res)
-      setItemsAfterSearch(res)
+      setItems(res)
+      setItemsAfterSearch(res) 
     } catch (err) {
       console.log(err);
     }
@@ -85,20 +88,23 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
-    
   },[])
-//при нажатии на категорию вызываем функцию, аргументом передаем категори_айди+
-//функция которая передает в стейт все айтомы в этой категории
-//нужно получить все айтомы и все категории, их профильтровать на категори_айди,
-//стейт должен получиться только из айтомов соответствующей категории
-  function chooseCategory(category_id) {
-    setCategoriesToRender(categories.filter((item) => item.parent_id === category_id))
-    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
-  } 
 
-  function chooseNextCategory(category_id) {
-    setCategoriesToRender(categoriesToRender.filter((item) => item.parent_id === category_id))
-    //setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
+  function chooseCategory(category) {
+    setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
+
+
+    //const allItemsInCategory = lastFourtyItems.filter((i) => i.category_id === category.category_id)
+
+    /*const categoryIdArr = [category.category_id]
+    const arr = categories.filter((item) => item.parent_id === category.category_id)
+    arr.forEach((item) => (categoryIdArr.push(item.category_id)))*/
+
+    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
+
+  /*
+    console.log(category)
+    console.log(lastFourtyItems)*/
   } 
 
   function handleRegSubmit(userData) {
@@ -248,14 +254,19 @@ function App() {
 
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
-    console.log(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)));
-
-    //itemsAfterSearch, 
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
     //console.log(categories.filter((category) => category.name.includes(keyWord)))
     //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
     //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
-}
+  }
+
+  function startToSearchSecondPage (keyWord) {
+    const keywordLowerCase = keyWord.toLowerCase()
+    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    //console.log(categories.filter((category) => category.name.includes(keyWord)))
+    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
+    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
+  }
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -350,7 +361,6 @@ function App() {
           path="/"
           element={
             <Main 
-              //categoriesToRender={categoriesToRender}
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
               categories={categories}
@@ -360,9 +370,8 @@ function App() {
               //deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
-
+              //categoryItemsSearch={categoryItemsSearch} 
               itemsAfterSearch={itemsAfterSearch}
-
               isLoggin={isLoggin}
             />
           }
@@ -372,14 +381,16 @@ function App() {
           path='/category/:slug' 
           element={
             <CategoryPage 
-              onChooseCategory={chooseCategory}
+              chooseCategory={chooseCategory}
               categoriesToRender={categoriesToRender}
               categories={categories}
-              startToSearch={startToSearch}
-              categoryItemsSearch={categoryItemsSearch}
+
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
-              chooseNextCategory={chooseNextCategory}
+
+              startToSearch={startToSearch}
+              lastFourtyItems={lastFourtyItems}
+              categoryItemsSearch={categoryItemsSearch} 
             />
           }
         />

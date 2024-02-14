@@ -5,20 +5,23 @@ function Category({category, onChooseCategory}) {
     let { slug } = useParams();
 
     function handleChoose() {
-        onChooseCategory(category.category_id)
+        console.log('handleChoose')
+        onChooseCategory(category)//category.category_id
     }
+
 
     return (
         <li className="category-container" >
             <Link to={`/category/${category.slug}`} onClick={handleChoose} className="category__link">
-                <img src={category.image_url} className="category-pic"></img>
-                <p className="category-title">{category.name}</p>
+              <img src={category.image_url} className="category-pic"></img>
+              <p className="category-title">{category.name}</p>
             </Link>
         </li>
     )
 }
 
 export default Category;
+
 
 /*
 CREATE TABLE category (

@@ -7,9 +7,9 @@ import OneAd from '../../OneAd/OneAd.js'
 
 import './CategoryPage.css'
 
-function CategoryPage({chooseNextCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
+function CategoryPage({lastFourtyItems, chooseNextCategory, chooseCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
     
-    const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
+    const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
     let { slug } = useParams();
 
     React.useEffect(() => {
@@ -20,16 +20,20 @@ function CategoryPage({chooseNextCategory, categories, startToSearch, categoryIt
         }
     }, [categoriesToRender, slug]);
 
-    if(categoriesToRender.length === 0) {
-        return <p>Loading ...</p>
+    console.log(categoryFromPage)
+
+    if(categoryFromPage.length <= 0) {
+       return <p>Loading ...</p>
     }
 
+    console.log('categoryItemsSearch =>', categoryItemsSearch)
     return(
-        <section>
+        <section className='categoryPage-main-container'>
             <MainSearchEngine startToSearch={startToSearch}/>
             <MainCategories 
-                categoryFromPage={categoryFromPage} 
-                chooseNextCategory={chooseNextCategory}
+                categoriesToRender={categoryFromPage} 
+                //chooseNextCategory={chooseNextCategory}
+                chooseCategory={chooseCategory}
             />
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
