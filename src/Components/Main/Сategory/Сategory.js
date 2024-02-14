@@ -1,14 +1,11 @@
 import './Сategory.css'
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 function Category({category, onChooseCategory}) {
-
     let { slug } = useParams();
 
     function handleChoose() {
         onChooseCategory(category.category_id)
-        //console.log(category.category_id)
     }
 
     return (

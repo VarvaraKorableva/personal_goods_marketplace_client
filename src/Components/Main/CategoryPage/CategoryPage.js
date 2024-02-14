@@ -7,27 +7,30 @@ import OneAd from '../../OneAd/OneAd.js'
 
 import './CategoryPage.css'
 
-function CategoryPage({chooseThirdCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites}) {
+function CategoryPage({chooseNextCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState([]); //if you came on route first
     let { slug } = useParams();
 
     React.useEffect(() => {
-        const myCategory = categories.find((item) => item.slug === slug);
-        if (categories.length > 0 && myCategory) {
+        const myCategory = categoriesToRender.find((item) => item.slug === slug);
+        if (categoriesToRender.length > 0 && myCategory) {
             const filteredCategories = categories.filter((item) => item.parent_id === myCategory.category_id);
             setCategoryFromPage(filteredCategories);
         }
-    }, [categories, slug]);
+    }, [categoriesToRender, slug]);
 
-    if(categories.length === 0) {
+    if(categoriesToRender.length === 0) {
         return <p>Loading ...</p>
     }
 
     return(
         <section>
             <MainSearchEngine startToSearch={startToSearch}/>
-            <MainCategories categoryFromPage={categoryFromPage} chooseThirdCategory={chooseThirdCategory}/>
+            <MainCategories 
+                categoryFromPage={categoryFromPage} 
+                chooseNextCategory={chooseNextCategory}
+            />
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
                 {categoryItemsSearch.map((item) => (

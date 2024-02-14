@@ -8,13 +8,12 @@ import Registration from './Components/Registration/Registration'
 import Login from './Components/Login/Login'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
-import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
+import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import './App.css'
 
 import AddAdPage from './Components/AddAdPage/AddAdPage'
-import ThirdCategoryPage from './Components/Main/ThirdCategoryPage/ThirdCategoryPage'
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
@@ -42,10 +41,13 @@ function App() {
 
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
+
+  const [categoriesToRender, setCategoriesToRender] = React.useState([])
+
   const [subCategories, setSubCategories] = React.useState([])
   const [thirdSubCategories, setThirdSubCategories] = React.useState([])
+
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
-  //const [favoriteItems, setFavoriteItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
@@ -58,13 +60,23 @@ function App() {
 
   const userId = currentUser.user_id
   const favorite_collector_id = currentUser.user_id
-  
   const navigate = useNavigate()
 
   async function getCategory() {
     try {
       const res = await Api.getCategory();
       setCategories(res);
+      setCategoriesToRender(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getLastFourtyItems() {
+    try {
+      const res = await Api.getLastForty();
+      setLastFoutryItems(res)
+      setItemsAfterSearch(res)
     } catch (err) {
       console.log(err);
     }
@@ -80,18 +92,13 @@ function App() {
 //нужно получить все айтомы и все категории, их профильтровать на категори_айди,
 //стейт должен получиться только из айтомов соответствующей категории
   function chooseCategory(category_id) {
-    setSubCategories(categories.filter((item) => item.parent_id === category_id))
+    setCategoriesToRender(categories.filter((item) => item.parent_id === category_id))
     setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
   } 
 
-  function chooseThirdCategory(category_id) {
-    setThirdSubCategories(categories.filter((item) => item.parent_id === category_id))
-    console.log(categories.filter((item) => item.parent_id === category_id))
+  function chooseNextCategory(category_id) {
+    setCategoriesToRender(categoriesToRender.filter((item) => item.parent_id === category_id))
     //setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
-  } 
-
-  function goToCategory(slug) {
-    setSubCategories(categories.filter((item) => item.slug === slug))
   } 
 
   function handleRegSubmit(userData) {
@@ -129,11 +136,7 @@ function App() {
     .then ((res) => {
       setIsLoggin(true)
       setCurrentUser(res.user[0])
-      Api.getCategory()
-        .then((data) => {
-          setCategories(data)
-          navigate(`/`)
-        })
+      navigate(`/`)
     })  
     .catch((err) => {
       console.log(err)
@@ -152,15 +155,6 @@ function App() {
           //setIsLoginError(false)
         }, 5000)
       }
-      //401
-    })
-  }
-
-  function getLastFourtyItems() {
-    Api.getLastForty()
-    .then((res) => {
-      setLastFoutryItems(res)
-      setItemsAfterSearch(res)
     })
   }
 
@@ -356,10 +350,10 @@ function App() {
           path="/"
           element={
             <Main 
-              categories={categories} 
+              //categoriesToRender={categoriesToRender}
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
-
+              categories={categories}
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
               startToSearch={startToSearch}
@@ -378,25 +372,14 @@ function App() {
           path='/category/:slug' 
           element={
             <CategoryPage 
+              onChooseCategory={chooseCategory}
+              categoriesToRender={categoriesToRender}
               categories={categories}
               startToSearch={startToSearch}
               categoryItemsSearch={categoryItemsSearch}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
-              chooseThirdCategory={chooseThirdCategory}
-            />
-          }
-        />
-
-        <Route 
-          path='/third-category-page/:slug' 
-          element={
-            <ThirdCategoryPage 
-              thirdSubCategories={thirdSubCategories}
-              startToSearch={startToSearch}
-              categoryItemsSearch={categoryItemsSearch}
-              addToFavorites={addToFavorites}
-              deleteFromFavorites={deleteFromFavorites}
+              chooseNextCategory={chooseNextCategory}
             />
           }
         />
@@ -412,6 +395,7 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
+              favoriteItems={favoriteItems}
             />
           }
         />

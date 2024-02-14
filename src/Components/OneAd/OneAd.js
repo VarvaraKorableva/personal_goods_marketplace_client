@@ -10,8 +10,13 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
-    const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
+    const isLiked = false
 
+    /*favoriteItems.length === 0? 
+    (isLiked = false) 
+    : 
+    (const isLiked = favoriteItems.some((i) => i.item_id === item.item_id))*/
+    
     function handleClick() {
         getItemById(item.item_id)
     }
