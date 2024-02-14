@@ -12,3 +12,13 @@
 .categoryPage-main-container {
     min-height: 80vh;
 }
+
+.categoryPage-categories-container{
+    padding: 0;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 40px;
+    justify-content: center;
+}

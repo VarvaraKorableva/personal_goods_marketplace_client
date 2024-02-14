@@ -4,10 +4,11 @@ import MainSearchEngine from '../MainSearchEngine/MainSearchEngine'
 import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
+import Category from '../Сategory/Сategory'
 
 import './CategoryPage.css'
 
-function CategoryPage({lastFourtyItems, chooseNextCategory, chooseCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
+function CategoryPage({lastFourtyItems,  chooseCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
     let { slug } = useParams();
@@ -30,11 +31,17 @@ function CategoryPage({lastFourtyItems, chooseNextCategory, chooseCategory, cate
     return(
         <section className='categoryPage-main-container'>
             <MainSearchEngine startToSearch={startToSearch}/>
-            <MainCategories 
-                categoriesToRender={categoryFromPage} 
-                //chooseNextCategory={chooseNextCategory}
-                chooseCategory={chooseCategory}
-            />
+
+            <ul className='categoryPage-categories-container'>
+                {categoriesToRender.map((subCategory) => (
+                    <Category 
+                        key={subCategory.category_id} 
+                        category={subCategory} 
+                        onChooseCategory={chooseCategory}
+                    />
+                  ))
+                }
+            </ul>
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
                 {categoryItemsSearch.map((item) => (
@@ -53,6 +60,14 @@ function CategoryPage({lastFourtyItems, chooseNextCategory, chooseCategory, cate
 //лайки
 
 export default CategoryPage;
+
+/*
+            <MainCategories 
+                categoriesToRender={categoryFromPage} 
+                //chooseNextCategory={chooseNextCategory}
+                chooseCategory={chooseCategory}
+            />
+*/
 
 /*function CategoryPage({categories, subCategories, goToCategory}) {
 

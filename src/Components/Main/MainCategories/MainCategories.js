@@ -9,6 +9,17 @@ function MainCategories({ categories, onChooseCategory, categoriesToRender}) {
 
   return (
     <ul className="MainCategories-container">
+      {categories.filter(item => item.parent_id === null).map(item => (
+        <Category key={item.category_id} category={item} onChooseCategory={onChooseCategory}/>
+        ))
+      }
+    </ul>
+  )
+}
+
+export default MainCategories;
+
+/*
       {
         location.pathname === '/'? 
           (categories.filter(item => item.parent_id === null).map(item => (
@@ -20,8 +31,4 @@ function MainCategories({ categories, onChooseCategory, categoriesToRender}) {
             <Category key={subCategory.category_id} category={subCategory} onChooseCategory={onChooseCategory}></Category> 
           )))
       }
-     </ul>
-  )
-}
-
-export default MainCategories;
+*/
