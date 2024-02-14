@@ -8,6 +8,7 @@ const ProtectedRoute = ({
 }) => {
 
   if (!isLoggin) {
+    console.log(isLoggin)
     return <Navigate to={redirectPath} replace />;
   }
 

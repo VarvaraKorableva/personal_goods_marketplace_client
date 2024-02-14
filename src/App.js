@@ -12,12 +12,14 @@ import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
+
+import AddAdPage from './Components/AddAdPage/AddAdPage'
+import ThirdCategoryPage from './Components/Main/ThirdCategoryPage/ThirdCategoryPage'
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
-import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
@@ -25,7 +27,7 @@ function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
 
-  const [isLoading, setIsLoading] = React.useState(false)
+  //const [isLoading, setIsLoading] = React.useState(false)
   const [showLoading, setShowLoading] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState('')
   const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
@@ -41,15 +43,21 @@ function App() {
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
   const [subCategories, setSubCategories] = React.useState([])
+  const [thirdSubCategories, setThirdSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+
+  const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
+  const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
   const [selectedItem, setSelectedItem] = React.useState([])
-  const [userInfo, setUserInfo] = React.useState([])
+  const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
 
+  const [isGood, setIsGood] = React.useState(true)
+
   const userId = currentUser.user_id
   const favorite_collector_id = currentUser.user_id
-
+  
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -64,11 +72,21 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
-    //getMyFavorites(favorite_collector_id)
+    
   },[])
-
+//при нажатии на категорию вызываем функцию, аргументом передаем категори_айди+
+//функция которая передает в стейт все айтомы в этой категории
+//нужно получить все айтомы и все категории, их профильтровать на категори_айди,
+//стейт должен получиться только из айтомов соответствующей категории
   function chooseCategory(category_id) {
     setSubCategories(categories.filter((item) => item.parent_id === category_id))
+    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
+  } 
+
+  function chooseThirdCategory(category_id) {
+    setThirdSubCategories(categories.filter((item) => item.parent_id === category_id))
+    console.log(categories.filter((item) => item.parent_id === category_id))
+    //setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category_id))
   } 
 
   function goToCategory(slug) {
@@ -141,6 +159,7 @@ function App() {
     Api.getLastForty()
     .then((res) => {
       setLastFoutryItems(res)
+      setItemsAfterSearch(res)
     })
   }
 
@@ -179,6 +198,7 @@ function App() {
     Api.getUserById(user_id)
     .then((res) => {
       setUserInfo(res)
+      console.log(res) 
     })
     .catch((err) => {
       console.log(err)
@@ -230,8 +250,17 @@ function App() {
       console.log(err)
     })
   }
-/*
-*/
+
+  function startToSearch(keyWord) {
+    const keywordLowerCase = keyWord.toLowerCase()
+    console.log(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)));
+
+    //itemsAfterSearch, 
+    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    //console.log(categories.filter((category) => category.name.includes(keyWord)))
+    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
+    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
+}
 
   function handleItemClick(item) {
     setSelectedItem(item);
@@ -241,8 +270,10 @@ function App() {
     setSuccessfulActionPopup(true)
   }
 
-  function handleAddAdClick(){
-    setIsAddAdPopup(true)
+  function handleAddAdClick(data){
+    setIsGood(data)
+    navigate(`/add-ad`) 
+    closeAllPopups()
   }
 
   function handleChoiceOfProductOrServicePopupClick(){
@@ -255,6 +286,33 @@ function App() {
     setSuccessfulActionPopup(false)
     setPopupMessage("")
   }
+
+  function handleLogout() {
+    //Api.logout()
+    //.then((res)=>{
+      setIsLoggin(false)
+      setCurrentUser({})
+      navigate(`/`)
+    //})
+    //.coach((err) => {
+    //  console.log(err)
+    //})
+  }
+/*
+  function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split('=');
+      if (cookieName.trim() === name) {
+        return decodeURIComponent(cookieValue);
+      }
+    }
+    return null;
+  }
+  
+  // Пример использования:
+  const token = getCookie('jwt');
+  console.log(token);*/
 
   return (
     <LanguageProvider>
@@ -286,11 +344,17 @@ function App() {
               categories={categories} 
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
-              lastFourtyItems={lastFourtyItems}
+
+              lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
+              startToSearch={startToSearch}
               //deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
+
+              itemsAfterSearch={itemsAfterSearch}
+
+              isLoggin={isLoggin}
             />
           }
         />
@@ -300,6 +364,24 @@ function App() {
           element={
             <CategoryPage 
               categories={categories}
+              startToSearch={startToSearch}
+              categoryItemsSearch={categoryItemsSearch}
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
+              chooseThirdCategory={chooseThirdCategory}
+            />
+          }
+        />
+
+        <Route 
+          path='/third-category-page/:slug' 
+          element={
+            <ThirdCategoryPage 
+              thirdSubCategories={thirdSubCategories}
+              startToSearch={startToSearch}
+              categoryItemsSearch={categoryItemsSearch}
+              addToFavorites={addToFavorites}
+              deleteFromFavorites={deleteFromFavorites}
             />
           }
         />
@@ -314,9 +396,24 @@ function App() {
               userInfo={userInfo}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
+              isLoggin={isLoggin}
             />
           }
         />
+
+        <Route
+          path={`/add-ad`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <AddAdPage
+                categories={categories}
+                onAddAd={handleAddAdSubmit}
+                isLoggin={isLoggin}
+                isGood={isGood}
+              />
+            </ProtectedRoute>
+          }>
+        </Route> 
 
         <Route
           exact path={`/users/${userId}`}
@@ -326,6 +423,8 @@ function App() {
                 getMyItems={getMyItems}
                 myAds={myAds}
                 deleteMyAd={deleteMyAd}
+                handleLogout={handleLogout}
+                isLoggin={isLoggin}
               />
             </ProtectedRoute>
           }>
@@ -342,23 +441,27 @@ function App() {
               myAds={myAds}
               getMyItems={getMyItems}
               getItemById={getItemById}
+              isLoggin={isLoggin}
           />
           }>
         </Route>
 
-        <Route 
-          path='/my_favorites' 
+        <Route
+          exact path={`/my_favorites`}
           element={
-            <MyFavoritesPage 
-              getMyFavorites={getMyFavorites}
-              favorite={favorite}
-              lastFourtyItems={lastFourtyItems}
-              favoriteItems={favoriteItems}
-              deleteFromFavorites={deleteFromFavorites}
-              getMyFavorites={getMyFavorites}
-            />
-          }
-        />
+            <ProtectedRoute isLoggin={isLoggin}>
+              <MyFavoritesPage 
+                getMyFavorites={getMyFavorites}
+                favorite={favorite}
+                lastFourtyItems={lastFourtyItems}
+                favoriteItems={favoriteItems}
+                deleteFromFavorites={deleteFromFavorites}
+                getMyFavorites={getMyFavorites}
+              />
+            </ProtectedRoute>
+          }>
+        </Route> 
+
         <Route
           path="*"
           element={
@@ -366,17 +469,12 @@ function App() {
           }>
         </Route>
       </Routes>
+
       <ChoiceOfProductOrServicePopup
         isOpen={isChoiceOfProductOrServicePopup}
         onClose={closeAllPopups}
         onAdBtn={handleAddAdClick}
-      /> 
-      <AddAdPopup
-        isOpen={isAddAdPopup}
-        onClose={closeAllPopups}
-        onAddAd={handleAddAdSubmit}
-        categories={categories}
-      /> 
+      />
 
       <SuccessfulActionPopup 
         isOpen={isSuccessfulActionPopup}
@@ -391,3 +489,12 @@ function App() {
 }
 
 export default App;
+
+/*
+      <AddAdPopup
+        isOpen={isAddAdPopup}
+        onClose={closeAllPopups}
+        onAddAd={handleAddAdSubmit}
+        categories={categories}
+      /> 
+*/

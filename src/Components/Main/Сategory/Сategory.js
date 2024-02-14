@@ -8,7 +8,7 @@ function Category({category, onChooseCategory}) {
 
     function handleChoose() {
         onChooseCategory(category.category_id)
-        console.log(category.category_id)
+        //console.log(category.category_id)
     }
 
     return (

@@ -4,7 +4,7 @@ import './MainCategories.css'
 
 import { Link, useLocation } from 'react-router-dom'
 
-function MainCategories({categories, onChooseCategory, categoryFromPage}) {
+function MainCategories({categories, onChooseCategory, categoryFromPage, chooseThirdCategory}) {
   const location = useLocation();
 
   return (
@@ -17,7 +17,7 @@ function MainCategories({categories, onChooseCategory, categoryFromPage}) {
           )
         :
           (categoryFromPage.map((subCategory) => (
-            <SubCategory key={subCategory.category_id} subCategory={subCategory}></SubCategory>
+            <SubCategory key={subCategory.category_id} onChooseThirdCategory={chooseThirdCategory} subCategory={subCategory}></SubCategory>
           )))
       }
      </ul>
@@ -25,6 +25,8 @@ function MainCategories({categories, onChooseCategory, categoryFromPage}) {
 }
 
 export default MainCategories;
+
+//onChooseCategory={onChooseCategory}
 
 
 

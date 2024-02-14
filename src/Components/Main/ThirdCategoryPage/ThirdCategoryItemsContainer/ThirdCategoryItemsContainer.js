@@ -1,10 +1,12 @@
-import OneAd from '../../OneAd/OneAd'
-import './ItemsContainer.css';
+////ThirdCategoryItemsContainer
 
-function ItemsContainer({isLoggin, itemsAfterSearch, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite}) {
+import OneAd from '../../../OneAd/OneAd'
+import './ThirdCategoryItemsContainer.css';
+
+function ThirdCategoryItemsContainer({itemsAfterSearch, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite}) {
 
     return(
-        <ul className="itemsContainer-listings-container">
+        <ul className="thirdCategoryItemsContainer-listings-container">
             {itemsAfterSearch.map((item) => (
                 <OneAd 
                     key={item.item_id} 
@@ -13,11 +15,10 @@ function ItemsContainer({isLoggin, itemsAfterSearch, lastFourtyItems, getItemByI
                     addToFavorites={addToFavorites}
                     deleteFromFavorites={deleteFromFavorites}
                     favorite={favorite}
-                    isLoggin={isLoggin}
                 />
             ))}
         </ul>
     )
 }
 
-export default ItemsContainer;
+export default ThirdCategoryItemsContainer;

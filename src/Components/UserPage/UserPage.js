@@ -3,7 +3,7 @@ import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
 
-function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites}) {
+function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin}) {
     
     const owner_id = useParams()
 
@@ -17,20 +17,34 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToF
     }
     
     return(
-        <>
-            <h3>UserPage</h3>
+        <section className='userPage_main-container'>
             <p>{userInfo[0].username}</p>
-            <p>Reiting</p>
-            <p>Write a message to {userInfo[0].username}</p>
+
+            {
+            isLoggin?
+                <div className='userPage__message-container'>
+                  <p>Write a message to {userInfo[0].username}</p>
+                  <div className='userPage__message-pic'></div> 
+                </div>
+            :
+                <></>
+            }
+
             <div>
                 <h3>All ads</h3>
                 <ul className="userPage-listings-container">
                     {myAds.map((item) => (
-                        <OneAd key={item.item_id} item={item} getItemById={getItemById} addToFavorites={addToFavorites}/>
+                        <OneAd 
+                            key={item.item_id} 
+                            isLoggin={isLoggin} 
+                            item={item} 
+                            getItemById={getItemById} 
+                            addToFavorites={addToFavorites}
+                        />
                     ))}
                 </ul>
             </div>
-        </>
+        </section>
 
     )
 }

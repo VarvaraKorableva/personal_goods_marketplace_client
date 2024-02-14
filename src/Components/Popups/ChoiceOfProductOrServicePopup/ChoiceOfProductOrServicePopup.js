@@ -3,6 +3,16 @@ import '../Popups.css'
 
 function ChoiceOfProductOrServicePopup({onClose, isOpen, onAdBtn}) {
 
+  function handleGoodBtn() {
+    const data = true
+    onAdBtn(data)
+  }
+
+  function handleServicesBtn() {
+    const data = false
+    onAdBtn(data)
+  }
+
 return (
     
     <div className={`popup ${isOpen && 'popup__opened'}`}>
@@ -15,8 +25,8 @@ return (
     </button>
     <h2 className="popup__title-ChoiceOfProductOrServicePopup">What ad would you like to add?</h2>
     <div className='popup__container-ChoiceOfProductOrServicePopup'>
-        <button onClick={onAdBtn} className='popup_choice_btn'>Goods</button>
-        <button className='popup_choice_btn'>Services</button>
+        <button onClick={handleGoodBtn} className='popup_choice_btn'>Goods</button>
+        <button onClick={handleServicesBtn} className='popup_choice_btn'>Services</button>
     </div>  
     </div>
     </div>

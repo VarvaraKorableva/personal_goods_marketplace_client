@@ -1,7 +1,7 @@
 import React from 'react'
-import './MainSearchEngine.css'
+import './ThirdCategorySearchEngine.css'
 
-function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
+function ThirdCategorySearchEngine({lastFourtyItems, categories, startToSearch}) {
     const [keyWord, setKeyWord] = React.useState('')
 
     function handleTakeKeyWord(e) {
@@ -14,16 +14,16 @@ function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
     }
 
     return(
-        <form className="MainSearchEngine-form" onSubmit={handleSubmitToSearch}>
+        <form className="thirdCategorySearchEngine-form" onSubmit={handleSubmitToSearch}>
             <input 
-                className="MainSearchEngine-input"
+                className="thirdCategorySearchEngine-input"
                 placeholder="Search by advertisements"
                 value={keyWord}
                 onChange={handleTakeKeyWord}
             />
-            <button className="MainSearchEngine-btn" type='submit'>Search</button>
+            <button className="thirdCategorySearchEngine-btn" type='submit'>Search</button>
         </form>
     )
 }
 
-export default MainSearchEngine;
+export default ThirdCategorySearchEngine;
