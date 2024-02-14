@@ -52,6 +52,22 @@
     background-image: url('../../images/like.png');
 }
 
+.oneAdd__like-btn_activ {
+    background-image: url('../../images/like.png');
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.oneAdd__like-btn_activ:hover {
+    background-image: url('../../images/emptyheart.png');
+}
+
 .oneAdd__delete-btn {
     background-image: url('../../images/deleteBtn.png');
     width: 25px;

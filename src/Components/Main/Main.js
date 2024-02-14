@@ -26,7 +26,7 @@ function Main({isLoggin, itemsAfterSearch, startToSearch, favorite, categories, 
                 deleteFromFavorites={deleteFromFavorites}
                 favorite={favorite}
                 favoriteItems={favoriteItems}
-
+                
                 isLoggin={isLoggin}
             />
         </section>

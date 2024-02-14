@@ -45,6 +45,7 @@ function App() {
   const [subCategories, setSubCategories] = React.useState([])
   const [thirdSubCategories, setThirdSubCategories] = React.useState([])
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  //const [favoriteItems, setFavoriteItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
@@ -298,21 +299,35 @@ function App() {
     //  console.log(err)
     //})
   }
-/*
+
   function getCookie(name) {
-    const cookies = document.cookie.split(';');
+    //const cookies = document.Cookies.split(';');
+    /*
     for (let cookie of cookies) {
       const [cookieName, cookieValue] = cookie.split('=');
       if (cookieName.trim() === name) {
         return decodeURIComponent(cookieValue);
       }
     }
-    return null;
+    return null;*/
+    console.log(document.Cookies)
   }
   
   // Пример использования:
-  const token = getCookie('jwt');
-  console.log(token);*/
+  //const token = getCookie('jwt');
+  //console.log(token);
+
+  React.useEffect(() => {
+      const favoriteItemsResult = lastFourtyItems.filter(item =>
+        favorite.some(favoriteItem => favoriteItem.item_id === item.item_id)
+      );
+      setFavoriteItems(favoriteItemsResult);
+    }, [lastFourtyItems, favorite]);
+  
+  React.useEffect(() => {
+      getMyFavorites(favorite_collector_id)
+  },[favorite_collector_id])
+  
 
   return (
     <LanguageProvider>

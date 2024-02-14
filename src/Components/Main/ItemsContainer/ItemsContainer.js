@@ -1,7 +1,7 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
 
-function ItemsContainer({isLoggin, itemsAfterSearch, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite}) {
+function ItemsContainer({isLoggin, itemsAfterSearch, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
 
     return(
         <ul className="itemsContainer-listings-container">
@@ -14,6 +14,8 @@ function ItemsContainer({isLoggin, itemsAfterSearch, lastFourtyItems, getItemByI
                     deleteFromFavorites={deleteFromFavorites}
                     favorite={favorite}
                     isLoggin={isLoggin}
+
+                    favoriteItems={favoriteItems}
                 />
             ))}
         </ul>
