@@ -29,7 +29,6 @@ function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout}) {
                     <div className="myPage__info-wrapper">
                         <p className="myPage__name">{currentUser.username}</p>
                         <p className="myPage__my-rating"></p>
-                        <p>reviews</p> 
                     </div>
                 </div>
                 <div className="myPage__listings-wrapper">

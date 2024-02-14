@@ -13,13 +13,13 @@ import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import './App.css'
 
+import AddAdPage from './Components/AddAdPage/AddAdPage'
 import ThirdCategoryPage from './Components/Main/ThirdCategoryPage/ThirdCategoryPage'
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import Category from './Components/Main/Сategory/Сategory';
-import AddAdPopup from './Components/Popups/AddAdPopup/AddAdPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
@@ -52,6 +52,8 @@ function App() {
   const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
+
+  const [isGood, setIsGood] = React.useState(true)
 
   const userId = currentUser.user_id
   const favorite_collector_id = currentUser.user_id
@@ -268,8 +270,10 @@ function App() {
     setSuccessfulActionPopup(true)
   }
 
-  function handleAddAdClick(){
-    setIsAddAdPopup(true)
+  function handleAddAdClick(data){
+    setIsGood(data)
+    navigate(`/add-ad`) 
+    closeAllPopups()
   }
 
   function handleChoiceOfProductOrServicePopupClick(){
@@ -398,6 +402,20 @@ function App() {
         />
 
         <Route
+          path={`/add-ad`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <AddAdPage
+                categories={categories}
+                onAddAd={handleAddAdSubmit}
+                isLoggin={isLoggin}
+                isGood={isGood}
+              />
+            </ProtectedRoute>
+          }>
+        </Route> 
+
+        <Route
           exact path={`/users/${userId}`}
           element={
             <ProtectedRoute isLoggin={isLoggin}>
@@ -428,19 +446,22 @@ function App() {
           }>
         </Route>
 
-        <Route 
-          path='/my_favorites' //закрытый роут !!!!
+        <Route
+          exact path={`/my_favorites`}
           element={
-            <MyFavoritesPage 
-              getMyFavorites={getMyFavorites}
-              favorite={favorite}
-              lastFourtyItems={lastFourtyItems}
-              favoriteItems={favoriteItems}
-              deleteFromFavorites={deleteFromFavorites}
-              getMyFavorites={getMyFavorites}
-            />
-          }
-        />
+            <ProtectedRoute isLoggin={isLoggin}>
+              <MyFavoritesPage 
+                getMyFavorites={getMyFavorites}
+                favorite={favorite}
+                lastFourtyItems={lastFourtyItems}
+                favoriteItems={favoriteItems}
+                deleteFromFavorites={deleteFromFavorites}
+                getMyFavorites={getMyFavorites}
+              />
+            </ProtectedRoute>
+          }>
+        </Route> 
+
         <Route
           path="*"
           element={
@@ -448,17 +469,12 @@ function App() {
           }>
         </Route>
       </Routes>
+
       <ChoiceOfProductOrServicePopup
         isOpen={isChoiceOfProductOrServicePopup}
         onClose={closeAllPopups}
         onAdBtn={handleAddAdClick}
-      /> 
-      <AddAdPopup
-        isOpen={isAddAdPopup}
-        onClose={closeAllPopups}
-        onAddAd={handleAddAdSubmit}
-        categories={categories}
-      /> 
+      />
 
       <SuccessfulActionPopup 
         isOpen={isSuccessfulActionPopup}
@@ -473,3 +489,12 @@ function App() {
 }
 
 export default App;
+
+/*
+      <AddAdPopup
+        isOpen={isAddAdPopup}
+        onClose={closeAllPopups}
+        onAddAd={handleAddAdSubmit}
+        categories={categories}
+      /> 
+*/
