@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
 import * as Api from '../../Api/Api'
 
-function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites }) {
+function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites }) {
     let { item_id } = useParams();
     let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
@@ -28,6 +28,10 @@ function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin, favorit
     if(selectedItem.length === 0) {
         return <p>Loading ...</p>;
     } 
+
+    function hundleDeleteMyAd() {
+        deleteMyAd(selectedItem[0].item_id)
+    }
 
     function handleAddToFavorites() {
         addToFavorites(favorite_collector_id, selectedItem[0].item_id, selectedItem[0])
@@ -62,14 +66,21 @@ function CardPage({ selectedItem, getItemById, addToFavorites, isLoggin, favorit
                         {
                             isLoggin?
                                 <div className="cardPage__btn-container">
-                                    {isLiked? 
+                                    {currentUser.user_id === selectedItem[0].owner_id ?
+                                        <button className='cardPage__write-message-btn' onClick={hundleDeleteMyAd}>Delete ad</button>
                                     
-                                    <button onClick={hundleDeleteFromFavorites} className='cardPage__favorite-btn'>Delete from favorites</button>
                                     :
-                                    <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
-                                    }
+                                        <>
+                                        {isLiked? 
                                     
-                                    <button className='cardPage__write-message-btn'>Write a message</button>
+                                           <button onClick={hundleDeleteFromFavorites} className='cardPage__favorite-btn'>Delete from favorites</button>
+                                        :
+                                           <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>Add to favorites</button>
+                                        }
+                                    
+                                        <button className='cardPage__write-message-btn'>Write a message</button>
+                                        </>
+                                    }
                                 </div>
                             :
                             <></>

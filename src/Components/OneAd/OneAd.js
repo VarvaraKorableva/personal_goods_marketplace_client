@@ -4,8 +4,6 @@ import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 
-//Написать если isLoggin фалс то при нажатии на лайк редирект на страницу логина
-
 function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id

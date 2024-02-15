@@ -5,8 +5,7 @@ function Category({category, onChooseCategory}) {
     let { slug } = useParams();
 
     function handleChoose() {
-        console.log('handleChoose')
-        onChooseCategory(category)//category.category_id
+      onChooseCategory(category)//category.category_id
     }
 
 

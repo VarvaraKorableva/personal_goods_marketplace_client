@@ -8,7 +8,13 @@ import Category from '../Сategory/Сategory'
 
 import './CategoryPage.css'
 
-function CategoryPage({lastFourtyItems,  chooseCategory, categories, startToSearch, categoryItemsSearch, addToFavorites, deleteFromFavorites, categoriesToRender}) {
+function CategoryPage({
+    favorite, categories, 
+    onChooseCategory, isLoggin,
+    getItemById, addToFavorites, deleteFromFavorites, 
+    favoriteItems, lastFourtyItems,  chooseCategory, 
+    startToSearch, categoryItemsSearch, categoriesToRender
+}) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
     let { slug } = useParams();
@@ -47,9 +53,15 @@ function CategoryPage({lastFourtyItems,  chooseCategory, categories, startToSear
                 {categoryItemsSearch.map((item) => (
                     <OneAd 
                         key={item.item_id} 
-                        item={item}>
+                        //itemsAfterSearch={itemsAfterSearch}
+                        lastFourtyItems={lastFourtyItems} 
+                        getItemById={getItemById} 
                         addToFavorites={addToFavorites}
-                        deleteFromFavorites={deleteFromFavorites}    
+                        deleteFromFavorites={deleteFromFavorites}
+                        favorite={favorite}
+                        favoriteItems={favoriteItems}
+                        isLoggin={isLoggin}
+                        item={item}>
                     </OneAd>
                 ))}
             </ul>
@@ -60,42 +72,3 @@ function CategoryPage({lastFourtyItems,  chooseCategory, categories, startToSear
 //лайки
 
 export default CategoryPage;
-
-/*
-            <MainCategories 
-                categoriesToRender={categoryFromPage} 
-                //chooseNextCategory={chooseNextCategory}
-                chooseCategory={chooseCategory}
-            />
-*/
-
-/*function CategoryPage({categories, subCategories, goToCategory}) {
-
-    const [categoryFromPage, setCategoryFromPage]= React.useState([]) //if you came on route first
-    
-    let { slug } = useParams();
- 
-    function seeSubCategory() {
-        goToCategory(slug)
-    }
-    //http://localhost:3000/category/services
-    //import { Link, useLocation } from 'react-router-dom'
-    //location.pathname === `/category/${slug}`
-
-
-    const myCategory = categories.find((item) => item.slug === slug);
-    
-
-    return(
-        <section>
-            <MainSearchEngine/>
-            <MainCategories subCategories={subCategories} categoryFromPage={categoryFromPage}/>
-            <h2 className='main__title'> ads</h2>
-            
-        </section>
-    )
-}
-
-export default CategoryPage;*/
-
-//<ItemsContainer />

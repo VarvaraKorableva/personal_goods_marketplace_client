@@ -166,6 +166,9 @@ function App() {
     .then((res)=> {
       closeAllPopups()
       setPopupMessage("Ad added successful!")
+      
+      setMyAds([res, ...myAds])
+
       openSuccessfulActionPopup()
     })
     .catch((err)=> {
@@ -368,6 +371,9 @@ function App() {
               startToSearch={startToSearch}
               lastFourtyItems={lastFourtyItems}
               categoryItemsSearch={categoryItemsSearch} 
+              isLoggin={isLoggin}
+              favorite={favorite}
+              favoriteItems={favoriteItems}
             />
           }
         />
@@ -384,6 +390,7 @@ function App() {
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
+              deleteMyAd={deleteMyAd}
             />
           }
         />
@@ -412,6 +419,13 @@ function App() {
                 deleteMyAd={deleteMyAd}
                 handleLogout={handleLogout}
                 isLoggin={isLoggin}
+                getItemById={getItemById}
+                addToFavorites={addToFavorites} 
+                deleteFromFavorites={deleteFromFavorites}
+                favorite={favorite}
+                favoriteItems={favoriteItems}
+
+
               />
             </ProtectedRoute>
           }>
