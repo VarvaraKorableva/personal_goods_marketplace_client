@@ -1,6 +1,6 @@
 //export const BASE_URL = '//localhost:3001';
 //https://personal-goods-marketplace-api.onrender.com/
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com/'
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
