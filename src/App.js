@@ -43,8 +43,8 @@ function App() {
 
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
   
-  const [subCategories, setSubCategories] = React.useState([])
-  const [thirdSubCategories, setThirdSubCategories] = React.useState([])
+  //const [subCategories, setSubCategories] = React.useState([])
+  //const [thirdSubCategories, setThirdSubCategories] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [items, setItems] = React.useState([])
@@ -92,19 +92,7 @@ function App() {
 
   function chooseCategory(category) {
     setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
-
-
-    //const allItemsInCategory = lastFourtyItems.filter((i) => i.category_id === category.category_id)
-
-    /*const categoryIdArr = [category.category_id]
-    const arr = categories.filter((item) => item.parent_id === category.category_id)
-    arr.forEach((item) => (categoryIdArr.push(item.category_id)))*/
-
     setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
-
-  /*
-    console.log(category)
-    console.log(lastFourtyItems)*/
   } 
 
   function handleRegSubmit(userData) {
@@ -142,6 +130,8 @@ function App() {
     .then ((res) => {
       setIsLoggin(true)
       setCurrentUser(res.user[0])
+      const favorite_collector_id = res.user[0].user_id
+      getMyFavorites(favorite_collector_id)
       navigate(`/`)
     })  
     .catch((err) => {
@@ -176,6 +166,9 @@ function App() {
     .then((res)=> {
       closeAllPopups()
       setPopupMessage("Ad added successful!")
+      
+      setMyAds([res, ...myAds])
+
       openSuccessfulActionPopup()
     })
     .catch((err)=> {
@@ -217,27 +210,23 @@ function App() {
   }
 
   function addToFavorites(favorite_collector_id, item_id, item) {
-    const isLiked = favorite.some((i) => i.item_id === item_id);
-    if (isLiked) {
-      console.log("Этот элемент уже в избранном!");
-    }
     Api.addToFavoritesServer({ favorite_collector_id, item_id })
       .then((res) => {
         setFovorite([res, ...favorite])
-        console.log("Элемент успешно добавлен в избранное!")
+        setFavoriteItems([item, ...favoriteItems]);
       })
     .catch((err) => {
       console.log(err)
     })
   }
-
-  function deleteFromFavorites(favorite_items_id) {
-    console.log('from app => ', favorite_items_id)
-    Api.deleteFromFavoritesServer(favorite_items_id)
-    .then((res)=> {
-      setFovorite(prevFavorite => prevFavorite.filter((f) => f.favorite_items_id !== favorite_items_id));
+ 
+  function deleteFromFavorites(favItem) {
+    Api.deleteFromFavoritesServer(favItem.favorite_items_id)
+    .then((res) => {
+      setFovorite((state) => state.filter((item) => item.favorite_items_id !== favItem.favorite_items_id))
+      setFavoriteItems((state) => state.filter((item) => item.item_id !== favItem.item_id));
     })
-    .catch((err)=> {
+    .catch((err) => {
       console.log(err)
     })
   }
@@ -246,6 +235,11 @@ function App() {
     Api.getMyFavorites(favorite_collector_id)
     .then((res) => {
       setFovorite(res)
+      console.log(res)
+      const favoriteItemsResult = lastFourtyItems.filter(item =>
+      res.some(favoriteItem => favoriteItem.item_id === item.item_id)
+      );
+      setFavoriteItems(favoriteItemsResult);
     })
     .catch((err) => {
       console.log(err)
@@ -294,15 +288,10 @@ function App() {
   }
 
   function handleLogout() {
-    //Api.logout()
-    //.then((res)=>{
       setIsLoggin(false)
       setCurrentUser({})
+      getMyFavorites([])
       navigate(`/`)
-    //})
-    //.coach((err) => {
-    //  console.log(err)
-    //})
   }
 
   function getCookie(name) {
@@ -322,16 +311,6 @@ function App() {
   //const token = getCookie('jwt');
   //console.log(token);
 
-  React.useEffect(() => {
-      const favoriteItemsResult = lastFourtyItems.filter(item =>
-        favorite.some(favoriteItem => favoriteItem.item_id === item.item_id)
-      );
-      setFavoriteItems(favoriteItemsResult);
-    }, [lastFourtyItems, favorite]);
-  
-  React.useEffect(() => {
-      getMyFavorites(favorite_collector_id)
-  },[favorite_collector_id])
   
 
   return (
@@ -367,7 +346,8 @@ function App() {
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
               startToSearch={startToSearch}
-              //deleteFromFavorites={deleteFromFavorites}
+              
+              deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
               //categoryItemsSearch={categoryItemsSearch} 
@@ -391,6 +371,9 @@ function App() {
               startToSearch={startToSearch}
               lastFourtyItems={lastFourtyItems}
               categoryItemsSearch={categoryItemsSearch} 
+              isLoggin={isLoggin}
+              favorite={favorite}
+              favoriteItems={favoriteItems}
             />
           }
         />
@@ -407,6 +390,7 @@ function App() {
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
+              deleteMyAd={deleteMyAd}
             />
           }
         />
@@ -435,6 +419,13 @@ function App() {
                 deleteMyAd={deleteMyAd}
                 handleLogout={handleLogout}
                 isLoggin={isLoggin}
+                getItemById={getItemById}
+                addToFavorites={addToFavorites} 
+                deleteFromFavorites={deleteFromFavorites}
+                favorite={favorite}
+                favoriteItems={favoriteItems}
+
+
               />
             </ProtectedRoute>
           }>
@@ -452,6 +443,8 @@ function App() {
               getMyItems={getMyItems}
               getItemById={getItemById}
               isLoggin={isLoggin}
+              favoriteItems={favoriteItems}
+              favorite={favorite}
           />
           }>
         </Route>
@@ -466,7 +459,6 @@ function App() {
                 lastFourtyItems={lastFourtyItems}
                 favoriteItems={favoriteItems}
                 deleteFromFavorites={deleteFromFavorites}
-                getMyFavorites={getMyFavorites}
               />
             </ProtectedRoute>
           }>

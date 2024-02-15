@@ -4,7 +4,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {Link} from 'react-router-dom'
 import './MyPage.css'
 
-function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout}) {
+function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -16,7 +16,7 @@ function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout}) {
     function onLogout() {
         handleLogout()
     }
-
+    
     useEffect(()=> {
         getMyItems(userId)
     },[])
@@ -35,7 +35,18 @@ function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout}) {
                     <h3 className="myPage__title">My listings</h3>
                     <ul className="myPage-listings-container">
                         {myAds.map((item) => (
-                            <OneAd key={item.item_id} item={item} deleteMyAd={deleteMyAd} isLoggin={isLoggin}/>
+                            <OneAd 
+                                key={item.item_id} 
+                                item={item} 
+                                deleteMyAd={deleteMyAd} 
+                                isLoggin={isLoggin}
+                                getItemById={getItemById}
+
+                                addToFavorites={addToFavorites} 
+                                deleteFromFavorites={deleteFromFavorites}
+                                favorite={favorite}
+                                favoriteItems={favoriteItems}
+                            />
                         ))}
                     </ul>
                 </div>

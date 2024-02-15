@@ -3,7 +3,7 @@ import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
 
-function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin}) {
+function UserPage({favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite}) {
     
     const owner_id = useParams()
 
@@ -35,11 +35,15 @@ function UserPage({getUserById, userInfo, myAds, getMyItems, getItemById, addToF
                 <ul className="userPage-listings-container">
                     {myAds.map((item) => (
                         <OneAd 
+                            favoriteItems={favoriteItems}
                             key={item.item_id} 
                             isLoggin={isLoggin} 
                             item={item} 
                             getItemById={getItemById} 
                             addToFavorites={addToFavorites}
+
+                            deleteFromFavorites={deleteFromFavorites}
+                            favorite={favorite}
                         />
                     ))}
                 </ul>

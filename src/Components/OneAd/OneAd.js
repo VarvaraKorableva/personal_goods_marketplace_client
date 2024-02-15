@@ -4,18 +4,14 @@ import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 
-//Написать если isLoggin фалс то при нажатии на лайк редирект на страницу логина
-
 function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
-     const isLiked = false
-/*
-   favoriteItems.length === 0? 
-    (isLiked = false) 
-    : */
-    //const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
+    const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
+
+    let favItem = favorite.filter((f) => f.item_id === item.item_id)[0]
+    
     
     function handleClick() {
         getItemById(item.item_id)
@@ -23,6 +19,10 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
 
     function handleAddToFavourite() {
         addToFavorites(favorite_collector_id, item.item_id, item)
+    }
+
+    function handleDeleteFromFav() {
+        deleteFromFavorites(favItem)
     }
 
     function handleDeleteMyitem() {
@@ -73,7 +73,13 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
                         (currentUser.user_id === item.owner_id ?
                         <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
                         :
-                        <button className={isLiked? "oneAdd__like-btn_activ" :"oneAdd__like-btn"} onClick={handleAddToFavourite}></button>)
+                          (isLiked ?
+                            <button className="oneAdd__like-btn_activ" onClick={handleDeleteFromFav}></button>
+                          :
+                            <button className="oneAdd__like-btn" onClick={handleAddToFavourite}></button>
+                          )
+                        
+                        )
                     : <></>}
                 </div>
                 <p className="oneAdd__price">{item.price}</p>
