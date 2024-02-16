@@ -1,6 +1,6 @@
-//export const BASE_URL = '//localhost:3001';
-//https://personal-goods-marketplace-api.onrender.com/
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//https://personal-goods-marketplace-api.onrender.com
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -217,15 +217,22 @@ export const logout = () => {
       .then(checkResponse) 
 };
 
+export const uploadFile = ( formData, itemId ) => {
+    formData.append('item_id', itemId);
+    return fetch(`${BASE_URL}/files/upload-single`, {
+        credentials: 'include',
+        method: "POST",
+        body: formData
+    })
 
-///logout
-///favoriteItems
-//favorite_collector_id, item_id
+      .then(checkResponse)
+};
+
 /*
-
-/:user_id
-item_router.get('/categoryId/:category_id', getAllItemsByCategoryId)
-item_router.get('/userId/:owner_id', getAllItemsByUserId)
-item_router.get('/all', getAllItems) //установить лимит на 40 последних 
-item_router.post('/', createItem)
-item_router.delete('/item_id', deleteItem)*/
+CREATE TABLE images_of_goods (
+    images_of_goods_id SERIAL PRIMARY KEY,
+    img_url VARCHAR (2048),
+    item_id INTEGER,
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
+);
+*/

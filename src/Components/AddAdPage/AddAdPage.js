@@ -8,6 +8,10 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   
+  const [file, setFile] = useState(null);
+  const [fileData, setFileData] = useState(null);
+  const [myUploads, setMyUploads] = useState([]);
+  const [showInputFields, setShowInputFields] = useState(true);
   //const [isValid, setIsValid] = React.useState(false)
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
