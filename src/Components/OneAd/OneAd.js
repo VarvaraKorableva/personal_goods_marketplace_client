@@ -4,13 +4,18 @@ import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 
-function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
+function OneAd({
+    isLoggin, item, getItemById, 
+    deleteMyAd, addToFavorites, 
+    deleteFromFavorites, favorite, 
+    favoriteItems
+}) {
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
     const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
 
-    let favItem = favorite.filter((f) => f.item_id === item.item_id)[0]
+    //let favItem = favorite.filter((f) => f.item_id === item.item_id[0])
     
     
     function handleClick() {
@@ -22,10 +27,11 @@ function OneAd({isLoggin, item, getItemById, deleteMyAd, addToFavorites, deleteF
     }
 
     function handleDeleteFromFav() {
-        deleteFromFavorites(favItem)
+        deleteFromFavorites(item)
     }
 
     function handleDeleteMyitem() {
+        console.log(item.item_id)
         deleteMyAd(item.item_id)
     }
 

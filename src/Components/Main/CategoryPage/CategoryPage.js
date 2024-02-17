@@ -10,7 +10,7 @@ import './CategoryPage.css'
 
 function CategoryPage({
     favorite, categories, 
-    onChooseCategory, isLoggin,
+    deleteMyAd, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
     startToSearch, categoryItemsSearch, categoriesToRender
@@ -27,13 +27,10 @@ function CategoryPage({
         }
     }, [categoriesToRender, slug]);
 
-    console.log(categoryFromPage)
-
     if(categoryFromPage.length <= 0) {
        return <p>Loading ...</p>
     }
 
-    console.log('categoryItemsSearch =>', categoryItemsSearch)
     return(
         <section className='categoryPage-main-container'>
             <MainSearchEngine startToSearch={startToSearch}/>
@@ -53,7 +50,6 @@ function CategoryPage({
                 {categoryItemsSearch.map((item) => (
                     <OneAd 
                         key={item.item_id} 
-                        //itemsAfterSearch={itemsAfterSearch}
                         lastFourtyItems={lastFourtyItems} 
                         getItemById={getItemById} 
                         addToFavorites={addToFavorites}
@@ -62,13 +58,12 @@ function CategoryPage({
                         favoriteItems={favoriteItems}
                         isLoggin={isLoggin}
                         item={item}>
+                        deleteMyAd={deleteMyAd}
                     </OneAd>
                 ))}
             </ul>
         </section>
     )
 }
-//не писала функцию для фильтрации - нет стейта
-//лайки
 
 export default CategoryPage;

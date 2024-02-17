@@ -37,8 +37,6 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
         addToFavorites(favorite_collector_id, selectedItem[0].item_id, selectedItem[0])
     }
 
-    console.log('selectedItem=>', selectedItem
-    )
     function hundleDeleteFromFavorites() {
         deleteFromFavorites(selectedItem[0])
     }

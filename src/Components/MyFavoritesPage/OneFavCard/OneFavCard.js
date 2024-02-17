@@ -8,11 +8,8 @@ function OneFavCard({item, deleteFromFavorites, favorite}) {
         return <p>Loading ...</p>;
     }
 
-    //let favorite_items_id = favorite.filter((f) => f.item_id === item.item_id)[0].favorite_items_id
-    let favItem = favorite.filter((f) => f.item_id === item.item_id)[0]
-
     function handleDeleteFavorite() {
-        deleteFromFavorites(favItem)//favorite_items_id
+        deleteFromFavorites(item)//item_id
     }
 
     function formatDate(dateString) {

@@ -8,22 +8,16 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   
-  const [file, setFile] = useState(null);
-  const [fileData, setFileData] = useState(null);
-  const [myUploads, setMyUploads] = useState([]);
-  const [showInputFields, setShowInputFields] = useState(true);
-  //const [isValid, setIsValid] = React.useState(false)
+  const [file, setFile] = React.useState(null);
+  const [fileData, setFileData] = React.useState(null);
+  const [myUploads, setMyUploads] = React.useState([]);
+  const [showInputFields, setShowInputFields] = React.useState(true);
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
   const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
   const [errorDreamLinkMessage, setErrorDreamLinkMessage] = React.useState('')
   
   const [luckyMessage, setLuckyMessage] = React.useState('')
-
-  const [errorName, setErrorName] = React.useState(true)
-  const [errorImg, setErrorImg] = React.useState(true)
-  const [errorPrice, setErrorPrice] = React.useState(true)
-  const [errorDreamLink, setErrorDreamLink] = React.useState(true)
   
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
   const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
@@ -45,7 +39,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
   const [buttonText, setButtonText] = React.useState('Upload picture');
 
-  const addDreamRef = React.useRef(null);
+  const addItemRef = React.useRef(null);
 
   const { language } = React.useContext(LanguageContext)
 
@@ -60,8 +54,10 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     translatedContext = hebrew;
   }
 
+  const formRef = React.useRef(null);
+
   function handleImgLinkChange(e) {
-    setImg(e.target.files[0]);
+    setFile(e.target.files[0]);
   }
 
   function handledesDriptionChange(e) {
@@ -93,7 +89,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setSelectedSubCategoryId(null)
       setTitle('')
       setCity('')
-      setImg(null)
+      setFile(null)
       setPrice('')
       setDescription('')
       setSize('')
@@ -109,9 +105,13 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     } 
     else 
     {id = Number(thirdCategoryId)}
-    console.log('id =>', id)
+    /*console.log('id =>', id)
     console.log('thirdSubCategoryId =>', thirdSubCategoryId)
-    console.log('thirdCategoryId =>', thirdCategoryId)
+    console.log('thirdCategoryId =>', thirdCategoryId)*/
+    
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
 
       onAddAd({
         title,
@@ -123,7 +123,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
         size, 
         color, 
         condition,
+        formData,
       });
+    } else {
+      onAddAd({
+        title,
+        owner_id: owner_id,
+        category_id: Number(id), //thirdSubCategoryId),
+        city,
+        price,
+        description,
+        size, 
+        color, 
+        condition,
+        
+      });
+    }
 
       setSelectedCategoryId(null)
       setSelectedSubCategoryId(null)
@@ -131,7 +146,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setThirdCategoryId(null)
       setTitle('')
       setCity('')
-      setImg(null)
+      setFile(null)
       setPrice('')
       setDescription('')
       setSize('')
@@ -172,8 +187,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   React.useEffect(() => {
     if (isGood === false) {
         setSelectedCategoryId(categories.filter((category) => category.is_good === false))
-        console.log(categories.filter((category) => category.is_good === false))
-        //setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
     } 
   }, [])
 
@@ -184,7 +197,9 @@ return (
     <>
     <h2 className="addAdPage__title">Ad new good</h2>
     <form 
+      ref={formRef}
       className='addAdPage__form'
+      //encType="multipart/form-data"
       onSubmit={handleSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
@@ -255,16 +270,16 @@ return (
 
       <label className='popup__inputname'>Add pictures</label>
       <button 
-        onClick={() => addDreamRef.current.click()}
+        onClick={() => addItemRef.current.click()}
         className='popup__input-btn'
         type="button">
           {buttonText}
       </button> 
       
       <input
-        ref={addDreamRef}
+        ref={addItemRef}
         className='popup__input'
-        name='image'
+        name='file'
         type="file"
         onChange={handleImgLinkChange}
         hidden
@@ -283,7 +298,9 @@ return (
     <>
     <h2 className="addAdPage__title">Ad new service</h2>
     <form 
+      ref={formRef}
       className='addAdPage__form'
+      encType="multipart/form-data"
       onSubmit={handleServicesSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
@@ -354,17 +371,18 @@ return (
 
       <label className='popup__inputname'>Add pictures</label>
       <button 
-        onClick={() => addDreamRef.current.click()}
+        onClick={() => addItemRef.current.click()}
         className='popup__input-btn'
         type="button">
           {buttonText}
       </button> 
       
       <input
-        ref={addDreamRef}
+        ref={addItemRef}
         className='popup__input'
-        name='image'
+        name='file'
         type="file"
+        accept="*/*"
         onChange={handleImgLinkChange}
         hidden
       ></input>
