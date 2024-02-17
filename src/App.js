@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
-import { LanguageContext, LanguageProvider } from './contexts/TranslationContext';
+import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import * as Api from './Api/Api'
 import Registration from './Components/Registration/Registration'
@@ -18,20 +18,12 @@ import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
-import Category from './Components/Main/Сategory/Сategory';
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
-
-  //const [isLoading, setIsLoading] = React.useState(false)
-  const [showLoading, setShowLoading] = React.useState(false)
-  const [errorMessage, setErrorMessage] = React.useState('')
-  const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
-  const [isError, setIsError] = React.useState(false)
-  const [isLoginError, setIsLoginError] = React.useState(false)
 
   const [isAddAdPopup, setIsAddAdPopup] = React.useState(false)
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
@@ -42,9 +34,6 @@ function App() {
   const [categories, setCategories] = React.useState([])
 
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
-  
-  //const [subCategories, setSubCategories] = React.useState([])
-  //const [thirdSubCategories, setThirdSubCategories] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [items, setItems] = React.useState([])
@@ -61,7 +50,6 @@ function App() {
   const [isGood, setIsGood] = React.useState(true)
 
   const userId = currentUser.user_id
-  const favorite_collector_id = currentUser.user_id
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -108,17 +96,7 @@ function App() {
       navigate(`/`)
     })  
     .catch((err) => {
-      if (err.status === 409 || 11000) {
-        setIsError(true)
-        setErrorMessage('Error, such Email already exists.');
-      } else {
-        setIsError(true)
-        setErrorMessage('The server encountered an error. Please try again later.')
-        setTimeout(function(){
-          setErrorMessage('');
-          setIsError(false)
-        }, 5000)
-      }
+      console.log(err)
     })
   }
 
@@ -136,21 +114,6 @@ function App() {
     })  
     .catch((err) => {
       console.log(err)
-      if (err.status === 401 || 11000) {
-        setIsLoginError(true)
-        setErrorLoginMessage('One of the two does not fit.');
-        setTimeout(function(){
-          setErrorLoginMessage('')
-          //setIsLoginError(false)
-        }, 4000)
-      } else {
-        setIsLoginError(true)
-        setErrorLoginMessage('The server encountered an error. Please try again later.')
-        setTimeout(function(){
-          setErrorLoginMessage('')
-          //setIsLoginError(false)
-        }, 5000)
-      }
     })
   }
 
@@ -162,14 +125,29 @@ function App() {
   }
 
   function handleAddAdSubmit(data) {
-    Api.createItem(data)
+    const { formData, ...otherData } = data;
+    Api.createItem(otherData)
     .then((res)=> {
-      closeAllPopups()
-      setPopupMessage("Ad added successful!")
-      
-      setMyAds([res, ...myAds])
-
-      openSuccessfulActionPopup()
+      if(formData) {
+        formData.append('item_id', res[0].itemId);
+        Api.uploadFile(formData)
+        .then((res) => {
+          closeAllPopups()
+          setPopupMessage("Ad added successful!")
+          setMyAds([res, ...myAds])
+          openSuccessfulActionPopup()
+        })
+        .catch((err)=> {
+          closeAllPopups()
+          setPopupMessage("Something wrong, plese try again")
+          openSuccessfulActionPopup()
+        })
+      }else {
+          closeAllPopups()
+          setPopupMessage("Ad added successful!")
+          setMyAds([res, ...myAds])
+          openSuccessfulActionPopup()
+      }
     })
     .catch((err)=> {
       closeAllPopups()
@@ -192,7 +170,6 @@ function App() {
     Api.getUserById(user_id)
     .then((res) => {
       setUserInfo(res)
-      console.log(res) 
     })
     .catch((err) => {
       console.log(err)
@@ -203,6 +180,8 @@ function App() {
     Api.deleteItem(item_id)
     .then((res) => {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
+      setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
+      setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
     })
     .catch((err) => {
       console.log(err)
@@ -221,21 +200,23 @@ function App() {
   }
  
   function deleteFromFavorites(favItem) {
-    Api.deleteFromFavoritesServer(favItem.favorite_items_id)
-    .then((res) => {
-      setFovorite((state) => state.filter((item) => item.favorite_items_id !== favItem.favorite_items_id))
-      setFavoriteItems((state) => state.filter((item) => item.item_id !== favItem.item_id));
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    Api.deleteFromFavoritesServer(favItem.item_id)
+      .then((res) => {
+        setFovorite((state) => 
+          state.filter((item) => 
+          item.item_id !== favItem.item_id)
+        )
+        setFavoriteItems((state) => state.filter((item) => item.item_id !== favItem.item_id));
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   function getMyFavorites(favorite_collector_id) {
     Api.getMyFavorites(favorite_collector_id)
     .then((res) => {
       setFovorite(res)
-      console.log(res)
       const favoriteItemsResult = lastFourtyItems.filter(item =>
       res.some(favoriteItem => favoriteItem.item_id === item.item_id)
       );
@@ -249,21 +230,11 @@ function App() {
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-    //console.log(categories.filter((category) => category.name.includes(keyWord)))
-    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
-    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
   }
 
   function startToSearchSecondPage (keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-    //console.log(categories.filter((category) => category.name.includes(keyWord)))
-    //console.log(lastFourtyItems.filter((item) => item.title.toUpperCase().includes(keyWord.toUpperCase())))
-    //console.log(lastFourtyItems.filter((item) => item.city.includes(keyWord)))
-  }
-
-  function handleItemClick(item) {
-    setSelectedItem(item);
   }
 
   function openSuccessfulActionPopup() {
@@ -346,7 +317,7 @@ function App() {
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
               startToSearch={startToSearch}
-              
+              deleteMyAd={deleteMyAd}
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
@@ -364,10 +335,10 @@ function App() {
               chooseCategory={chooseCategory}
               categoriesToRender={categoriesToRender}
               categories={categories}
-
+              deleteMyAd={deleteMyAd}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
-
+              getItemById={getItemById} 
               startToSearch={startToSearch}
               lastFourtyItems={lastFourtyItems}
               categoryItemsSearch={categoryItemsSearch} 

@@ -70,7 +70,7 @@ export const getCategory = () => {
         .then(checkResponse) 
 };
 
-export const createItem = (data) => {
+export const createItem = (otherData) => {
   return fetch(`${BASE_URL}/items`, {
     credentials: 'include',
     method: 'POST',
@@ -79,15 +79,15 @@ export const createItem = (data) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      category_id: data.category_id,
-      title: data.title,
-      owner_id: data.owner_id,
-      city: data.city,
-      price: data.price,
-      description: data.description,
-      size: data.size,
-      color: data.color, 
-      condition: data.condition,        
+      category_id: otherData.category_id,
+      title: otherData.title,
+      owner_id: otherData.owner_id,
+      city: otherData.city,
+      price: otherData.price,
+      description: otherData.description,
+      size: otherData.size,
+      color: otherData.color, 
+      condition: otherData.condition,        
     })
   })
     .then(checkResponse);
@@ -165,8 +165,8 @@ export const deleteItem = (item_id) => {
       .then(checkResponse) 
 };
 
-export const deleteFromFavoritesServer = (favorite_items_id) => {
-  return fetch(`${BASE_URL}/favoriteItems/${favorite_items_id}`, {
+export const deleteFromFavoritesServer = (item_id) => {
+  return fetch(`${BASE_URL}/favoriteItems/${item_id}`, {
       credentials: 'include',
       method: "DELETE",
       headers: {
@@ -217,15 +217,14 @@ export const logout = () => {
       .then(checkResponse) 
 };
 
-export const uploadFile = ( formData, itemId ) => {
-    formData.append('item_id', itemId);
-    return fetch(`${BASE_URL}/files/upload-single`, {
-        credentials: 'include',
-        method: "POST",
-        body: formData
-    })
+export const uploadFile = (formData) => {
 
-      .then(checkResponse)
+  return fetch(`${BASE_URL}/files/upload-single`, {
+    credentials: 'include',
+    method: "POST",
+    body: formData
+  })
+  .then(checkResponse);
 };
 
 /*

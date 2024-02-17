@@ -8,7 +8,7 @@ function Main({
     itemsAfterSearch, startToSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
     getItemById, addToFavorites, 
-    deleteFromFavorites, favoriteItems}) {
+    deleteFromFavorites, favoriteItems, deleteMyAd}) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -37,6 +37,7 @@ function Main({
                 favorite={favorite}
                 favoriteItems={favoriteItems}
                 isLoggin={isLoggin}
+                deleteMyAd={ deleteMyAd}
             />
         </section>
     )
