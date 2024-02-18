@@ -73,6 +73,23 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     else 
     {id = Number(selectedSubCategoryId)}
 
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      onAddAd({
+        title,
+        owner_id: owner_id,
+        category_id: Number(id),//selectedCategoryId
+        city,
+        price,
+        description,
+        size, 
+        color, 
+        condition,
+        formData,
+      });
+    } else {
       onAddAd({
         title,
         owner_id: owner_id,
@@ -85,6 +102,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
         condition,
       });
 
+    }
       setSelectedCategoryId(null)
       setSelectedSubCategoryId(null)
       setTitle('')
@@ -112,6 +130,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
+      //console.log([...formData.entries()]);
 
       onAddAd({
         title,
@@ -136,7 +155,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
         size, 
         color, 
         condition,
-        
       });
     }
 
@@ -199,7 +217,7 @@ return (
     <form 
       ref={formRef}
       className='addAdPage__form'
-      //encType="multipart/form-data"
+      encType="multipart/form-data"
       onSubmit={handleSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
@@ -238,7 +256,6 @@ return (
           name='description'
           type='text'
           value={description}
-          //onInput={handledesDriptionChange}
           onChange={handledesDriptionChange}
         ></input>
        
@@ -300,7 +317,7 @@ return (
     <form 
       ref={formRef}
       className='addAdPage__form'
-      encType="multipart/form-data"
+      enctype="multipart/form-data"
       onSubmit={handleServicesSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 
@@ -391,7 +408,7 @@ return (
       <button 
         className= 'popup__btn_active'
         type='submit'
-        >
+      >
           {translatedContext.createButton}
       </button>
     </form>

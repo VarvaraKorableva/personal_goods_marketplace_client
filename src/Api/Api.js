@@ -1,6 +1,6 @@
-//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//localhost:3001';
 //https://personal-goods-marketplace-api.onrender.com
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -218,7 +218,7 @@ export const logout = () => {
 };
 
 export const uploadFile = (formData) => {
-
+  console.log([...formData.entries()]);
   return fetch(`${BASE_URL}/files/upload-single`, {
     credentials: 'include',
     method: "POST",
@@ -227,11 +227,44 @@ export const uploadFile = (formData) => {
   .then(checkResponse);
 };
 
+export const getAllImages = () => {
+  return fetch(`${BASE_URL}/files/images/all`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const getUserImagesById = (owner_id) => {
+  return fetch(`${BASE_URL}/files/images/${owner_id}`, {
+      credentials: 'include',
+      method: "GET",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
+
+export const deleteImage = (item_id) => {
+  return fetch(`${BASE_URL}/files/images/${item_id}`, {
+      credentials: 'include',
+      method: "DELETE",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+  })
+      .then(checkResponse) 
+};
 /*
-CREATE TABLE images_of_goods (
-    images_of_goods_id SERIAL PRIMARY KEY,
-    img_url VARCHAR (2048),
-    item_id INTEGER,
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
-);
+files_router.post("/upload-single", upload.single("file"), _uploadSingle);
+files_router.get("/images/all", getAllImages);
+files_router.get("/images/:owner_id", getAllImagesByUserId);
+files_router.delete("/image/:item_id", deleteFavoriteItems);
 */

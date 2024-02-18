@@ -33,10 +33,13 @@ function App() {
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
 
+  const [allImages, setAllImages] = React.useState([])
+  const [myImages, setMyImages] = React.useState([])
+  const [images, setImages] = React.useState([])
+
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
-  const [items, setItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
 
@@ -66,8 +69,18 @@ function App() {
     try {
       const res = await Api.getLastForty();
       setLastFoutryItems(res)
-      setItems(res)
+      //setItems(res)
       setItemsAfterSearch(res) 
+    } catch (err) {
+      console.log(err);
+    }
+  }
+/////
+  async function getAllImagesForItems() {
+    try {
+      const res = await Api.getAllImages();
+      setAllImages(res)
+      console.log(res)
     } catch (err) {
       console.log(err);
     }
@@ -76,6 +89,7 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getLastFourtyItems()
+    getAllImagesForItems()
   },[])
 
   function chooseCategory(category) {
@@ -126,10 +140,17 @@ function App() {
 
   function handleAddAdSubmit(data) {
     const { formData, ...otherData } = data;
+    
+    console.log([...formData.entries()]);
+    
     Api.createItem(otherData)
+
     .then((res)=> {
       if(formData) {
-        formData.append('item_id', res[0].itemId);
+        const id = res.item_id
+        const str_item_id = Number(id)
+        console.log(str_item_id)
+        formData.append('str_item_id', str_item_id); 
         Api.uploadFile(formData)
         .then((res) => {
           closeAllPopups()
@@ -138,9 +159,11 @@ function App() {
           openSuccessfulActionPopup()
         })
         .catch((err)=> {
+          console.log(err)
           closeAllPopups()
           setPopupMessage("Something wrong, plese try again")
           openSuccessfulActionPopup()
+          
         })
       }else {
           closeAllPopups()
@@ -221,6 +244,21 @@ function App() {
       res.some(favoriteItem => favoriteItem.item_id === item.item_id)
       );
       setFavoriteItems(favoriteItemsResult);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function getUserImagesById(owner_id) {
+    Api.getUserImagesById(owner_id)
+    .then((res) => {
+      setMyImages(res)
+      /*setFovorite(res)
+      const favoriteItemsResult = lastFourtyItems.filter(item =>
+      res.some(favoriteItem => favoriteItem.item_id === item.item_id)
+      );
+      setFavoriteItems(favoriteItemsResult);*/
     })
     .catch((err) => {
       console.log(err)
