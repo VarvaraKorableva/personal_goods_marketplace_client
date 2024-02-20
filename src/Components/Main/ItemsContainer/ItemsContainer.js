@@ -5,7 +5,7 @@ function ItemsContainer({
     isLoggin, itemsAfterSearch, 
     getItemById, 
     addToFavorites, deleteFromFavorites, 
-    favorite, favoriteItems, deleteMyAd
+    favorite, favoriteItems, deleteMyAd, allImages
 }) {
 
     return(
@@ -21,6 +21,7 @@ function ItemsContainer({
                     isLoggin={isLoggin}
                     favoriteItems={favoriteItems}
                     deleteMyAd={deleteMyAd}
+                    allImages={allImages}
                 />
             ))}
         </ul>

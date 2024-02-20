@@ -4,7 +4,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {Link} from 'react-router-dom'
 import './MyPage.css'
 
-function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
+function MyPage({allImages, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -46,6 +46,7 @@ function MyPage({isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemB
                                 deleteFromFavorites={deleteFromFavorites}
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
+                                allImages={allImages}
                             />
                         ))}
                     </ul>

@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
 import * as Api from '../../Api/Api'
 
-function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites }) {
+function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites }) {
     let { item_id } = useParams();
     let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
@@ -42,13 +42,14 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
     }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
+    const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id)
 
     return(
         <section className="cardPage-section">
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
                     <div className="cardPage-img-container">
-                        <img src={selectedItem[0].image} alt={selectedItem[0].title} />
+                        <img src={image[0].location} alt={selectedItem[0].title} className='cardPage-image'/>
                     </div>
 
                     <div className="cardPage-info-container">

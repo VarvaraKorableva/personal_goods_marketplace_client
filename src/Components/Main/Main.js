@@ -7,7 +7,7 @@ function Main({
     categoriesToRender, isLoggin, 
     itemsAfterSearch, startToSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
-    getItemById, addToFavorites, 
+    getItemById, addToFavorites, allImages,
     deleteFromFavorites, favoriteItems, deleteMyAd}) {
     
     React.useEffect(() => {
@@ -29,6 +29,7 @@ function Main({
             />
             <h2 className='main__title'>All ad</h2>
             <ItemsContainer 
+                allImages={allImages}
                 itemsAfterSearch={itemsAfterSearch}
                 lastFourtyItems={lastFourtyItems} 
                 getItemById={getItemById} 
@@ -38,6 +39,7 @@ function Main({
                 favoriteItems={favoriteItems}
                 isLoggin={isLoggin}
                 deleteMyAd={ deleteMyAd}
+                
             />
         </section>
     )

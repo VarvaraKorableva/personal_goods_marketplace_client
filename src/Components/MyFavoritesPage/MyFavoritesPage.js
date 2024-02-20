@@ -4,7 +4,7 @@ import OneFavCard from './OneFavCard/OneFavCard'
 import "./MyFavoritesPage.css"
 import {Link} from 'react-router-dom'
 
-function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
+function MyFavoritesPage({allImages, getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
 
     const currentUser = React.useContext(CurrentUserContext)
 
@@ -23,6 +23,7 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
                         deleteFromFavorites={deleteFromFavorites}
                         favoriteItems={favoriteItems}
                         favorite={favorite}
+                        allImages={allImages}
                     />
                 ))}
             </ul>

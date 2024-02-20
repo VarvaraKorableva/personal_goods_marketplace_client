@@ -95,3 +95,9 @@
 .cardPage__btn-container {
     display: flex;
 }
+
+.cardPage-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}

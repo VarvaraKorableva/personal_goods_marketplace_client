@@ -1,6 +1,6 @@
 import React from 'react';
 import MainCategories from '../MainCategories/MainCategories'
-import MainSearchEngine from '../MainSearchEngine/MainSearchEngine'
+import CategorySearchEngine from '../CategorySearchEngine/CategorySearchEngine'
 import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
@@ -10,10 +10,11 @@ import './CategoryPage.css'
 
 function CategoryPage({
     favorite, categories, 
-    deleteMyAd, isLoggin,
+    deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    startToSearch, categoryItemsSearch, categoriesToRender
+    categoriesToRender,
+    categorySecondPageSearch, startToSearchSecondPage
 }) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
@@ -33,7 +34,7 @@ function CategoryPage({
 
     return(
         <section className='categoryPage-main-container'>
-            <MainSearchEngine startToSearch={startToSearch}/>
+            <CategorySearchEngine startToSearchSecondPage={startToSearchSecondPage}/>
 
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (
@@ -47,8 +48,9 @@ function CategoryPage({
             </ul>
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
-                {categoryItemsSearch.map((item) => (
+                {categorySecondPageSearch.map((item) => (
                     <OneAd 
+                        allImages={allImages}
                         key={item.item_id} 
                         lastFourtyItems={lastFourtyItems} 
                         getItemById={getItemById} 
@@ -59,6 +61,7 @@ function CategoryPage({
                         isLoggin={isLoggin}
                         item={item}>
                         deleteMyAd={deleteMyAd}
+                        
                     </OneAd>
                 ))}
             </ul>

@@ -317,7 +317,7 @@ return (
     <form 
       ref={formRef}
       className='addAdPage__form'
-      enctype="multipart/form-data"
+      encType="multipart/form-data"
       onSubmit={handleServicesSubmit}>
       <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
 

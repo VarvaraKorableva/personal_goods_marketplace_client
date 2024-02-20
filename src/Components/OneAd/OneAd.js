@@ -8,14 +8,15 @@ function OneAd({
     isLoggin, item, getItemById, 
     deleteMyAd, addToFavorites, 
     deleteFromFavorites, favorite, 
-    favoriteItems
+    favoriteItems, allImages
 }) {
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
     const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
 
-    //let favItem = favorite.filter((f) => f.item_id === item.item_id[0])
+    const image = allImages.filter((img) => img.item_id === item.item_id)
+
     
     
     function handleClick() {
@@ -69,7 +70,7 @@ function OneAd({
     return(
         <li className="oneAdd__container">
             <div>
-                <img className="oneAdd__main-pic" alt = {item.title}></img>
+                <img className="oneAdd__main-pic" alt = {item.title} src={image[0].location}></img>
             </div>
             
             <div className="oneAdd__text-container">

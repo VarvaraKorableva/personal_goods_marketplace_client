@@ -1,18 +1,10 @@
 .MainSearchEngine-form {
     display: flex;
-    max-width: 500px;
-    min-width: 500px;
+    width: 500px;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
-
-@media screen and (max-width: 550px) {
-    .MainSearchEngine-form {
-        flex-direction: column;
-    }
-}
-
 
 .MainSearchEngine-input {
     width: 75%;
@@ -30,7 +22,7 @@
     border: none;
     cursor: pointer;
     height: 30px;
-    margin: 10px;
+    margin-left: 10px;
 }
 
 .MainSearchEngine-btn:hover {

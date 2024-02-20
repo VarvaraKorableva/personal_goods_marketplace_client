@@ -3,7 +3,7 @@ import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
 
-function UserPage({favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite}) {
+function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite}) {
     
     const owner_id = useParams()
 
@@ -44,6 +44,7 @@ function UserPage({favoriteItems, getUserById, userInfo, myAds, getMyItems, getI
 
                             deleteFromFavorites={deleteFromFavorites}
                             favorite={favorite}
+                            allImages={allImages}
                         />
                     ))}
                 </ul>

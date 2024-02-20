@@ -42,6 +42,8 @@ function App() {
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
 
   const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
+  const [categorySecondPageSearch, setCategoryPageSearch] = React.useState([])
+  const [startCategorySecondPageSearch, setStartCategoryPageSearch] = React.useState([])
 
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
 
@@ -71,6 +73,7 @@ function App() {
       setLastFoutryItems(res)
       //setItems(res)
       setItemsAfterSearch(res) 
+      
     } catch (err) {
       console.log(err);
     }
@@ -87,14 +90,16 @@ function App() {
   }
 
   React.useEffect(()=>{
+    getAllImagesForItems()
     getCategory()
     getLastFourtyItems()
-    getAllImagesForItems()
   },[])
 
   function chooseCategory(category) {
     setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
     setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
+    setStartCategoryPageSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
+    setCategoryPageSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
   } 
 
   function handleRegSubmit(userData) {
@@ -153,10 +158,15 @@ function App() {
         formData.append('str_item_id', str_item_id); 
         Api.uploadFile(formData)
         .then((res) => {
+          setMyImages([res[0], ...images])
           closeAllPopups()
           setPopupMessage("Ad added successful!")
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
+        })
+        .then(()=> {
+          getLastFourtyItems()
+          getAllImagesForItems()
         })
         .catch((err)=> {
           console.log(err)
@@ -205,6 +215,7 @@ function App() {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
       setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
+      setCategoryPageSearch((state) => state.filter((item) => item.item_id !== item_id))
     })
     .catch((err) => {
       console.log(err)
@@ -272,7 +283,7 @@ function App() {
 
   function startToSearchSecondPage (keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
-    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    setCategoryPageSearch(startCategorySecondPageSearch.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
   function openSuccessfulActionPopup() {
@@ -362,6 +373,7 @@ function App() {
               //categoryItemsSearch={categoryItemsSearch} 
               itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
+              allImages={allImages}
             />
           }
         />
@@ -377,12 +389,16 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               getItemById={getItemById} 
-              startToSearch={startToSearch}
+//              startToSearch={startToSearch}
               lastFourtyItems={lastFourtyItems}
-              categoryItemsSearch={categoryItemsSearch} 
+              //categoryItemsSearch={categoryItemsSearch} 
+
+              categorySecondPageSearch={categorySecondPageSearch}
+              startToSearchSecondPage={startToSearchSecondPage}
               isLoggin={isLoggin}
               favorite={favorite}
               favoriteItems={favoriteItems}
+              allImages={allImages}
             />
           }
         />
@@ -400,6 +416,7 @@ function App() {
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
               deleteMyAd={deleteMyAd}
+              allImages={allImages}
             />
           }
         />
@@ -433,7 +450,7 @@ function App() {
                 deleteFromFavorites={deleteFromFavorites}
                 favorite={favorite}
                 favoriteItems={favoriteItems}
-
+                allImages={allImages}
 
               />
             </ProtectedRoute>
@@ -454,6 +471,7 @@ function App() {
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
               favorite={favorite}
+              allImages={allImages}
           />
           }>
         </Route>
@@ -468,6 +486,7 @@ function App() {
                 lastFourtyItems={lastFourtyItems}
                 favoriteItems={favoriteItems}
                 deleteFromFavorites={deleteFromFavorites}
+                allImages={allImages}
               />
             </ProtectedRoute>
           }>
