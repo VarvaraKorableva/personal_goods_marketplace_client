@@ -244,7 +244,6 @@ return (
           name='title'
           type='text'
           value={title}
-          //onInput={handleTitleChange}
           onChange={handleTitleChange}
         ></input>
       </label>
@@ -267,7 +266,6 @@ return (
           name='price'
           type='text'
           value={price}
-          //onInput={handlePriceChange}
           onChange={handlePriceChange}
         ></input>
       </label>
@@ -279,7 +277,6 @@ return (
           name='city'
           type='text'
           value={city}
-          //onInput={handleCityChange}
           onChange={handleCityChange}
         ></input>
       </label>

@@ -25,7 +25,6 @@ function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
 
-  const [isAddAdPopup, setIsAddAdPopup] = React.useState(false)
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
@@ -35,15 +34,13 @@ function App() {
 
   const [allImages, setAllImages] = React.useState([])
   const [myImages, setMyImages] = React.useState([])
-  const [images, setImages] = React.useState([])
 
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
 
-  const [categoryItemsSearch, setCategoryItemsAfterSearch] = React.useState([])
-  const [categorySecondPageSearch, setCategoryPageSearch] = React.useState([])
-  const [startCategorySecondPageSearch, setStartCategoryPageSearch] = React.useState([])
+  const [itemsSecondPageSearch, setItemsSecondPageSearch] = React.useState([])//items
+  const [startItemsSecondPage, setStartItemsSecondPage] = React.useState([])//items
 
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
 
@@ -71,19 +68,17 @@ function App() {
     try {
       const res = await Api.getLastForty();
       setLastFoutryItems(res)
-      //setItems(res)
       setItemsAfterSearch(res) 
       
     } catch (err) {
       console.log(err);
     }
   }
-/////
+
   async function getAllImagesForItems() {
     try {
       const res = await Api.getAllImages();
       setAllImages(res)
-      console.log(res)
     } catch (err) {
       console.log(err);
     }
@@ -96,11 +91,36 @@ function App() {
   },[])
 
   function chooseCategory(category) {
-    setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
-    setCategoryItemsAfterSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
-    setStartCategoryPageSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
-    setCategoryPageSearch(lastFourtyItems.filter((i) => i.category_id === category.category_id))
+
+      setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
+  
+      let myCatToRender = []
+
+      findAllCategoryGrandChildren(category, myCatToRender) 
+   
+
+      setItemsSecondPageSearch(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+      setStartItemsSecondPage(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+      
   } 
+
+  function findAllCategoryGrandChildren(category, myCatToRenderNew) {
+    let childrens = categories.filter((item) => item.parent_id === category.category_id)
+
+    if(childrens.length === 0) {
+      myCatToRenderNew.push(category.category_id)
+    } else {
+      childrens.forEach((item) => {
+        findAllCategoryGrandChildren(item, myCatToRenderNew)
+      })
+    }
+
+    return myCatToRenderNew
+  }
+
+
+
+
 
   function handleRegSubmit(userData) {
     Api.register({
@@ -158,7 +178,7 @@ function App() {
         formData.append('str_item_id', str_item_id); 
         Api.uploadFile(formData)
         .then((res) => {
-          setMyImages([res[0], ...images])
+          setMyImages([res[0], ...myImages])
           closeAllPopups()
           setPopupMessage("Ad added successful!")
           setMyAds([res, ...myAds])
@@ -215,7 +235,7 @@ function App() {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
       setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
-      setCategoryPageSearch((state) => state.filter((item) => item.item_id !== item_id))
+      setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
     })
     .catch((err) => {
       console.log(err)
@@ -261,21 +281,6 @@ function App() {
     })
   }
 
-  function getUserImagesById(owner_id) {
-    Api.getUserImagesById(owner_id)
-    .then((res) => {
-      setMyImages(res)
-      /*setFovorite(res)
-      const favoriteItemsResult = lastFourtyItems.filter(item =>
-      res.some(favoriteItem => favoriteItem.item_id === item.item_id)
-      );
-      setFavoriteItems(favoriteItemsResult);*/
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
@@ -283,7 +288,7 @@ function App() {
 
   function startToSearchSecondPage (keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
-    setCategoryPageSearch(startCategorySecondPageSearch.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
+    setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
   function openSuccessfulActionPopup() {
@@ -301,7 +306,6 @@ function App() {
   }
 
   function closeAllPopups() {
-    setIsAddAdPopup(false)
     setIsChoiceOfProductOrServicePopup(false)
     setSuccessfulActionPopup(false)
     setPopupMessage("")
@@ -313,26 +317,7 @@ function App() {
       getMyFavorites([])
       navigate(`/`)
   }
-
-  function getCookie(name) {
-    //const cookies = document.Cookies.split(';');
-    /*
-    for (let cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName.trim() === name) {
-        return decodeURIComponent(cookieValue);
-      }
-    }
-    return null;*/
-    console.log(document.Cookies)
-  }
   
-  // Пример использования:
-  //const token = getCookie('jwt');
-  //console.log(token);
-
-  
-
   return (
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
@@ -370,7 +355,6 @@ function App() {
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
-              //categoryItemsSearch={categoryItemsSearch} 
               itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
               allImages={allImages}
@@ -389,11 +373,8 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               getItemById={getItemById} 
-//              startToSearch={startToSearch}
               lastFourtyItems={lastFourtyItems}
-              //categoryItemsSearch={categoryItemsSearch} 
-
-              categorySecondPageSearch={categorySecondPageSearch}
+              itemsSecondPageSearch={itemsSecondPageSearch}
               startToSearchSecondPage={startToSearchSecondPage}
               isLoggin={isLoggin}
               favorite={favorite}
@@ -519,12 +500,3 @@ function App() {
 }
 
 export default App;
-
-/*
-      <AddAdPopup
-        isOpen={isAddAdPopup}
-        onClose={closeAllPopups}
-        onAddAd={handleAddAdSubmit}
-        categories={categories}
-      /> 
-*/

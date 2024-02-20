@@ -1,7 +1,5 @@
 import React from 'react';
-import MainCategories from '../MainCategories/MainCategories'
 import CategorySearchEngine from '../CategorySearchEngine/CategorySearchEngine'
-import ItemsContainer from '../ItemsContainer/ItemsContainer'
 import { useParams } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
@@ -13,8 +11,7 @@ function CategoryPage({
     deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    categoriesToRender,
-    categorySecondPageSearch, startToSearchSecondPage
+    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage
 }) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
@@ -48,7 +45,7 @@ function CategoryPage({
             </ul>
             <h2 className='main__title'> ads</h2>
             <ul className='categoryPage-listings-container'>
-                {categorySecondPageSearch.map((item) => (
+                {itemsSecondPageSearch.map((item) => (
                     <OneAd 
                         allImages={allImages}
                         key={item.item_id} 
