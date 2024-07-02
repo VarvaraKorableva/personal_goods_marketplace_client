@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
 
-function Registration({onRegister, errorMessage, isError}){
+function Registration({onRegister, isRegError}){
 
 /*
 username VARCHAR(255) NOT NULL,
@@ -38,6 +38,8 @@ const { en, rus, hebrew } = choose;
     translatedContext = hebrew;
   }
 
+const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.alreadyRegisteredError)  
+
   function handleSubmit(e) {
     e.preventDefault();
     onRegister({
@@ -56,12 +58,15 @@ const { en, rus, hebrew } = choose;
 
     if (!e.target.value.length) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameFieldMustBeFilledIn)
+      
       setErrorName(true);
      } else if (e.target.value.length < 2) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameMustBeAtLeastCharactersLong)
+      
       setErrorName(true);
      } else if (!validName) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameShouldOnlyContainLatinLettersCyrillicLetters)
+      
       setErrorName(true);
      } else if (validName) {
       setErrorNameMessage('')
@@ -101,11 +106,14 @@ const { en, rus, hebrew } = choose;
     if (!e.target.value.length) {
       setErrorEmailMessage(translatedContext.mistakesEmail.emailMustBeFilledIn)
       setErrorEmail(true)
+ 
     } else if (!validEmail) {
       setErrorEmailMessage(translatedContext.mistakesEmail.invalidEmailFormat)
       setErrorEmail(true)
+  
     } else {
       setErrorEmailMessage('')
+  
       setErrorEmail(false)
     }
     setEmail(e.target.value)
@@ -125,7 +133,7 @@ const { en, rus, hebrew } = choose;
         className='register__form'
         onSubmit={handleSubmit}>
         <h2 className='register__title'>{translatedContext.greetings}</h2>
-        <h3 className='register__greetingsText'>{translatedContext.greetingsText}</h3>
+
         <fieldset className='register__fieldset'>
           <label className='register__inputname'>{translatedContext.name}<span className='register__inputname-span'>*</span>
             <input className='register__input'
@@ -167,9 +175,14 @@ const { en, rus, hebrew } = choose;
           </label>
           <span className='register__inputmistake'>{errorPasswordMessage}
           </span>
+        </fieldset>
 
-          <span className={`${isError?'register__inputmistake' : ''}`}>{errorMessage}</span>
-      </fieldset>
+        {isRegError?
+          <span className='register__inputmistake'>{errorRegMessage}</span>
+          :
+          <></>
+        }
+
         <button
           type="submit"
           className={`'register__btn' ${isValid? 'register__btn_active': 'register__btn'}`}

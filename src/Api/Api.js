@@ -1,12 +1,13 @@
-//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//localhost:3001';
 //https://personal-goods-marketplace-api.onrender.com
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
       return res.json();
     } else {
-      return Promise.reject(new Error(`Ошибка: ${res.status}`));
+        return Promise.reject(res.status);
+      //return Promise.reject(new Error(`Ошибка: ${res.status}`));
     }
 };
 
@@ -24,7 +25,6 @@ export const register = ( {username, email, password} ) => {
       password: password
       })
   }).then((res) => {
-    console.log(res);
     return checkResponse(res);
   });
 }; 
@@ -218,7 +218,6 @@ export const logout = () => {
 };
 
 export const uploadFile = (formData) => {
-  console.log([...formData.entries()]);
   return fetch(`${BASE_URL}/files/upload-single`, {
     credentials: 'include',
     method: "POST",

@@ -219,3 +219,50 @@
 .header__links-container {
   display: flex;
 }
+
+.header__lang-container {
+  display: flex;
+}
+
+.header__lang-btn {
+  width: fit-content;
+  height: 20px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: transparent;
+  margin-right: 3px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.header__lang-btn:last-of-type {
+  margin-right: 0;
+}
+
+.header__lang-btn:hover {
+  background-color: #fff;
+}
+
+.header__lang-btn_active {
+  width: calc(fit-content + 2px) ;
+  height: 20px;
+  border-radius: 30px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 3px;
+  background-color: black;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.header__lang-btn_active:last-of-type {
+  margin-right: 0;
+}

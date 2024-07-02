@@ -50,6 +50,9 @@ function App() {
   const [favoriteItems, setFavoriteItems] = React.useState([])
   
   const [isGood, setIsGood] = React.useState(true)
+  const [isLoginError, setIsLoginError] = React.useState(false)
+  const [isRegError, setIsRegError] = React.useState(false)
+
 
   const userId = currentUser.user_id
   const navigate = useNavigate()
@@ -98,7 +101,6 @@ function App() {
 
       findAllCategoryGrandChildren(category, myCatToRender) 
    
-
       setItemsSecondPageSearch(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
       setStartItemsSecondPage(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
       
@@ -119,9 +121,6 @@ function App() {
   }
 
 
-
-
-
   function handleRegSubmit(userData) {
     Api.register({
       username:userData.username,
@@ -135,7 +134,9 @@ function App() {
       navigate(`/`)
     })  
     .catch((err) => {
-      console.log(err)
+      if(err == 400) {
+        setIsRegError(true)
+      }
     })
   }
 
@@ -145,6 +146,7 @@ function App() {
       email: userData.email
     })
     .then ((res) => {
+      setIsLoginError(false)
       setIsLoggin(true)
       setCurrentUser(res.user[0])
       const favorite_collector_id = res.user[0].user_id
@@ -152,7 +154,9 @@ function App() {
       navigate(`/`)
     })  
     .catch((err) => {
-      console.log(err)
+      if(err == 401) {
+        setIsLoginError(true)
+      }
     })
   }
 
@@ -165,16 +169,11 @@ function App() {
 
   function handleAddAdSubmit(data) {
     const { formData, ...otherData } = data;
-    
-    console.log([...formData.entries()]);
-    
     Api.createItem(otherData)
-
     .then((res)=> {
       if(formData) {
         const id = res.item_id
         const str_item_id = Number(id)
-        console.log(str_item_id)
         formData.append('str_item_id', str_item_id); 
         Api.uploadFile(formData)
         .then((res) => {
@@ -328,7 +327,9 @@ function App() {
         <Route
         path="/signup"
         element={
-        <Registration onRegister={handleRegSubmit}
+        <Registration 
+          onRegister={handleRegSubmit}
+          isRegError={isRegError}
         />
         }>
         </Route>
@@ -336,7 +337,9 @@ function App() {
         <Route
           path="/signin"
           element={
-            <Login onLogin={handleLoginSubmit}
+            <Login 
+              onLogin={handleLoginSubmit}
+              isLoginError={isLoginError}
             />
           }>
         </Route>

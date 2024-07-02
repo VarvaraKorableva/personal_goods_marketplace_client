@@ -4,7 +4,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Login'
 import { Link } from 'react-router-dom'
 
-function Login({ isLoginError, errorLoginMessage, onLogin }) {
+function Login({ isLoginError, onLogin }) {
 
 const [isValid, setIsValid] = React.useState(false)
 
@@ -16,6 +16,9 @@ const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
 
 const [errorEmail, setErrorEmail] = React.useState(true)
 const [errorPassword, setErrorPassword] = React.useState(true)
+
+//const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
+////setErrorLoginMessage(translatedContext.errors.authenticationError)
 
 const { language } = React.useContext(LanguageContext)
 
@@ -84,8 +87,8 @@ const { language } = React.useContext(LanguageContext)
   return (
     <section className='login'>
       <form className='login__form' onSubmit={handleSubmit}>
-        <h2 className='login__title'>Glad to see you!</h2>
-        <h2>Login</h2>
+        <h2 className='login__title'>{translatedContext.title}</h2>
+
         <fieldset className='login__fieldset'>
           <label  className='login__inputname'>{translatedContext.email}
             <input className='login__input'
@@ -110,13 +113,21 @@ const { language } = React.useContext(LanguageContext)
             />
           </label>
           <span className='login__inputmistake'>{errorPasswordMessage}</span>
-          <span className={`${isLoginError?'login__inputmistake' : ''}`}>{errorLoginMessage}</span>
+          
         </fieldset>
+
+        {isLoginError?
+          <span className='login__inputmistake'>
+            {translatedContext.errors.authenticationError}
+          </span>
+          :
+          <></>
+        }
 
         <button className={`'login__btn' ${isValid? 'login__btn_active': 'login__btn'}`} type='submit' disabled={!isValid}>{translatedContext.button}</button>
           <div className='login__wrapper'>
             <p className='login__subtitle'>{translatedContext.notRegisteredYet}
-            <Link className='login__entrylink' to="/signup"> {translatedContext.signUp}</Link>
+              <Link className='login__entrylink' to="/signup"> {translatedContext.signUp}</Link>
             </p>
           </div>
       </form>

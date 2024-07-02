@@ -1,6 +1,6 @@
 const en = {
+    greetings: 'Registration',
     greetingsRegistration: 'Registration',
-    greetings: 'Welcome!',
     greetingsText: 'You can register here',
     name: 'Name',
     email: 'E-mail',
@@ -26,10 +26,12 @@ const en = {
         emailMustBeFilledIn: 'Email must be filled in.',
         invalidEmailFormat: 'Invalid email format.',
     },
+
+    alreadyRegisteredError: 'Email is already registered',
 }
 
 const rus = {
-    greetings: 'Привет!',
+    greetings: 'Зарегистрироваться',
     greetingsText: 'Здесь можно зарегистрироваться',
 
     name: 'Имя',
@@ -59,6 +61,8 @@ const rus = {
         emailMustBeFilledIn: 'Поле должно быть заполнено.',
         invalidEmailFormat: 'Неправильный формат электронной почты.',
     },
+
+    alreadyRegisteredError: 'Такой email уже зарегистрирован',
 }
 
 const hebrew = {
@@ -93,6 +97,8 @@ const hebrew = {
         emailMustBeFilledIn: '.יש למלא את האימייל',
         invalidEmailFormat: '.פורמט האימייל אינו תקין',
     },
+
+    alreadyRegisteredError: 'Такой email уже зарегистрирован -изменить',
 }
 
 const choose = { en, rus, hebrew };

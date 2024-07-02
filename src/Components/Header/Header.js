@@ -5,7 +5,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 
-function Header({isLoggin, signOut, onChangeLanguageClick, onAdPopup}) {
+function Header({isLoggin, onAdPopup}) {
   
 const currentUser = React.useContext(CurrentUserContext)
 
@@ -13,7 +13,11 @@ const userId = currentUser.user_id
 
 const location = useLocation();
 
-const { language } = React.useContext(LanguageContext)
+const { language, changeLanguage } = React.useContext(LanguageContext)
+
+const handleLanguageChange = (newLanguage) => {
+  changeLanguage(newLanguage);
+};
 
 const { en, rus, hebrew } = choose;
 
@@ -77,8 +81,11 @@ return (
           <p>{translatedContext.registraion}</p>
         </Link>
       </div>
-
       }
+      <div className='header__lang-container'>
+        <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active':'header__lang-btn'}>RU</button>
+        <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active':'header__lang-btn'}>EN</button>
+      </div>
       
     </div>
     </div>

@@ -123,19 +123,16 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     } 
     else 
     {id = Number(thirdCategoryId)}
-    /*console.log('id =>', id)
-    console.log('thirdSubCategoryId =>', thirdSubCategoryId)
-    console.log('thirdCategoryId =>', thirdCategoryId)*/
+
     
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      //console.log([...formData.entries()]);
 
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(id), //thirdSubCategoryId),
+        category_id: Number(id),
         city,
         price,
         description,
