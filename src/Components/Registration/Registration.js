@@ -26,6 +26,8 @@ const [errorPassword, setErrorPassword] = React.useState(true)
 
 const [isValid, setIsValid] = React.useState(false);
 
+const [isRegErrorEmailChanging, setIsRegErrorEmailChanging] = React.useState(false);
+
 const { language } = React.useContext(LanguageContext)
 const { en, rus, hebrew } = choose;
 
@@ -47,39 +49,40 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       email,
       password
     });
-
-    console.log(username)
+    setIsRegErrorEmailChanging(false)
   }
 
   const handleNameChange = (e) => {
-    const validName = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u.test(
+    /*const validName = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u.test(
       e.target.value
-    )
+    )*/
 
     if (!e.target.value.length) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameFieldMustBeFilledIn)
-      
       setErrorName(true);
+
      } else if (e.target.value.length < 2) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameMustBeAtLeastCharactersLong)
-      
       setErrorName(true);
-     } else if (!validName) {
+
+     } else if (!e.target.value) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameShouldOnlyContainLatinLettersCyrillicLetters)
-      
       setErrorName(true);
-     } else if (validName) {
+
+     } else if (e.target.value) {
       setErrorNameMessage('')
       setErrorName(false);
+
      } else if (e.target.value.length > 30) {
       setErrorNameMessage(translatedContext.mistakesName.usernameMustBeNoMoreThan)
       setErrorName(true);
+
      } else {
       setErrorNameMessage('')
       setErrorName(false);
+      setName(e.target.value[0].toUpperCase() + e.target.value.slice(1));
      }
-     //setName(e.target.value)
-     setName(e.target.value[0].toUpperCase() + e.target.value.slice(1));
+     
   }
 
   const handlePasswordChange = (e) => {
@@ -106,15 +109,16 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
     if (!e.target.value.length) {
       setErrorEmailMessage(translatedContext.mistakesEmail.emailMustBeFilledIn)
       setErrorEmail(true)
+      setIsRegErrorEmailChanging(true)
  
     } else if (!validEmail) {
       setErrorEmailMessage(translatedContext.mistakesEmail.invalidEmailFormat)
       setErrorEmail(true)
-  
+      setIsRegErrorEmailChanging(true)
     } else {
       setErrorEmailMessage('')
-  
       setErrorEmail(false)
+      setIsRegErrorEmailChanging(true)
     }
     setEmail(e.target.value)
   }
@@ -126,6 +130,10 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       setIsValid(true)
     }
   }, [errorEmail, errorName, errorPassword])
+/*
+  console.log('isRegError', isRegError)
+  console.log('!isRegErrorEmailChanging', !isRegErrorEmailChanging)
+*/
 
   return (
     <section className='register'>
@@ -177,10 +185,10 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
           </span>
         </fieldset>
 
-        {isRegError?
-          <span className='register__inputmistake'>{errorRegMessage}</span>
-          :
-          <></>
+        {isRegError && !isRegErrorEmailChanging?
+            <span className='register__inputmistake'>{errorRegMessage}</span>
+          : 
+            <></>
         }
 
         <button

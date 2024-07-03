@@ -16,7 +16,7 @@ function Main({
 
 
     return(
-        <section>
+        <section className='main__section'>
             <MainSearchEngine
                 lastFourtyItems={lastFourtyItems}
                 categories={categories}
