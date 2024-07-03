@@ -44,7 +44,7 @@ export const authorize = ( {email, password} ) => {
   })
       .then(checkResponse)
 };
-
+///не использую?
 export const getContent = () => {
     return fetch(`${BASE_URL}/items`, {
         credentials: 'include',
@@ -104,7 +104,7 @@ export const getUserItems = (owner_id) => {
   })
       .then(checkResponse) 
 };
-
+/// не использую
 export const getItemsByCategory = (category_id) => {
   return fetch(`${BASE_URL}/items/categoryId/${category_id}`, {
       credentials: 'include',

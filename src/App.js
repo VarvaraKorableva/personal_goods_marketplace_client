@@ -122,12 +122,15 @@ function App() {
 
 
   function handleRegSubmit(userData) {
+    setIsRegError(false)
     Api.register({
       username:userData.username,
       email: userData.email,
       password: userData.password,
     })
+    
     .then((data) => {
+      setIsRegError(false)
       setCurrentUser(data.user)
       setMyAds([]);
       setIsLoggin(true)
@@ -148,8 +151,8 @@ function App() {
     .then ((res) => {
       setIsLoginError(false)
       setIsLoggin(true)
-      setCurrentUser(res.user[0])
-      const favorite_collector_id = res.user[0].user_id
+      setCurrentUser(res.user)
+      const favorite_collector_id = res.user.user_id
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
     })  
@@ -157,6 +160,7 @@ function App() {
       if(err == 401) {
         setIsLoginError(true)
       }
+      console.log(err)
     })
   }
 
