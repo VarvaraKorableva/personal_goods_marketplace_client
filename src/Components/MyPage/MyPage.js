@@ -64,8 +64,8 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
                     <h3 className="myPage__title">{translatedContext.myListingsTitle}</h3>
                     {myAds.length === 0?
                     <div className="myPage__add-ad-container">
-                        <h3>Вы еще не добавили ни одного объявления</h3>
-                        <button className='myPage_add-announcement-btn' onClick={handleAddAdClick}>Добавить</button>
+                        <h3>{translatedContext.noAdsMessage}</h3>
+                        <button className='myPage_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAdBtnName}</button>
                     </div>
 
                     :

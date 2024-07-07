@@ -4,6 +4,8 @@ const en = {
     myListingsTitle: 'My listings:', 
     logOutBtn: 'Log out',
     addMoreAdsBtn: 'Add more',
+    noAdsMessage: "You haven't added any ads yet",
+    addNewAdBtnName: "Add",
 }
 
 const rus = {
@@ -11,6 +13,8 @@ const rus = {
     myListingsTitle: 'Мои объявления:', 
     logOutBtn: 'Выйти из приложения',
     addMoreAdsBtn: 'Посмотреть остальные',
+    noAdsMessage: "Вы еще не добавили ни одного объявления",
+    addNewAdBtnName: "Добавить",
 }
 
 const hebrew = {
@@ -18,6 +22,8 @@ const hebrew = {
     myListingsTitle: 'My listings:', 
     logOutBtn: 'Log out',
     addMoreAdsBtn: 'Add more ads',
+    noAdsMessage: "You haven't added any ads yet",
+    addNewAdBtnName: "Add",
 }
 
 const choose = { en, rus, hebrew };

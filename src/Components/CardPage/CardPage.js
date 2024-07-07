@@ -48,9 +48,9 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
         <section className="cardPage-section">
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
-                    <div className="cardPage-img-container">
+                    {/*<div className="cardPage-img-container">
                         <img src={image[0].location} alt={selectedItem[0].title} className='cardPage-image'/>
-                    </div>
+                    </div>*/}
 
                     <div className="cardPage-info-container">
                         <div>

@@ -69,9 +69,9 @@ function OneAd({
 
     return(
         <li className="oneAdd__container">
-            <div>
+            {/*<div>
                 <img className="oneAdd__main-pic" alt = {item.title} src={image[0].location}></img>
-            </div>
+            </div>*/}
             
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
