@@ -1,6 +1,17 @@
+.myPage__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    min-width: 600px;
+    margin: auto;
+    /*min-height: 80vh;*/
+}
+
 .myPage__info-container {
     display: flex;
-    max-width: 500px;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     margin: auto;
@@ -40,4 +51,63 @@
 
 .myPage__info-container {
 
+}
+
+.myPage__avatar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPage__btn {
+    border-radius: 20px;
+    border: 2px solid black;
+    height: 30px;
+    background-color: transparent;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.myPage__btn:hover {
+    background-color: black;
+    color: #fff;
+}
+
+.myPage__btn-logout {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.myPage__add-ad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPage_add-announcement-btn {
+    border: 2px solid black;
+    border-radius: 20px;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    height: 30px;
+    background-color: transparent;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPage_add-announcement-btn:hover {
+    opacity: 0.7;
+    background-color: black;
+    color: #fff;
 }

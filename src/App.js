@@ -45,13 +45,17 @@ function App() {
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
 
   const [selectedItem, setSelectedItem] = React.useState([])
-  const [userInfo, setUserInfo] = React.useState([]) ///нужно удалить!!!
+  const [userInfo, setUserInfo] = React.useState([])
   const [favorite, setFovorite] = React.useState([])
   const [favoriteItems, setFavoriteItems] = React.useState([])
   
   const [isGood, setIsGood] = React.useState(true)
   const [isLoginError, setIsLoginError] = React.useState(false)
   const [isRegError, setIsRegError] = React.useState(false)
+
+  const [limit, setLimit] = React.useState(8)
+
+  const addAds = () => setLimit(limit + 4);
 
 
   const userId = currentUser.user_id
@@ -91,6 +95,10 @@ function App() {
     getAllImagesForItems()
     getCategory()
     getLastFourtyItems()
+    /*if(localStorage.getItem('isLogin') === true ) {
+      setIsLoggin(true)
+      setCurrentUser(localStorage.getItem('user'))
+    }*/
   },[])
 
   function chooseCategory(category) {
@@ -132,8 +140,10 @@ function App() {
     .then((data) => {
       setIsRegError(false)
       setCurrentUser(data.user)
+      localStorage.setItem('user', data.user)
       setMyAds([]);
       setIsLoggin(true)
+      localStorage.setItem('isLogin', true)
       navigate(`/`)
     })  
     .catch((err) => {
@@ -151,7 +161,9 @@ function App() {
     .then ((res) => {
       setIsLoginError(false)
       setIsLoggin(true)
+      localStorage.setItem('isLogin', true)
       setCurrentUser(res.user)
+      localStorage.setItem('user', res.user)
       const favorite_collector_id = res.user.user_id
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
@@ -318,6 +330,9 @@ function App() {
 
   function handleLogout() {
       setIsLoggin(false)
+      localStorage.removeItem('isLogin')
+      localStorage.removeItem('user')
+      
       setCurrentUser({})
       getMyFavorites([])
       navigate(`/`)
@@ -426,10 +441,12 @@ function App() {
         </Route> 
 
         <Route
-          exact path={`/users/${userId}`}
+          exact path={`/users/${userId}`}/////тут было так ${userId}
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
+                onAdPopup={handleChoiceOfProductOrServicePopupClick}
+                getUserById={getUserById}
                 getMyItems={getMyItems}
                 myAds={myAds}
                 deleteMyAd={deleteMyAd}
@@ -441,7 +458,8 @@ function App() {
                 favorite={favorite}
                 favoriteItems={favoriteItems}
                 allImages={allImages}
-
+                limit={limit}
+                addAds={addAds}
               />
             </ProtectedRoute>
           }>
@@ -501,7 +519,7 @@ function App() {
         onClose={closeAllPopups}
         popupMessage={popupMessage}
       />
-      <Footer></Footer>
+      <Footer handleLogout={handleLogout}></Footer>
     </div>
     </CurrentUserContext.Provider>  
     </LanguageProvider>

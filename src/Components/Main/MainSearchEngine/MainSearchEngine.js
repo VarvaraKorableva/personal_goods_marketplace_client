@@ -5,7 +5,7 @@ import choose from '../../../const/mainContainer'
 
 function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
     const [keyWord, setKeyWord] = React.useState('')
-    const { language, changeLanguage } = React.useContext(LanguageContext)
+    const { language } = React.useContext(LanguageContext)
 
     const { en, rus, hebrew } = choose;
 

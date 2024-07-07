@@ -7,10 +7,12 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     
     const owner_id = useParams()
 
+    console.log(owner_id)
+
     React.useEffect(() => {
         getUserById(Number(owner_id.owner_id));
         getMyItems(Number(owner_id.owner_id))
-    }, []);//item_id
+    }, []);
 
     if(userInfo.length === 0 || myAds.length === 0) {
         return <p>Loading ...</p>;
