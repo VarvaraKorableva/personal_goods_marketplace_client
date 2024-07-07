@@ -24,7 +24,7 @@ function ItemsContainer({
                     allImages={allImages}
                 />
             ))}
-        </ul>
+            </ul>
     )
 }
 

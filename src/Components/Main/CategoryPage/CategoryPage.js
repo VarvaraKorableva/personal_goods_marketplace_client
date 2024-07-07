@@ -43,7 +43,7 @@ function CategoryPage({
                   ))
                 }
             </ul>
-            <h2 className='main__title'> ads</h2>
+            <h2 className='main__title'>Ads</h2>
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.map((item) => (
                     <OneAd 

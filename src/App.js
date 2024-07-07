@@ -159,8 +159,10 @@ function App() {
     .catch((err) => {
       if(err == 401) {
         setIsLoginError(true)
+        setTimeout(function(){
+          setIsLoginError(false)
+        }, 3000)
       }
-      console.log(err)
     })
   }
 

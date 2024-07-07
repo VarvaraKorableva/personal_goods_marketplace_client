@@ -44,10 +44,10 @@ return (
       {isLoggin ?//&& location.pathname === `/users/`${userId}
         <div className='header_wrapper'>
           
-          <button className='header_add-announcement-btn' onClick={handleAddAdClick}>Place an ad</button>
+          <button className='header_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
           
           <Link to={`/users/${userId}`} className='header_link'>
-            <button className='header_add-announcement-btn'>My page</button>
+            <button className='header_add-announcement-btn'>{translatedContext.mypage}</button>
           </Link>
 
           <Link  to={`/my_favorites`} className='header_link'>

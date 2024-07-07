@@ -2,6 +2,7 @@ import React from 'react'
 import MainCategories from './MainCategories/MainCategories'
 import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
+import './Main.css'
 
 function Main({
     categoriesToRender, isLoggin, 
@@ -27,7 +28,7 @@ function Main({
                 categories={categories}
                 categoriesToRender={categoriesToRender}
             />
-            <h2 className='main__title'>All ad</h2>
+            {/*<h2 className='main__title'>All ad</h2>
             <ItemsContainer 
                 allImages={allImages}
                 itemsAfterSearch={itemsAfterSearch}
@@ -39,8 +40,7 @@ function Main({
                 favoriteItems={favoriteItems}
                 isLoggin={isLoggin}
                 deleteMyAd={ deleteMyAd}
-                
-            />
+            />*/}
         </section>
     )
 }

@@ -1,6 +1,6 @@
 const en = {
-    logout: 'LogOut',
-    mypage: 'My Page',
+    btnNameSearch: 'Search',
+    placeholder: 'Search by advertisements',
     login: 'LogIn',
     registraion: 'SignUp',
     addNewAddBtnName: 'Place an ad',
@@ -8,16 +8,16 @@ const en = {
 }
 
 const rus = {
-    logout: 'Выйти из приложения',
-    mypage: 'Моя страница',
+    btnNameSearch: 'Искать',
+    placeholder: 'Начните ввод ',
     login: 'Войти',
     registraion: 'Зарегистрироваться', 
     addNewAddBtnName: 'Добавить объявление',
 }
 
 const hebrew = {
-    logout: 'להתנתק',
-    mypage: 'העמוד שלי',
+    btnNameSearch: 'Search',
+    placeholder: 'Search by advertisements',
     login: 'התחברות',
 
     registraion: 'רישום',
