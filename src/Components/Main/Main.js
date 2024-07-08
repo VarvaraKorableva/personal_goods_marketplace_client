@@ -28,7 +28,7 @@ function Main({
                 categories={categories}
                 categoriesToRender={categoriesToRender}
             />
-            {/*<h2 className='main__title'>All ad</h2>
+            <h2 className='main__title'>All ad</h2>
             <ItemsContainer 
                 allImages={allImages}
                 itemsAfterSearch={itemsAfterSearch}
@@ -40,7 +40,7 @@ function Main({
                 favoriteItems={favoriteItems}
                 isLoggin={isLoggin}
                 deleteMyAd={ deleteMyAd}
-            />*/}
+            />
         </section>
     )
 }
