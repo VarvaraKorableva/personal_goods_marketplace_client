@@ -10,9 +10,14 @@
     align-items: center;
 }
 .oneAdd__main-pic {
-    width: 196px;
+    /*width: 196px;
     object-fit: cover; 
     height: 170px;
+    border: none;
+    border-radius: 10px;*/
+    width: 100px;
+    object-fit: cover; 
+    height: 100px;
     border: none;
     border-radius: 10px;
 }
@@ -20,16 +25,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 90px;
 }
 .oneAdd__title-and-like-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
     margin-top: 2px;
     margin-bottom: 2px;
+
+    position: relative;
 }
 
 .oneAdd__title {
@@ -61,6 +67,10 @@
     cursor: pointer;
 
     margin-right: 1px;
+
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }
 
 .oneAdd__like-btn:hover {
@@ -79,6 +89,10 @@
     cursor: pointer;
 
     margin-right: 1px;
+
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }
 
 .oneAdd__like-btn_activ:hover {
@@ -95,6 +109,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }
 
 .oneAdd__delete-btn:hover {
@@ -121,12 +139,35 @@
 }
 
 .oneAdd__time {
-    margin-top: 5px;
     margin-bottom: 0;
-    margin-top: 3px;
+    margin-top: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
     font-size: 12px;
+}
+
+.oneAdd__pic-and-info-container {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.oneAdd__main-pic-wrapper {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(170, 168, 168);
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.oneAdd__no-pic {
+   width: 30px;
+   height: 30px;
+
 }

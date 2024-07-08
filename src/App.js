@@ -21,6 +21,8 @@ import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
+import testData from './const/testData';
+
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
   const [currentUser, setCurrentUser] = React.useState({})
@@ -53,9 +55,10 @@ function App() {
   const [isLoginError, setIsLoginError] = React.useState(false)
   const [isRegError, setIsRegError] = React.useState(false)
 
-  const [limit, setLimit] = React.useState(8)
+  const [limit, setLimit] = React.useState(3)
 
-  const addAds = () => setLimit(limit + 4);
+  const addAds = () => setLimit(limit + 3);
+  //const hideAds = () => setLimit(3);
 
 
   const userId = currentUser.user_id
@@ -76,6 +79,9 @@ function App() {
       const res = await Api.getLastForty();
       setLastFoutryItems(res)
       setItemsAfterSearch(res) 
+      //setLastFoutryItems(testData)
+      //setItemsAfterSearch(testData) 
+      //testData
       
     } catch (err) {
       console.log(err);
@@ -95,6 +101,7 @@ function App() {
     getAllImagesForItems()
     getCategory()
     getLastFourtyItems()
+    
     /*if(localStorage.getItem('isLogin') === true ) {
       setIsLoggin(true)
       setCurrentUser(localStorage.getItem('user'))

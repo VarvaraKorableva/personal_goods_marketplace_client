@@ -52,8 +52,10 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
             <div className="myPage__container">
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">
-                        <div className="myPage__avatar">Avatar</div>
-                        <button className="myPage__btn">{translatedContext.changeAvatarBtn}</button>
+                        <div className="myPage__avatar">
+                            <p className="myPage__avatar-info-text">{translatedContext.temporaryMessage}</p>
+                        </div>
+                        {/*<button className="myPage__btn">{translatedContext.changeAvatarBtn}</button>*/}
                     </div>
                     <div className="myPage__info-wrapper">
                         <p className="myPage__name">{currentUser.username}</p>
