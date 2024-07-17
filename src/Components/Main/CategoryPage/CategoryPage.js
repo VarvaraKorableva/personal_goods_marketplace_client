@@ -11,7 +11,7 @@ function CategoryPage({
     deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage
+    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, getItemsByCategoryCategoryId, getItemsByParentId,
 }) {
     
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
@@ -39,6 +39,8 @@ function CategoryPage({
                         key={subCategory.category_id} 
                         category={subCategory} 
                         onChooseCategory={chooseCategory}
+                        getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
+                        getItemsByParentId={getItemsByParentId}
                     />
                   ))
                 }

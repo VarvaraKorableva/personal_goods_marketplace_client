@@ -9,7 +9,7 @@ function Main({
     itemsAfterSearch, startToSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
     getItemById, addToFavorites, allImages,
-    deleteFromFavorites, favoriteItems, deleteMyAd}) {
+    deleteFromFavorites, favoriteItems, deleteMyAd, getItemsByCategoryCategoryId, getItemsByParentId,}) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,6 +27,9 @@ function Main({
                 onChooseCategory={onChooseCategory}
                 categories={categories}
                 categoriesToRender={categoriesToRender}
+
+                getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
+                getItemsByParentId={getItemsByParentId}
             />
             <h2 className='main__title'>All ad</h2>
             <ItemsContainer 

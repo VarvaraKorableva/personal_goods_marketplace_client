@@ -21,7 +21,8 @@ import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
-import testData from './const/testData';
+import testData from './const/testData'
+
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
@@ -77,12 +78,49 @@ function App() {
   async function getLastFourtyItems() {
     try {
       const res = await Api.getLastForty();
+      console.log(res)
       setLastFoutryItems(res)
       setItemsAfterSearch(res) 
       //setLastFoutryItems(testData)
       //setItemsAfterSearch(testData) 
       //testData
       
+    } catch (err) {
+      console.log(err);
+    }
+  }
+//////////func TEST///////////////
+
+  async function getItemsByCategoryCategoryId(category_id) {
+    try {
+      const res = await Api.getItemsByCategory(category_id)
+      console.log(res)
+
+      setStartItemsSecondPage(res)
+      setItemsSecondPageSearch(res)
+      //setItemsSecondPageSearch(res)
+      //setStartItemsSecondPage(res)
+      //setLastFoutryItems(res)
+      //setItemsAfterSearch(res)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getItemsByParentId(parent_id) {
+    
+    try {
+      const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
+      console.log(res)
+      setStartItemsSecondPage(res)
+      setItemsSecondPageSearch(res)
+
+      //setItemsSecondPageSearch(res)
+      //setStartItemsSecondPage(res)
+      //setLastFoutryItems(res)
+      //setItemsAfterSearch(res)
+ 
     } catch (err) {
       console.log(err);
     }
@@ -101,12 +139,8 @@ function App() {
     getAllImagesForItems()
     getCategory()
     getLastFourtyItems()
-    
-    /*if(localStorage.getItem('isLogin') === true ) {
-      setIsLoggin(true)
-      setCurrentUser(localStorage.getItem('user'))
-    }*/
   },[])
+
 
   function chooseCategory(category) {
 
@@ -116,10 +150,14 @@ function App() {
 
       findAllCategoryGrandChildren(category, myCatToRender) 
    
-      setItemsSecondPageSearch(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-      setStartItemsSecondPage(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-      
+      //setItemsSecondPageSearch(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+      //console.log('setItemsSecondPageSearch', lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+
+      //setStartItemsSecondPage(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+      //console.log('setStartItemsSecondPage', lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
+
   } 
+
 
   function findAllCategoryGrandChildren(category, myCatToRenderNew) {
     let childrens = categories.filter((item) => item.parent_id === category.category_id)
@@ -389,6 +427,10 @@ function App() {
               itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
               allImages={allImages}
+
+
+              getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
+              getItemsByParentId={getItemsByParentId}
             />
           }
         />
@@ -411,6 +453,10 @@ function App() {
               favorite={favorite}
               favoriteItems={favoriteItems}
               allImages={allImages}
+
+
+              getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
+              getItemsByParentId={getItemsByParentId}
             />
           }
         />
@@ -534,3 +580,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+//subcaterory удалить look like never used
