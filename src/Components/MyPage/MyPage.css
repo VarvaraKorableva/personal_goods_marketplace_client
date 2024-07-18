@@ -9,6 +9,20 @@
     min-height: 83vh;
 }
 
+@media screen and (max-width: 600px) {
+    .myPage__container {
+        max-width: 550px;
+        min-width: 400px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .myPage__container {
+        max-width: 400px;
+        min-width: 270px;
+    }
+}
+
 .myPage__info-container {
     display: flex;
     max-height: 310px;
@@ -17,6 +31,13 @@
     align-items: center;
     margin: auto;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 600px) {
+    .myPage__info-container {
+        flex-direction: column;
+
+    }
 }
 
 .myPage__info-wrapper {
@@ -113,6 +134,14 @@
     align-items: center;
 }
 
+@media screen and (max-width: 600px) {
+    .myPage__add-ad-container {
+        justify-content: flex-start;
+        align-items: flex-start;
+
+    }
+}
+
 .myPage_add-announcement-btn {
     border: 2px solid black;
     border-radius: 20px;
@@ -132,3 +161,16 @@
     background-color: black;
     color: #fff;
 }
+
+/*@media screen and (max-width: 600px) {
+    .cardPage-description-container {
+        width: 252px;
+
+    }
+}
+
+.myPage__listings-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}*/
+
