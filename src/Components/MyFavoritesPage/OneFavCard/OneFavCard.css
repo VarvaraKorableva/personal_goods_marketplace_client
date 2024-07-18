@@ -9,19 +9,18 @@
     width: 200px;
     align-items: center;
 }
-.OneFavCard__main-pic {
-    width: 196px;
-    object-fit: cover; 
-    height: 170px;
-    border: none;
-    border-radius: 10px;
+
+.OneFavCard__wrapper {
+    display: flex;
 }
+
 .OneFavCard__text-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
+    width: 90px;
 }
+
 .OneFavCard__title-and-like-container {
     display: flex;
     justify-content: space-between;
@@ -30,6 +29,7 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
 .OneFavCard__title {
     margin: 0;
     text-overflow: ellipsis;
@@ -57,7 +57,6 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    padding: 0;
 }
 
 .OneFavCard__delete-btn:hover {
@@ -87,6 +86,40 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: 100%;
-    font-size: 12px;
+    max-width: 80%;
+    font-size: 10px;
+
+    text-align: start;
+}
+
+.OneFavCard__main-pic-wrapper {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(170, 168, 168);
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.OneFavCard__main-pic {
+    width: 30px;
+    height: 30px;
+    object-fit: cover; 
+    border: none;
+    border-radius: 10px;
+}
+
+.OneFavCard__no-pic {
+    width: 30px;
+    height: 30px;
+}
+
+.OneFavCard__time-and-delete-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }

@@ -10,7 +10,7 @@
 }
 
 .myFavoritesPage-main-container {
-    min-height: 100vh;
+    min-height: 85vh;
 }
 
 .myFavoritesPage-link {
@@ -21,4 +21,20 @@
 
 .myFavoritesPage-link:hover {
     opacity: 0.7;
+}
+
+.myFavoritesPage-main-container_empty {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.myFavoritesPage-back-btn {
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
 }
