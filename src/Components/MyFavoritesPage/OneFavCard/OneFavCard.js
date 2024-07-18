@@ -2,8 +2,23 @@ import './OneFavCard.css'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import noPictures from '../../../images/nopictures.png'
+import {LanguageContext} from '../../../contexts/TranslationContext'
+import choose from '../../../const/Timing'
 
 function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
+
+    const { language } = React.useContext(LanguageContext)
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
 
     if(favorite.length === 0) {
         return <p>Loading ...</p>;
@@ -25,7 +40,7 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
     
         // Если дата равна текущей дате, выводим "сегодня"
         if (formattedDate.getTime() === formattedCurrentDate.getTime()) {
-            return `Posted today at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedToday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         }
     
         // Получаем дату вчерашнего дня
@@ -34,12 +49,12 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
     
         // Если дата равна вчерашней дате, выводим "вчера"
         if (formattedDate.getTime() === yesterday.getTime()) {
-            return `posted yesterday at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedYesterday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         }
     
         // Иначе выводим полную дату
         const formattedDateString = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-        return `posted ${formattedDateString}`;
+        return `${translatedContext.posted} ${formattedDateString}`;
     }
     
     // Пример использования

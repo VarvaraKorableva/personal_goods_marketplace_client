@@ -4,6 +4,8 @@ import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 import noPictures from '../../images/nopictures.png'
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/Timing'
 
 function OneAd({
     isLoggin, item, getItemById, 
@@ -11,12 +13,26 @@ function OneAd({
     deleteFromFavorites, favorite, 
     favoriteItems, allImages
 }) {
+
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
     const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
 
     const image = allImages.filter((img) => img.item_id === item.item_id)
+
+    const { language } = React.useContext(LanguageContext)
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
 
     
     function handleClick() {
@@ -46,7 +62,7 @@ function OneAd({
     
         // Если дата равна текущей дате, выводим "сегодня"
         if (formattedDate.getTime() === formattedCurrentDate.getTime()) {
-            return `Posted today at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedToday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         }
     
         // Получаем дату вчерашнего дня
@@ -55,12 +71,12 @@ function OneAd({
     
         // Если дата равна вчерашней дате, выводим "вчера"
         if (formattedDate.getTime() === yesterday.getTime()) {
-            return `posted yesterday at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedYesterday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         }
     
         // Иначе выводим полную дату
         const formattedDateString = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-        return `posted ${formattedDateString}`;
+        return `${translatedContext.posted} ${formattedDateString}`;
     }
     
     // Пример использования

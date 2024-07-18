@@ -51,6 +51,12 @@
     padding-bottom: 20px;
 }
 
+@media screen and (max-width: 600px) {
+    .cardPage-container {
+      flex-direction: column;
+    }
+}
+
 .cardPage-info-container {
     display: flex;
     flex-direction: column;
@@ -79,6 +85,11 @@
 
 .cardPage-info {
     font-weight: 600;
+    margin-bottom: 0;
+}
+
+.cardPage-info-title {
+    margin-top: 0;
 }
 
 .cardPage-link {
@@ -100,4 +111,76 @@
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+    .cardPage-image {
+        width: 100%;
+        height: 350px;
+
+    }
+}
+
+.cardPage-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+
+.cardPage__info-about-user {
+    margin-top: 20px;
+}
+
+.cardPage__main-pic-wrapper {
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgb(170, 168, 168);
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    .cardPage__main-pic-wrapper {
+        margin-right: 0;
+        margin-bottom: 25px;
+
+    }
+}
+
+.cardPage__main-pic {
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+    border: none;
+    border-radius: 10px;
+}
+
+.cardPage__no-pic {
+    width: 60px;
+    height: 60px;
+}
+
+.cardPage-description-container {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+@media screen and (max-width: 600px) {
+    .cardPage-description-container {
+        width: 252px;
+
+    }
+}
+
+.cardPage-info-description {
+    text-align: start;
 }
