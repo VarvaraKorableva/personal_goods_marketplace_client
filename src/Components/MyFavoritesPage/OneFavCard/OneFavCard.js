@@ -1,6 +1,7 @@
 import './OneFavCard.css'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import noPictures from '../../../images/nopictures.png'
 
 function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
 
@@ -47,18 +48,28 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
     
     return (
         <li className="OneFavCard__container">
-            <div>
-                <img className="OneFavCard__main-pic" alt = {item.title} src={image[0].location}></img>
+
+            <div className="OneFavCard__wrapper">
+            <div className="OneFavCard__main-pic-wrapper">
+                {image.location?
+                  <img className="OneFavCard__main-pic" alt = {item.title} src={image[0].location}></img>
+                : 
+                  <img className="OneFavCard__no-pic" alt = 'no pic' src={noPictures}></img>
+                }
             </div>
             
             <div className="OneFavCard__text-container">
                 <div className="OneFavCard__title-and-like-container">
                     <Link to={`/items/${item.item_id}`} className="oneAdd__title">{item.title}</Link>
-                        <button className="OneFavCard__delete-btn" onClick={handleDeleteFavorite}></button>
                 </div>
                 <p className="OneFavCard__price">{item.price}</p>
                 <p className="OneFavCard__city">{item.city}</p>
+                
+            </div>
+            </div>
+            <div className="OneFavCard__time-and-delete-container">
                 <p className="OneFavCard__time">{formattedTime}</p>
+                <button className="OneFavCard__delete-btn" onClick={handleDeleteFavorite}></button>
             </div>
 
         </li>

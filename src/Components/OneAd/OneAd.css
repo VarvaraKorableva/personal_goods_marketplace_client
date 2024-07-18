@@ -9,18 +9,7 @@
     width: 200px;
     align-items: center;
 }
-.oneAdd__main-pic {
-    /*width: 196px;
-    object-fit: cover; 
-    height: 170px;
-    border: none;
-    border-radius: 10px;*/
-    width: 100px;
-    object-fit: cover; 
-    height: 100px;
-    border: none;
-    border-radius: 10px;
-}
+
 .oneAdd__text-container {
     display: flex;
     flex-direction: column;
@@ -34,7 +23,6 @@
     width: 100%;
     margin-top: 2px;
     margin-bottom: 2px;
-
     position: relative;
 }
 
@@ -169,5 +157,17 @@
 .oneAdd__no-pic {
    width: 30px;
    height: 30px;
+}
 
+.oneAdd__main-pic {
+    /*width: 196px;
+    object-fit: cover; 
+    height: 170px;
+    border: none;
+    border-radius: 10px;*/
+    width: 30px;
+    height: 30px;
+    object-fit: cover; 
+    border: none;
+    border-radius: 10px;
 }
