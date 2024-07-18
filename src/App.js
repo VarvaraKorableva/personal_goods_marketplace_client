@@ -21,8 +21,6 @@ import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
 
-import testData from './const/testData'
-
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
