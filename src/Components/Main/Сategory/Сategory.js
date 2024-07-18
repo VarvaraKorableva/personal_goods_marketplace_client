@@ -4,12 +4,22 @@ import {Link, useParams} from 'react-router-dom'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/HeaderLan'
 
-function Category({category, onChooseCategory}) {
+function Category({category, onChooseCategory, getItemsByCategoryCategoryId, getItemsByParentId,}) {
     let { slug } = useParams();
     const { language } = React.useContext(LanguageContext)
 
     function handleChoose() {
-      onChooseCategory(category)//category.category_id
+      
+      console.log(category)
+
+      onChooseCategory(category)
+      { 
+        category.parent_id ?
+        
+          getItemsByCategoryCategoryId(category.category_id)
+        : 
+          getItemsByParentId(category.category_id)
+      }
     }
 
     return (

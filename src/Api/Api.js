@@ -104,7 +104,7 @@ export const getUserItems = (owner_id) => {
   })
       .then(checkResponse) 
 };
-/// не использую
+/// 
 export const getItemsByCategory = (category_id) => {
   return fetch(`${BASE_URL}/items/categoryId/${category_id}`, {
       credentials: 'include',
@@ -116,6 +116,19 @@ export const getItemsByCategory = (category_id) => {
   })
       .then(checkResponse) 
 };
+
+//получение айтемов при первом нажатии на родительскую категорию
+export const getItemsBySubCategoriesByParentId = (parent_id) => {
+    return fetch(`${BASE_URL}/items/getItemsBySubCategoriesByParentId/${parent_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+  };
 
 export const getItemById = (item_id) => {
   return fetch(`${BASE_URL}/items/all/${item_id}`, {

@@ -51,16 +51,9 @@
       cursor: pointer;
       transition: 0.5s ease;
       position: absolute;
-      top: 10px;
-      right: 0;
-    }
-
-    @media screen and (max-width: 600px) {
-      .popup__close-button {
-        right: -30px;
-        top: -10px;
-      }
-    }  
+      right: -30px;
+      top: -10px;
+    } 
     
     .popup__close-button:hover {
       opacity: 60%;
@@ -225,11 +218,17 @@
 
 .popup__title-ChoiceOfProductOrServicePopup {
   color: #fff;
+  width: calc(430px - (36px*2));
+  display: flex;
+  margin: auto;
+
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {
   .popup__title-ChoiceOfProductOrServicePopup {
     font-size: 20px;
+    width: calc(282px - (22px*2));
   }  
 }
 

@@ -1,4 +1,4 @@
-import '../Сategory/Сategory.css'
+/*import '../Сategory/Сategory.css'
 import { useParams, Link } from 'react-router-dom'
 
 function SubCategory({subCategory, onChooseThirdCategory}) {
@@ -20,6 +20,4 @@ function SubCategory({subCategory, onChooseThirdCategory}) {
     )
 }
 
-export default SubCategory;
-
-////third-category-page
+export default SubCategory;*/

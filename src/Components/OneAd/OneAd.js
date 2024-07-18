@@ -19,7 +19,6 @@ function OneAd({
     const image = allImages.filter((img) => img.item_id === item.item_id)
 
     
-    
     function handleClick() {
         getItemById(item.item_id)
     }

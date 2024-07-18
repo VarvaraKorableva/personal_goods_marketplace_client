@@ -2,7 +2,7 @@ import React from 'react'
 import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
-import choose from '../../const/Popups/addAdPopup'
+import choose from '../../const/AddAdPageData'
 
 function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -210,32 +210,51 @@ return (
     <section className="addAdPage__section">
     {isGood?
     <>
-    <h2 className="addAdPage__title">Ad new good</h2>
+    <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
     <form 
       ref={formRef}
       className='addAdPage__form'
       encType="multipart/form-data"
       onSubmit={handleSubmit}>
-      <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
+      <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
 
       <select className='popup__select' onChange={handleSelectChange}>
-        <option value="">Select a category</option>
-          {categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
-            <option key={item.category_id} value={item.category_id}>{item.name}</option>
-          ))}
+        <option value="">{translatedContext.choiseACategory}</option>
+
+          {language === 'rus' ?
+            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
+            ))
+            
+            :
+            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name}</option>
+            ))
+          }
+
       </select>
 
-      <label className='popup__inputname'>Choise a sub category</label>
+      <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
       <select className='popup__select' onChange={handleSubCategoryChange}>
-        <option value="">Select a sub category</option>
-          {subCategory
+        <option value="">{translatedContext.choiseASubCategory}</option>
+        {language === 'rus' ?
+            subCategory
+            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+            .map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
+            ))
+          :
+            subCategory
             .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
             .map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name}</option>
-          ))}
+            ))
+        } 
+
+
       </select>
 
-      <label className='popup__inputname'>{translatedContext.nameOfDream}<span className='popup__inputname-span'>*</span>  
+      <label className='popup__inputname'>{translatedContext.name}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
           name='title'
@@ -246,7 +265,7 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorNameMessage}</span>
 
-      <label className='popup__inputname'>Add a description here</label>
+      <label className='popup__inputname'>{translatedContext.description}</label>
         <input
           className='popup__input'
           name='description'
@@ -257,7 +276,7 @@ return (
        
       <span className='popup__inputmistake'>{errorDreamLinkMessage}</span>
 
-      <label className='popup__inputname'>Price<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.price}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='price'
@@ -268,7 +287,7 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>Where can you give the goods (city)<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='city'
@@ -279,12 +298,12 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>Add pictures</label>
+      <label className='popup__inputname'>{translatedContext.picture}</label>
       <button 
         onClick={() => addItemRef.current.click()}
         className='popup__input-btn'
         type="button">
-          {buttonText}
+          {translatedContext.uploadPictureBtn}
       </button> 
       
       <input
@@ -301,38 +320,57 @@ return (
         className= 'popup__btn_active'
         type='submit'
         >
-          {translatedContext.createButton}
+          {translatedContext.addBtn}
       </button>
     </form>
     </>
+
+
+
     :
+
+//services//
     <>
-    <h2 className="addAdPage__title">Ad new service</h2>
+    <h2 className="addAdPage__title">{translatedContext.adANewService}</h2>
     <form 
       ref={formRef}
       className='addAdPage__form'
       encType="multipart/form-data"
       onSubmit={handleServicesSubmit}>
-      <label className='popup__inputname'>Choise a category<span className='popup__inputname-span'>*</span></label> 
+      <label className='popup__inputname'>{translatedContext.choiseAServices}<span className='popup__inputname-span'>*</span></label> 
 
       <select className='popup__select' onChange={handleSelectServicesChange}>
-        <option value="">Select a category</option>
-          {categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
-            <option key={item.category_id} value={item.category_id}>{item.name}</option>
-          ))}
+        <option value="">{translatedContext.choiseAServices}</option>
+          {language === 'rus' ?
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
+            ))
+          :
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name}</option>
+            ))
+          }
       </select>
 
-      <label className='popup__inputname'>Choise a sub category</label>
+      <label className='popup__inputname'>{translatedContext.choiseASubCategoryOfServices}</label>
       <select className='popup__select' onChange={handleThirdCategoryIdChange}>
-        <option value="">Select a sub category</option>
-          {thirdSubCategory
+        <option value="">{translatedContext.choiseASubCategoryOfServices}</option>
+        {language === 'rus' ?
+          thirdSubCategory
             .filter((category) => category.is_good === false && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
             .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-          ))}
+              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
+          ))
+          :
+          thirdSubCategory
+          .filter((category) => category.is_good === false && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+          .map((item) => (
+            <option key={item.category_id} value={item.category_id}>{item.name}</option>
+        ))
+        }
       </select>
 
-      <label className='popup__inputname'>{translatedContext.nameOfDream}<span className='popup__inputname-span'>*</span>  
+      <label className='popup__inputname'>{translatedContext.serviceName}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
           name='title'
@@ -344,7 +382,7 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorNameMessage}</span>
 
-      <label className='popup__inputname'>Add a description here</label>
+      <label className='popup__inputname'>{translatedContext.serviceDescription}</label>
         <input
           className='popup__input'
           name='description'
@@ -356,7 +394,7 @@ return (
        
       <span className='popup__inputmistake'>{errorDreamLinkMessage}</span>
 
-      <label className='popup__inputname'>Price<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.servicePrice}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='price'
@@ -368,7 +406,7 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>Where can you give the goods (city)<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.cityServices}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='city'
@@ -380,12 +418,12 @@ return (
       </label>
       <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>Add pictures</label>
+      <label className='popup__inputname'>{translatedContext.picture}</label>
       <button 
         onClick={() => addItemRef.current.click()}
         className='popup__input-btn'
         type="button">
-          {buttonText}
+          {translatedContext.uploadPictureBtn}
       </button> 
       
       <input
@@ -403,7 +441,7 @@ return (
         className= 'popup__btn_active'
         type='submit'
       >
-          {translatedContext.createButton}
+          {translatedContext.addBtn}
       </button>
     </form>
     </>}
