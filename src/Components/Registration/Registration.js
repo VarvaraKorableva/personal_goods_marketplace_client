@@ -44,6 +44,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(username)
     onRegister({
       username,
       email,
@@ -68,10 +69,6 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
      } else if (!e.target.value) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameShouldOnlyContainLatinLettersCyrillicLetters)
       setErrorName(true);
-
-     } else if (e.target.value) {
-      setErrorNameMessage('')
-      setErrorName(false);
 
      } else if (e.target.value.length > 30) {
       setErrorNameMessage(translatedContext.mistakesName.usernameMustBeNoMoreThan)

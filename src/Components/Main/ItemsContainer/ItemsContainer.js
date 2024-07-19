@@ -1,5 +1,6 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
+import testData from '../../../const/testData'
 
 function ItemsContainer({
     isLoggin, itemsAfterSearch, 
@@ -10,7 +11,7 @@ function ItemsContainer({
 
     return(
         <ul className="itemsContainer-listings-container">
-            {itemsAfterSearch.map((item) => (
+            {testData.map((item) => (
                 <OneAd 
                     key={item.item_id} 
                     item={item} 
