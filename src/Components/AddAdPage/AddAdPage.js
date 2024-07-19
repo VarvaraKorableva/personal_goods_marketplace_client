@@ -16,6 +16,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
   const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
   const [errorDreamLinkMessage, setErrorDreamLinkMessage] = React.useState('')
+
+  const [isCategorySelected, setIsCategorySelected] = React.useState(false)
   
   const [luckyMessage, setLuckyMessage] = React.useState('')
   
@@ -36,8 +38,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [size, setSize] = React.useState('')
   const [color, setColor] = React.useState('')
   const [condition, setCondition] = React.useState('')
-
-  const [buttonText, setButtonText] = React.useState('Upload picture');
 
   const addItemRef = React.useRef(null);
 
@@ -113,6 +113,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setSize('')
       setColor('')
       setCondition('')
+
+      setIsCategorySelected(false)
   }
 
   function handleServicesSubmit(e) {
@@ -167,6 +169,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setSize('')
       setColor('')
       setCondition('')
+
+      setIsCategorySelected(false)
   }
 
   const handleTitleChange = (e) => {
@@ -184,11 +188,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const handleSelectChange = (e) => {
     setSelectedCategoryId(e.target.value)
     setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+    if(e.target.value !== "") {
+      setIsCategorySelected(true)
+    } else {
+      setIsCategorySelected(false)
+    }
   };
 
   const handleSelectServicesChange = (e) => {
     setThirdSubCategoryId(e.target.value)
     setThirdSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+    if(e.target.value !== "") {
+      setIsCategorySelected(true)
+    } else {
+      setIsCategorySelected(false)
+    }
   };
 
   const handleThirdCategoryIdChange = (e) => {
@@ -234,6 +249,8 @@ return (
 
       </select>
 
+    {isCategorySelected?
+    <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
       <select className='popup__select' onChange={handleSubCategoryChange}>
         <option value="">{translatedContext.choiseASubCategory}</option>
@@ -250,10 +267,13 @@ return (
               <option key={item.category_id} value={item.category_id}>{item.name}</option>
             ))
         } 
-
-
       </select>
-
+    </>
+    :
+    <></>
+    }  
+      
+      
       <label className='popup__inputname'>{translatedContext.name}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
@@ -352,6 +372,8 @@ return (
           }
       </select>
 
+    {isCategorySelected?
+      <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategoryOfServices}</label>
       <select className='popup__select' onChange={handleThirdCategoryIdChange}>
         <option value="">{translatedContext.choiseASubCategoryOfServices}</option>
@@ -369,7 +391,10 @@ return (
         ))
         }
       </select>
-
+      </>
+      :
+      <></>
+    }
       <label className='popup__inputname'>{translatedContext.serviceName}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
