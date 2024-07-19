@@ -93,13 +93,10 @@ function App() {
     try {
       const res = await Api.getItemsByCategory(category_id)
       console.log(res)
-
+      setLastFoutryItems(res)
+      setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
-      //setItemsSecondPageSearch(res)
-      //setStartItemsSecondPage(res)
-      //setLastFoutryItems(res)
-      //setItemsAfterSearch(res)
 
     } catch (err) {
       console.log(err);
@@ -111,13 +108,10 @@ function App() {
     try {
       const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
       console.log(res)
+      setLastFoutryItems(res)
+      setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
-
-      //setItemsSecondPageSearch(res)
-      //setStartItemsSecondPage(res)
-      //setLastFoutryItems(res)
-      //setItemsAfterSearch(res)
  
     } catch (err) {
       console.log(err);

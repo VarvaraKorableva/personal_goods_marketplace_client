@@ -67,7 +67,7 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
 
 
                 <div className="cardPage__main-pic-wrapper">
-                    {image.location?
+                    {image.length?
                         <img className="cardPage__main-pic" alt = {selectedItem.title} src={image[0].location}></img>
                     : 
                         <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>

@@ -66,7 +66,7 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
 
             <div className="OneFavCard__wrapper">
             <div className="OneFavCard__main-pic-wrapper">
-                {image.location?
+                {image.length?
                   <img className="OneFavCard__main-pic" alt = {item.title} src={image[0].location}></img>
                 : 
                   <img className="OneFavCard__no-pic" alt = 'no pic' src={noPictures}></img>
