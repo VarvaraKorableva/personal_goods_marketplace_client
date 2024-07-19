@@ -105,8 +105,8 @@
 }
 
 .OneFavCard__main-pic {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
     object-fit: cover; 
     border: none;
     border-radius: 10px;

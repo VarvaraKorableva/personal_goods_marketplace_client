@@ -18,17 +18,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [errorDreamLinkMessage, setErrorDreamLinkMessage] = React.useState('')
 
   const [isCategorySelected, setIsCategorySelected] = React.useState(false)
-  
-  const [luckyMessage, setLuckyMessage] = React.useState('')
+  const [isSecondCategorySelected, setIsSecondCategorySelected] = React.useState(false)
   
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
   const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
+  const [selectedSecondSubCategoryId, setSelectedSecondSubCategoryId] = React.useState(null)
 
   const [subCategory, setSubCategory] = React.useState([])
+  const [secondSubCategory, setSecondSubCategory] = React.useState([])
 
   const [thirdSubCategory, setThirdSubCategory] = React.useState([])
   const [thirdSubCategoryId, setThirdSubCategoryId] = React.useState(null)
   const [thirdCategoryId, setThirdCategoryId] = React.useState(null)
+
+  const [haveSubCategory, setHaveSubCategory] = React.useState(false)
+  const [haveSecondSubCategory, setHaveSecondSubCategory] = React.useState(false)
+  
 
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
@@ -67,11 +72,15 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   function handleSubmit(e) {
     e.preventDefault();
     let id = null
-    if(selectedSubCategoryId === null || selectedSubCategoryId === ""){
+    if((selectedSubCategoryId === null || selectedSubCategoryId === "") && (selectedSecondSubCategoryId === null || selectedSecondSubCategoryId === '')){
       id = Number(selectedCategoryId)
     } 
-    else 
-    {id = Number(selectedSubCategoryId)}
+    if(selectedSubCategoryId && (selectedSecondSubCategoryId === null || selectedSecondSubCategoryId === '')){
+      id = Number(selectedSubCategoryId)
+    }
+    if(selectedSecondSubCategoryId) {
+      id = Number(selectedSecondSubCategoryId)
+    }
 
     if (file) {
       const formData = new FormData();
@@ -80,7 +89,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(id),//selectedCategoryId
+        category_id: Number(id),
         city,
         price,
         description,
@@ -93,7 +102,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(id),//selectedCategoryId
+        category_id: Number(id),
         city,
         price,
         description,
@@ -105,6 +114,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     }
       setSelectedCategoryId(null)
       setSelectedSubCategoryId(null)
+      setSelectedSecondSubCategoryId(null)
+
       setTitle('')
       setCity('')
       setFile(null)
@@ -115,6 +126,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setCondition('')
 
       setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
   }
 
   function handleServicesSubmit(e) {
@@ -159,6 +171,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
       setSelectedCategoryId(null)
       setSelectedSubCategoryId(null)
+      setSelectedSecondSubCategoryId(null)
+      
       setThirdSubCategoryId(null)
       setThirdCategoryId(null)
       setTitle('')
@@ -171,6 +185,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setCondition('')
 
       setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
   }
 
   const handleTitleChange = (e) => {
@@ -187,11 +202,21 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
   const handleSelectChange = (e) => {
     setSelectedCategoryId(e.target.value)
+    
     setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+    categories.filter((category) => category.parent_id == e.target.value).length ?
+      setHaveSubCategory(true)
+    :
+      setHaveSubCategory(false)
+      setHaveSecondSubCategory(false)
+
     if(e.target.value !== "") {
       setIsCategorySelected(true)
+      setIsSecondCategorySelected(false)////////////
     } else {
       setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
     }
   };
 
@@ -199,19 +224,43 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     setThirdSubCategoryId(e.target.value)
     setThirdSubCategory(categories.filter((category) => category.parent_id == e.target.value))
 
+    categories.filter((category) => category.parent_id == e.target.value).length ?
+      setHaveSubCategory(true)
+    :
+      setHaveSubCategory(false)
+      setHaveSecondSubCategory(false)
+
     if(e.target.value !== "") {
       setIsCategorySelected(true)
     } else {
       setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
     }
   };
 
   const handleThirdCategoryIdChange = (e) => {
     setThirdCategoryId(e.target.value)
   }
-
+////////////
   const handleSubCategoryChange = (e) => {
-    setSelectedSubCategoryId(e.target.value)
+    setSelectedSubCategoryId(e.target.value) //то что нужно добавить
+    
+    setSecondSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+    categories.filter((category) => category.parent_id == e.target.value).length ?
+      setHaveSecondSubCategory(true)
+    :
+      setHaveSecondSubCategory(false)
+
+    if(e.target.value !== "") {
+      setIsSecondCategorySelected(true)
+    } else {
+      setIsSecondCategorySelected(false)
+    }
+  }
+
+  const handleSecondSubCategoryChange = (e) => {
+    setSelectedSecondSubCategoryId(e.target.value)
   }
 
   React.useEffect(() => {
@@ -249,7 +298,7 @@ return (
 
       </select>
 
-    {isCategorySelected?
+    {isCategorySelected && haveSubCategory?
     <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
       <select className='popup__select' onChange={handleSubCategoryChange}>
@@ -272,7 +321,30 @@ return (
     :
     <></>
     }  
-      
+
+    {isSecondCategorySelected && haveSecondSubCategory?
+      <>
+      <label className='popup__inputname'>{translatedContext.choiseASecondSubCategoryGoods}</label>
+      <select className='popup__select' onChange={handleSecondSubCategoryChange}>
+        <option value="">{translatedContext.choiseASecondSubCategoryGoods}</option>
+        {language === 'rus' ?
+            secondSubCategory
+            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+            .map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
+            ))
+          :
+            secondSubCategory
+            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+            .map((item) => (
+              <option key={item.category_id} value={item.category_id}>{item.name}</option>
+            ))
+        } 
+      </select>
+      </>
+      :
+      <></>
+    }  
       
       <label className='popup__inputname'>{translatedContext.name}<span className='popup__inputname-span'>*</span>  
         <input
@@ -372,7 +444,7 @@ return (
           }
       </select>
 
-    {isCategorySelected?
+    {isCategorySelected && haveSubCategory?
       <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategoryOfServices}</label>
       <select className='popup__select' onChange={handleThirdCategoryIdChange}>

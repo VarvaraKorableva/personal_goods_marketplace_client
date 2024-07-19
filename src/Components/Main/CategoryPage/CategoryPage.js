@@ -13,7 +13,7 @@ function CategoryPage({
     favoriteItems, lastFourtyItems,  chooseCategory, 
     categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, getItemsByCategoryCategoryId, getItemsByParentId,
 }) {
-    
+
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
     let { slug } = useParams();
 
@@ -24,11 +24,12 @@ function CategoryPage({
             setCategoryFromPage(filteredCategories);
         }
     }, [categoriesToRender, slug]);
-
+/*
     if(categoryFromPage.length <= 0) {
        return <p>Loading ...</p>
     }
-
+*/
+    
     return(
         <section className='categoryPage-main-container'>
             <CategorySearchEngine startToSearchSecondPage={startToSearchSecondPage}/>

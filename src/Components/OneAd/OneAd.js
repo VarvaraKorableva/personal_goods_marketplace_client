@@ -21,6 +21,8 @@ function OneAd({
 
     const image = allImages.filter((img) => img.item_id === item.item_id)
 
+    console.log(image)
+
     const { language } = React.useContext(LanguageContext)
 
     const { en, rus, hebrew } = choose;
@@ -48,7 +50,6 @@ function OneAd({
     }
 
     function handleDeleteMyitem() {
-        console.log(item.item_id)
         deleteMyAd(item.item_id)
     }
 
@@ -88,7 +89,7 @@ function OneAd({
             <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
             <div className="oneAdd__pic-and-info-container">
             <div className="oneAdd__main-pic-wrapper">
-                {image.location?
+                {image.length?
                   <img className="oneAdd__main-pic" alt = {item.title} src={image[0].location}></img>
                 : 
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
