@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import ThirdCategoryCategories from '../ThirdCategoryPage/ThirdCategoryCategories/ThirdCategoryCategories'
 import ThirdCategorySearchEngine from '../ThirdCategoryPage/ThirdCategorySearchEngine/ThirdCategorySearchEngine'
 import ThirdCategoryItemsContainer from '../ThirdCategoryPage/ThirdCategoryItemsContainer/ThirdCategoryItemsContainer'
@@ -6,6 +6,7 @@ import ThirdCategoryItemsContainer from '../ThirdCategoryPage/ThirdCategoryItems
 
 ///Разобраться с ThirdCategoryCategories
 function ThirdCategoryPage({thirdSubCategories}) {
+    
     return (
         <section>
             <ThirdCategorySearchEngine></ThirdCategorySearchEngine>
@@ -16,6 +17,6 @@ function ThirdCategoryPage({thirdSubCategories}) {
     )
 }
 
-export default ThirdCategoryPage;
+export default ThirdCategoryPage;*/
 
 //<ThirdCategoryItemsContainer></ThirdCategoryItemsContainer>
