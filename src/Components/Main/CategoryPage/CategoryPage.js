@@ -32,7 +32,7 @@ function CategoryPage({
     
     return(
         <section className='categoryPage-main-container'>
-            <CategorySearchEngine startToSearchSecondPage={startToSearchSecondPage}/>
+        {/*<CategorySearchEngine startToSearchSecondPage={startToSearchSecondPage}/>*/}
 
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (
