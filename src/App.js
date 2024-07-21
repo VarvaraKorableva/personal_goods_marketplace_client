@@ -58,8 +58,6 @@ function App() {
 
   const addAds = () => setLimit(limit + 3);
   //const hideAds = () => setLimit(3);
-
-
   const userId = currentUser.user_id
   const navigate = useNavigate()
 
@@ -73,9 +71,9 @@ function App() {
     }
   }
 
-  async function getLastFourtyItems() {
+  async function getAllItems() {
     try {
-      const res = await Api.getLastForty();
+      const res = await Api.getAllItems();
       console.log(res)
       setLastFoutryItems(res)
       setItemsAfterSearch(res) 
@@ -92,9 +90,9 @@ function App() {
   async function getItemsByCategoryCategoryId(category_id) {
     try {
       const res = await Api.getItemsByCategory(category_id)
-      console.log(res)
-      setLastFoutryItems(res)
-      setItemsAfterSearch(res)
+      
+      //setLastFoutryItems(res)
+      //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
 
@@ -107,9 +105,9 @@ function App() {
     
     try {
       const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
-      console.log(res)
-      setLastFoutryItems(res)
-      setItemsAfterSearch(res)
+      
+      //setLastFoutryItems(res)
+      //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
  
@@ -130,7 +128,7 @@ function App() {
   React.useEffect(()=>{
     getAllImagesForItems()
     getCategory()
-    getLastFourtyItems()
+    getAllItems()
   },[])
 
 
@@ -239,7 +237,7 @@ function App() {
           openSuccessfulActionPopup()
         })
         .then(()=> {
-          getLastFourtyItems()
+          getAllItems()
           getAllImagesForItems()
         })
         .catch((err)=> {

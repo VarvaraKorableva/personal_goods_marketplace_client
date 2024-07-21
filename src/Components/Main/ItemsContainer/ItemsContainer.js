@@ -11,7 +11,7 @@ function ItemsContainer({
 
     return(
         <ul className="itemsContainer-listings-container">
-            {testData.map((item) => (
+            {itemsAfterSearch.map((item) => (
                 <OneAd 
                     key={item.item_id} 
                     item={item} 

@@ -104,7 +104,7 @@ export const getUserItems = (owner_id) => {
   })
       .then(checkResponse) 
 };
-/// 
+
 export const getItemsByCategory = (category_id) => {
   return fetch(`${BASE_URL}/items/categoryId/${category_id}`, {
       credentials: 'include',
@@ -154,7 +154,7 @@ export const getUserById = (user_id) => {
       .then(checkResponse) 
 };
 
-export const getLastForty = () => {
+export const getAllItems = () => {
   return fetch(`${BASE_URL}/items/all`, {
       credentials: 'include',
       method: "GET",
