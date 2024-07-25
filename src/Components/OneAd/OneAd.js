@@ -21,8 +21,6 @@ function OneAd({
 
     const image = allImages.filter((img) => img.item_id === item.item_id)
 
-    console.log(image)
-
     const { language } = React.useContext(LanguageContext)
 
     const { en, rus, hebrew } = choose;

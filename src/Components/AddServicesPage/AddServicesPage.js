@@ -9,6 +9,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const owner_id = currentUser.user_id
   
   const [file, setFile] = React.useState(null);
+  const [fileData, setFileData] = React.useState(null);
+  const [myUploads, setMyUploads] = React.useState([]);
+  const [showInputFields, setShowInputFields] = React.useState(true);
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
   const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
@@ -47,8 +50,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [isTitleSelected, setIsTitleSelected] = React.useState(false)
   const [isPriceSelected, setIsPriceSelected] = React.useState(false)
   const [isCitySelected, setIsCitySelected] = React.useState(false)
+  //
 
-  //const [isValid, setIsValid] = React.useState(false)
+  //const [isCategorySelected, setIsValid] = React.useState(false)
 
 
   const addItemRef = React.useRef(null);
@@ -136,6 +140,65 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setIsSecondCategorySelected(false)
   }
 
+  function handleServicesSubmit(e) {
+    e.preventDefault();
+    let id = null
+    if(thirdCategoryId === null || thirdCategoryId === ""){
+      id = Number(thirdSubCategoryId)
+    } 
+    else 
+    {id = Number(thirdCategoryId)}
+
+    
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      onAddAd({
+        title,
+        owner_id: owner_id,
+        category_id: Number(id),
+        city,
+        price,
+        description,
+        size, 
+        color, 
+        condition,
+        formData,
+      });
+    } else {
+      onAddAd({
+        title,
+        owner_id: owner_id,
+        category_id: Number(id), //thirdSubCategoryId),
+        city,
+        price,
+        description,
+        size, 
+        color, 
+        condition,
+      });
+    }
+
+      setSelectedCategoryId(null)
+      setSelectedSubCategoryId(null)
+      setSelectedThirdSubCategoryId(null)
+      
+      setThirdSubCategoryId(null)
+      setThirdCategoryId(null)
+      setTitle('')
+      setCity('')
+      setFile(null)
+      setPrice('')
+      setDescription('')
+      setSize('')
+      setColor('')
+      setCondition('')
+
+      setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
+  }
+
   const handleTitleChange = (e) => {
     if(e.target.value !== '') {
       setTitle(e.target.value)
@@ -183,6 +246,28 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     }
   };
 
+  const handleSelectServicesChange = (e) => {
+    if(e.target.value !== "") {
+      setIsCategorySelected(true)
+      setThirdSubCategoryId(e.target.value)
+      setThirdSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+      categories.filter((category) => category.parent_id == e.target.value).length ?
+        setHaveSubCategory(true)
+      :
+        setHaveSubCategory(false)
+        setHaveSecondSubCategory(false)
+  
+    } else {
+      setIsCategorySelected(false)
+      setIsSecondCategorySelected(false)
+    }
+  };
+
+  const handleThirdCategoryIdChange = (e) => {
+    setThirdCategoryId(e.target.value)
+  }
+
   const handleSubCategoryChange = (e) => {
     if(e.target.value !== "") {
       setIsSecondCategorySelected(true)
@@ -216,155 +301,95 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     } 
   }, [])
 
-  /*
-   const [isCategorySelected, setIsCategorySelected] = React.useState(false)
-  const [isSecondCategorySelected, setIsSecondCategorySelected] = React.useState(false)
-  const [isThirdSubCategorySelected, setIsThirdSubCategorySelected] = React.useState(false)
-  const [isTitleSelected, setIsTitleSelected] = React.useState(false)
-  const [isPriceSelected, setIsPriceSelected] = React.useState(false)
-  const [isCitySelected, setIsCitySelected] = React.useState(false)
-
-
-    const [haveSubCategory, setHaveSubCategory] = React.useState(false)
-  const [haveSecondSubCategory, setHaveSecondSubCategory] = React.useState(false)
-   */
-
-  React.useEffect(() => {
-    haveSubCategory?
-
-        haveSecondSubCategory?
-
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected)?
-              setIsValid(true)
-            :
-              setIsValid(false)
-        :
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected)?
-              setIsValid(true)
-            :
-              setIsValid(false)      
-    :
-      (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected)?
-        setIsValid(true)
-      :
-        setIsValid(false) 
-
-  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected])
-  console.log(isValid)
-  
 return (
     <section className="addAdPage__section">
-    <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
+    <h2 className="addAdPage__title">{translatedContext.adANewService}</h2>
     <form 
       ref={formRef}
       className='addAdPage__form'
       encType="multipart/form-data"
-      onSubmit={handleSubmit}>
-      <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
+      onSubmit={handleServicesSubmit}>
+      <label className='popup__inputname'>{translatedContext.choiseAServices}<span className='popup__inputname-span'>*</span></label> 
 
-      <select className='popup__select' onChange={handleSelectChange}>
-        <option value="">{translatedContext.choiseACategory}</option>
-
+      <select className='popup__select' onChange={handleSelectServicesChange}>
+        <option value="">{translatedContext.choiseAServices}</option>
           {language === 'rus' ?
-            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
             ))
-            
-            :
-            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
+          :
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name}</option>
             ))
           }
-
       </select>
 
     {isCategorySelected && haveSubCategory?
-    <>
-      <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
-      <select className='popup__select' onChange={handleSubCategoryChange}>
-        <option value="">{translatedContext.choiseASubCategory}</option>
-        {language === 'rus' ?
-            subCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
-            ))
-          :
-            subCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-            ))
-        } 
-      </select>
-    </>
-    :
-    <></>
-    }  
-
-    {isSecondCategorySelected && haveSecondSubCategory?
       <>
-      <label className='popup__inputname'>{translatedContext.choiseASecondSubCategoryGoods}</label>
-      <select className='popup__select' onChange={handleSecondSubCategoryChange}>
-        <option value="">{translatedContext.choiseASecondSubCategoryGoods}</option>
+      <label className='popup__inputname'>{translatedContext.choiseASubCategoryOfServices}</label>
+      <select className='popup__select' onChange={handleThirdCategoryIdChange}>
+        <option value="">{translatedContext.choiseASubCategoryOfServices}</option>
         {language === 'rus' ?
-            secondSubCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+          thirdSubCategory
+            .filter((category) => category.is_good === false && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
             .map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
-            ))
+          ))
           :
-            secondSubCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-            ))
-        } 
+          thirdSubCategory
+          .filter((category) => category.is_good === false && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
+          .map((item) => (
+            <option key={item.category_id} value={item.category_id}>{item.name}</option>
+        ))
+        }
       </select>
       </>
       :
       <></>
-    }  
-      
-      <label className='popup__inputname'>{translatedContext.name}<span className='popup__inputname-span'>*</span>  
+    }
+      <label className='popup__inputname'>{translatedContext.serviceName}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
           name='title'
           type='text'
           value={title}
+          //onInput={handleTitleChange}
           onChange={handleTitleChange}
         ></input>
       </label>
       <span className='popup__inputmistake'>{errorNameMessage}</span>
 
-      <label className='popup__inputname'>{translatedContext.description}</label>
+      <label className='popup__inputname'>{translatedContext.serviceDescription}</label>
         <input
           className='popup__input'
           name='description'
           type='text'
           value={description}
+          //onInput={handledesDriptionChange}
           onChange={handledesDriptionChange}
         ></input>
        
       <span className='popup__inputmistake'>{errorDreamLinkMessage}</span>
 
-      <label className='popup__inputname'>{translatedContext.price}<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.servicePrice}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='price'
           type='text'
           value={price}
+          //onInput={handlePriceChange}
           onChange={handlePriceChange}
         ></input>
       </label>
       <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
+      <label className='popup__inputname'>{translatedContext.cityServices}<span className='popup__inputname-span'>*</span>
         <input
           className='popup__input'
           name='city'
           type='text'
           value={city}
+          //onInput={handleCityChange}
           onChange={handleCityChange}
         ></input>
       </label>
@@ -383,6 +408,7 @@ return (
         className='popup__input'
         name='file'
         type="file"
+        accept="*/*"
         onChange={handleImgLinkChange}
         hidden
       ></input>
@@ -391,13 +417,12 @@ return (
       <button 
         className= 'popup__btn_active'
         type='submit'
-        >
+      >
           {translatedContext.addBtn}
       </button>
     </form>
-
     </section>
-  )
+)
 }
 
-export default AddAdPage;
+export default AddServicesPage;
