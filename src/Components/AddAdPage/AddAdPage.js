@@ -42,13 +42,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [isValid, setIsValid] = React.useState(false)
 
   const [isCategorySelected, setIsCategorySelected] = React.useState(false)
+  const [categoryErrorMessage, setCategoryErrorMessage] = React.useState('')
+  
   const [isSecondCategorySelected, setIsSecondCategorySelected] = React.useState(false)
-  const [isThirdSubCategorySelected, setIsThirdSubCategorySelected] = React.useState(false)
-  const [isTitleSelected, setIsTitleSelected] = React.useState(false)
-  const [isPriceSelected, setIsPriceSelected] = React.useState(false)
-  const [isCitySelected, setIsCitySelected] = React.useState(false)
+  const [secondCategoryErrorMessage, setSecondCategoryErrorMessage] = React.useState('')
 
-  //const [isValid, setIsValid] = React.useState(false)
+  const [isThirdSubCategorySelected, setIsThirdSubCategorySelected] = React.useState(false)
+  const [thirdSubCategoryErrorMessage, setThirdSubCategoryErrorMessage] = React.useState('')
+
+  const [isTitleSelected, setIsTitleSelected] = React.useState(false)
+  const [titleErrorMessage, setTitleErrorMessage] = React.useState('')
+
+  const [isPriceSelected, setIsPriceSelected] = React.useState(false)
+  const [priceErrorMessage, setPriceErrorMessage] = React.useState('')
+
+  const [isCitySelected, setIsCitySelected] = React.useState(false)
+  const [cityErrorMessage, setCityErrorMessage] = React.useState('')
 
 
   const addItemRef = React.useRef(null);
@@ -140,8 +149,10 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     if(e.target.value !== '') {
       setTitle(e.target.value)
       setIsTitleSelected(true)
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
     }else {
       setIsTitleSelected(false)
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
     }
   }
 
@@ -149,17 +160,21 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
     if(e.target.value !== '') {
       setIsPriceSelected(true)
       setPrice(e.target.value)
+      setPriceErrorMessage('')
     }else {
       setIsPriceSelected(false)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
     }
   };
 
   const handleCityChange = (e) => {
-    if(e.target.value !== ''){
+    if(e.target.value){
       setCity(e.target.value)
       setIsCitySelected(true)
+      setCityErrorMessage('')
     }else {
       setIsCitySelected(false)
+      setCityErrorMessage(`${translatedContext.errors.cityErrorMessage.errorMessage}`)
     }
   }
 
@@ -174,21 +189,25 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setHaveSubCategory(false)
       setHaveSecondSubCategory(false)
 
-    if(e.target.value !== "") {
+    if(e.target.value) {
       setIsCategorySelected(true)
       setIsSecondCategorySelected(false)
+      setCategoryErrorMessage('')
     } else {
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)
+      setCategoryErrorMessage(`${translatedContext.errors.categoryErrorMessage.errorMessage}`)
     }
   };
 
   const handleSubCategoryChange = (e) => {
-    if(e.target.value !== "") {
+    if(e.target.value) {
       setIsSecondCategorySelected(true)
       setSelectedSubCategoryId(e.target.value)
     
       setSecondSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+      setSecondCategoryErrorMessage('')
   
       categories.filter((category) => category.parent_id == e.target.value).length ?
         setHaveSecondSubCategory(true)
@@ -197,15 +216,18 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
     } else {
       setIsSecondCategorySelected(false)
+      setSecondCategoryErrorMessage(`${translatedContext.errors.secondCategoryErrorMessage.errorMessage}`)
     }
   }
 
   const handleSecondSubCategoryChange = (e) => {
-    if (e.target.value !== '') {
+    if (e.target.value) {
       setIsThirdSubCategorySelected(true)
       setSelectedThirdSubCategoryId(e.target.value)
+      setThirdSubCategoryErrorMessage('')
     } else {
       setIsThirdSubCategorySelected(false)
+      setThirdSubCategoryErrorMessage(`${translatedContext.errors.thirdSubCategoryErrorMessage.errorMessage}`)
     }
     
   }
@@ -215,19 +237,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
         setSelectedCategoryId(categories.filter((category) => category.is_good === false))
     } 
   }, [])
-
-  /*
-   const [isCategorySelected, setIsCategorySelected] = React.useState(false)
-  const [isSecondCategorySelected, setIsSecondCategorySelected] = React.useState(false)
-  const [isThirdSubCategorySelected, setIsThirdSubCategorySelected] = React.useState(false)
-  const [isTitleSelected, setIsTitleSelected] = React.useState(false)
-  const [isPriceSelected, setIsPriceSelected] = React.useState(false)
-  const [isCitySelected, setIsCitySelected] = React.useState(false)
-
-
-    const [haveSubCategory, setHaveSubCategory] = React.useState(false)
-  const [haveSecondSubCategory, setHaveSecondSubCategory] = React.useState(false)
-   */
 
   React.useEffect(() => {
     haveSubCategory?
@@ -250,7 +259,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
         setIsValid(false) 
 
   }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected])
-  console.log(isValid)
+  
   
 return (
     <section className="addAdPage__section">
@@ -278,6 +287,12 @@ return (
 
       </select>
 
+      {isCategorySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
+      }
+
     {isCategorySelected && haveSubCategory?
     <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
@@ -297,6 +312,12 @@ return (
             ))
         } 
       </select>
+
+      {isSecondCategorySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{secondCategoryErrorMessage}</span>
+      }
     </>
     :
     <></>
@@ -321,9 +342,17 @@ return (
             ))
         } 
       </select>
+
+      {isThirdSubCategorySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{thirdSubCategoryErrorMessage}</span>
+      }
+
       </>
       :
       <></>
+
     }  
       
       <label className='popup__inputname'>{translatedContext.name}<span className='popup__inputname-span'>*</span>  
@@ -335,7 +364,12 @@ return (
           onChange={handleTitleChange}
         ></input>
       </label>
-      <span className='popup__inputmistake'>{errorNameMessage}</span>
+
+      {isTitleSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{titleErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.description}</label>
         <input
@@ -345,8 +379,6 @@ return (
           value={description}
           onChange={handledesDriptionChange}
         ></input>
-       
-      <span className='popup__inputmistake'>{errorDreamLinkMessage}</span>
 
       <label className='popup__inputname'>{translatedContext.price}<span className='popup__inputname-span'>*</span>
         <input
@@ -357,7 +389,12 @@ return (
           onChange={handlePriceChange}
         ></input>
       </label>
-      <span className='popup__inputmistake'>{errorPriceMessage}</span>
+
+      {isPriceSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{priceErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
         <input
@@ -368,7 +405,12 @@ return (
           onChange={handleCityChange}
         ></input>
       </label>
-      <span className='popup__inputmistake'>{errorPriceMessage}</span>
+
+      {isCitySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.picture}</label>
       <button 
@@ -389,8 +431,9 @@ return (
 
       <span className='popup__inputmistake'>{errorImgMessage}</span>
       <button 
-        className= 'popup__btn_active'
+        className= {isValid? 'popup__btn_active' : 'add-ad-popup__btn'}
         type='submit'
+        disabled={!isValid}
         >
           {translatedContext.addBtn}
       </button>
@@ -401,3 +444,29 @@ return (
 }
 
 export default AddAdPage;
+
+
+/*
+errors: {
+    categoryErrorMessage: {
+        errorMessage: 'Select a category',
+    },
+    secondCategoryErrorMessage: {
+        errorMessage: 'Select a subcategory',
+    },    
+    thirdSubCategoryErrorMessage: {
+        errorMessage: 'Select a subcategory',
+    },
+    titleErrorMessage: {
+        errorMessage: 'Add a product title',
+    },    
+    priceErrorMessage: {
+        errorMessage: 'Add a price',
+    },
+    cityErrorMessage: {
+        errorMessage: 'Add a city',
+        errorInCity: 'Are you sure such a city exists? If yes and you still get an error, add the nearest city to it',
+    }    
+}
+
+*/

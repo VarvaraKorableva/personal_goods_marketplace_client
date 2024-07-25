@@ -20,6 +20,28 @@ const en = {
 
     addBtn: 'Add the Ad',
     uploadPictureBtn: 'Upload picture',
+
+    errors: {
+        categoryErrorMessage: {
+            errorMessage: 'Select a category',
+        },
+        secondCategoryErrorMessage: {
+            errorMessage: 'Select a subcategory',
+        },    
+        thirdSubCategoryErrorMessage: {
+            errorMessage: 'Select a subcategory',
+        },
+        titleErrorMessage: {
+            errorMessage: 'Add a product title',
+        },    
+        priceErrorMessage: {
+            errorMessage: 'Add a price',
+        },
+        cityErrorMessage: {
+            errorMessage: 'Add a city',
+            errorInCity: 'Are you sure such a city exists? If yes and you still get an error, add the nearest city to it',
+        }    
+    }
     
 }
 
@@ -43,6 +65,28 @@ const rus = {
 
     addBtn: 'Добавить объявление',
     uploadPictureBtn: 'Загрузить фотографию',
+
+    errors: {
+        categoryErrorMessage: {
+            errorMessage: 'Выберите категорию',
+        },
+        secondCategoryErrorMessage: {
+            errorMessage: 'Выберите субкатегорию',
+        },    
+        thirdSubCategoryErrorMessage: {
+            errorMessage: 'Выберите субкатегорию',
+        },
+        titleErrorMessage: {
+            errorMessage: 'Добавьте название товара',
+        },    
+        priceErrorMessage: {
+            errorMessage: 'Добавьте цену',
+        },
+        cityErrorMessage: {
+            errorMessage: 'Добавьте город',
+            errorInCity: 'Вы уверены, что есть такой город? Если да и вы получили ошибку, добавьте ближайший к нему',
+        }    
+    }
 
 
 }
