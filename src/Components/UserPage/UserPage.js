@@ -18,17 +18,11 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     
     return(
         <section className='userPage_main-container'>
-            <p>{userInfo[0].username}</p>
-
-            {
-            isLoggin?
-                <div className='userPage__message-container'>
-                  <p>Write a message to {userInfo[0].username}</p>
-                  <div className='userPage__message-pic'></div> 
-                </div>
-            :
-                <></>
-            }
+            <div className="userPage-user-info-container">
+                <div className="userPage-user-info-pic"></div>
+                <p className="userPage-user-info-name">{userInfo[0].username}</p>
+            </div>
+            
 
             <div>
                 <h3>All ads</h3>

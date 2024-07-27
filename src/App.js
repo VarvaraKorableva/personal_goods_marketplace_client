@@ -10,6 +10,7 @@ import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
+import MyMessages from './Components/MyPage/MyMessages/MyMessages'
 import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import './App.css'
 
@@ -74,44 +75,28 @@ function App() {
   async function getAllItems() {
     try {
       const res = await Api.getAllItems();
-      console.log(res)
       setLastFoutryItems(res)
-      setItemsAfterSearch(res) 
-      //setLastFoutryItems(testData)
-      //setItemsAfterSearch(testData) 
-      //testData
-      
+      setItemsAfterSearch(res)   
     } catch (err) {
       console.log(err);
     }
   }
-//////////func TEST///////////////
 
   async function getItemsByCategoryCategoryId(category_id) {
     try {
       const res = await Api.getItemsByCategory(category_id)
-      
-      //setLastFoutryItems(res)
-      //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
-      console.log(res)
     } catch (err) {
       console.log(err);
     }
   }
 
   async function getItemsByParentId(parent_id) {
-    
     try {
       const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
-      
-      //setLastFoutryItems(res)
-      //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
-      console.log(res)
- 
     } catch (err) {
       console.log(err);
     }
@@ -127,26 +112,16 @@ function App() {
   }
 
   React.useEffect(()=>{
-    getAllImagesForItems()
+    //getAllImagesForItems()
     getCategory()
     getAllItems()
   },[])
 
 
   function chooseCategory(category) {
-
       setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
-  
       let myCatToRender = []
-
       findAllCategoryGrandChildren(category, myCatToRender) 
-   
-      //setItemsSecondPageSearch(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-      //console.log('setItemsSecondPageSearch', lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-
-      //setStartItemsSecondPage(lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-      //console.log('setStartItemsSecondPage', lastFourtyItems.filter((i) => myCatToRender.includes(i.category_id)))
-
   } 
 
 
@@ -163,7 +138,6 @@ function App() {
 
     return myCatToRenderNew
   }
-
 
   function handleRegSubmit(userData) {
     setIsRegError(false)
@@ -347,7 +321,7 @@ function App() {
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-///взависимости от того какая дата фолс или тру и навигейт
+
   function handleAddAdClick(data){
     setIsGood(data)
 
@@ -449,8 +423,6 @@ function App() {
               favorite={favorite}
               favoriteItems={favoriteItems}
               allImages={allImages}
-
-
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
             />
@@ -504,7 +476,7 @@ function App() {
         </Route>
 
         <Route
-          exact path={`/users/${userId}`}/////тут было так ${userId}
+          exact path={`/users/${userId}`}
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
@@ -527,6 +499,15 @@ function App() {
             </ProtectedRoute>
           }>
         </Route>  
+
+        <Route 
+          path={`/users/${userId}/messages`}
+          element={
+            <MyMessages
+
+            />
+          }>
+        </Route>
        
         <Route 
           path={`/users/:owner_id`}
@@ -590,8 +571,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-//subcaterory удалить look like never used

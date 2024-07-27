@@ -54,7 +54,7 @@ return (
             <button className='header_favorite-btn'></button>
           </Link>
 
-          <Link className='header_link header_link-message-container'> {/* to={`/my_messages`} */}
+          <Link to={`/users/${userId}/messages`} className='header_link header_link-message-container'>
             <button className='header__message-pic'></button>
             <div className='header__messages-badge'>2</div>
           </Link>

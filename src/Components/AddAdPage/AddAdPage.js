@@ -146,7 +146,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   }
 
   const handleTitleChange = (e) => {
-    if(e.target.value !== '') {
+    if(e.target.value) {
+      //e.target.value[0].toUpperCase() + e.target.value.slice(1)
+      const str = e.target.value
       setTitle(e.target.value)
       setIsTitleSelected(true)
       setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)

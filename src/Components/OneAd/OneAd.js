@@ -81,10 +81,19 @@ function OneAd({
     // Пример использования
     //const itemCreatedAt = "2024-02-09T07:04:05.187Z"; // Полученное время из базы данных
     const formattedTime = formatDate(item.created_at)
+    const strTitle = item.title
+    const strCity = item.city
 
     return(
         <li className="oneAdd__container">
-            <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
+
+            {item.price > 0?
+              <></>
+            :
+              <div className="oneAdd__badge-free">{translatedContext.free}</div>  
+            }
+            
+            <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{strTitle[0].toUpperCase() + strTitle.slice(1)}</Link>
             <div className="oneAdd__pic-and-info-container">
             <div className="oneAdd__main-pic-wrapper">
                 {image.length?
@@ -110,8 +119,9 @@ function OneAd({
                         )
                     : <></>}
                 </div>
-                <p className="oneAdd__price">{item.price}</p>
-                <p className="oneAdd__city">{item.city}</p>
+                <p className="oneAdd__price">{item.price} ₪</p>
+                <p className="oneAdd__city">{strCity[0].toUpperCase() + strCity.slice(1)}</p>
+                
             </div>
             </div>
             <p className="oneAdd__time">{formattedTime}</p>

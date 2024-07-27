@@ -9,8 +9,6 @@ function Category({category, onChooseCategory, getItemsByCategoryCategoryId, get
     const { language } = React.useContext(LanguageContext)
 
     function handleChoose() {
-      
-      console.log(category)
 
       onChooseCategory(category)
       { 
