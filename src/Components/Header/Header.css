@@ -214,6 +214,10 @@
 
 .header_link{ 
   text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__links-container {
@@ -265,4 +269,45 @@
 
 .header__lang-btn_active:last-of-type {
   margin-right: 0;
+}
+
+
+.header__message-pic {
+  width: 25px;
+  height: 25px;
+  background-image: url(../../images/messagepic.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__message-pic:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.header_link-message-container {
+  position: relative;
+}
+
+.header__messages-badge {
+  border-radius: 50%;
+  background-color: #cc2b1d;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 8px;
 }
