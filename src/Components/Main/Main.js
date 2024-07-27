@@ -9,7 +9,7 @@ function Main({
     itemsAfterSearch, startToSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
     getItemById, addToFavorites, allImages,
-    deleteFromFavorites, favoriteItems, deleteMyAd, getItemsByCategoryCategoryId, getItemsByParentId,}) {
+    deleteFromFavorites, favoriteItems, deleteMyAd, getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,}) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,22 +27,22 @@ function Main({
                 onChooseCategory={onChooseCategory}
                 categories={categories}
                 categoriesToRender={categoriesToRender}
-
                 getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
                 getItemsByParentId={getItemsByParentId}
             />
             <h2 className='main__title'>All ad</h2>
             <ItemsContainer 
-                allImages={allImages}
-                itemsAfterSearch={itemsAfterSearch}
-                lastFourtyItems={lastFourtyItems} 
-                getItemById={getItemById} 
-                addToFavorites={addToFavorites}
-                deleteFromFavorites={deleteFromFavorites}
-                favorite={favorite}
-                favoriteItems={favoriteItems}
-                isLoggin={isLoggin}
-                deleteMyAd={ deleteMyAd}
+                allImages = {allImages}
+                itemsAfterSearch = {itemsAfterSearch}
+                lastFourtyItems = {lastFourtyItems} 
+                getItemById = {getItemById} 
+                addToFavorites = {addToFavorites}
+                deleteFromFavorites = {deleteFromFavorites}
+                favorite = {favorite}
+                favoriteItems = {favoriteItems}
+                isLoggin = {isLoggin}
+                deleteMyAd ={ deleteMyAd}
+                openFirstMessagePopup = {openFirstMessagePopup}
             />
         </section>
     )

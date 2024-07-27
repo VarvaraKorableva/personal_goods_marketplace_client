@@ -20,7 +20,8 @@ import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
-import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
+import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
+import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
 import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
+  const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
   
   const [myAds, setMyAds] = React.useState([])
@@ -308,6 +310,18 @@ function App() {
     })
   }
 
+  //createMessage
+
+  function addNewMessage(receiver_id, sender_id, item_id, message_text) {
+    Api.addMessage(receiver_id, sender_id, item_id, message_text) 
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
@@ -320,6 +334,10 @@ function App() {
 
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
+  }
+
+  function openFirstMessagePopup() {
+    setIsFirstMessagePopup(true)
   }
 
   function handleAddAdClick(data){
@@ -340,6 +358,7 @@ function App() {
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
     setSuccessfulActionPopup(false)
+    setIsFirstMessagePopup(false)
     setPopupMessage("")
   }
 
@@ -397,6 +416,7 @@ function App() {
               itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
               allImages={allImages}
+              openFirstMessagePopup={openFirstMessagePopup}
 
 
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
@@ -425,6 +445,8 @@ function App() {
               allImages={allImages}
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
+
+              openFirstMessagePopup={openFirstMessagePopup}
             />
           }
         />
@@ -443,6 +465,8 @@ function App() {
               favoriteItems={favoriteItems}
               deleteMyAd={deleteMyAd}
               allImages={allImages}
+
+              openFirstMessagePopup={openFirstMessagePopup}
             />
           }
         />
@@ -524,6 +548,7 @@ function App() {
               favoriteItems={favoriteItems}
               favorite={favorite}
               allImages={allImages}
+              openFirstMessagePopup={openFirstMessagePopup}
           />
           }>
         </Route>
@@ -563,6 +588,14 @@ function App() {
         onClose={closeAllPopups}
         popupMessage={popupMessage}
       />
+
+      <FirstMessagePopup 
+        isOpen={isFirstMessagePopup}
+        onClose={closeAllPopups}
+        createNewMessage={addNewMessage}
+      />
+
+
       <Footer handleLogout={handleLogout}></Footer>
     </div>
     </CurrentUserContext.Provider>  

@@ -11,7 +11,7 @@ function CategoryPage({
     deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, getItemsByCategoryCategoryId, getItemsByParentId,
+    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup
 }) {
 
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
@@ -49,7 +49,7 @@ function CategoryPage({
             <h2 className='main__title'>Ads</h2>
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.map((item) => (
-                    <OneAd 
+                    <OneAd
                         allImages={allImages}
                         key={item.item_id} 
                         lastFourtyItems={lastFourtyItems} 
@@ -59,10 +59,11 @@ function CategoryPage({
                         favorite={favorite}
                         favoriteItems={favoriteItems}
                         isLoggin={isLoggin}
-                        item={item}>
+                        item={item}
                         deleteMyAd={deleteMyAd}
-                        
-                    </OneAd>
+                        openFirstMessagePopup={openFirstMessagePopup}
+                    />    
+                    
                 ))}
             </ul>
         </section>

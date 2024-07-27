@@ -11,7 +11,7 @@ function OneAd({
     isLoggin, item, getItemById, 
     deleteMyAd, addToFavorites, 
     deleteFromFavorites, favorite, 
-    favoriteItems, allImages
+    favoriteItems, allImages, openFirstMessagePopup,
 }) {
 
     const currentUser = React.useContext(CurrentUserContext)
@@ -32,6 +32,10 @@ function OneAd({
       translatedContext = rus;
     } else if (language === 'hebrew') {
       translatedContext = hebrew;
+    }
+
+    function handleAddMessagePopupOpen() {
+      openFirstMessagePopup()
     }
 
     
@@ -121,6 +125,14 @@ function OneAd({
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
                 <p className="oneAdd__city">{strCity[0].toUpperCase() + strCity.slice(1)}</p>
+                {isLoggin && (currentUser.user_id !== item.owner_id) ?
+                    <button className="oneAdd__btn" onClick={handleAddMessagePopupOpen}>
+                      <div className="oneAdd__message-btn"></div>
+                      <p className="oneAdd__message-btn-text">Написать владельцу</p>
+                    </button>
+                  :
+                    <></>
+                }
                 
             </div>
             </div>

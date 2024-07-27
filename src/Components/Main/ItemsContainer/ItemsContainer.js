@@ -6,7 +6,7 @@ function ItemsContainer({
     isLoggin, itemsAfterSearch, 
     getItemById, 
     addToFavorites, deleteFromFavorites, 
-    favorite, favoriteItems, deleteMyAd, allImages
+    favorite, favoriteItems, deleteMyAd, allImages, openFirstMessagePopup
 }) {
 
     return(
@@ -23,6 +23,7 @@ function ItemsContainer({
                     favoriteItems={favoriteItems}
                     deleteMyAd={deleteMyAd}
                     allImages={allImages}
+                    openFirstMessagePopup = {openFirstMessagePopup}
                 />
             ))}
             </ul>

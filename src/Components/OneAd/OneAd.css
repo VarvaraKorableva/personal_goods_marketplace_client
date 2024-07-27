@@ -180,13 +180,50 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    border: 1px solid rgb(233, 6, 146);
     position: absolute;
     right: 0;
     top: -5px;
     /*width: 80px;
     height: 20px;*/
-    background-color: rgb(236, 91, 181);
+    background-color: rgb(236, 91, 181);/*rgb(243, 43, 166);*/
+    box-shadow: 0 3px 6px rgb(235, 182, 213);
     color: #fff;
     font-size: 8px;
     padding: 3px;
+}
+
+.oneAdd__message-btn {
+  width: 20px;
+  height: 20px;
+  background-image: url(../../images/messagepic.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oneAdd__message-btn:hover {
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+.oneAdd__message-btn-text {
+    margin: 0;
+    font-size: 8px;
+    text-align: start;
+}
+
+.oneAdd__btn {
+    margin-top: 25px;
+    cursor: pointer;
+    border: none;
+
+    background-color: transparent;
 }

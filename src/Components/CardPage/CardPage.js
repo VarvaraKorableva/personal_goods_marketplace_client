@@ -7,7 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
 
-function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites }) {
+function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
@@ -57,6 +57,10 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
         deleteFromFavorites(selectedItem[0])
     }
 
+    function handleAddMessage() {
+        openFirstMessagePopup()
+    }
+
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
     const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id)
 
@@ -99,7 +103,7 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
                                            <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>{translatedContext.addToFavBtn}</button>
                                         }
                                     
-                                        <button className='cardPage__write-message-btn'>{translatedContext.writeAMessageBtn}</button>
+                                        <button className='cardPage__write-message-btn' onClick={handleAddMessage}>{translatedContext.writeAMessageBtn}</button>
                                         </>
                                     }
                                 </div>

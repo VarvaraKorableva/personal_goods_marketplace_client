@@ -274,6 +274,67 @@ export const deleteImage = (item_id) => {
   })
       .then(checkResponse) 
 };
+
+export const getLastMessageFromEveryConversation = ( {receiver_id, sender_id} ) => {
+    return fetch(`${BASE_URL}/messages/getLastMessageFromEveryConversation/${receiver_id}/${sender_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
+
+export const getOneConversation = ( {receiver_id, sender_id, item_id} ) => {
+    return fetch(`${BASE_URL}/messages/getOneConversation/${receiver_id}/${sender_id}/${item_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
+/*
+export const createConversation = ( {receiver_id, sender_id, item_id, text} ) => {
+    return fetch(`${BASE_URL}/messages/create-conversation-first-message`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            receiver_id,
+            sender_id,
+            item_id,
+            text,
+        })
+    })
+        .then(checkResponse)
+};*/
+
+export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) => {
+    return fetch(`${BASE_URL}/messages`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            receiver_id,
+            sender_id,
+            item_id,
+            message_text,
+        })
+    })
+        .then(checkResponse)
+  };  
+
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);
