@@ -20,7 +20,7 @@ import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/ SuccessfulActionPopup/ SuccessfulActionPopup'
-
+import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
@@ -95,7 +95,7 @@ function App() {
       //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
-
+      console.log(res)
     } catch (err) {
       console.log(err);
     }
@@ -110,6 +110,7 @@ function App() {
       //setItemsAfterSearch(res)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
+      console.log(res)
  
     } catch (err) {
       console.log(err);
@@ -346,10 +347,15 @@ function App() {
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-
+///взависимости от того какая дата фолс или тру и навигейт
   function handleAddAdClick(data){
     setIsGood(data)
+
+    data?
     navigate(`/add-ad`) 
+    :
+    navigate(`/add-new-service`)
+    
     closeAllPopups()
   }
 
@@ -482,6 +488,20 @@ function App() {
             </ProtectedRoute>
           }>
         </Route> 
+
+        <Route
+          path={`/add-new-service`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <AddServicesPage
+                categories={categories}
+                onAddAd={handleAddAdSubmit}
+                isLoggin={isLoggin}
+                isGood={isGood}
+              />
+            </ProtectedRoute>
+          }>
+        </Route>
 
         <Route
           exact path={`/users/${userId}`}/////тут было так ${userId}

@@ -1,10 +1,10 @@
 import React from 'react'
-import './AddAdPage.css'
+import '../AddAdPage/AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 
-function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
+function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   

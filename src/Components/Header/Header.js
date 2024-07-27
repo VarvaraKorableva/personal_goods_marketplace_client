@@ -53,6 +53,11 @@ return (
           <Link  to={`/my_favorites`} className='header_link'>
             <button className='header_favorite-btn'></button>
           </Link>
+
+          <Link className='header_link header_link-message-container'> {/* to={`/my_messages`} */}
+            <button className='header__message-pic'></button>
+            <div className='header__messages-badge'>2</div>
+          </Link>
         </div>
       :  
       isLoggin ?
