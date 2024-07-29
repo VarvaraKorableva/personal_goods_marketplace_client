@@ -29,6 +29,7 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0,0,0,.5);
+      /*backdrop-filter: blur();*/
       position: fixed;
       top: 0;
       left: 0;
@@ -373,4 +374,87 @@
 
     color:rgb(181, 71, 71);
     font-size: 10px;
+  }
+
+  .firstMessagePopup__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    width: calc(430px - (36px*2));
+    /*min-height: calc(330px - (34px + 37px));*/
+    height: fit-content;
+    background-color: #fff;
+    /*backdrop-filter: blur();*/
+    color: black;
+    border-radius: 10px;
+    padding-left: 36px;
+    padding-right: 36px;
+    padding-bottom: 37px;
+    padding-top: 34px;
+  }
+
+  .firstMessagePopup__text {
+    /*width: calc(100% - 20px);*/
+    width: 90%;
+    height: 300px;
+    font-size: 14px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+  }
+
+  .firstMessagePopup__btn {
+    width: 60%;
+    height: 45px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+    color: #ccc;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    margin-top: 30px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .firstMessagePopup__btn_active {
+    background-color: black;
+    color: #fff;
+    width: 60%;
+    height: 45px;
+    border: 1px solid black;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 30px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 2s ease;
+    opacity: 1;
+  }
+  
+  @media screen and (max-width: 450px) {
+    .firstMessagePopup__btn_active {
+      width: 100%;
+      font-size: 12px;
+      margin-top: 130px;
+    }
+  }
+  
+  .firstMessagePopup__btn_active:hover {
+    transition: 2s ease;
+    opacity: 0.5;
   }
