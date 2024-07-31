@@ -1,4 +1,50 @@
+import React from 'react'
+import '../Popups.css'
+import {LanguageContext} from '../../../contexts/TranslationContext'
+import choose from '../../../const/Popups/FirstMessagePopupData'
+
 function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
+    const [messageText, setMessageText] = React.useState('')
+    const [isMessageText, setIsMessageText] = React.useState(false)
+    const [isValid, setIsValid] = React.useState(false)
+    const { language } = React.useContext(LanguageContext)
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
+
+    function handleCreateNewMessage(e) {
+        e.preventDefault()
+        setIsMessageText(false)
+        setMessageText('')
+        createNewMessage(messageText)
+    }
+
+    function handleMessageText(e) {
+      if(e.target.value == '') {
+        setIsMessageText(false)
+      }else {
+        setIsMessageText(true)
+        setMessageText(e.target.value)
+      }
+    }    
+
+    React.useEffect(() => {
+      if(isMessageText) {
+        setIsValid(true)
+      }else {
+        setIsValid(false)
+      }
+      
+    }, [isMessageText])
+
     return(
         <div className={`popup ${isOpen && 'popup__opened'}`}>
         <div className="popup__container">
@@ -8,14 +54,21 @@ function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
               onClick={onClose}>
             </button>
     
-        <h2 className="popup__title-ChoiceOfProductOrServicePopup">Написать сообщение</h2>
-        <form className='popup__container-ChoiceOfProductOrServicePopup'>
-            <textarea>
-
+        <h2 className="popup__title-ChoiceOfProductOrServicePopup">{translatedContext.popupTitle}</h2>
+        <form className='firstMessagePopup__form' onSubmit={handleCreateNewMessage}>
+            <textarea 
+              className='firstMessagePopup__text' 
+              onChange={handleMessageText}
+              value={messageText}
+            >
             </textarea>
-
-            <button>Отправить сообщение</button>
-
+            <button 
+              className={isValid? 'firstMessagePopup__btn_active':'firstMessagePopup__btn'} 
+              type='sumbit' 
+              disabled={!isValid}
+            >
+              {translatedContext.submitBtn}
+            </button>
         </form>  
         </div>
         </div>

@@ -57,6 +57,12 @@ function App() {
   const [isLoginError, setIsLoginError] = React.useState(false)
   const [isRegError, setIsRegError] = React.useState(false)
 
+  //for messages 
+  const [receiverId, setReceiverId] = React.useState('')
+  const [itemId, setItemId] = React.useState('')
+
+  const [lastMessages, setLastMessages] = React.useState([])
+
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
@@ -312,10 +318,26 @@ function App() {
 
   //createMessage
 
-  function addNewMessage(receiver_id, sender_id, item_id, message_text) {
-    Api.addMessage(receiver_id, sender_id, item_id, message_text) 
+  function addNewMessage(message_text) {
+    console.log('message_text', message_text)
+    console.log('receiverId', receiverId)
+    console.log('sender_id', userId)
+    console.log('itemId', itemId)
+    
+    Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
       console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    
+  }
+
+  function getLastMessageFromEveryConversation(id) {
+    Api.getLastMessageFromEveryConversation(Number(id))
+    .then((res) => {
+      setLastMessages(res)
     })
     .catch((err) => {
       console.log(err)
@@ -336,8 +358,14 @@ function App() {
     setSuccessfulActionPopup(true)
   }
 
-  function openFirstMessagePopup() {
+  function openFirstMessagePopup(receiver_id, item_id) {
     setIsFirstMessagePopup(true)
+
+    setReceiverId(receiver_id) 
+    setItemId(item_id)
+
+    console.log('receiver_id', receiver_id)
+    console.log('item_id', item_id)
   }
 
   function handleAddAdClick(data){
@@ -525,12 +553,15 @@ function App() {
         </Route>  
 
         <Route 
-          path={`/users/${userId}/messages`}
+          path={`/users/:userId/messages`}
           element={
+            <ProtectedRoute isLoggin={isLoggin}>
             <MyMessages
-
+              getLastMessageFromEveryConversation={getLastMessageFromEveryConversation}
+              lastMessages={lastMessages}
             />
-          }>
+            </ProtectedRoute>
+          }>  
         </Route>
        
         <Route 

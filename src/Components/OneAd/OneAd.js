@@ -16,6 +16,7 @@ function OneAd({
 
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
+    const sender_id = currentUser.user_id
 
     const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
 
@@ -33,11 +34,10 @@ function OneAd({
     } else if (language === 'hebrew') {
       translatedContext = hebrew;
     }
-
+    //receiver_id, sender_id, item_id  //item.owner_id, sender_id, item.item_id
     function handleAddMessagePopupOpen() {
-      openFirstMessagePopup()
+      openFirstMessagePopup(item.owner_id, item.item_id)
     }
-
     
     function handleClick() {
         getItemById(item.item_id)
