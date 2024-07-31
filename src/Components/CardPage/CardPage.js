@@ -57,9 +57,9 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
         deleteFromFavorites(selectedItem[0])
     }
 
-    function handleAddMessage() {
-        openFirstMessagePopup()
-    }
+    function handleAddMessagePopupOpen() {
+        openFirstMessagePopup(selectedItem[0].owner_id, selectedItem[0].item_id)
+      }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
     const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id)
@@ -103,7 +103,7 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
                                            <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>{translatedContext.addToFavBtn}</button>
                                         }
                                     
-                                        <button className='cardPage__write-message-btn' onClick={handleAddMessage}>{translatedContext.writeAMessageBtn}</button>
+                                        <button className='cardPage__write-message-btn' onClick={handleAddMessagePopupOpen}>{translatedContext.writeAMessageBtn}</button>
                                         </>
                                     }
                                 </div>

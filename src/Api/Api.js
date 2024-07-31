@@ -275,8 +275,10 @@ export const deleteImage = (item_id) => {
       .then(checkResponse) 
 };
 
-export const getLastMessageFromEveryConversation = ( {receiver_id, sender_id} ) => {
-    return fetch(`${BASE_URL}/messages/getLastMessageFromEveryConversation/${receiver_id}/${sender_id}`, {
+
+///messages
+export const getLastMessageFromEveryConversation = ( user_id ) => {
+    return fetch(`${BASE_URL}/messages/getLastMessageFromEveryConversation/${user_id}`, {
         credentials: 'include',
         method: "GET",
         headers: {
@@ -334,6 +336,8 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) =>
     })
         .then(checkResponse)
   };  
+
+///  
 
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);

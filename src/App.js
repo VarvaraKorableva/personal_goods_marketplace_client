@@ -61,6 +61,8 @@ function App() {
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('')
 
+  const [lastMessages, setLastMessages] = React.useState([])
+
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
@@ -321,7 +323,7 @@ function App() {
     console.log('receiverId', receiverId)
     console.log('sender_id', userId)
     console.log('itemId', itemId)
-    /*
+    
     Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
       console.log(res)
@@ -329,7 +331,17 @@ function App() {
     .catch((err) => {
       console.log(err)
     })
-    */
+    
+  }
+
+  function getLastMessageFromEveryConversation(id) {
+    Api.getLastMessageFromEveryConversation(Number(id))
+    .then((res) => {
+      setLastMessages(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   function startToSearch(keyWord) {
@@ -541,12 +553,15 @@ function App() {
         </Route>  
 
         <Route 
-          path={`/users/${userId}/messages`}
+          path={`/users/:userId/messages`}
           element={
+            <ProtectedRoute isLoggin={isLoggin}>
             <MyMessages
-
+              getLastMessageFromEveryConversation={getLastMessageFromEveryConversation}
+              lastMessages={lastMessages}
             />
-          }>
+            </ProtectedRoute>
+          }>  
         </Route>
        
         <Route 
