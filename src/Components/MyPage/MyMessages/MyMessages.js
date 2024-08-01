@@ -1,13 +1,11 @@
-//MyMessages
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect } from "react";
 import Message from './Message'
 import './MyMessages.css'
 
-function MyMessages({getLastMessageFromEveryConversation, lastMessages}) {
+function MyMessages({getLastMessageFromEveryConversation, lastMessages, getOneConversation, openOneConversationPopup}) {
     
     const userId = useParams()
-
 
     useEffect(()=>{
         getLastMessageFromEveryConversation(userId.userId)
@@ -21,6 +19,8 @@ function MyMessages({getLastMessageFromEveryConversation, lastMessages}) {
                     <Message
                         key={item.message_id}
                         message={item}
+                        getOneConversation={getOneConversation}
+                        openOneConversationPopup={openOneConversationPopup}
                     />
                 ))}
             </ul>

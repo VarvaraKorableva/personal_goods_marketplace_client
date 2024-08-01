@@ -289,7 +289,7 @@ export const getLastMessageFromEveryConversation = ( user_id ) => {
         .then(checkResponse)
 };
 
-export const getOneConversation = ( {receiver_id, sender_id, item_id} ) => {
+export const getOneConversation = ( receiver_id, sender_id, item_id ) => {
     return fetch(`${BASE_URL}/messages/getOneConversation/${receiver_id}/${sender_id}/${item_id}`, {
         credentials: 'include',
         method: "GET",
@@ -300,24 +300,6 @@ export const getOneConversation = ( {receiver_id, sender_id, item_id} ) => {
     })
         .then(checkResponse)
 };
-/*
-export const createConversation = ( {receiver_id, sender_id, item_id, text} ) => {
-    return fetch(`${BASE_URL}/messages/create-conversation-first-message`, {
-        credentials: 'include',
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ 
-            receiver_id,
-            sender_id,
-            item_id,
-            text,
-        })
-    })
-        .then(checkResponse)
-};*/
 
 export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) => {
     return fetch(`${BASE_URL}/messages`, {

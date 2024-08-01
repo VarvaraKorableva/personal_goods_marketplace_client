@@ -11,6 +11,7 @@ import Main from './Components/Main/Main'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import MyMessages from './Components/MyPage/MyMessages/MyMessages'
+//import OneMessagePage from './Components/MyPage/MyMessages/OneMessagePage'
 import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import './App.css'
 
@@ -21,6 +22,7 @@ import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
+import OneConversationPopup from './Components/Popups/OneConversationPopup/OneConversationPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
 import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
 
@@ -32,6 +34,7 @@ function App() {
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
+  const [isOneConversationPopup, setIsOneConversationPopup] = React.useState(false)
   
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
@@ -62,6 +65,11 @@ function App() {
   const [itemId, setItemId] = React.useState('')
 
   const [lastMessages, setLastMessages] = React.useState([])
+  const [coversations, setCoversations] = React.useState([])
+
+  const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
+  const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
+  const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
 
   const [limit, setLimit] = React.useState(3)
 
@@ -319,11 +327,6 @@ function App() {
   //createMessage
 
   function addNewMessage(message_text) {
-    console.log('message_text', message_text)
-    console.log('receiverId', receiverId)
-    console.log('sender_id', userId)
-    console.log('itemId', itemId)
-    
     Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
       console.log(res)
@@ -331,13 +334,32 @@ function App() {
     .catch((err) => {
       console.log(err)
     })
-    
+  }
+
+  function createNewMessageFromConversationPopup(receiver_id, item_id, message_text) {
+    Api.addMessage({receiver_id, sender_id: userId, item_id, message_text}) 
+    .then((res) => {
+      //(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   function getLastMessageFromEveryConversation(id) {
     Api.getLastMessageFromEveryConversation(Number(id))
     .then((res) => {
       setLastMessages(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function getOneConversation(r_id, s_id, i_id) {
+    Api.getOneConversation(r_id, s_id, i_id)
+    .then((res) => {
+      setCoversations(res)
     })
     .catch((err) => {
       console.log(err)
@@ -358,14 +380,18 @@ function App() {
     setSuccessfulActionPopup(true)
   }
 
+  function openOneConversationPopup(r_id, s_id, i_id) {
+    setIsOneConversationPopup(true)
+
+    setReceiver_idForOneConversationPopup(r_id)
+    setSender_idForOneConversationPopup(s_id) 
+    setItem_idForOneConversationPopup(i_id)
+  }
+
   function openFirstMessagePopup(receiver_id, item_id) {
     setIsFirstMessagePopup(true)
-
     setReceiverId(receiver_id) 
     setItemId(item_id)
-
-    console.log('receiver_id', receiver_id)
-    console.log('item_id', item_id)
   }
 
   function handleAddAdClick(data){
@@ -383,11 +409,13 @@ function App() {
     setIsChoiceOfProductOrServicePopup(true)
   }
 
+
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
     setSuccessfulActionPopup(false)
     setIsFirstMessagePopup(false)
     setPopupMessage("")
+    setIsOneConversationPopup(false)
   }
 
   function handleLogout() {
@@ -556,14 +584,18 @@ function App() {
           path={`/users/:userId/messages`}
           element={
             <ProtectedRoute isLoggin={isLoggin}>
-            <MyMessages
-              getLastMessageFromEveryConversation={getLastMessageFromEveryConversation}
-              lastMessages={lastMessages}
-            />
+              <MyMessages
+                getLastMessageFromEveryConversation={getLastMessageFromEveryConversation}
+                lastMessages={lastMessages}
+
+                getOneConversation={getOneConversation}
+
+                openOneConversationPopup={openOneConversationPopup}
+              />
             </ProtectedRoute>
           }>  
         </Route>
-       
+        
         <Route 
           path={`/users/:owner_id`}
           element={
@@ -626,8 +658,20 @@ function App() {
         createNewMessage={addNewMessage}
       />
 
+      <OneConversationPopup
+        isOpen={isOneConversationPopup}
+        onClose={closeAllPopups}
+        getOneConversation={getOneConversation}
+        receiver_id={receiver_idForOneConversationPopup}
+        sender_id={sender_idForOneConversationPopup}
+        item_id={item_idForOneConversationPopup}
+        coversations={coversations}
+
+        createNewMessage={createNewMessageFromConversationPopup}
+      />
 
       <Footer handleLogout={handleLogout}></Footer>
+
     </div>
     </CurrentUserContext.Provider>  
     </LanguageProvider>
