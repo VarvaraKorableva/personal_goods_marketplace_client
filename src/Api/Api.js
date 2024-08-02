@@ -319,6 +319,22 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) =>
         .then(checkResponse)
   };  
 
+  export const deleteMessage = ({message_id}) => {
+    return fetch(`${BASE_URL}/messages`, {
+        credentials: 'include',
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+            message_id,
+        })
+    })
+        .then(checkResponse) 
+  };
+
+
 ///  
 
 /*

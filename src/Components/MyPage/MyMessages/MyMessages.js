@@ -12,18 +12,25 @@ function MyMessages({getLastMessageFromEveryConversation, lastMessages, getOneCo
     },[])
 
     return(
-        <section>
-            <p>Messages</p>
-            <ul className="message__wrapper">
-                {lastMessages.map((item) => (
-                    <Message
-                        key={item.message_id}
-                        message={item}
-                        getOneConversation={getOneConversation}
-                        openOneConversationPopup={openOneConversationPopup}
-                    />
-                ))}
-            </ul>
+        <section className="my-messages__section">
+            {lastMessages.length?  
+                <ul className="message__wrapper">
+                
+                    {lastMessages.map((item) => (
+                        <Message
+                            key={item.message_id}
+                            message={item}
+                            getOneConversation={getOneConversation}
+                            openOneConversationPopup={openOneConversationPopup}
+                        />
+                    ))}
+      
+                </ul>
+            :
+                <div className="my-messages__no-length-text-container">
+                    <p className="my-messages__no-length-text">У вас нет сообщений</p>
+                </div>
+            } 
         </section>
     )
 }

@@ -1,3 +1,7 @@
+.my-messages__section {
+    min-height: 80vh;
+}
+
 .message__wrapper {
     padding: 0;
     display: flex;
@@ -23,4 +27,20 @@
 .message__container:hover {
     height: 85px;
     background-color: #e4e6e7;
+}
+
+.my-messages__no-length-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-messages__no-length-text-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }

@@ -462,13 +462,14 @@
 .oneConversationPopup__messages-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
   align-items: center;
   padding: 0;
   width: 100%;
   /*min-height: calc(330px - (34px + 37px));
   //height: fit-content;*/
-  height: 500px;
+  max-height: 500px;
+  overflow-y: scroll;
   background-color: #fff;
   /*backdrop-filter: blur();*/
   color: black;
@@ -554,6 +555,11 @@
   padding: 20px;
   border-radius: 50px 50px 0 50px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .oneConversationPopup__oneMessage {
@@ -567,4 +573,21 @@
   border-radius:  0 50px 50px 50px;
   margin-bottom: 5px;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oneConversationPopup__deleteBtn {
+  cursor: pointer;
+  border-radius: 50px;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 5px;
+  font-size: 10px;
+  background-color: transparent;
+
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

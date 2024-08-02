@@ -66,7 +66,7 @@ function App() {
 
   const [lastMessages, setLastMessages] = React.useState([])
   const [coversations, setCoversations] = React.useState([])
-
+  
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
@@ -329,7 +329,9 @@ function App() {
   function addNewMessage(message_text) {
     Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
-      console.log(res)
+      setCoversations([res, ...coversations])
+      setReceiverId('')
+      setItemId('')
     })
     .catch((err) => {
       console.log(err)
@@ -339,7 +341,7 @@ function App() {
   function createNewMessageFromConversationPopup(receiver_id, item_id, message_text) {
     Api.addMessage({receiver_id, sender_id: userId, item_id, message_text}) 
     .then((res) => {
-      //(res)
+      setCoversations([res, ...coversations])
     })
     .catch((err) => {
       console.log(err)
@@ -360,6 +362,16 @@ function App() {
     Api.getOneConversation(r_id, s_id, i_id)
     .then((res) => {
       setCoversations(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function deleteOneMessage(message_id) {
+    Api.deleteMessage({message_id})
+    .then((res) => {
+      setCoversations((state) => state.filter((item) => item.message_id !== message_id))
     })
     .catch((err) => {
       console.log(err)
@@ -668,6 +680,7 @@ function App() {
         coversations={coversations}
 
         createNewMessage={createNewMessageFromConversationPopup}
+        deleteOneMessage={deleteOneMessage}
       />
 
       <Footer handleLogout={handleLogout}></Footer>
