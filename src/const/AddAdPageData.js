@@ -2,11 +2,11 @@
 const en = {
     adANewGood: 'Ad a New Good',
     adANewService: 'Ad a New Service',
-    choiseACategory: 'Choise a category',
-    choiseAServices: 'Choise a category',
-    choiseASubCategory: 'Choise a Subcategory',
-    choiseASubCategoryOfServices: 'Choise a Subcategory',
-    choiseASecondSubCategoryGoods: 'Choise a Subcategory',
+    choiseACategory: 'Select a category',
+    choiseAServices: 'Select a category',
+    choiseASubCategory: 'Select a Subcategory',
+    choiseASubCategoryOfServices: 'Select a Subcategory',
+    choiseASecondSubCategoryGoods: 'Select a Subcategory',
     name: 'Add a Name of Good',
     serviceName: 'Add the name of the service you provide',
     description: 'Add a description here',
@@ -36,6 +36,7 @@ const en = {
         },    
         priceErrorMessage: {
             errorMessage: 'Add a price',
+            errorMessageOnlyNumbers: 'Price can only consist of digits',
         },
         cityErrorMessage: {
             errorMessage: 'Add a city',
@@ -81,6 +82,7 @@ const rus = {
         },    
         priceErrorMessage: {
             errorMessage: 'Добавьте цену',
+            errorMessageOnlyNumbers: 'Цена может состоять только из цифр',
         },
         cityErrorMessage: {
             errorMessage: 'Добавьте город',

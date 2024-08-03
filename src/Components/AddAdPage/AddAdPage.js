@@ -3,6 +3,7 @@ import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
+import {cities} from '../../const/Cities/cities'
 
 function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -28,7 +29,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
   const [haveSubCategory, setHaveSubCategory] = React.useState(false)
   const [haveSecondSubCategory, setHaveSecondSubCategory] = React.useState(false)
-  
 
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
@@ -146,26 +146,30 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   }
 
   const handleTitleChange = (e) => {
-    if(e.target.value) {
-      //e.target.value[0].toUpperCase() + e.target.value.slice(1)
+    if(!e.target.value) {
+      setIsTitleSelected(false)
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
+      setTitle('')
+    }else {
       const str = e.target.value
       setTitle(e.target.value)
       setIsTitleSelected(true)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
-    }else {
-      setIsTitleSelected(false)
       setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
     }
   }
 
   const handlePriceChange = (e) => {
-    if(e.target.value !== '') {
+    if (!e.target.value) {
+      setIsPriceSelected(false)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
+      setPrice('')
+    } else if(!(/^\d*$/.test(e.target.value))) {
+      setIsPriceSelected(false)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
+    } else {
       setIsPriceSelected(true)
       setPrice(e.target.value)
       setPriceErrorMessage('')
-    }else {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
     }
   };
 
@@ -174,7 +178,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setCity(e.target.value)
       setIsCitySelected(true)
       setCityErrorMessage('')
-    }else {
+    } else {
+      setCity('')
       setIsCitySelected(false)
       setCityErrorMessage(`${translatedContext.errors.cityErrorMessage.errorMessage}`)
     }
@@ -273,7 +278,7 @@ return (
       onSubmit={handleSubmit}>
       <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
 
-      <select className='popup__select' onChange={handleSelectChange}>
+      <select className='addAdPage__select' onChange={handleSelectChange}>
         <option value="">{translatedContext.choiseACategory}</option>
 
           {language === 'rus' ?
@@ -298,7 +303,7 @@ return (
     {isCategorySelected && haveSubCategory?
     <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
-      <select className='popup__select' onChange={handleSubCategoryChange}>
+      <select className='addAdPage__select' onChange={handleSubCategoryChange}>
         <option value="">{translatedContext.choiseASubCategory}</option>
         {language === 'rus' ?
             subCategory
@@ -328,7 +333,7 @@ return (
     {isSecondCategorySelected && haveSecondSubCategory?
       <>
       <label className='popup__inputname'>{translatedContext.choiseASecondSubCategoryGoods}</label>
-      <select className='popup__select' onChange={handleSecondSubCategoryChange}>
+      <select className='addAdPage__select' onChange={handleSecondSubCategoryChange}>
         <option value="">{translatedContext.choiseASecondSubCategoryGoods}</option>
         {language === 'rus' ?
             secondSubCategory
@@ -373,7 +378,7 @@ return (
         <span className='popup__mistake-msg'>{titleErrorMessage}</span>
       }
 
-      <label className='popup__inputname'>{translatedContext.description}</label>
+      <label className='popup__inputname'>{translatedContext.description}
         <input
           className='popup__input'
           name='description'
@@ -381,6 +386,8 @@ return (
           value={description}
           onChange={handledesDriptionChange}
         ></input>
+      </label>
+      <span className='popup__mistake-msg'></span>
 
       <label className='popup__inputname'>{translatedContext.price}<span className='popup__inputname-span'>*</span>
         <input
@@ -446,29 +453,3 @@ return (
 }
 
 export default AddAdPage;
-
-
-/*
-errors: {
-    categoryErrorMessage: {
-        errorMessage: 'Select a category',
-    },
-    secondCategoryErrorMessage: {
-        errorMessage: 'Select a subcategory',
-    },    
-    thirdSubCategoryErrorMessage: {
-        errorMessage: 'Select a subcategory',
-    },
-    titleErrorMessage: {
-        errorMessage: 'Add a product title',
-    },    
-    priceErrorMessage: {
-        errorMessage: 'Add a price',
-    },
-    cityErrorMessage: {
-        errorMessage: 'Add a city',
-        errorInCity: 'Are you sure such a city exists? If yes and you still get an error, add the nearest city to it',
-    }    
-}
-
-*/
