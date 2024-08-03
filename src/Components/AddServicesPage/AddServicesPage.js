@@ -417,6 +417,7 @@ return (
       <button 
         className= 'popup__btn_active'
         type='submit'
+        disabled={!isValid}
       >
           {translatedContext.addBtn}
       </button>

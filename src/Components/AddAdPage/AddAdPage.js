@@ -405,15 +405,20 @@ return (
         <span className='popup__mistake-msg'>{priceErrorMessage}</span>
       }
 
-      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
-        <input
-          className='popup__input'
-          name='city'
-          type='text'
-          value={city}
-          onChange={handleCityChange}
-        ></input>
-      </label>
+      <select className='addAdPage__select' onChange={handleCityChange}>
+        <option value="">{translatedContext.place}</option>
+
+          {language === 'rus' ?
+            cities.rus.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+            
+            :
+            cities.en.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+          }
+      </select>
 
       {isCitySelected?
         <span className='popup__mistake-msg'></span>
@@ -453,3 +458,22 @@ return (
 }
 
 export default AddAdPage;
+
+/*
+
+      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
+        <input
+          className='popup__input'
+          name='city'
+          type='text'
+          value={city}
+          onChange={handleCityChange}
+        ></input>
+      </label>
+
+      {isCitySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
+      }
+*/

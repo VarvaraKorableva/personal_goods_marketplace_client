@@ -1,5 +1,5 @@
 
-export const cities = [
+export const cities = 
     {
         rus:[
         "Иерусалим", "Тель-Авив", "Хайфа", "Нетания", "Ашдод", "Ашкелон", "Беэр-Шева", "Петах-Тиква", 
@@ -10,8 +10,7 @@ export const cities = [
         "Кфар-Цедек", "Маале-Адумим", "Кфар-Шимон", "Мерказ Шапира", "Аррар", "Кфар-Ха-Рош", "Шаар-Умгаш", 
         "Далиет-эль-Карр", "Неве-Шалом", "Шедерот", "Аруот", "Офаким", "Эмек-Изреэль", "Дор", "Ган-Явне", 
         "Хеврон", "Цфат", "Явне", "Шфарам", "Нир-Цви", "Кирьят-Арба", "Кефар-Тавор", "Кфар-Касем",
-    ]},
-    {
+        ],
         en: [
         "Jerusalem", "Tel Aviv", "Haifa", "Netanya", "Ashdod", "Ashkelon", "Beersheba", "Petah Tikva", 
         "Ramat Gan", "Rishon Lezion", "Hadera", "Ra'anana", "Kfar Saba", "Kiryat Shmona", "Hatzor Ashkelon", 
@@ -21,11 +20,9 @@ export const cities = [
         "Kfar Tzedek", "Maale Adumim", "Kfar Shimon", "Merkaz Shapira", "Arar", "Kfar HaRosh", "Shaar HaNegev", 
         "Daliyat al-Karmel", "Neve Shalom", "Shederot", "Aroot", "Ofakim", "Emek Yizreel", "Dor", "Gan Yavne", 
         "Hebron", "Yavne", "Shfaram", "Nir Tzvi", "Kiryat Arba", "Kfar Tavor", "Kfar Qasem"
-        ]
+        ],
     }
-    
-
-];
+;
 /*
 export const cities = [
     
