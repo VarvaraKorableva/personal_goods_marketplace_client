@@ -300,8 +300,8 @@ return (
         <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
       }
 
-    {isCategorySelected && haveSubCategory?
-    <>
+      {isCategorySelected && haveSubCategory?
+      <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
       <select className='addAdPage__select' onChange={handleSubCategoryChange}>
         <option value="">{translatedContext.choiseASubCategory}</option>
@@ -405,7 +405,11 @@ return (
         <span className='popup__mistake-msg'>{priceErrorMessage}</span>
       }
 
-      <select className='addAdPage__select' onChange={handleCityChange}>
+      <select 
+        className='addAdPage__select' 
+        onChange={handleCityChange}
+        value={city}
+      >
         <option value="">{translatedContext.place}</option>
 
           {language === 'rus' ?
@@ -458,22 +462,3 @@ return (
 }
 
 export default AddAdPage;
-
-/*
-
-      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
-        <input
-          className='popup__input'
-          name='city'
-          type='text'
-          value={city}
-          onChange={handleCityChange}
-        ></input>
-      </label>
-
-      {isCitySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
-      }
-*/

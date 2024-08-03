@@ -3,6 +3,7 @@ import '../AddAdPage/AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
+import {cities} from '../../const/Cities/cities'
 
 function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -45,15 +46,24 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   const [isValid, setIsValid] = React.useState(false)
 
   const [isCategorySelected, setIsCategorySelected] = React.useState(false)
+  const [categoryErrorMessage, setCategoryErrorMessage] = React.useState('')
+  
   const [isSecondCategorySelected, setIsSecondCategorySelected] = React.useState(false)
+  const [secondCategoryErrorMessage, setSecondCategoryErrorMessage] = React.useState('')
+
   const [isThirdSubCategorySelected, setIsThirdSubCategorySelected] = React.useState(false)
+  const [thirdSubCategoryErrorMessage, setThirdSubCategoryErrorMessage] = React.useState('')
+
   const [isTitleSelected, setIsTitleSelected] = React.useState(false)
+  const [titleErrorMessage, setTitleErrorMessage] = React.useState('')
+
   const [isPriceSelected, setIsPriceSelected] = React.useState(false)
+  const [priceErrorMessage, setPriceErrorMessage] = React.useState('')
+
   const [isCitySelected, setIsCitySelected] = React.useState(false)
-  //
+  const [cityErrorMessage, setCityErrorMessage] = React.useState('')
 
-  //const [isCategorySelected, setIsValid] = React.useState(false)
-
+  const [initiatorKeyWord, setInitiatorKeyWord] = React.useState('')
 
   const addItemRef = React.useRef(null);
 
@@ -80,75 +90,19 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
     setDescription(e.target.value)
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    let id = null
-    if((selectedSubCategoryId === null || selectedSubCategoryId === "") && (selectedThirdSubCategoryId === null || selectedThirdSubCategoryId === '')){
-      id = Number(selectedCategoryId)
-    } 
-    if(selectedSubCategoryId && (selectedThirdSubCategoryId === null || selectedThirdSubCategoryId === '')){
-      id = Number(selectedSubCategoryId)
-    }
-    if(selectedThirdSubCategoryId) {
-      id = Number(selectedThirdSubCategoryId)
-    }
-
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      onAddAd({
-        title,
-        owner_id: owner_id,
-        category_id: Number(id),
-        city,
-        price,
-        description,
-        size, 
-        color, 
-        condition,
-        formData,
-      });
-    } else {
-      onAddAd({
-        title,
-        owner_id: owner_id,
-        category_id: Number(id),
-        city,
-        price,
-        description,
-        size, 
-        color, 
-        condition,
-      });
-
-    }
-      setSelectedCategoryId(null)
-      setSelectedSubCategoryId(null)
-      setSelectedThirdSubCategoryId(null)
-
-      setTitle('')
-      setCity('')
-      setFile(null)
-      setPrice('')
-      setDescription('')
-      setSize('')
-      setColor('')
-      setCondition('')
-
-      setIsCategorySelected(false)
-      setIsSecondCategorySelected(false)
-  }
-
   function handleServicesSubmit(e) {
     e.preventDefault();
     let id = null
-    if(thirdCategoryId === null || thirdCategoryId === ""){
-      id = Number(thirdSubCategoryId)
-    } 
-    else 
-    {id = Number(thirdCategoryId)}
 
+    if((selectedSubCategoryId === null || selectedSubCategoryId === "") && (thirdSubCategoryId === null || thirdSubCategoryId === '')){
+      id = Number(selectedCategoryId)
+    } 
+    if(selectedSubCategoryId && (thirdSubCategoryId === null || thirdSubCategoryId === '')){
+      id = Number(selectedSubCategoryId)
+    }
+    if(thirdSubCategoryId) {
+      id = Number(thirdSubCategoryId)
+    }
     
     if (file) {
       const formData = new FormData();
@@ -170,7 +124,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
       onAddAd({
         title,
         owner_id: owner_id,
-        category_id: Number(id), //thirdSubCategoryId),
+        category_id: Number(id),
         city,
         price,
         description,
@@ -200,56 +154,50 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   }
 
   const handleTitleChange = (e) => {
-    if(e.target.value !== '') {
+    if(!e.target.value) {
+      setIsTitleSelected(false)
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
+      setTitle('')
+    }else {
+      const str = e.target.value
       setTitle(e.target.value)
       setIsTitleSelected(true)
-    }else {
-      setIsTitleSelected(false)
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
     }
   }
 
   const handlePriceChange = (e) => {
-    if(e.target.value !== '') {
+    if (!e.target.value) {
+      setIsPriceSelected(false)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
+      setPrice('')
+    } else if(!(/^\d*$/.test(e.target.value))) {
+      setIsPriceSelected(false)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
+    } else {
       setIsPriceSelected(true)
       setPrice(e.target.value)
-    }else {
-      setIsPriceSelected(false)
+      setPriceErrorMessage('')
     }
   };
 
   const handleCityChange = (e) => {
-    if(e.target.value !== ''){
+    if(e.target.value){
       setCity(e.target.value)
       setIsCitySelected(true)
-    }else {
+      setCityErrorMessage('')
+    } else {
+      setCity('')
       setIsCitySelected(false)
+      setCityErrorMessage(`${translatedContext.errors.cityErrorMessage.errorMessage}`)
     }
   }
-
-  const handleSelectChange = (e) => {
-    setSelectedCategoryId(e.target.value)
-    
-    setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
-
-    categories.filter((category) => category.parent_id == e.target.value).length ?
-      setHaveSubCategory(true)
-    :
-      setHaveSubCategory(false)
-      setHaveSecondSubCategory(false)
-
-    if(e.target.value !== "") {
-      setIsCategorySelected(true)
-      setIsSecondCategorySelected(false)
-    } else {
-      setIsCategorySelected(false)
-      setIsSecondCategorySelected(false)
-    }
-  };
 
   const handleSelectServicesChange = (e) => {
     if(e.target.value !== "") {
       setIsCategorySelected(true)
       setThirdSubCategoryId(e.target.value)
+      
       setThirdSubCategory(categories.filter((category) => category.parent_id == e.target.value))
 
       categories.filter((category) => category.parent_id == e.target.value).length ?
@@ -261,19 +209,18 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
     } else {
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)
+      setCategoryErrorMessage(`${translatedContext.errors.categoryErrorMessage.errorMessage}`)
     }
   };
 
   const handleThirdCategoryIdChange = (e) => {
-    setThirdCategoryId(e.target.value)
-  }
-
-  const handleSubCategoryChange = (e) => {
-    if(e.target.value !== "") {
+    if(e.target.value) {
       setIsSecondCategorySelected(true)
-      setSelectedSubCategoryId(e.target.value)
+      setThirdCategoryId(e.target.value)
     
       setSecondSubCategory(categories.filter((category) => category.parent_id == e.target.value))
+
+      setSecondCategoryErrorMessage('')
   
       categories.filter((category) => category.parent_id == e.target.value).length ?
         setHaveSecondSubCategory(true)
@@ -282,15 +229,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
 
     } else {
       setIsSecondCategorySelected(false)
-    }
-  }
-
-  const handleSecondSubCategoryChange = (e) => {
-    if (e.target.value !== '') {
-      setIsThirdSubCategorySelected(true)
-      setSelectedThirdSubCategoryId(e.target.value)
-    } else {
-      setIsThirdSubCategorySelected(false)
+      setSecondCategoryErrorMessage(`${translatedContext.errors.secondCategoryErrorMessage.errorMessage}`)
     }
     
   }
@@ -300,6 +239,28 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
         setSelectedCategoryId(categories.filter((category) => category.is_good === false))
     } 
   }, [])
+
+  React.useEffect(() => {
+    haveSubCategory?
+
+        haveSecondSubCategory?
+
+            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected)?
+              setIsValid(true)
+            :
+              setIsValid(false)
+        :
+            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected)?
+              setIsValid(true)
+            :
+              setIsValid(false)      
+    :
+      (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected)?
+        setIsValid(true)
+      :
+        setIsValid(false) 
+
+  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected])
 
 return (
     <section className="addAdPage__section">
@@ -311,7 +272,11 @@ return (
       onSubmit={handleServicesSubmit}>
       <label className='popup__inputname'>{translatedContext.choiseAServices}<span className='popup__inputname-span'>*</span></label> 
 
-      <select className='popup__select' onChange={handleSelectServicesChange}>
+      <select 
+        className='addAdPage__select' 
+        onChange={handleSelectServicesChange}
+        //value={}
+      >
         <option value="">{translatedContext.choiseAServices}</option>
           {language === 'rus' ?
             categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
@@ -324,10 +289,16 @@ return (
           }
       </select>
 
-    {isCategorySelected && haveSubCategory?
+      {isCategorySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
+      }
+
+      {isCategorySelected && haveSubCategory?
       <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategoryOfServices}</label>
-      <select className='popup__select' onChange={handleThirdCategoryIdChange}>
+      <select className='addAdPage__select' onChange={handleThirdCategoryIdChange}>
         <option value="">{translatedContext.choiseASubCategoryOfServices}</option>
         {language === 'rus' ?
           thirdSubCategory
@@ -343,21 +314,31 @@ return (
         ))
         }
       </select>
+      {isSecondCategorySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{secondCategoryErrorMessage}</span>
+      }
       </>
       :
       <></>
-    }
+      }
+
       <label className='popup__inputname'>{translatedContext.serviceName}<span className='popup__inputname-span'>*</span>  
         <input
           className='popup__input'
           name='title'
           type='text'
           value={title}
-          //onInput={handleTitleChange}
           onChange={handleTitleChange}
         ></input>
       </label>
-      <span className='popup__inputmistake'>{errorNameMessage}</span>
+
+      {isTitleSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{titleErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.serviceDescription}</label>
         <input
@@ -365,11 +346,10 @@ return (
           name='description'
           type='text'
           value={description}
-          //onInput={handledesDriptionChange}
           onChange={handledesDriptionChange}
         ></input>
        
-      <span className='popup__inputmistake'>{errorDreamLinkMessage}</span>
+       <span className='popup__mistake-msg'></span>
 
       <label className='popup__inputname'>{translatedContext.servicePrice}<span className='popup__inputname-span'>*</span>
         <input
@@ -377,23 +357,40 @@ return (
           name='price'
           type='text'
           value={price}
-          //onInput={handlePriceChange}
           onChange={handlePriceChange}
         ></input>
       </label>
-      <span className='popup__inputmistake'>{errorPriceMessage}</span>
 
-      <label className='popup__inputname'>{translatedContext.cityServices}<span className='popup__inputname-span'>*</span>
-        <input
-          className='popup__input'
-          name='city'
-          type='text'
-          value={city}
-          //onInput={handleCityChange}
-          onChange={handleCityChange}
-        ></input>
-      </label>
-      <span className='popup__inputmistake'>{errorPriceMessage}</span>
+      {isPriceSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{priceErrorMessage}</span>
+      }
+
+      <select 
+        className='addAdPage__select' 
+        onChange={handleCityChange}
+        value={city}
+      >
+        <option value="">{translatedContext.place}</option>
+
+          {language === 'rus' ?
+            cities.rus.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+            
+            :
+            cities.en.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+          }
+      </select>
+
+      {isCitySelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.picture}</label>
       <button 
@@ -415,7 +412,7 @@ return (
 
       <span className='popup__inputmistake'>{errorImgMessage}</span>
       <button 
-        className= 'popup__btn_active'
+        className= {isValid? 'popup__btn_active' : 'add-ad-popup__btn'}
         type='submit'
         disabled={!isValid}
       >
