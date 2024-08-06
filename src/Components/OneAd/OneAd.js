@@ -85,8 +85,8 @@ function OneAd({
     // Пример использования
     //const itemCreatedAt = "2024-02-09T07:04:05.187Z"; // Полученное время из базы данных
     const formattedTime = formatDate(item.created_at)
-    const strTitle = item.title
-    const strCity = item.city
+    const strTitle = item.title //{strTitle[0].toUpperCase() + strTitle.slice(1)}
+    const strCity = item.city //{strCity[0].toUpperCase() + strCity.slice(1)}
 
     return(
         <li className="oneAdd__container">
@@ -97,15 +97,15 @@ function OneAd({
               <div className="oneAdd__badge-free">{translatedContext.free}</div>  
             }
             
-            <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{strTitle[0].toUpperCase() + strTitle.slice(1)}</Link>
+            <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
             <div className="oneAdd__pic-and-info-container">
-            <div className="oneAdd__main-pic-wrapper">
+              <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {image.length?
                   <img className="oneAdd__main-pic" alt = {item.title} src={image[0].location}></img>
                 : 
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
-            </div>
+              </Link>
             
             <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
@@ -124,7 +124,7 @@ function OneAd({
                     : <></>}
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
-                <p className="oneAdd__city">{strCity[0].toUpperCase() + strCity.slice(1)}</p>
+                <p className="oneAdd__city">{item.city}</p>
                 {isLoggin && (currentUser.user_id !== item.owner_id) ?
                     <button className="oneAdd__btn" onClick={handleAddMessagePopupOpen}>
                       <div className="oneAdd__message-btn"></div>

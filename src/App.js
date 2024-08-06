@@ -64,18 +64,23 @@ function App() {
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('')
 
-  const [lastMessages, setLastMessages] = React.useState([])
   const [coversations, setCoversations] = React.useState([])
+  const [userNameForOneConversationPopup, setUserNameForOneConversationPopup] = React.useState({})
+  
   
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
+
+  const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
 
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
   //const hideAds = () => setLimit(3);
   const userId = currentUser.user_id
+  const adСount = currentUser.ad_count
+
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -128,9 +133,10 @@ function App() {
   }
 
   React.useEffect(()=>{
-    //getAllImagesForItems()
+    getAllImagesForItems()
     getCategory()
     getAllItems()
+    //getUnreadbleMessages(userId)
   },[])
 
 
@@ -193,6 +199,7 @@ function App() {
       const favorite_collector_id = res.user.user_id
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
+      getUnreadbleMessages(res.user.user_id)
     })  
     .catch((err) => {
       if(err == 401) {
@@ -212,6 +219,7 @@ function App() {
   }
 
   function handleAddAdSubmit(data) {
+    adCountIncrement(userId)
     const { formData, ...otherData } = data;
     Api.createItem(otherData)
     .then((res)=> {
@@ -252,6 +260,30 @@ function App() {
     })
   }
 
+
+//adCountIincrement
+//adCountDecrement
+
+function adCountIncrement(userId) {
+  Api.adCountIncrement(userId)
+  .then((res)=> {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
+function adCountDecrement(userId) {
+  Api.adCountDecrement(userId)
+  .then((res)=> {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
   function getItemById(item_id) {
     Api.getItemById(item_id)
     .then((res)=> {
@@ -279,6 +311,7 @@ function App() {
       setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
+      adCountDecrement(userId)
     })
     .catch((err) => {
       console.log(err)
@@ -325,7 +358,6 @@ function App() {
   }
 
   //createMessage
-
   function addNewMessage(message_text) {
     Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
@@ -341,17 +373,9 @@ function App() {
   function createNewMessageFromConversationPopup(receiver_id, item_id, message_text) {
     Api.addMessage({receiver_id, sender_id: userId, item_id, message_text}) 
     .then((res) => {
-      setCoversations([res, ...coversations])
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
-  function getLastMessageFromEveryConversation(id) {
-    Api.getLastMessageFromEveryConversation(Number(id))
-    .then((res) => {
-      setLastMessages(res)
+      //setCoversations([res, ...coversations])
+      //setCoversations([...coversations, res]);
+      getOneConversation(receiver_id, userId, item_id)
     })
     .catch((err) => {
       console.log(err)
@@ -359,9 +383,11 @@ function App() {
   }
 
   function getOneConversation(r_id, s_id, i_id) {
-    Api.getOneConversation(r_id, s_id, i_id)
+    Api.getOneConversation(r_id, s_id, i_id, userId)
     .then((res) => {
-      setCoversations(res)
+      setCoversations(res.messages)
+      setUserNameForOneConversationPopup(res.user.username)
+      console.log(res) ////////delete userId and res.messages
     })
     .catch((err) => {
       console.log(err)
@@ -369,7 +395,7 @@ function App() {
   }
 
   function deleteOneMessage(message_id) {
-    Api.deleteMessage({message_id})
+    Api.deleteMessage(message_id)
     .then((res) => {
       setCoversations((state) => state.filter((item) => item.message_id !== message_id))
     })
@@ -378,6 +404,26 @@ function App() {
     })
   }
 
+  function markMessagesAsRead( r_id, s_id, i_id ) {
+    Api.markMessagesAsRead(r_id, s_id, i_id, userId)
+    .then((res) => {
+      getUnreadbleMessages(userId)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function getUnreadbleMessages(userId) {
+    Api.getUnreadbleMessages(userId)
+    .then((res) => {
+      setUnreadbleMessages(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+  
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
@@ -391,13 +437,14 @@ function App() {
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-
+///////добавить юзер нейм , чтобы выводить имя отправителя в сообщении
   function openOneConversationPopup(r_id, s_id, i_id) {
     setIsOneConversationPopup(true)
 
     setReceiver_idForOneConversationPopup(r_id)
     setSender_idForOneConversationPopup(s_id) 
     setItem_idForOneConversationPopup(i_id)
+
   }
 
   function openFirstMessagePopup(receiver_id, item_id) {
@@ -418,9 +465,15 @@ function App() {
   }
 
   function handleChoiceOfProductOrServicePopupClick(){
-    setIsChoiceOfProductOrServicePopup(true)
+    if (adСount > 1) {
+      setSuccessfulActionPopup(true)
+      setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${adСount}`)
+      console.log(adСount)
+    } else {
+      setIsChoiceOfProductOrServicePopup(true)
+      console.log(currentUser)
+    }
   }
-
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
@@ -444,7 +497,12 @@ function App() {
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
     <div className='App'>
-      <Header isLoggin={isLoggin} onAdPopup={handleChoiceOfProductOrServicePopupClick}></Header>
+      <Header 
+        isLoggin={isLoggin} 
+        onAdPopup={handleChoiceOfProductOrServicePopupClick}
+        unreadbleMessages={unreadbleMessages}
+        getUnreadbleMessages={getUnreadbleMessages}
+      />
 
       <Routes>
         <Route
@@ -597,12 +655,9 @@ function App() {
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyMessages
-                getLastMessageFromEveryConversation={getLastMessageFromEveryConversation}
-                lastMessages={lastMessages}
-
                 getOneConversation={getOneConversation}
-
                 openOneConversationPopup={openOneConversationPopup}
+                markMessagesAsRead={markMessagesAsRead}
               />
             </ProtectedRoute>
           }>  
@@ -677,7 +732,9 @@ function App() {
         receiver_id={receiver_idForOneConversationPopup}
         sender_id={sender_idForOneConversationPopup}
         item_id={item_idForOneConversationPopup}
+        
         coversations={coversations}
+        userName={userNameForOneConversationPopup}
 
         createNewMessage={createNewMessageFromConversationPopup}
         deleteOneMessage={deleteOneMessage}

@@ -13,6 +13,16 @@
     }
 }
 
+@media screen and (max-width: 500px) {
+    .MainSearchEngine-form {
+        flex-direction: column;
+        width: calc(100% - 40px);
+        min-width: 300px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
 
 .MainSearchEngine-input {
     width: 75%;
@@ -20,6 +30,16 @@
     border-radius: 10px;
     border: 1px solid black;
     padding-left: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .MainSearchEngine-input {
+        /*width: calc(100% - 40px);
+        width: 300px;
+        min-width: 300px;
+        margin-left: 20px;
+        margin-right: 20px;*/
+    }
 }
 
 .MainSearchEngine-btn {

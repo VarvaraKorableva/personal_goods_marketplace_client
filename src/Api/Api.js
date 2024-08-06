@@ -289,8 +289,8 @@ export const getLastMessageFromEveryConversation = ( user_id ) => {
         .then(checkResponse)
 };
 
-export const getOneConversation = ( receiver_id, sender_id, item_id ) => {
-    return fetch(`${BASE_URL}/messages/getOneConversation/${receiver_id}/${sender_id}/${item_id}`, {
+export const getOneConversation = ( receiver_id, sender_id, item_id, my_user_id ) => {
+    return fetch(`${BASE_URL}/messages/getOneConversation/${receiver_id}/${sender_id}/${item_id}/${my_user_id}`, {
         credentials: 'include',
         method: "GET",
         headers: {
@@ -300,6 +300,20 @@ export const getOneConversation = ( receiver_id, sender_id, item_id ) => {
     })
         .then(checkResponse)
 };
+
+export const getUnreadbleMessages = ( user_id ) => {
+    return fetch(`${BASE_URL}/messages/getUnreadbleMessages/${user_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
+
+///
 
 export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) => {
     return fetch(`${BASE_URL}/messages`, {
@@ -319,23 +333,57 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) =>
         .then(checkResponse)
   };  
 
-  export const deleteMessage = ({message_id}) => {
-    return fetch(`${BASE_URL}/messages`, {
+  export const deleteMessage = (message_id) => {
+    return fetch(`${BASE_URL}/messages/${message_id}`, {
         credentials: 'include',
         method: "DELETE",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-            message_id,
-        })
     })
         .then(checkResponse) 
   };
 
+  export const markMessagesAsRead = ( receiver_id, sender_id, item_id, user_id ) => {
+      
+    return fetch(`${BASE_URL}/messages/markMessagesAsRead/${receiver_id}/${sender_id}/${item_id}/${user_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
 
-///  
+export const adCountIncrement = ( user_id ) => {
+
+    return fetch(`${BASE_URL}/users/adCountIncrement/${user_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
+
+export const adCountDecrement = ( user_id ) => {
+      
+    return fetch(`${BASE_URL}/users/adCountDecrement/${user_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
+
 
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);

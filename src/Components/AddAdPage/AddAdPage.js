@@ -59,6 +59,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   const [isCitySelected, setIsCitySelected] = React.useState(false)
   const [cityErrorMessage, setCityErrorMessage] = React.useState('')
 
+  const [isDescriptionSelected, setIsDescriptionSelected] = React.useState(false)
+  const [descriptionErrorMessage, setDescriptionErrorMessage] = React.useState('')
+
 
   const addItemRef = React.useRef(null);
 
@@ -82,7 +85,19 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   }
 
   function handledesDriptionChange(e) {
-    setDescription(e.target.value)
+    if(e.target.value.length > 900) {
+      setIsDescriptionSelected(false)
+      setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
+    } else if(e.target.value) {
+      console.log(e.target.value.length)
+      setIsDescriptionSelected(true)
+      setDescriptionErrorMessage('')
+      setDescription(e.target.value)
+    } else {
+      setIsDescriptionSelected(true)
+      setDescriptionErrorMessage('')
+      setDescription('')
+    }
   }
 
   function handleSubmit(e) {
@@ -151,7 +166,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
       setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
       setTitle('')
     }else {
-      const str = e.target.value
       setTitle(e.target.value)
       setIsTitleSelected(true)
       setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
@@ -250,22 +264,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
 
         haveSecondSubCategory?
 
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected)?
+            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected && isDescriptionSelected)?
               setIsValid(true)
             :
               setIsValid(false)
         :
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected)?
+            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isDescriptionSelected)?
               setIsValid(true)
             :
               setIsValid(false)      
     :
-      (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected)?
+      (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isDescriptionSelected)?
         setIsValid(true)
       :
         setIsValid(false) 
 
-  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected])
+  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected, isDescriptionSelected])
   
   
 return (
@@ -300,8 +314,8 @@ return (
         <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
       }
 
-    {isCategorySelected && haveSubCategory?
-    <>
+      {isCategorySelected && haveSubCategory?
+      <>
       <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
       <select className='addAdPage__select' onChange={handleSubCategoryChange}>
         <option value="">{translatedContext.choiseASubCategory}</option>
@@ -379,15 +393,20 @@ return (
       }
 
       <label className='popup__inputname'>{translatedContext.description}
-        <input
+        <textarea
           className='popup__input'
           name='description'
           type='text'
           value={description}
           onChange={handledesDriptionChange}
-        ></input>
+        ></textarea>
       </label>
-      <span className='popup__mistake-msg'></span>
+
+      {isDescriptionSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{descriptionErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.price}<span className='popup__inputname-span'>*</span>
         <input
@@ -405,7 +424,11 @@ return (
         <span className='popup__mistake-msg'>{priceErrorMessage}</span>
       }
 
-      <select className='addAdPage__select' onChange={handleCityChange}>
+      <select 
+        className='addAdPage__select' 
+        onChange={handleCityChange}
+        value={city}
+      >
         <option value="">{translatedContext.place}</option>
 
           {language === 'rus' ?
@@ -458,22 +481,3 @@ return (
 }
 
 export default AddAdPage;
-
-/*
-
-      <label className='popup__inputname'>{translatedContext.place}<span className='popup__inputname-span'>*</span>
-        <input
-          className='popup__input'
-          name='city'
-          type='text'
-          value={city}
-          onChange={handleCityChange}
-        ></input>
-      </label>
-
-      {isCitySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
-      }
-*/
