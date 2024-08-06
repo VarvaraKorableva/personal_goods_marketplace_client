@@ -10,8 +10,23 @@
     align-items: center;
     width: 800px;
     margin: auto;
+    
     margin-top: 0;
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .message__wrapper {
+        width: calc(100% - 80px); 
+        margin: 40px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .message__wrapper {
+        width: calc(100% - 40px); 
+        margin: 20px;
+    }
 }
 
 .message__container {
@@ -151,12 +166,12 @@
     }
 }
 
-.message__wrapper {
+.one-message__wrapper {
     width: 80%;
 }
 
 @media screen and (max-width: 450px) {
-    .message__wrapper {
+    .one-message__wrapper {
         width: 70%; 
     }
 }

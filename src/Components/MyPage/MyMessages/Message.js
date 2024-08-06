@@ -28,7 +28,7 @@ function Message({message, openOneConversationPopup, markMessagesAsRead}) {
                         </div>
                     }
                 </div>
-                <div className="message__wrapper">
+                <div className="one-message__wrapper">
                     <div className="message__item-info-container">
                         {message.item_owner_id === userId && message.receiver_id === userId? 
                             <p className="message__sender-name">{message.sender_username}</p> 

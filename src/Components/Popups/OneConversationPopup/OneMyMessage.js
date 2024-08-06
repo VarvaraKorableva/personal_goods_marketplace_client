@@ -11,29 +11,25 @@ function OneMyMessage({message, deleteOneMessage, userName}) {
     }
 
     return(
-        <li 
-          className={message.sender_id === userId? "oneConversationPopup__oneMessage_user" : "oneConversationPopup__oneMessage"}
-        >
+        <>
+        {message.sender_id === userId?
 
-          {message.sender_id === userId? 
-            <></>
-          :
-            <p className='oneConversationPopup__userName'>{userName} :</p>
-          }
-
-          <p>{message.message_text}</p>
-
-          {message.sender_id === userId? 
-            <button 
-                className='oneConversationPopup__deleteBtn'
-                onClick={onMessagesDelete}
-            >
-                Удалить
-            </button>
-          :
-            <></>
-          }
+        <li className='oneConversationPopup__oneMessage_user'>
+          <p className='oneConversationPopup__text'>{message.message_text}</p>
+          <button 
+            className='oneConversationPopup__deleteBtn'
+            onClick={onMessagesDelete}
+          >
+            Удалить
+          </button>
         </li>
+        :
+        <li className='oneConversationPopup__oneMessage'>
+          <p className='oneConversationPopup__userName'>{userName} :</p>
+          <p className='oneConversationPopup__text'>{message.message_text}</p>
+        </li>
+        }
+        </>
     )
 }
 

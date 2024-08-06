@@ -52,8 +52,17 @@
       cursor: pointer;
       transition: 0.5s ease;
       position: absolute;
-      right: -30px;
-      top: -10px;
+      right: 10px;
+      top: 10px;
+    } 
+
+    @media screen and (max-width: 500px) {
+      .popup__close-button {
+        right: 5px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+      }
     } 
     
     .popup__close-button:hover {
@@ -500,6 +509,18 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .oneConversationPopup__wrapper {
+    width: calc(300px - (15px*2));
+    margin: auto;
+
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+}
+
 .oneConversationPopup__form {
   height: fit-content;
   display: flex;
@@ -517,6 +538,12 @@
 
   resize: none;
   
+}
+
+@media screen and (max-width: 500px) {
+  .oneConversationPopup__textarea {
+    width: calc(300px - (30px*2));
+  }
 }
 
 .oneConversationPopup__submit-btn {
@@ -562,12 +589,10 @@
   margin-bottom: 5px;
   padding: 20px;
   border-radius: 50px 50px 0 50px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: relative;
+  align-items: flex-start;
 }
 
 .oneConversationPopup__oneMessage {
@@ -584,7 +609,8 @@
   padding: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
 
   position: relative;
 }
@@ -597,12 +623,34 @@
   padding: 5px;
   font-size: 10px;
   background-color: transparent;
-
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  align-self: flex-end;
 }
 
 .oneConversationPopup__userName {
   color: #fff;
+  margin: 0;
+  text-align: start;
+  width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: start;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px) {
+  .oneConversationPopup__userName {
+    font-size: 12px;
+    width: 100px;
+  }
+}
+
+.oneConversationPopup__text {
+  text-align: start;
+}
+
+@media screen and (max-width: 500px) {
+  .oneConversationPopup__text {
+    font-size: 12px;
+  }
 }
