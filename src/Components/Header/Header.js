@@ -5,7 +5,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 
-function Header({isLoggin, onAdPopup}) {
+function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages}) {
   
 const currentUser = React.useContext(CurrentUserContext)
 
@@ -18,6 +18,10 @@ const { language, changeLanguage } = React.useContext(LanguageContext)
 const handleLanguageChange = (newLanguage) => {
   changeLanguage(newLanguage);
 };
+
+function handleGetUnreadbleMessages() {
+  getUnreadbleMessages(userId)
+}
 
 const { en, rus, hebrew } = choose;
 
@@ -32,6 +36,7 @@ if (language === 'en') {
 
 function handleAddAdClick() {
   onAdPopup()
+  getUnreadbleMessages(userId)
 }
 
 return (
@@ -46,23 +51,27 @@ return (
           
           <button className='header_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
           
-          <Link to={`/users/${userId}`} className='header_link'>
+          <Link to={`/users/${userId}`} className='header_link' onClick={handleGetUnreadbleMessages}>
             <button className='header_add-announcement-btn'>{translatedContext.mypage}</button>
           </Link>
 
-          <Link  to={`/my_favorites`} className='header_link'>
+          <Link  to={`/my_favorites`} className='header_link' onClick={handleGetUnreadbleMessages}>
             <button className='header_favorite-btn'></button>
           </Link>
 
           <Link to={`/users/${userId}/messages`} className='header_link header_link-message-container'>
             <button className='header__message-pic'></button>
-            <div className='header__messages-badge'>2</div>
+            {unreadbleMessages.length > 0? 
+                <div className='header__messages-badge'>{unreadbleMessages.length}</div>
+                :
+                <></>
+            }     
           </Link>
         </div>
       :  
       isLoggin ?
         <div className='header_wrapper'>
-          <Link to={`/users/`} className='header_login-link'>
+          <Link to={`/users/`} className='header_login-link' onClick={handleGetUnreadbleMessages}>
             <p className='header_login-link'>{translatedContext.mypage}</p>
           </Link>
         </div>

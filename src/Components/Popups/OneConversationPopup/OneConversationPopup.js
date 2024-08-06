@@ -1,14 +1,25 @@
 import '../Popups.css'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
+import OneMyMessage from './OneMyMessage'
 
-function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage}) {
+function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName}) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
     const [messageText, setMessageText] = useState('')
     const [isMessageText, setIsMessageText] = useState(false)
+    const [messageTextErrorMessage, setMessageTextErrorMessage] = useState('')
     const [isValid, setIsValid] = useState(false)
+
+    const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+        // Прокрутка контейнера до самого низа при открытии попапа
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [coversations]);
 
 
     useEffect(() => {
@@ -25,19 +36,23 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
             createNewMessage(receiver_id, item_id, messageText)
 
         setMessageText('')
+        setIsMessageText(false)
     }
 
     function handleTextChanged(e) {
-        if(e.target.value) {
+        if(e.target.value.length > 400){
+            setIsMessageText(false)
+            setMessageText(e.target.value)
+            setMessageTextErrorMessage('Максимально количество символов 400')
+
+        } else if(e.target.value) {
             setMessageText(e.target.value)
             setIsMessageText(true)
+            setMessageTextErrorMessage('')
         } else {
             setIsMessageText(false)
+            setMessageText(e.target.value)
         }
-    }
-
-    function handleMessageDelete(message_id) {
-        deleteOneMessage(message_id)
     }
 
     useEffect(()=>{
@@ -47,10 +62,6 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
             setIsValid(false)
         }
     },[isMessageText])
-/*
-    console.log(coversations)
-    const revConv = coversations.reverse()
-    console.log(revConv)*/
 
     return(
         <div className={`popup ${isOpen && 'popup__opened'}`}>
@@ -62,35 +73,39 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
             </button>
     
             <div className="oneConversationPopup__wrapper">
+                
             <ul className="oneConversationPopup__messages-container">
                 {coversations.map((message) =>(
                     
-                        <li 
-                            className={message.sender_id == userId? "oneConversationPopup__oneMessage_user" : "oneConversationPopup__oneMessage"}
-                            key={message.message_id}
-                            >
-                            <p>{message.message_text}</p>
-
-                            {message.sender_id == userId? 
-                                <button 
-                                    className='oneConversationPopup__deleteBtn'
-                                    onClick={() => handleMessageDelete(message.message_id)}
-                                >
-                                    Удалить
-                                </button>
-                            :
-                                <></>
-                        }
-                        </li>
+                  <OneMyMessage 
+                    key={message.message_id}
+                    message={message}
+                    deleteOneMessage={deleteOneMessage}
+                    userName={userName}
+                  />
                         
-                    
                 ))}
+
+                <div ref={messagesEndRef} />
             </ul> 
 
             <form onSubmit={handleCreateNewMessage} className="oneConversationPopup__form">
-                <textarea onChange={handleTextChanged} className="oneConversationPopup__textarea"></textarea>
+                <textarea 
+                    onChange={handleTextChanged} 
+                    className="oneConversationPopup__textarea"
+                    value={messageText}
+                >
+                </textarea>
+
+                {isMessageText?
+                    <span className='popup__mistake-msg'></span>
+                : 
+                    <span className='popup__mistake-msg'>{messageTextErrorMessage}</span>
+                }
+
                 <button type='submit' className={isValid?"oneConversationPopup__submit-btn_active":"oneConversationPopup__submit-btn"} disabled={!isValid}>Ответить</button>
             </form>
+
             </div>
         </div>
         </div>

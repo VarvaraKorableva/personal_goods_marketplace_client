@@ -395,7 +395,6 @@
   }
 
   .firstMessagePopup__text {
-    /*width: calc(100% - 20px);*/
     width: 90%;
     height: 300px;
     font-size: 14px;
@@ -404,7 +403,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    
+    resize: none;
   }
 
   .firstMessagePopup__btn {
@@ -480,7 +479,7 @@
   justify-content: center;
   align-items: center;
 
-  width: calc(430px - (36px*2));
+  width: calc(500px - (36px*2));
   /*min-height: calc(330px - (34px + 37px));*/
   height: fit-content;
   
@@ -492,6 +491,13 @@
   padding-right: 36px;
   padding-bottom: 37px;
   padding-top: 34px;
+}
+
+@media screen and (max-width: 600px) {
+  .oneConversationPopup__wrapper {
+    width: calc(400px - (36px*2));
+    margin: auto;
+  }
 }
 
 .oneConversationPopup__form {
@@ -508,6 +514,8 @@
   padding: 10px;
   width: 100%;
   min-height: 60px;
+
+  resize: none;
   
 }
 
@@ -545,8 +553,9 @@
 .oneConversationPopup__oneMessage_user {
   align-self: flex-end;
   width: 50%;
-  min-height: 80px;
-  height: fit-content;
+  
+  min-height: fit-content;
+  
   background-color: rgb(220, 172, 230);
   color:rgba(0, 0, 0, 0.6);
   list-style-type: none;
@@ -564,8 +573,9 @@
 .oneConversationPopup__oneMessage {
   align-self: flex-start;
   width: 50%;
-  height: fit-content;
-  min-height: 80px;
+  
+  min-height: fit-content;
+  
   background-color: rgb(94, 187, 204);
   color:rgba(0, 0, 0, 0.6);
   list-style-type: none;
@@ -575,6 +585,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 }
 
 .oneConversationPopup__deleteBtn {
@@ -589,4 +601,8 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+
+.oneConversationPopup__userName {
+  color: #fff;
 }

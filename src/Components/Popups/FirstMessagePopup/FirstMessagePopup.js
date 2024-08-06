@@ -22,14 +22,15 @@ function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
 
     function handleCreateNewMessage(e) {
         e.preventDefault()
+        createNewMessage(messageText)
         setIsMessageText(false)
         setMessageText('')
-        createNewMessage(messageText)
     }
 
     function handleMessageText(e) {
-      if(e.target.value == '') {
+      if(!e.target.value) {
         setIsMessageText(false)
+        setMessageText('')
       }else {
         setIsMessageText(true)
         setMessageText(e.target.value)

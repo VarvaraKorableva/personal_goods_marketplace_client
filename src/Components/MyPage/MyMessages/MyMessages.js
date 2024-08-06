@@ -2,14 +2,27 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from "react";
 import Message from './Message'
 import './MyMessages.css'
+import * as Api from '../../../Api/Api'
+import React from 'react'
 
-function MyMessages({getLastMessageFromEveryConversation, lastMessages, getOneConversation, openOneConversationPopup}) {
-    
+function MyMessages({ getOneConversation, openOneConversationPopup, markMessagesAsRead }) {
+    const [lastMessages, setLastMessages] = React.useState({})
     const userId = useParams()
-
+    
     useEffect(()=>{
         getLastMessageFromEveryConversation(userId.userId)
     },[])
+
+    function getLastMessageFromEveryConversation(userId) {
+        Api.getLastMessageFromEveryConversation(userId)
+        .then((res) => {
+          setLastMessages(res)
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
 
     return(
         <section className="my-messages__section">
@@ -22,6 +35,7 @@ function MyMessages({getLastMessageFromEveryConversation, lastMessages, getOneCo
                             message={item}
                             getOneConversation={getOneConversation}
                             openOneConversationPopup={openOneConversationPopup}
+                            markMessagesAsRead={markMessagesAsRead}
                         />
                     ))}
       
