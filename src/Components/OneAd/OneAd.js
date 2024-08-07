@@ -65,7 +65,7 @@ function OneAd({
     
         // Если дата равна текущей дате, выводим "сегодня"
         if (formattedDate.getTime() === formattedCurrentDate.getTime()) {
-            return `${translatedContext.postedToday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedToday}`;
         }
     
         // Получаем дату вчерашнего дня
@@ -74,7 +74,7 @@ function OneAd({
     
         // Если дата равна вчерашней дате, выводим "вчера"
         if (formattedDate.getTime() === yesterday.getTime()) {
-            return `${translatedContext.postedYesterday} ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            return `${translatedContext.postedYesterday}`;
         }
     
         // Иначе выводим полную дату
@@ -98,6 +98,7 @@ function OneAd({
             }
             
             <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
+
             <div className="oneAdd__pic-and-info-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {image.length?
@@ -107,7 +108,7 @@ function OneAd({
                 }
               </Link>
             
-            <div className="oneAdd__text-container">
+              <div className="oneAdd__text-container">
                 <div className="oneAdd__title-and-like-container">
                     
                     {isLoggin? 

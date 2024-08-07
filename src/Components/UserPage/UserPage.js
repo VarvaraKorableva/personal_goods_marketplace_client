@@ -25,7 +25,7 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
             
 
             <div>
-                <h3>All ads</h3>
+                <h3>Все объявления {userInfo[0].username}</h3>
                 <ul className="userPage-listings-container">
                     {myAds.map((item) => (
                         <OneAd 

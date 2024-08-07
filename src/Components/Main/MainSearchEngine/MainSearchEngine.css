@@ -10,14 +10,15 @@
 @media screen and (max-width: 550px) {
     .MainSearchEngine-form {
         flex-direction: column;
+        margin-bottom: 0;
+        margin-top: 40px;
     }
 }
 
 @media screen and (max-width: 500px) {
     .MainSearchEngine-form {
-        flex-direction: column;
         width: calc(100% - 40px);
-        min-width: 300px;
+        min-width: 260px;
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -26,6 +27,7 @@
 
 .MainSearchEngine-input {
     width: 75%;
+    
     height: 30px;
     border-radius: 10px;
     border: 1px solid black;
@@ -34,11 +36,7 @@
 
 @media screen and (max-width: 500px) {
     .MainSearchEngine-input {
-        /*width: calc(100% - 40px);
-        width: 300px;
-        min-width: 300px;
-        margin-left: 20px;
-        margin-right: 20px;*/
+        width: 100%;
     }
 }
 
@@ -55,4 +53,10 @@
 
 .MainSearchEngine-btn:hover {
     opacity: 0.8;
+}
+
+@media screen and (max-width: 550px) {
+    .MainSearchEngine-btn {
+        width: 40%;
+    }
 }

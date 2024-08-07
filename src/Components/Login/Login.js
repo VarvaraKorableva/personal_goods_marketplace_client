@@ -3,8 +3,9 @@ import './Login.css'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Login'
 import { Link } from 'react-router-dom'
+import Preloader from '../../Components/Preloader/Preloader'
 
-function Login({ isLoginError, onLogin }) {
+function Login({ isLoginError, onLogin, isLoading }) {
 
 const [isValid, setIsValid] = React.useState(false)
 
@@ -16,9 +17,6 @@ const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
 
 const [errorEmail, setErrorEmail] = React.useState(true)
 const [errorPassword, setErrorPassword] = React.useState(true)
-
-//const [errorLoginMessage, setErrorLoginMessage] = React.useState('')
-////setErrorLoginMessage(translatedContext.errors.authenticationError)
 
 const { language } = React.useContext(LanguageContext)
 
@@ -86,6 +84,9 @@ const { language } = React.useContext(LanguageContext)
 
   return (
     <section className='login'>
+      {isLoading? 
+        <Preloader/>
+      :
       <form className='login__form' onSubmit={handleSubmit}>
         <h2 className='login__title'>{translatedContext.title}</h2>
 
@@ -130,7 +131,8 @@ const { language } = React.useContext(LanguageContext)
               <Link className='login__entrylink' to="/signup"> {translatedContext.signUp}</Link>
             </p>
           </div>
-      </form>
+        </form>
+      }
     </section>
   )
 }

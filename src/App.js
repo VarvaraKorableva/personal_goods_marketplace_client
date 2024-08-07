@@ -13,6 +13,8 @@ import MyPage from './Components/MyPage/MyPage'
 import MyMessages from './Components/MyPage/MyMessages/MyMessages'
 //import OneMessagePage from './Components/MyPage/MyMessages/OneMessagePage'
 import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
+import Preloader from './Components/Preloader/Preloader'
+
 import './App.css'
 
 import AddAdPage from './Components/AddAdPage/AddAdPage'
@@ -24,6 +26,7 @@ import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOr
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
 import OneConversationPopup from './Components/Popups/OneConversationPopup/OneConversationPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
+import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup'
 import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
 
 function App() {
@@ -35,6 +38,7 @@ function App() {
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
   const [isOneConversationPopup, setIsOneConversationPopup] = React.useState(false)
+  const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
   
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
@@ -74,6 +78,8 @@ function App() {
 
   const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
 
+  const [isLoading, setIsLoading] = React.useState(false) 
+
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
@@ -84,42 +90,55 @@ function App() {
   const navigate = useNavigate()
 
   async function getCategory() {
+    openLoading()
     try {
       const res = await Api.getCategory();
       setCategories(res);
       setCategoriesToRender(res);
+      closeLoading()
     } catch (err) {
       console.log(err);
+      closeLoading()
     }
+
   }
 
   async function getAllItems() {
+    openLoading()
     try {
       const res = await Api.getAllItems();
       setLastFoutryItems(res)
-      setItemsAfterSearch(res)   
+      setItemsAfterSearch(res) 
+      closeLoading() 
     } catch (err) {
       console.log(err);
+      closeLoading()
     }
   }
 
   async function getItemsByCategoryCategoryId(category_id) {
+    openLoading()
     try {
       const res = await Api.getItemsByCategory(category_id)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
+      closeLoading()
     } catch (err) {
       console.log(err);
+      closeLoading()
     }
   }
 
   async function getItemsByParentId(parent_id) {
+    openLoading()
     try {
       const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
+      closeLoading()
     } catch (err) {
       console.log(err);
+      closeLoading()
     }
   }
 
@@ -162,13 +181,13 @@ function App() {
   }
 
   function handleRegSubmit(userData) {
+    openLoading()
     setIsRegError(false)
     Api.register({
       username:userData.username,
       email: userData.email,
       password: userData.password,
     })
-    
     .then((data) => {
       setIsRegError(false)
       setCurrentUser(data.user)
@@ -177,15 +196,18 @@ function App() {
       setIsLoggin(true)
       localStorage.setItem('isLogin', true)
       navigate(`/`)
+      closeLoading()
     })  
     .catch((err) => {
       if(err == 400) {
         setIsRegError(true)
+        closeLoading()
       }
     })
   }
 
   function handleLoginSubmit(userData){
+    openLoading()
     Api.authorize({
       password: userData.password, 
       email: userData.email
@@ -200,8 +222,10 @@ function App() {
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
       getUnreadbleMessages(res.user.user_id)
+      closeLoading()
     })  
     .catch((err) => {
+      closeLoading()
       if(err == 401) {
         setIsLoginError(true)
         setTimeout(function(){
@@ -212,13 +236,20 @@ function App() {
   }
 
   function getMyItems(owner_id) {
+    openLoading()
     Api.getUserItems(owner_id)
     .then((res) => {
       setMyAds(res)
+      closeLoading()
+    })
+    .catch((err) => {
+      console.log(err)
+      closeLoading()
     })
   }
 
   function handleAddAdSubmit(data) {
+    openLoading()
     adCountIncrement(userId)
     const { formData, ...otherData } = data;
     Api.createItem(otherData)
@@ -234,6 +265,7 @@ function App() {
           setPopupMessage("Ad added successful!")
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
+          closeLoading()
         })
         .then(()=> {
           getAllItems()
@@ -244,19 +276,21 @@ function App() {
           closeAllPopups()
           setPopupMessage("Something wrong, plese try again")
           openSuccessfulActionPopup()
-          
+          closeLoading()
         })
       }else {
           closeAllPopups()
           setPopupMessage("Ad added successful!")
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
+          closeLoading()
       }
     })
     .catch((err)=> {
       closeAllPopups()
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage("Something wrong, please try again")
       openSuccessfulActionPopup()
+      closeLoading()
     })
   }
 
@@ -285,26 +319,34 @@ function adCountDecrement(userId) {
 }
 
   function getItemById(item_id) {
+    openLoading()
     Api.getItemById(item_id)
     .then((res)=> {
       setSelectedItem(res)
+      setIsLoading(false)
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   function getUserById(user_id) {
+    openLoading()
     Api.getUserById(user_id)
     .then((res) => {
       setUserInfo(res)
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   function deleteMyAd(item_id) {
+    openLoading()
     Api.deleteItem(item_id)
     .then((res) => {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
@@ -312,38 +354,48 @@ function adCountDecrement(userId) {
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
       adCountDecrement(userId)
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   function addToFavorites(favorite_collector_id, item_id, item) {
+    openLoading()
     Api.addToFavoritesServer({ favorite_collector_id, item_id })
       .then((res) => {
         setFovorite([res, ...favorite])
         setFavoriteItems([item, ...favoriteItems]);
+        closeLoading()
       })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
  
   function deleteFromFavorites(favItem) {
+    openLoading()
     Api.deleteFromFavoritesServer(favItem.item_id)
       .then((res) => {
         setFovorite((state) => 
           state.filter((item) => 
           item.item_id !== favItem.item_id)
+          
         )
         setFavoriteItems((state) => state.filter((item) => item.item_id !== favItem.item_id));
+        closeLoading()
       })
       .catch((err) => {
         console.log(err)
+        closeLoading()
       })
   }
 
   function getMyFavorites(favorite_collector_id) {
+    openLoading()
     Api.getMyFavorites(favorite_collector_id)
     .then((res) => {
       setFovorite(res)
@@ -351,56 +403,76 @@ function adCountDecrement(userId) {
       res.some(favoriteItem => favoriteItem.item_id === item.item_id)
       );
       setFavoriteItems(favoriteItemsResult);
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   //createMessage
   function addNewMessage(message_text) {
+    openLoading()
     Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
     .then((res) => {
+      closeAllPopups()
       setCoversations([res, ...coversations])
       setReceiverId('')
       setItemId('')
+      closeLoading()
+      setSuccessfulActionPopup(true)
+      setPopupMessage('Сообщение отправлено')
+
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
+      closeAllPopups()
+      setSuccessfulActionPopup(true)
+      setPopupMessage('Что-то пошло не так :(')
     })
   }
 
   function createNewMessageFromConversationPopup(receiver_id, item_id, message_text) {
+    openLoading()
     Api.addMessage({receiver_id, sender_id: userId, item_id, message_text}) 
     .then((res) => {
       //setCoversations([res, ...coversations])
       //setCoversations([...coversations, res]);
       getOneConversation(receiver_id, userId, item_id)
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   function getOneConversation(r_id, s_id, i_id) {
+    openLoading()
     Api.getOneConversation(r_id, s_id, i_id, userId)
     .then((res) => {
       setCoversations(res.messages)
       setUserNameForOneConversationPopup(res.user.username)
-      console.log(res) ////////delete userId and res.messages
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
   function deleteOneMessage(message_id) {
+    openLoading()
     Api.deleteMessage(message_id)
     .then((res) => {
       setCoversations((state) => state.filter((item) => item.message_id !== message_id))
+      closeLoading()
     })
     .catch((err) => {
       console.log(err)
+      closeLoading()
     })
   }
 
@@ -434,23 +506,36 @@ function adCountDecrement(userId) {
     setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
+  //setIsLoading(false)
+
+  function openLoading() {
+    setIsLoading(true)
+  }
+
+  function closeLoading() {
+    setIsLoading(false)
+  }
+
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-///////добавить юзер нейм , чтобы выводить имя отправителя в сообщении
+
   function openOneConversationPopup(r_id, s_id, i_id) {
     setIsOneConversationPopup(true)
 
     setReceiver_idForOneConversationPopup(r_id)
     setSender_idForOneConversationPopup(s_id) 
     setItem_idForOneConversationPopup(i_id)
-
   }
 
   function openFirstMessagePopup(receiver_id, item_id) {
     setIsFirstMessagePopup(true)
     setReceiverId(receiver_id) 
     setItemId(item_id)
+  }
+
+  function openBurgerMenuPopup() {
+    setIsBurgerMenuPopup(true)
   }
 
   function handleAddAdClick(data){
@@ -481,6 +566,7 @@ function adCountDecrement(userId) {
     setIsFirstMessagePopup(false)
     setPopupMessage("")
     setIsOneConversationPopup(false)
+    setIsBurgerMenuPopup(false)
   }
 
   function handleLogout() {
@@ -502,6 +588,7 @@ function adCountDecrement(userId) {
         onAdPopup={handleChoiceOfProductOrServicePopupClick}
         unreadbleMessages={unreadbleMessages}
         getUnreadbleMessages={getUnreadbleMessages}
+        onOpenBurgerMenuPopup={openBurgerMenuPopup}
       />
 
       <Routes>
@@ -511,6 +598,7 @@ function adCountDecrement(userId) {
         <Registration 
           onRegister={handleRegSubmit}
           isRegError={isRegError}
+          isLoading={isLoading}
         />
         }>
         </Route>
@@ -521,6 +609,7 @@ function adCountDecrement(userId) {
             <Login 
               onLogin={handleLoginSubmit}
               isLoginError={isLoginError}
+              isLoading={isLoading}
             />
           }>
         </Route>
@@ -606,6 +695,7 @@ function adCountDecrement(userId) {
                 onAddAd={handleAddAdSubmit}
                 isLoggin={isLoggin}
                 isGood={isGood}
+                isLoading={isLoading}
               />
             </ProtectedRoute>
           }>
@@ -620,6 +710,7 @@ function adCountDecrement(userId) {
                 onAddAd={handleAddAdSubmit}
                 isLoggin={isLoggin}
                 isGood={isGood}
+                isLoading={isLoading}
               />
             </ProtectedRoute>
           }>
@@ -719,6 +810,15 @@ function adCountDecrement(userId) {
         popupMessage={popupMessage}
       />
 
+      <BurgerMenuPopup 
+        isOpen={isBurgerMenuPopup}
+        onClose={closeAllPopups}
+        isLoggin={isLoggin}
+        getUnreadbleMessages={getUnreadbleMessages}
+        unreadbleMessages={unreadbleMessages}
+        onAdPopup={handleChoiceOfProductOrServicePopupClick}
+      />        
+
       <FirstMessagePopup 
         isOpen={isFirstMessagePopup}
         onClose={closeAllPopups}
@@ -738,6 +838,10 @@ function adCountDecrement(userId) {
 
         createNewMessage={createNewMessageFromConversationPopup}
         deleteOneMessage={deleteOneMessage}
+      />
+
+      <Preloader 
+        isLoading={isLoading}
       />
 
       <Footer handleLogout={handleLogout}></Footer>

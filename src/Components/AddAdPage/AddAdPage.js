@@ -5,7 +5,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import {cities} from '../../const/Cities/cities'
 
-function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
+function AddAdPage({onAddAd, categories, isGood, isLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   
@@ -284,16 +284,18 @@ function AddAdPage({onAddAd, categories, isGood, isLoggin}) {
   
 return (
     <section className="addAdPage__section">
-    <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
-    <form 
-      ref={formRef}
-      className='addAdPage__form'
-      encType="multipart/form-data"
-      onSubmit={handleSubmit}>
-      <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
 
-      <select className='addAdPage__select' onChange={handleSelectChange}>
-        <option value="">{translatedContext.choiseACategory}</option>
+      <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
+      <form 
+        ref={formRef}
+        className='addAdPage__form'
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}>
+
+        <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
+
+        <select className='addAdPage__select' onChange={handleSelectChange}>
+          <option value="">{translatedContext.choiseACategory}</option>
 
           {language === 'rus' ?
             categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
@@ -306,9 +308,9 @@ return (
             ))
           }
 
-      </select>
+        </select>
 
-      {isCategorySelected?
+        {isCategorySelected?
         <span className='popup__mistake-msg'></span>
       : 
         <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
