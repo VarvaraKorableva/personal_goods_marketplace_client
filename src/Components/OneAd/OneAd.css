@@ -6,10 +6,30 @@
     margin: 5px;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 250px;
     align-items: center;
-
     position: relative;
+}
+
+@media screen and (max-width: 900px) {
+    .oneAdd__container {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .oneAdd__container {
+        width: 140px;
+        padding: 8px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .oneAdd__container {
+        width: 130px;
+    }
 }
 
 .oneAdd__text-container {
@@ -44,6 +64,12 @@
 
 .oneAdd__title:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 500px) {
+    .oneAdd__title {
+        font-size: 12px;
+    }
 }
 
 .oneAdd__like-btn {
@@ -139,15 +165,27 @@
     font-size: 12px;
 }
 
+@media screen and (max-width: 500px) {
+    .oneAdd__time {
+        font-size: 10px;
+    }
+}
+
 .oneAdd__pic-and-info-container {
     display: flex;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 500px) {
+    .oneAdd__pic-and-info-container {
+        flex-direction: column;
+    }
+}
+
 .oneAdd__main-pic-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: 1px solid rgb(170, 168, 168);
     border-radius: 10px;
     margin-right: 10px;
@@ -155,6 +193,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+    .oneAdd__main-pic-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .oneAdd__main-pic-wrapper {
+        margin-right: 0;
+    }
 }
 
 .oneAdd__no-pic {
@@ -183,7 +234,7 @@
     border: 1px solid rgb(233, 6, 146);
     position: absolute;
     right: 0;
-    top: -5px;
+    top: -7px;
     /*width: 80px;
     height: 20px;*/
     background-color: rgb(236, 91, 181);/*rgb(243, 43, 166);*/

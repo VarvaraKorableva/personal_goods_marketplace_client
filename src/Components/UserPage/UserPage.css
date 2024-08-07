@@ -41,6 +41,7 @@
     justify-content:space-between; 
     align-items: center;
     margin: auto;
+    padding: 10px;
 }
 
 .userPage-user-info-pic {
@@ -48,8 +49,10 @@
     border: 1px solid grey;
     width: 100px;
     height: 100px;
+
+    
 }
 
 .userPage-user-info-name {
-
+    max-width: 150px;
 }

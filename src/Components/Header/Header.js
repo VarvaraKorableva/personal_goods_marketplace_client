@@ -5,7 +5,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 
-function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages}) {
+function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages, onOpenBurgerMenuPopup}) {
   
 const currentUser = React.useContext(CurrentUserContext)
 
@@ -39,14 +39,22 @@ function handleAddAdClick() {
   getUnreadbleMessages(userId)
 }
 
+function handleOpenBurgerMenuPopup() {
+  onOpenBurgerMenuPopup()
+}
+
 return (
   <div className='header_container'>
     <div className='header'>
     <Link to={`/`} className='header_logo-container'>
-      <h1 className='header_logo'> Personal goods marketplace</h1>
+      <div className='header_logo-img'></div>
+      <h1 className='header_logo'>НужноеНеНужное</h1> {/*Personal goods marketplace */}
     </Link> 
+
+    <button className='header__burger-menu' onClick={handleOpenBurgerMenuPopup}></button>
+
     <div className='header__langpic-container'>
-      {isLoggin ?//&& location.pathname === `/users/`${userId}
+      {isLoggin ?
         <div className='header_wrapper'>
           
           <button className='header_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>

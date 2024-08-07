@@ -1,0 +1,416 @@
+.burgerMenuPopup {
+    visibility: hidden;
+    display: none;
+}
+
+.burgerMenuPopup__opened {
+    display: flex;
+    margin: auto;
+    justify-content: right;
+    align-items: top;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    /*backdrop-filter: blur();*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 1s, opacity 1s;
+  }
+
+
+.burgerMenuPopup__close-btn {
+    background-image: url(../../../images/closeicon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+}
+
+.burgerMenuPopup__container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: fit-content;
+    background-color: #fff;
+    visibility: visible;
+
+    border-radius:  0 0 0 20px;
+}
+
+.burgerMenuPopup_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 25px;
+    background-color: #e4e6e7;
+    height: 50px;
+    
+    width: 100%;
+  }
+  
+  @media screen and (max-width: 980px) {
+    .burgerMenuPopup_container {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .burgerMenuPopup_container {
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 450px) {
+    .burgerMenuPopup_container {
+      margin-bottom: 15px;
+    }
+  }
+  
+  .burgerMenuPopup_logo {
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: none;
+  }
+  
+  @media screen and (max-width: 550px) {
+    .burgerMenuPopup_logo {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+  
+  @media screen and (max-width: 310px) {
+    .burgerMenuPopup_logo {
+      font-size: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 276px) {
+    .burgerMenuPopup_logo {
+      font-size: 8px;
+    }
+  }
+  
+  .burgerMenuPopup_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .burgerMenuPopup_login-link {
+    color: black;
+    cursor: pointer;
+    margin: 0;
+    margin-left: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .burgerMenuPopup_login-link:hover{
+    opacity: 0.5;
+  }
+  
+  @media screen and (max-width: 336px) {
+    .burgerMenuPopup_login-link {
+      font-size: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 319px) {
+    .burgerMenuPopup_login-link {
+      font-size: 8px;
+    }
+  }
+  
+  .burgerMenuPopup_registraion-link {
+    color: black;
+    cursor: pointer;
+    margin: 0;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .burgerMenuPopup_registraion-link:hover{
+    opacity: 0.5;
+  }
+  
+  .burgerMenuPopup_LogOut-btn {
+    color: black;
+    cursor: pointer;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .burgerMenuPopup_LogOut-btn:hover{
+    opacity: 0.5;
+  }
+  
+  @media screen and (max-width: 325px) {
+    .burgerMenuPopup_LogOut-btn {
+      font-size: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 319px) {
+    .burgerMenuPopup_LogOut-btn {
+      font-size: 8px;
+    }
+  }
+  
+  .burgerMenuPopup__langpic:hover {
+    opacity: 0.6;
+    transition: 1s;
+  }
+  
+  .burgerMenuPopup__langpic-container {
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    .burgerMenuPopup__langpic-container {
+      display: none;
+    }
+  }
+
+.burgerMenuPopup_logo-container {
+    text-decoration: none;
+    height: 30px;
+    
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+
+.burgerMenuPopup_add-announcement-container { 
+    display: flex;
+}
+.burgerMenuPopup_add-mypage-pic {
+    background-image: url(../../../images/myPageIcon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.burgerMenuPopup_add-mypage-pic:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.burgerMenuPopup_add-announcement-btn-pic {
+    background-image: url(../../../images/addAdIcon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.burgerMenuPopup_add-announcement-btn-pic:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.burgerMenuPopup_add-announcement-btn {
+  height: 30px;
+  background-color: #fff;
+  border-radius: 35px;
+  cursor: pointer;
+  color: black;
+  border: none;
+  margin-right: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+    .burgerMenuPopup_add-announcement-btn {
+      font-size: 14px;
+    }
+}
+
+.burgerMenuPopup_add-announcement-btn:hover {
+  background-color: black;
+  opacity: 0.9;
+  color: #fff;
+}
+
+.burgerMenuPopup_favorite-btn {
+  background-image: url(../../../images/like.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.burgerMenuPopup_favorite-btn:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.burgerMenuPopup_link{ 
+  text-decoration: none;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.burgerMenuPopup__links-container {
+  display: flex;
+}
+
+.burgerMenuPopup__lang-container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.burgerMenuPopup__lang-btn {
+  width: fit-content;
+  height: 20px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: transparent;
+  margin-right: 3px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.burgerMenuPopup__lang-btn:last-of-type {
+  margin-right: 0;
+}
+
+.burgerMenuPopup__lang-btn:hover {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+    .burgerMenuPopup__lang-btn {
+      font-size: 12px;
+    }
+}
+
+.burgerMenuPopup__lang-btn_active {
+  width: calc(fit-content + 2px) ;
+  height: 20px;
+  border-radius: 30px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 3px;
+  background-color: black;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.burgerMenuPopup__lang-btn_active:last-of-type {
+  margin-right: 0;
+}
+
+
+@media screen and (max-width: 500px) {
+    .burgerMenuPopup__lang-btn_active {
+      font-size: 12px;
+    }
+}
+
+
+.burgerMenuPopup__message-pic {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../../images/messagepic.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.burgerMenuPopup__message-pic:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.burgerMenuPopup_link-message-container {
+  position: relative;
+}
+
+.burgerMenuPopup__messages-badge {
+  border-radius: 50%;
+  background-color: #cc2b1d;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 8px;
+}
+

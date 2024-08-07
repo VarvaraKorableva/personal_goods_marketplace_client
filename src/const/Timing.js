@@ -1,23 +1,23 @@
 //Timing
 const en = {
-    postedToday: 'Posted today at',
-    postedYesterday: 'Posted yesterday at',
+    postedToday: 'Posted today',
+    postedYesterday: 'Posted yesterday',
     posted: 'Posted',
 
     free: 'Free',
 }
 
 const rus = {
-    postedToday: 'Добавлено сегодня в ',
-    postedYesterday: 'Добавлено вчера в ',
+    postedToday: 'Добавлено сегодня',
+    postedYesterday: 'Добавлено вчера',
     posted: 'Добавлено',
 
     free: 'Бесплатно',
 }
 
 const hebrew = {
-    postedToday: 'Posted today at',
-    postedYesterday: 'Posted yesterday at',
+    postedToday: 'Posted today',
+    postedYesterday: 'Posted yesterday',
     posted: 'Posted',
 
     free: 'Free',

@@ -3,14 +3,9 @@ import './Registration.css'
 import { Link } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
+import Preloader from '../../Components/Preloader/Preloader'
 
-function Registration({onRegister, isRegError}){
-
-/*
-username VARCHAR(255) NOT NULL,
-email VARCHAR(255) NOT NULL,
-password VARCHAR(255) NOT NULL,
-*/    
+function Registration({onRegister, isRegError, isLoading}){
 
 const [username, setName] = React.useState('')
 const [email, setEmail] = React.useState('')
@@ -54,9 +49,6 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
   }
 
   const handleNameChange = (e) => {
-    /*const validName = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u.test(
-      e.target.value
-    )*/
 
     if (!e.target.value.length) {
       setErrorNameMessage(translatedContext.mistakesName.theUsernameFieldMustBeFilledIn)
@@ -127,13 +119,12 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       setIsValid(true)
     }
   }, [errorEmail, errorName, errorPassword])
-/*
-  console.log('isRegError', isRegError)
-  console.log('!isRegErrorEmailChanging', !isRegErrorEmailChanging)
-*/
 
   return (
     <section className='register'>
+      {isLoading? 
+        <Preloader/>
+      :
       <form 
         className='register__form'
         onSubmit={handleSubmit}>
@@ -199,6 +190,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
           <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
         </div>
     </form>
+}
     </section>
   );
 }

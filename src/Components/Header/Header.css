@@ -136,21 +136,6 @@
     }
   }
   
-  .header__langpic {
-    background-image: url(../../images/languagechangepic.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    cursor: pointer;
-    margin-left: 5px;
-    transition: 1s;
-    background-color: transparent;
-  
-    border: none;
-  }
-  
   .header__langpic:hover {
     opacity: 0.6;
     transition: 1s;
@@ -159,6 +144,12 @@
   .header__langpic-container {
     display: flex;
     align-items: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    .header__langpic-container {
+      display: none;
+    }
   }
 
 .header_logo-container {
@@ -310,4 +301,36 @@
   top: 5px;
   right: 5px;
   font-size: 8px;
+}
+
+.header__burger-menu {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .header__burger-menu {
+    display: flex;
+    background-image: url(../../images/burgermenuicon.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+  }
+}
+
+.header_logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  margin-right: 10px;
+
+  background-image: url(../../images/logoneed.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
