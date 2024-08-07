@@ -31,11 +31,13 @@ function BurgerMenuPopup({onClose, isOpen, isLoggin, getUnreadbleMessages, unrea
 
     function handleGetUnreadbleMessages() {
         getUnreadbleMessages(userId)
+        onClose()
     }
 
     function handleAddAdClick() {
-        onAdPopup()
+        onClose()
         getUnreadbleMessages(userId)
+        onAdPopup()
     }
 
 return (
@@ -52,7 +54,7 @@ return (
         <div className='burgerMenuPopup_wrapper'>
 
           <div className='burgerMenuPopup_add-announcement-container'>
-            <div className='burgerMenuPopup_add-announcement-btn-pic'></div>
+            <div className='burgerMenuPopup_add-announcement-btn-pic' onClick={handleAddAdClick}></div>
             <button className='burgerMenuPopup_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
           </div> 
 
@@ -66,7 +68,7 @@ return (
             <button className='burgerMenuPopup_add-announcement-btn'>Избранное</button>
           </Link>
 
-          <Link to={`/users/${userId}/messages`} className='burgerMenuPopup_link burgerMenuPopup_link-message-container'>
+          <Link to={`/users/${userId}/messages`} className='burgerMenuPopup_link burgerMenuPopup_link-message-container' onClick={onClose}>
             <button className='burgerMenuPopup__message-pic'></button>
             {unreadbleMessages.length > 0? 
                 <div className='burgerMenuPopup__messages-badge'>{unreadbleMessages.length}</div>
@@ -86,20 +88,20 @@ return (
          
       :
       !isLoggin  && location.pathname === '/signup'?
-      <Link to="/signin" className='burgerMenuPopup_login-link'>
+      <Link to="/signin" className='burgerMenuPopup_login-link' onClick={onClose}>
         <p>{translatedContext.login}</p>
       </Link>
       :
       !isLoggin && location.pathname === '/signin'?
-      <Link to="/signup" className='burgerMenuPopup_registraion-link'>
+      <Link to="/signup" className='burgerMenuPopup_registraion-link' onClick={onClose}>
         <p>{translatedContext.registraion}</p>
       </Link>
       :
       <div className='burgerMenuPopup__links-container'>
-        <Link to="/signin" className='burgerMenuPopup_registraion-link'>
+        <Link to="/signin" className='burgerMenuPopup_registraion-link' onClick={onClose}>
           <p>{translatedContext.login}</p>
         </Link>
-        <Link to="/signup" className='burgerMenuPopup_registraion-link'>
+        <Link to="/signup" className='burgerMenuPopup_registraion-link' onClick={onClose}>
           <p>{translatedContext.registraion}</p>
         </Link>
       </div>
@@ -107,8 +109,6 @@ return (
       <div className='burgerMenuPopup__lang-container'>
         <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>RU</button>
         <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>EN</button>
-
-        <button className='burgerMenuPopup_add-announcement-btn'>Language</button>
       </div>
       
     </div>

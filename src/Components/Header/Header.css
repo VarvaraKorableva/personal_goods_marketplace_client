@@ -136,21 +136,6 @@
     }
   }
   
-  .header__langpic {
-    background-image: url(../../images/languagechangepic.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    cursor: pointer;
-    margin-left: 5px;
-    transition: 1s;
-    background-color: transparent;
-  
-    border: none;
-  }
-  
   .header__langpic:hover {
     opacity: 0.6;
     transition: 1s;
