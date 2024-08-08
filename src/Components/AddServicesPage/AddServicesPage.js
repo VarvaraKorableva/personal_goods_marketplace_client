@@ -63,6 +63,9 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   const [isCitySelected, setIsCitySelected] = React.useState(false)
   const [cityErrorMessage, setCityErrorMessage] = React.useState('')
 
+  const [isDescriptionSelected, setIsDescriptionSelected] = React.useState(true)
+  const [descriptionErrorMessage, setDescriptionErrorMessage] = React.useState('')
+
   const [initiatorKeyWord, setInitiatorKeyWord] = React.useState('')
 
   const addItemRef = React.useRef(null);
@@ -87,7 +90,19 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
   }
 
   function handledesDriptionChange(e) {
-    setDescription(e.target.value)
+    if(e.target.value.length > 900) {
+      setIsDescriptionSelected(false)
+      setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
+    } else if(e.target.value) {
+      console.log(e.target.value.length)
+      setIsDescriptionSelected(true)
+      setDescriptionErrorMessage('')
+      setDescription(e.target.value)
+    } else {
+      setIsDescriptionSelected(true)
+      setDescriptionErrorMessage('')
+      setDescription('')
+    }
   }
 
   function handleServicesSubmit(e) {
@@ -349,7 +364,11 @@ return (
           onChange={handledesDriptionChange}
         ></input>
        
-       <span className='popup__mistake-msg'></span>
+       {isDescriptionSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{descriptionErrorMessage}</span>
+      }
 
       <label className='popup__inputname'>{translatedContext.servicePrice}<span className='popup__inputname-span'>*</span>
         <input

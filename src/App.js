@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
 import { LanguageProvider } from './contexts/TranslationContext';
@@ -69,12 +69,14 @@ function App() {
   const [itemId, setItemId] = React.useState('')
 
   const [coversations, setCoversations] = React.useState([])
+
+  //popups
   const [userNameForOneConversationPopup, setUserNameForOneConversationPopup] = React.useState({})
-  
-  
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
+
+  const [adCount, setAdCount] = React.useState(0) //count of ads for regulations adding
 
   const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
 
@@ -83,10 +85,17 @@ function App() {
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
-  //const hideAds = () => setLimit(3);
   const userId = currentUser.user_id
-  const adСount = currentUser.ad_count
 
+  //setAdCount(currentUser.ad_count)
+
+  useEffect(() => {
+    currentUser?
+      setAdCount(currentUser.ad_count)
+    :
+      setAdCount(0)
+  }, [userId])
+  
   const navigate = useNavigate()
 
   async function getCategory() {
@@ -100,7 +109,6 @@ function App() {
       console.log(err);
       closeLoading()
     }
-
   }
 
   async function getAllItems() {
@@ -152,9 +160,10 @@ function App() {
   }
 
   React.useEffect(()=>{
-    getAllImagesForItems()
+    //getAllImagesForItems()
     getCategory()
     getAllItems()
+    
     //getUnreadbleMessages(userId)
   },[])
 
@@ -164,7 +173,6 @@ function App() {
       let myCatToRender = []
       findAllCategoryGrandChildren(category, myCatToRender) 
   } 
-
 
   function findAllCategoryGrandChildren(category, myCatToRenderNew) {
     let childrens = categories.filter((item) => item.parent_id === category.category_id)
@@ -176,7 +184,6 @@ function App() {
         findAllCategoryGrandChildren(item, myCatToRenderNew)
       })
     }
-
     return myCatToRenderNew
   }
 
@@ -191,6 +198,7 @@ function App() {
     .then((data) => {
       setIsRegError(false)
       setCurrentUser(data.user)
+      
       localStorage.setItem('user', data.user)
       setMyAds([]);
       setIsLoggin(true)
@@ -217,6 +225,7 @@ function App() {
       setIsLoggin(true)
       localStorage.setItem('isLogin', true)
       setCurrentUser(res.user)
+      
       localStorage.setItem('user', res.user)
       const favorite_collector_id = res.user.user_id
       getMyFavorites(favorite_collector_id)
@@ -301,7 +310,7 @@ function App() {
 function adCountIncrement(userId) {
   Api.adCountIncrement(userId)
   .then((res)=> {
-    console.log(res)
+    setAdCount(res);
   })
   .catch((err) => {
     console.log(err)
@@ -311,7 +320,7 @@ function adCountIncrement(userId) {
 function adCountDecrement(userId) {
   Api.adCountDecrement(userId)
   .then((res)=> {
-    console.log(res)
+    setAdCount(res)
   })
   .catch((err) => {
     console.log(err)
@@ -506,8 +515,6 @@ function adCountDecrement(userId) {
     setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
-  //setIsLoading(false)
-
   function openLoading() {
     setIsLoading(true)
   }
@@ -549,14 +556,12 @@ function adCountDecrement(userId) {
     closeAllPopups()
   }
 
-  function handleChoiceOfProductOrServicePopupClick(){
-    if (adСount >= 3) {
+  function handleChoiceOfProductOrServicePopupClick() {
+    if (adCount >= 3) {
       setSuccessfulActionPopup(true)
-      setPopupMessage(`Можно добавлять не более 3 объявлений, у вас добавлено ${adСount}`)
-      console.log(adСount)
+      setPopupMessage(`Можно добавлять не более 3 объявлений, у вас добавлено ${adCount}`)
     } else {
       setIsChoiceOfProductOrServicePopup(true)
-      console.log(currentUser)
     }
   }
 
@@ -569,11 +574,11 @@ function adCountDecrement(userId) {
     setIsBurgerMenuPopup(false)
   }
 
+
   function handleLogout() {
       setIsLoggin(false)
       localStorage.removeItem('isLogin')
       localStorage.removeItem('user')
-      
       setCurrentUser({})
       getMyFavorites([])
       navigate(`/`)

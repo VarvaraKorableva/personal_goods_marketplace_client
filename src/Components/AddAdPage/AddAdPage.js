@@ -59,7 +59,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading}) {
   const [isCitySelected, setIsCitySelected] = React.useState(false)
   const [cityErrorMessage, setCityErrorMessage] = React.useState('')
 
-  const [isDescriptionSelected, setIsDescriptionSelected] = React.useState(false)
+  const [isDescriptionSelected, setIsDescriptionSelected] = React.useState(true)
   const [descriptionErrorMessage, setDescriptionErrorMessage] = React.useState('')
 
 

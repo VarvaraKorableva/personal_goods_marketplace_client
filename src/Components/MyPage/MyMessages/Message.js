@@ -16,10 +16,10 @@ function Message({message, openOneConversationPopup, markMessagesAsRead}) {
 
     
     return(
-        <li className="message__container" onClick={handleOpenOneConversationPopup}>
+        <li className="message__container">
 
             <div className="message__item-info-wrapper">
-                <div className="message__main-pic-wrapper">
+                <Link to={`/items/${message.item_id}`} className="message__main-pic-wrapper" >
                     {message.image_location?
                         <img className="message__item-pic" alt = {message.item_title} src={message.image_location}></img>
                         :
@@ -27,8 +27,8 @@ function Message({message, openOneConversationPopup, markMessagesAsRead}) {
                             <img className="message__no-pic" alt = 'no pic' src={noPictures}></img>
                         </div>
                     }
-                </div>
-                <div className="one-message__wrapper">
+                </Link>
+                <div className="one-message__wrapper" onClick={handleOpenOneConversationPopup}>
                     <div className="message__item-info-container">
                         {message.item_owner_id === userId && message.receiver_id === userId? 
                             <p className="message__sender-name">{message.sender_username}</p> 
