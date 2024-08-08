@@ -47,12 +47,18 @@
     position: sticky;
     top: 0;
     right: 0;
-    width: 70%;
+    width: 50%;
     height: fit-content;
     background-color: #fff;
     visibility: visible;
 
     border-radius:  0 0 0 20px;
+}
+
+@media screen and (max-width: 450px) {
+    .burgerMenuPopup__container {
+        width: 70%;
+    }
 }
 
 .burgerMenuPopup_container {
