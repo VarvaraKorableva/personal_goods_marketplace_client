@@ -180,6 +180,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoading}) {
     } else if(!(/^\d*$/.test(e.target.value))) {
       setIsPriceSelected(false)
       setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
+    } else if (e.target.value.length > 10) {
+      setIsPriceSelected(false)
+      setPriceErrorMessage(`Цена не может содержать более 10 цифр`)
     } else {
       setIsPriceSelected(true)
       setPrice(e.target.value)
