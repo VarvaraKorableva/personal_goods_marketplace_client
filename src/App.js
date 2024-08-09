@@ -455,6 +455,9 @@ function adCountDecrement(userId) {
     .catch((err) => {
       console.log(err)
       closeLoading()
+      closeAllPopups()
+      setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 
@@ -469,6 +472,9 @@ function adCountDecrement(userId) {
     .catch((err) => {
       console.log(err)
       closeLoading()
+      closeAllPopups()
+      setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 
@@ -482,6 +488,9 @@ function adCountDecrement(userId) {
     .catch((err) => {
       console.log(err)
       closeLoading()
+      closeAllPopups()
+      setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 

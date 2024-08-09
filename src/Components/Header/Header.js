@@ -47,8 +47,11 @@ return (
   <div className='header_container'>
     <div className='header'>
     <Link to={`/`} className='header_logo-container'>
+      {/*<div className='header_logo-img'></div>
+      <h1 className='header_logo'>Personal <span className='header_logo-name'></span> marketplace</h1> Personal goods marketplace */}
+      <h1 className='header_logo'>Personal</h1>
       <div className='header_logo-img'></div>
-      <h1 className='header_logo'>НужноеНеНужное</h1> {/*Personal goods marketplace */}
+      <h1 className='header_logo'>Marketplace</h1>
     </Link> 
 
     <button className='header__burger-menu' onClick={handleOpenBurgerMenuPopup}></button>

@@ -6,7 +6,7 @@
     margin-top: 0;
     margin-bottom: 25px;
     background-color: #e4e6e7;
-    height: 50px;
+    height: 70px;
     
     width: 100%;
   }
@@ -26,6 +26,12 @@
   @media screen and (max-width: 450px) {
     .header_container {
       margin-bottom: 15px;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    .header_container {
+      height: 60px;
     }
   }
 
@@ -323,14 +329,21 @@
 }
 
 .header_logo-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-
-  margin-right: 10px;
-
-  background-image: url(../../images/logoneed.png);
+  width: 70px;
+  height: 70px;
+  background-image: url(../../images/goodslogo.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+@media screen and (max-width: 360px) {
+  .header_logo-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.header_logo-name {
+  color: rgb(127, 127, 197);
 }
