@@ -4,7 +4,7 @@ import {CurrentUserContext} from './contexts/CurrentUserContext'
 import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import * as Api from './Api/Api'
-import Registration from './Components/Registration/Registration'
+import Registration from './Components/Registration/RegVerification'
 import Login from './Components/Login/Login'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
