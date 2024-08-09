@@ -4,7 +4,10 @@ const en = {
     greetingsText: 'You can register here',
     name: 'Name',
     email: 'E-mail',
+    verificationEmailLabel: "Enter your email address to receive a verification code.",
     password: 'Password',
+    verificationEmailButton: "Send code to email",
+    verificationPassword: 'Enter the code that was sent to your email',
     button: 'SignUp',
     question: 'Already signUp?',
     signin: 'SignIn',
@@ -31,13 +34,16 @@ const en = {
 }
 
 const rus = {
-    greetings: 'Зарегистрироваться',
-    greetingsText: 'Здесь можно зарегистрироваться',
+    greetings: 'Регистрация в приложении',
+    firstStepTitle: 'Первый этап - подтверждение адреса электронной почты',
+    confirmEmailAddress: 'Подтвердить адрес электронной почты',
 
     name: 'Имя',
     email: 'Электронная почта',
+    verificationEmailLabel: "Введите адрес электронной почты, чтобы получить код для подтверждения",
     password: 'Пароль',
-
+    verificationPassword: 'Введите код, который пришел вам на почту',
+    verificationEmailButton: "Отправить код на почту",
     button: 'Зарегистрироваться',
 
     question: 'Уже зарегистрированы?',
@@ -73,6 +79,7 @@ const hebrew = {
     name: 'שם',
     email: 'דוא"ל',
     password: 'סיסמה',
+    verificationPassword: 'Enter the code that was sent to your email',
 
     button: 'הירשם',
 
