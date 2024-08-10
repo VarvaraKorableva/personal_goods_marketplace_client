@@ -4,7 +4,8 @@ import {CurrentUserContext} from './contexts/CurrentUserContext'
 import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import * as Api from './Api/Api'
-import Registration from './Components/Registration/RegVerification'
+import Registration from './Components/Registration/Registration'
+import RegistrationFirstStage from './Components/Registration/RegistrationFirstStage'
 import Login from './Components/Login/Login'
 import Header from './Components/Header/Header'
 import Main from './Components/Main/Main'
@@ -419,6 +420,25 @@ function adCountDecrement(userId) {
       closeLoading()
     })
   }
+  //sendVerificationCode
+
+  function sendVerificationCode(email) {
+    openLoading()
+    Api.sendVerificationCode(email) 
+    .then((res) => {
+      closeAllPopups()
+      closeLoading()
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      closeLoading()
+      closeAllPopups()
+      
+      setSuccessfulActionPopup(true)
+      setPopupMessage('Что-то пошло не так :(')
+    })
+  }
 
   //createMessage
   function addNewMessage(message_text) {
@@ -607,10 +627,21 @@ function adCountDecrement(userId) {
 
       <Routes>
         <Route
-        path="/signup"
-        element={
+          path="/signup"
+          element={
         <Registration 
           onRegister={handleRegSubmit}
+          isRegError={isRegError}
+          isLoading={isLoading}
+        />
+        }>
+        </Route>
+
+        <Route
+          path="/signup-first-stage"
+          element={
+        <RegistrationFirstStage
+          onSendBtn={sendVerificationCode}
           isRegError={isRegError}
           isLoading={isLoading}
         />

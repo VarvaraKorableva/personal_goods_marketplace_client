@@ -384,7 +384,22 @@ export const adCountDecrement = ( user_id ) => {
         .then(checkResponse)
 };
 
+export const sendVerificationCode = ( email ) => {
+    return fetch(`${BASE_URL}/verification/sendVerificationCode`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            email,
+        })
+    })
+        .then(checkResponse)
+  };
 
+//verification/sendVerificationCode
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);
