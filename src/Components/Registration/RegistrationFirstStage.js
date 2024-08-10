@@ -3,9 +3,9 @@ import './Registration.css'
 import { Link } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
-import Preloader from '../../Components/Preloader/Preloader'
+import Preloader from '../Preloader/Preloader'
 
-function Registration({onRegister, isRegError, isLoading}){
+function RegistrationFirstStage({onSendBtn, isRegError, isLoading}){
 
 const [username, setName] = React.useState('')
 const [email, setEmail] = React.useState('')
@@ -39,13 +39,10 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(username)
-    onRegister({
-      username,
-      email,
-      password
-    });
+    console.log(email)
+    onSendBtn(email);
     setIsRegErrorEmailChanging(false)
+    setEmail('')
   }
 
   const handleNameChange = (e) => {
@@ -127,10 +124,10 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       :
       <form 
         className='register__form'
-        //onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
       >
         <h2 className='register__title'>{translatedContext.greetings}</h2>
-        <h3 className='register__subtitle'>{translatedContext.firstStepTitle}</h3>
+        <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
 
         <fieldset className='register__fieldset'>
           <label className='register__inputname'>{translatedContext.verificationEmailLabel}
@@ -148,7 +145,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
 
         <button
           type="submit"
-          className={`'register__verification-btn' ${isValid? 'register__btn_active': 'register__btn'}`}
+          className={`'register__verification-btn' ${isValid? 'register-verification__btn_active': 'register-verification__btn'}`}
           disabled={!isValid}
         >
             {translatedContext.verificationEmailButton} {email}
@@ -164,4 +161,4 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
   );
 }
 
-export default Registration;
+export default RegistrationFirstStage;
