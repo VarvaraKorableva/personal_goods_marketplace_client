@@ -87,13 +87,13 @@ return (
         </div>
          
       :
-      !isLoggin  && location.pathname === '/signup'?
+      !isLoggin  && location.pathname === '/signup-first-stage'?
       <Link to="/signin" className='burgerMenuPopup_login-link' onClick={onClose}>
         <p>{translatedContext.login}</p>
       </Link>
       :
       !isLoggin && location.pathname === '/signin'?
-      <Link to="/signup" className='burgerMenuPopup_registraion-link' onClick={onClose}>
+      <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link' onClick={onClose}>
         <p>{translatedContext.registraion}</p>
       </Link>
       :
@@ -101,7 +101,7 @@ return (
         <Link to="/signin" className='burgerMenuPopup_registraion-link' onClick={onClose}>
           <p>{translatedContext.login}</p>
         </Link>
-        <Link to="/signup" className='burgerMenuPopup_registraion-link' onClick={onClose}>
+        <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link' onClick={onClose}>
           <p>{translatedContext.registraion}</p>
         </Link>
       </div>

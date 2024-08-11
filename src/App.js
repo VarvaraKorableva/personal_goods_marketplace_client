@@ -83,6 +83,10 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false) 
 
+  const [isVerificationCodeSent, setIsVerificationCodeSent] = React.useState(false) 
+  const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = React.useState('') 
+  const [isEmailConfirmed, setIsEmailConfirmed] = React.useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
+
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
@@ -304,10 +308,6 @@ function App() {
     })
   }
 
-
-//adCountIincrement
-//adCountDecrement
-
 function adCountIncrement(userId) {
   Api.adCountIncrement(userId)
   .then((res)=> {
@@ -420,7 +420,28 @@ function adCountDecrement(userId) {
       closeLoading()
     })
   }
-  //sendVerificationCode
+  //sendVerificationCode verifyCode
+  function verifyCode(email, code) {
+    openLoading()
+    Api.verifyCode(email, code) 
+    .then((res) => {
+      closeAllPopups()
+      closeLoading()
+      setIsVerificationCodeSent(false)
+      setIsVerificationCodeSentMessage('')
+      console.log(res)
+      setIsEmailConfirmed(true)
+    })
+    .catch((err) => {
+      console.log(err)
+      closeLoading()
+      closeAllPopups()
+      setIsVerificationCodeSent(false)
+      setSuccessfulActionPopup(true)
+      setPopupMessage('Что-то пошло не так :(')
+    })
+  }
+
 
   function sendVerificationCode(email) {
     openLoading()
@@ -428,15 +449,14 @@ function adCountDecrement(userId) {
     .then((res) => {
       closeAllPopups()
       closeLoading()
-      console.log(res)
+      setIsVerificationCodeSent(true)
+      setIsVerificationCodeSentMessage(res.msg)
     })
     .catch((err) => {
       console.log(err)
       closeLoading()
       closeAllPopups()
-      
-      setSuccessfulActionPopup(true)
-      setPopupMessage('Что-то пошло не так :(')
+      setIsVerificationCodeSent(false)
     })
   }
 
@@ -644,6 +664,12 @@ function adCountDecrement(userId) {
           onSendBtn={sendVerificationCode}
           isRegError={isRegError}
           isLoading={isLoading}
+
+          isVerificationCodeSent={isVerificationCodeSent}
+          isVerificationCodeSentMessage={isVerificationCodeSentMessage}
+          verifyCode={verifyCode}
+          isEmailConfirmed={isEmailConfirmed}
+          onRegister={handleRegSubmit}
         />
         }>
         </Route>
