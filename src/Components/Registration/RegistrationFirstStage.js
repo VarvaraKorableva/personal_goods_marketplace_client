@@ -5,19 +5,16 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../Preloader/Preloader'
 
-function RegistrationFirstStage({onSendBtn, isRegError, isLoading}){
+function RegistrationFirstStage({onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
 
-const [username, setName] = React.useState('')
 const [email, setEmail] = React.useState('')
-const [password, setPassword] = React.useState('')
+const [code, setCode] = React.useState('')
 
-const [errorNameMessage, setErrorNameMessage] = React.useState('')
 const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
-const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
+const [errorCodeMessage, setErrorCodeMessage] = React.useState('')
 
-const [errorName, setErrorName] = React.useState(true)
 const [errorEmail, setErrorEmail] = React.useState(true)
-const [errorPassword, setErrorPassword] = React.useState(true)
+const [errorCode, setErrorCode] = React.useState(true)
 
 const [isValid, setIsValid] = React.useState(false);
 
@@ -39,53 +36,33 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email)
     onSendBtn(email);
     setIsRegErrorEmailChanging(false)
+    //setEmail('')
+    setIsValid(false)
+    setErrorCode(true)
+  }
+
+  function onVerifyCode(e) {
+    e.preventDefault();
+    verifyCode(email, code)
+
+    setIsRegErrorEmailChanging(false)
     setEmail('')
+    setIsValid(false)
+    setErrorCode(true) 
   }
 
-  const handleNameChange = (e) => {
-
+  const handleCodeChange = (e) => {
     if (!e.target.value.length) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameFieldMustBeFilledIn)
-      setErrorName(true);
-
-     } else if (e.target.value.length < 2) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameMustBeAtLeastCharactersLong)
-      setErrorName(true);
-
-     } else if (!e.target.value) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameShouldOnlyContainLatinLettersCyrillicLetters)
-      setErrorName(true);
-
-     } else if (e.target.value.length > 30) {
-      setErrorNameMessage(translatedContext.mistakesName.usernameMustBeNoMoreThan)
-      setErrorName(true);
-
-     } else {
-      setErrorNameMessage('')
-      setErrorName(false);
-      setName(e.target.value[0].toUpperCase() + e.target.value.slice(1));
-     }
-     
-  }
-
-  const handlePasswordChange = (e) => {
-    if (!e.target.value.length) {
-      setErrorPasswordMessage(translatedContext.mistakesPassword.passwordMustBeFilledIn);
-      setErrorPassword(true);
-    } else if (e.target.value.length < 5) {
-      setErrorPasswordMessage(translatedContext.mistakesPassword.passwordMustContainAtLeast);
-      setErrorPassword(true);
-    } else if (e.target.value.length > 8) {
-      setErrorPasswordMessage(translatedContext.mistakesPassword.passwordMustNotExceed);
-      setErrorPassword(true);
+      setErrorCodeMessage(translatedContext.mistakesPassword.passwordMustBeFilledIn);
+      setErrorCode(true);
     } else {
-      setErrorPasswordMessage('');
-      setErrorPassword(false);
+      setErrorCodeMessage('');
+      setErrorCode(false);
+      setCode(e.target.value);
+      setErrorEmail(false)
     }
-    setPassword(e.target.value);
   };
   
   const handleEmailChange = (e) => {
@@ -105,58 +82,105 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       setErrorEmailMessage('')
       setErrorEmail(false)
       setIsRegErrorEmailChanging(true)
+      setErrorCode(false)
     }
     setEmail(e.target.value)
   }
 
   React.useEffect(() => {
-    if (errorEmail) {
+    if (errorEmail || errorCode) {
       setIsValid(false)
     } else {
       setIsValid(true)
     }
-  }, [errorEmail])
+  }, [errorEmail, errorCode])
 
   return (
     <section className='register'>
       {isLoading? 
         <Preloader/>
       :
-      <form 
-        className='register__form'
-        onSubmit={handleSubmit}
-      >
-        <h2 className='register__title'>{translatedContext.greetings}</h2>
-        <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
+      <>
+        {isEmailConfirmed?
+          <p>
+            регистрация! имейл {email}
+          </p> /*Добавить форму для регистрации компонент все функции передать туда*/
+        :
+          <>
+            <h2 className='registrationFirstStage__title'>{translatedContext.greetings}</h2>
+            <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
 
-        <fieldset className='register__fieldset'>
-          <label className='register__inputname'>{translatedContext.verificationEmailLabel}
-            <input className='register__input'
-              required
-              name="email"
-              type="email"
-              autoComplete="on"
-              defaultValue=""
-              onChange={handleEmailChange}
-            />  
-          </label>
-          <span className='register__inputmistake'>{errorEmailMessage}</span>
-        </fieldset>
+            {
+              isVerificationCodeSent?
+                <form 
+                  className='registrationFirstStage__form'
+                  onSubmit={onVerifyCode}>
 
-        <button
-          type="submit"
-          className={`'register__verification-btn' ${isValid? 'register-verification__btn_active': 'register-verification__btn'}`}
-          disabled={!isValid}
-        >
-            {translatedContext.verificationEmailButton} {email}
-        </button>
+                  <fieldset className='register__fieldset'>
+                    <h3>Код отправлен на электронную почту {email}</h3>
+                    <label className='register__inputname'>{translatedContext.verificationCodeLabel}
+                    <input 
+                      className='register__input' 
+                      required
+                      name="text"
+                      type="text"
+                      defaultValue=""
+                      onChange={handleCodeChange}
+                    />
+                    </label>
+                    {/*<span className='register__inputmistake'></span>  Нужно передавать сообщение которое придет с бекенда истек срок кода или неверный код*/}
+                  </fieldset>
 
-        <div className='register__wrapper'>
-          <p className='register__subtitle'>{translatedContext.question}
-          <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
-        </div>
-    </form>
-}
+                  <button
+                    type="submit"
+                    className={`'register__verification-btn' ${isValid? 'register-verification__btn_active': 'register-verification__btn'}`}
+                    disabled={!isValid}
+                  >
+                    Подтвердить
+                  </button>
+
+                </form>
+
+              :
+
+                <form 
+                  className='registrationFirstStage__form' 
+                  onSubmit={handleSubmit}>
+
+                  <fieldset className='register__fieldset'>
+                    <label className='register__inputname'>{translatedContext.verificationEmailLabel}
+                    <input className='register__input'
+                      required
+                      name="email"
+                      type="email"
+                      autoComplete="on"
+                      defaultValue=""
+                      onChange={handleEmailChange}
+                    />  
+                    </label>
+                    <span className='register__inputmistake'>{errorEmailMessage}</span>
+                  </fieldset>  
+
+                  <button
+                    type="submit"
+                    className={`'register__verification-btn' ${isValid? 'register-verification__btn_active': 'register-verification__btn'}`}
+                    disabled={!isValid}
+                  >
+                    {translatedContext.verificationEmailButton} {email}
+                  </button>
+
+                </form>
+            }
+
+          <div className='register__wrapper'>
+            <p className='register__subtitle'>{translatedContext.question}
+            <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
+          </div>
+
+          </>
+        }
+      </>
+      }
     </section>
   );
 }

@@ -88,13 +88,13 @@ return (
         </div>
          
       :
-      !isLoggin  && location.pathname === '/signup'?
+      !isLoggin  && location.pathname === '/signup-first-stage'?
       <Link to="/signin" className='header_login-link'>
         <p>{translatedContext.login}</p>
       </Link>
       :
       !isLoggin && location.pathname === '/signin'?
-      <Link to="/signup" className='header_registraion-link'>
+      <Link to="/signup-first-stage" className='header_registraion-link'>
         <p>{translatedContext.registraion}</p>
       </Link>
       :
@@ -102,7 +102,7 @@ return (
         <Link to="/signin" className='header_registraion-link'>
           <p>{translatedContext.login}</p>
         </Link>
-        <Link to="/signup" className='header_registraion-link'>
+        <Link to="/signup-first-stage" className='header_registraion-link'>
           <p>{translatedContext.registraion}</p>
         </Link>
       </div>

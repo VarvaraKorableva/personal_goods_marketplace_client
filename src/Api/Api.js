@@ -399,7 +399,23 @@ export const sendVerificationCode = ( email ) => {
         .then(checkResponse)
   };
 
-//verification/sendVerificationCode
+export const verifyCode = ( email, code ) => {
+    return fetch(`${BASE_URL}/verification/verifyCode`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            email,
+            code
+        })
+    })
+        .then(checkResponse)
+  };  
+
+//verification/verifyCode
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);
