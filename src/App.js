@@ -669,6 +669,7 @@ function adCountDecrement(userId) {
           isVerificationCodeSentMessage={isVerificationCodeSentMessage}
           verifyCode={verifyCode}
           isEmailConfirmed={isEmailConfirmed}
+          onRegister={handleRegSubmit}
         />
         }>
         </Route>

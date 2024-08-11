@@ -127,7 +127,8 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
       :
       <form 
         className='register__form'
-        onSubmit={handleSubmit}>
+       // onSubmit={handleSubmit}
+      >
         <h2 className='register__title'>{translatedContext.greetings}</h2>
         <p className='register__title-stage'>{translatedContext.emailIsConfirmTitle}</p>
         <p className='register__title-stage'>{translatedContext.secondStepTitle}</p>
@@ -139,7 +140,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
               type="text"
               autoComplete="on"
               defaultValue=""
-              onChange={handleNameChange}
+              //onChange={handleNameChange}
             />
             </label>
             <span className='register__inputmistake'>{errorNameMessage}
@@ -152,7 +153,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
               type="email"
               autoComplete="on"
               defaultValue=""
-              onChange={handleEmailChange}
+              //onChange={handleEmailChange}
             />  
           </label>
           <span className='register__inputmistake'>{errorEmailMessage}
@@ -167,7 +168,7 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
               minLength="5"
               autoComplete="on"
               defaultValue=""
-              onChange={handlePasswordChange}
+              //onChange={handlePasswordChange}
             />
           </label>
           <span className='register__inputmistake'>{errorPasswordMessage}

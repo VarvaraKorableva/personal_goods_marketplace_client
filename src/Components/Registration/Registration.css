@@ -103,15 +103,36 @@
     margin-bottom: 0;
     width: 396px;
   }
+
+  @media screen and (max-width: 500px) {
+    .register__title-stage  {
+      width: 300px;
+    }
+  }
   
   @media screen and (max-width: 450px) {
     .register__title-stage  {
       margin: auto;
       margin-top: 20px;
       margin-bottom: 0;
-      width: 300px;
+      width: 260px;
     }
   }
+
+  /*
+  @media screen and (max-width: 500px) {
+    .registrationFirstStage__form  {
+      width: 300px;
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media screen and (max-width: 450px) {
+    .registrationFirstStage__form  {
+      width: 260px;
+    }
+  } 
+  */
 
   .register__greetingsText {
     margin-top: 10px;
