@@ -194,7 +194,7 @@ function handleRegSubmit(e) {
                 <p className='register__title-stage'>{translatedContext.secondStepTitle}</p>
                 <fieldset className='register__fieldset'>
                   <label className='register__inputname'>{translatedContext.email}
-                    <div className='register__input'>{email}</div>
+                    <div className='register__input-email'>{email}</div>
                   </label>
                   <span className='register__inputmistake'></span> 
 
