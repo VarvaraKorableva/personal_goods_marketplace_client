@@ -63,18 +63,20 @@
    }
 
   .registrationFirstStage__title {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 500;
+    margin-top: 40px;
+    margin-bottom: 40px;
     color: black;
-    margin-bottom: 0;
-    margin-top: 60px;
   } 
 
   @media screen and (max-width: 450px) {
     .registrationFirstStage__title  {
       margin: auto;
       margin-bottom: 0;
-      margin-top: 0;
+      margin-top: 20px;
+
+      font-size: 22px;
     }
   }
    
@@ -114,7 +116,7 @@
     .register__title-stage  {
       margin: auto;
       margin-top: 20px;
-      margin-bottom: 0;
+      margin-bottom: 20px;
       width: 260px;
     }
   }
@@ -148,6 +150,12 @@
      width: 100%;
      margin-top: 50px;
    }
+
+   @media screen and (max-width: 450px) {
+    .register__fieldset  {
+      margin-top: 0;
+    }
+  }
    
    .register__inputname {
      color: black;
@@ -229,6 +237,7 @@
      .register__btn_active {
        width: 100%;
        font-size: 12px;
+       margin-top: 30px;
      }
    }
    
@@ -256,6 +265,7 @@
      .register__btn {
        width: 100%;
        font-size: 12px;
+       margin-top: 30px;
      }
    }
 
@@ -305,16 +315,26 @@
      display: flex;
      justify-content: center;
    }
-   
+
    .register__subtitle {
-  /*   color: #A0A0A0;*/
-     color:black;
-     font-weight: 400;
-     font-size: 14px;
-     margin-top: 16px;
-     /*margin-bottom: 70px;*/
-     margin-bottom: 30px;
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+   .register__subtitle  {
+     font-size: 12px;
+     margin-bottom: 0;
    }
+ }
+
+ @media screen and (max-width: 450px) {
+   .register__subtitle  {
+     font-size: 10px;
+   }
+ }
 
 .register__inputname-span {
   color: #ff6838;

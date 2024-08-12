@@ -403,6 +403,17 @@
     padding-top: 34px;
   }
 
+  @media screen and (max-width: 600px) {
+    .firstMessagePopup__form {
+      width: calc(282px - (22px*2));
+      min-height: calc(322px - (25px*2));
+      padding-left: 22px;
+      padding-right: 22px;
+      padding-bottom: 25px;
+      padding-top: 25px;
+    }
+  }  
+
   .firstMessagePopup__text {
     width: 90%;
     height: 300px;
@@ -433,6 +444,12 @@
     font-size: 14px;
   }
 
+  @media screen and (max-width: 450px) {
+    .firstMessagePopup__btn {
+      width: 100%;
+    }
+  }
+
   .firstMessagePopup__btn_active {
     background-color: black;
     color: #fff;
@@ -457,7 +474,6 @@
     .firstMessagePopup__btn_active {
       width: 100%;
       font-size: 12px;
-      margin-top: 130px;
     }
   }
   
