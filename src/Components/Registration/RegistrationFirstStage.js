@@ -190,8 +190,9 @@ function handleRegSubmit(e) {
                 onSubmit={handleRegSubmit}
               >
                 <h2 className='registrationFirstStage__title'>{translatedContext.greetings}</h2>
-                <p className='register__title-stage'>{translatedContext.emailIsConfirmTitle}</p>
+                
                 <p className='register__title-stage'>{translatedContext.secondStepTitle}</p>
+                <p className='register__title-stage'>{translatedContext.emailIsConfirmTitle}</p>
                 <fieldset className='register__fieldset'>
                   <label className='register__inputname'>{translatedContext.email}
                     <div className='register__input-email'>{email}</div>
@@ -254,7 +255,7 @@ function handleRegSubmit(e) {
                   onSubmit={onVerifyCode}>
 
                   <fieldset className='register__fieldset'>
-                    <h3>Код отправлен на электронную почту {email}</h3>
+                    <p>Код отправлен на электронную почту {email}</p>
                     <label className='register__inputname'>{translatedContext.verificationCodeLabel}
                     <input 
                       className='register__input' 

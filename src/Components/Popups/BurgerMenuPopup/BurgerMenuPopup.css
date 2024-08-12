@@ -420,3 +420,10 @@
   font-size: 8px;
 }
 
+@media screen and (max-width: 950px) {
+  .burgerMenuPopup__messages-badge  {
+    top: 2px;
+    left: 23px;
+  }
+}
+
