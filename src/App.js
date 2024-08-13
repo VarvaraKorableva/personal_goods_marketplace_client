@@ -472,7 +472,6 @@ function adCountDecrement(userId) {
       closeLoading()
       setSuccessfulActionPopup(true)
       setPopupMessage('Сообщение отправлено')
-
     })
     .catch((err) => {
       console.log(err)

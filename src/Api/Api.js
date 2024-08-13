@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -273,6 +273,37 @@ export const deleteImage = (item_id) => {
   })
       .then(checkResponse) 
 };
+
+//conversations
+export const createConversation = ( {conversation_owner_id, item_owner_id, item_id} ) => {
+    return fetch(`${BASE_URL}/conversations/create_conversation`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            conversation_owner_id,
+            item_owner_id,
+            item_id
+        })
+    })
+        .then(checkResponse)
+  }; 
+
+export const getAllUserConversations = (user_id) => {
+    return fetch(`${BASE_URL}/conversations/get_all_user_conversations/${user_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+  };  
+
 
 
 ///messages
