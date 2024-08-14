@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -475,8 +475,7 @@ export const updateIsReserved = ( item_id, user_id ) => {
     })
         .then(checkResponse)
 };  
-//updateIsReserved
-//verification/verifyCode
+
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);
