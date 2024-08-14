@@ -431,7 +431,6 @@ function adCountDecrement(userId) {
       closeLoading()
       setIsVerificationCodeSent(false)
       setIsVerificationCodeSentMessage('')
-      console.log(res)
       setIsEmailConfirmed(true)
     })
     .catch((err) => {
@@ -467,10 +466,10 @@ function adCountDecrement(userId) {
     openLoading()
     Api.createConversation({conversation_owner_id: userId, item_owner_id: receiverId, item_id: itemId}) 
       .then((res)=> {
-        console.log(res)
+        
         Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text, conversation_id: res.conversation_id}) 
         .then((res) => {
-          console.log(res)
+          
           //closeAllPopups()
           //setCoversations([res, ...coversations])
           setReceiverId('')
@@ -517,7 +516,7 @@ function adCountDecrement(userId) {
       setCoversations(res.messages)
       setUserNameForOneConversationPopup(res)//.user.username
       setItemTitleForOneConversationPopup(res.item)
-      console.log('getOneConversation',res)
+      
       closeLoading()
     })
     .catch((err) => {
@@ -642,6 +641,17 @@ function adCountDecrement(userId) {
       getMyFavorites([])
       navigate(`/`)
   }
+
+  //updateIsReserved
+  function handleUpdateIsReserved( item_id ) {
+    Api.updateIsReserved(item_id, userId)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
   
   return (
     <LanguageProvider>
@@ -713,10 +723,9 @@ function adCountDecrement(userId) {
               isLoggin={isLoggin}
               allImages={allImages}
               openFirstMessagePopup={openFirstMessagePopup}
-
-
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
+              handleUpdateIsReserved={handleUpdateIsReserved}
             />
           }
         />
@@ -743,6 +752,7 @@ function adCountDecrement(userId) {
               getItemsByParentId={getItemsByParentId}
 
               openFirstMessagePopup={openFirstMessagePopup}
+              handleUpdateIsReserved={handleUpdateIsReserved}
             />
           }
         />
@@ -817,6 +827,7 @@ function adCountDecrement(userId) {
                 allImages={allImages}
                 limit={limit}
                 addAds={addAds}
+                handleUpdateIsReserved={handleUpdateIsReserved}
               />
             </ProtectedRoute>
           }>

@@ -9,7 +9,9 @@ function Main({
     itemsAfterSearch, startToSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
     getItemById, addToFavorites, allImages,
-    deleteFromFavorites, favoriteItems, deleteMyAd, getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,}) {
+    deleteFromFavorites, favoriteItems, deleteMyAd, 
+    getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
+    handleUpdateIsReserved, }) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -43,6 +45,7 @@ function Main({
                 isLoggin = {isLoggin}
                 deleteMyAd ={ deleteMyAd}
                 openFirstMessagePopup = {openFirstMessagePopup}
+                handleUpdateIsReserved={handleUpdateIsReserved}
             />
         </section>
     )

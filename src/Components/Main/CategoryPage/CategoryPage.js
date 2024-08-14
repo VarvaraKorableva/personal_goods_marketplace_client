@@ -11,7 +11,9 @@ function CategoryPage({
     deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup
+    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, 
+    getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
+    handleUpdateIsReserved
 }) {
 
     const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
@@ -62,6 +64,7 @@ function CategoryPage({
                         item={item}
                         deleteMyAd={deleteMyAd}
                         openFirstMessagePopup={openFirstMessagePopup}
+                        handleUpdateIsReserved={handleUpdateIsReserved}
                     />    
                     
                 ))}

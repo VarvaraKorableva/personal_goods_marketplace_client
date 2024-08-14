@@ -8,7 +8,7 @@ import choose from '../../const/myPageData'
 
 import './MyPage.css'
 
-function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds}) {
+function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -86,6 +86,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
                                 allImages={allImages}
+                                handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}
                     </ul>

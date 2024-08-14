@@ -272,9 +272,38 @@
 }
 
 .oneAdd__btn {
-    margin-top: 25px;
+    margin-top: 15px;
     cursor: pointer;
     border: none;
-
+    border: 1px solid rgb(91, 166, 189);
     background-color: transparent;
+    font-size: 8px;
+    border-radius: 30px;
+    height: 25px;
+}
+
+.oneAdd__btn:hover {
+    background-color: rgb(104, 175, 223);
+    color: #fff;
+}
+
+.oneAdd__reserved-btn {
+    margin-top: 15px;
+    cursor: pointer;
+    border: 1px solid rgb(91, 166, 189);
+    border-radius: 30px;
+    font-size: 8px;
+    height: 25px;
+    background-color: transparent;
+}
+
+.oneAdd__reserved-btn:hover {
+    background-color: rgb(104, 175, 223);
+    color: #fff;
+}
+
+.oneAdd__reserved-text {
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 0;
 }

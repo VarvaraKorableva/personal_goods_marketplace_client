@@ -11,7 +11,7 @@ function OneAd({
     isLoggin, item, getItemById, 
     deleteMyAd, addToFavorites, 
     deleteFromFavorites, favorite, 
-    favoriteItems, allImages, openFirstMessagePopup,
+    favoriteItems, allImages, openFirstMessagePopup, handleUpdateIsReserved
 }) {
 
     const currentUser = React.useContext(CurrentUserContext)
@@ -53,6 +53,10 @@ function OneAd({
 
     function handleDeleteMyitem() {
         deleteMyAd(item.item_id)
+    }
+
+    function onUpdateIsReserved() {
+      handleUpdateIsReserved(item.item_id)
     }
 
     function formatDate(dateString) {
@@ -113,7 +117,7 @@ function OneAd({
                     
                     {isLoggin? 
                         (currentUser.user_id === item.owner_id ?
-                        <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
+                          <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
                         :
                           (isLiked ?
                             <button className="oneAdd__like-btn_activ" onClick={handleDeleteFromFav}></button>
@@ -126,13 +130,26 @@ function OneAd({
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
                 <p className="oneAdd__city">{item.city}</p>
-                {isLoggin && (currentUser.user_id !== item.owner_id) ?
-                    <button className="oneAdd__btn" onClick={handleAddMessagePopupOpen}>
-                      <div className="oneAdd__message-btn"></div>
-                      <p className="oneAdd__message-btn-text">Написать владельцу</p>
-                    </button>
-                  :
-                    <></>
+                {isLoggin?
+                    (currentUser.user_id !== item.owner_id) ?
+                        <>
+                          {item.reserved?
+                           <p className="oneAdd__reserved-text">Зарезервировано</p>
+                          :
+                           <p className="oneAdd__reserved-text"></p>
+                          }
+                          <button className="oneAdd__btn" onClick={handleAddMessagePopupOpen}>
+                            Написать владельцу
+                          </button>
+                        </>
+                      :
+                        (item.reserved?
+                          <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Снять резервацию</button>
+                          :
+                          <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Зарезервировать</button>
+                        )
+                :
+                <></>
                 }
                 
             </div>

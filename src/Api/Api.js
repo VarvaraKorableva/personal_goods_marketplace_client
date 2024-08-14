@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -459,6 +459,23 @@ export const verifyCode = ( email, code ) => {
         .then(checkResponse)
   };  
 
+
+export const updateIsReserved = ( item_id, user_id ) => {
+      
+    return fetch(`${BASE_URL}/items/updateIsReserved`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+            item_id, user_id
+        })
+    })
+        .then(checkResponse)
+};  
+//updateIsReserved
 //verification/verifyCode
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
