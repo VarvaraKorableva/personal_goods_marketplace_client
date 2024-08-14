@@ -5,7 +5,7 @@ import './MyMessages.css'
 import * as Api from '../../../Api/Api'
 import React from 'react'
 
-function MyMessages({ getOneConversation, openOneConversationPopup, markMessagesAsRead }) {
+function MyMessages({ getOneConversation, openOneConversationPopup, markMessagesAsRead, onConversation }) {
     const [lastMessages, setLastMessages] = React.useState({})
     const userId = useParams()
     
@@ -35,6 +35,7 @@ function MyMessages({ getOneConversation, openOneConversationPopup, markMessages
                             message={item}
                             getOneConversation={getOneConversation}
                             openOneConversationPopup={openOneConversationPopup}
+                            onConversation={onConversation}
                             markMessagesAsRead={markMessagesAsRead}
                         />
                     ))}

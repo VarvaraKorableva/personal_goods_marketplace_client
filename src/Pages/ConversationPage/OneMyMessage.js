@@ -1,5 +1,5 @@
 import React from 'react'
-import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 
 function OneMyMessage({message, deleteOneMessage, userName}) {
 
@@ -25,7 +25,12 @@ function OneMyMessage({message, deleteOneMessage, userName}) {
         </li>
         :
         <li className='oneConversationPopup__oneMessage'>
-          <p className='oneConversationPopup__userName'>{userName} :</p>
+          {userName.user.user_id === userId?
+            <p className='oneConversationPopup__userName'>{userName.userSecond.username}:</p>
+            :
+            <p className='oneConversationPopup__userName'>{userName.user.username}:</p>
+        }
+          
           <p className='oneConversationPopup__text'>{message.message_text}</p>
         </li>
         }

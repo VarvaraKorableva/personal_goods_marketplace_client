@@ -25,10 +25,11 @@ import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
-import OneConversationPopup from './Components/Popups/OneConversationPopup/OneConversationPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
 import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup'
 import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
+
+import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(false)
@@ -460,21 +461,31 @@ function adCountDecrement(userId) {
     })
   }
 
-  //createMessage
+  //createMessage create conversation and create first message
   function addNewMessage(message_text) {
     openLoading()
-    Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text}) 
-    .then((res) => {
-      closeAllPopups()
-      setCoversations([res, ...coversations])
-      setReceiverId('')
-      setItemId('')
-      closeLoading()
-      setSuccessfulActionPopup(true)
-      setPopupMessage('Сообщение отправлено')
-    })
+    Api.createConversation({conversation_owner_id: userId, item_owner_id: receiverId, item_id: itemId}) 
+      .then((res)=> {
+        console.log(res)
+        Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text, conversation_id: res.conversation_id}) 
+        .then((res) => {
+          console.log(res)
+          //closeAllPopups()
+          //setCoversations([res, ...coversations])
+          setReceiverId('')
+          setItemId('')
+          closeLoading()
+          setSuccessfulActionPopup(true)
+          setPopupMessage('Сообщение отправлено')
+        })
+        .catch((err) => {
+          closeLoading()
+          closeAllPopups()
+          setSuccessfulActionPopup(true)
+          setPopupMessage('Что-то пошло не так :(')
+        })
+      })
     .catch((err) => {
-      console.log(err)
       closeLoading()
       closeAllPopups()
       setSuccessfulActionPopup(true)
@@ -482,9 +493,9 @@ function adCountDecrement(userId) {
     })
   }
 
-  function createNewMessageFromConversationPopup(receiver_id, item_id, message_text) {
+  function createNewMessageFromConversationPopup(receiver_id, item_id, message_text, conversation_id) {
     openLoading()
-    Api.addMessage({receiver_id, sender_id: userId, item_id, message_text}) 
+    Api.addMessage({receiver_id, sender_id: userId, item_id, message_text, conversation_id}) 
     .then((res) => {
       //setCoversations([res, ...coversations])
       //setCoversations([...coversations, res]);
@@ -505,7 +516,8 @@ function adCountDecrement(userId) {
     Api.getOneConversation(r_id, s_id, i_id, userId)
     .then((res) => {
       setCoversations(res.messages)
-      setUserNameForOneConversationPopup(res.user.username)
+      setUserNameForOneConversationPopup(res)//.user.username
+      console.log('getOneConversation',res)
       closeLoading()
     })
     .catch((err) => {
@@ -573,6 +585,13 @@ function adCountDecrement(userId) {
 
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
+  }
+
+//onConversation
+  function selectConversation(r_id, s_id, i_id) {
+    setReceiver_idForOneConversationPopup(r_id)
+    setSender_idForOneConversationPopup(s_id) 
+    setItem_idForOneConversationPopup(i_id)
   }
 
   function openOneConversationPopup(r_id, s_id, i_id) {
@@ -819,6 +838,28 @@ function adCountDecrement(userId) {
                 getOneConversation={getOneConversation}
                 openOneConversationPopup={openOneConversationPopup}
                 markMessagesAsRead={markMessagesAsRead}
+                onConversation={selectConversation}
+              />
+            </ProtectedRoute>
+          }>  
+        </Route>
+
+        <Route 
+          path={`/users/conversation-page/:conversation_id`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <ConversationPage
+                getOneConversation={getOneConversation}
+                receiver_id={receiver_idForOneConversationPopup}
+                sender_id={sender_idForOneConversationPopup}
+                item_id={item_idForOneConversationPopup}
+                
+                coversations={coversations}
+                userName={userNameForOneConversationPopup}
+        
+                createNewMessage={createNewMessageFromConversationPopup}
+                deleteOneMessage={deleteOneMessage}
+
               />
             </ProtectedRoute>
           }>  
@@ -893,21 +934,6 @@ function adCountDecrement(userId) {
         isOpen={isFirstMessagePopup}
         onClose={closeAllPopups}
         createNewMessage={addNewMessage}
-      />
-
-      <OneConversationPopup
-        isOpen={isOneConversationPopup}
-        onClose={closeAllPopups}
-        getOneConversation={getOneConversation}
-        receiver_id={receiver_idForOneConversationPopup}
-        sender_id={sender_idForOneConversationPopup}
-        item_id={item_idForOneConversationPopup}
-        
-        coversations={coversations}
-        userName={userNameForOneConversationPopup}
-
-        createNewMessage={createNewMessageFromConversationPopup}
-        deleteOneMessage={deleteOneMessage}
       />
 
       <Preloader 

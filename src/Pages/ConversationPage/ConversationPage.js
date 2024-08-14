@@ -1,9 +1,10 @@
-import '../Popups.css'
+import '../../Components/Popups/Popups.css'
+import './ConversationPage.css'
 import React, { useEffect, useState, useRef } from 'react'
-import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 
-function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName}) {
+function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
@@ -15,12 +16,11 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
-        // Прокрутка контейнера до самого низа при открытии попапа
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [coversations]);
-
+    
 
     useEffect(() => {
         getOneConversation(receiver_id, sender_id, item_id)
@@ -31,9 +31,9 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
         e.preventDefault()
 
         receiver_id === userId?
-            createNewMessage(sender_id, item_id, messageText)
+            createNewMessage(sender_id, item_id, messageText, coversations[0].conversation_id)
         :
-            createNewMessage(receiver_id, item_id, messageText)
+            createNewMessage(receiver_id, item_id, messageText, coversations[0].conversation_id)
 
         setMessageText('')
         setIsMessageText(false)
@@ -62,21 +62,17 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
             setIsValid(false)
         }
     },[isMessageText])
-
+    //{userName.item.title? <h3>{userName.item[0].title}</h3> : <></>}
+    //console.log('userName.item[0].title', userName.item[0].title)
     return(
-        <div className={`popup ${isOpen && 'popup__opened'}`}>
-        <div className="popup__container">
-            <button 
-              className="popup__close-button" 
-              type="button" 
-              onClick={onClose}>
-            </button>
-    
-            <div className="oneConversationPopup__wrapper">
-                
+
+        
+        <div className="conversationPage__wrapper">
+           
+           {userName.item.title? <h3>{userName.item[0].title}</h3> : <></>}
             <ul className="oneConversationPopup__messages-container">
                 {coversations.map((message) =>(
-                    
+                  
                   <OneMyMessage 
                     key={message.message_id}
                     message={message}
@@ -106,10 +102,8 @@ function OneConversationPopup({onClose, isOpen, getOneConversation, receiver_id,
                 <button type='submit' className={isValid?"oneConversationPopup__submit-btn_active":"oneConversationPopup__submit-btn"} disabled={!isValid}>Ответить</button>
             </form>
 
-            </div>
-        </div>
         </div>
     )
 }
 
-export default OneConversationPopup;
+export default ConversationPage;
