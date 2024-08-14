@@ -4,15 +4,10 @@ import React from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import noPictures from '../../../images/nopictures.png'
 
-function Message({message, openOneConversationPopup, markMessagesAsRead, onConversation}) {
+function Message({message, markMessagesAsRead, onConversation}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
-
-    function handleOpenOneConversationPopup(){
-        openOneConversationPopup(message.receiver_id, message.sender_id, message.item_id)
-        markMessagesAsRead(message.receiver_id, message.sender_id, message.item_id)
-    }
 
     function handleConversationClick(){
         onConversation(message.receiver_id, message.sender_id, message.item_id)
@@ -32,7 +27,11 @@ function Message({message, openOneConversationPopup, markMessagesAsRead, onConve
                         </div>
                     }
                 </Link>
-                <Link to={`/users/conversation-page/${message.conversation_id}`} onClick={handleConversationClick}>
+                <Link 
+                    to={`/users/conversation-page/${message.conversation_id}`} 
+                    onClick={handleConversationClick}
+                    className="message__container-link"
+                >
                     <div className="one-message__wrapper">
                         <div className="message__item-info-container">
                             {message.item_owner_id === userId && message.receiver_id === userId? 

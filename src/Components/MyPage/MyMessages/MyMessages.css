@@ -235,3 +235,8 @@
         height: 60px; 
     }
 }
+
+.message__container-link {
+    text-decoration: none;
+    color: black;
+}

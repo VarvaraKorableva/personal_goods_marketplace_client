@@ -74,6 +74,7 @@ function App() {
 
   //popups
   const [userNameForOneConversationPopup, setUserNameForOneConversationPopup] = React.useState({})
+  const [itemTitleForOneConversationPopup, setItemTitleForOneConversationPopup] = React.useState({})
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
@@ -497,8 +498,6 @@ function adCountDecrement(userId) {
     openLoading()
     Api.addMessage({receiver_id, sender_id: userId, item_id, message_text, conversation_id}) 
     .then((res) => {
-      //setCoversations([res, ...coversations])
-      //setCoversations([...coversations, res]);
       getOneConversation(receiver_id, userId, item_id)
       closeLoading()
     })
@@ -517,6 +516,7 @@ function adCountDecrement(userId) {
     .then((res) => {
       setCoversations(res.messages)
       setUserNameForOneConversationPopup(res)//.user.username
+      setItemTitleForOneConversationPopup(res.item)
       console.log('getOneConversation',res)
       closeLoading()
     })
@@ -589,14 +589,6 @@ function adCountDecrement(userId) {
 
 //onConversation
   function selectConversation(r_id, s_id, i_id) {
-    setReceiver_idForOneConversationPopup(r_id)
-    setSender_idForOneConversationPopup(s_id) 
-    setItem_idForOneConversationPopup(i_id)
-  }
-
-  function openOneConversationPopup(r_id, s_id, i_id) {
-    setIsOneConversationPopup(true)
-
     setReceiver_idForOneConversationPopup(r_id)
     setSender_idForOneConversationPopup(s_id) 
     setItem_idForOneConversationPopup(i_id)
@@ -836,7 +828,6 @@ function adCountDecrement(userId) {
             <ProtectedRoute isLoggin={isLoggin}>
               <MyMessages
                 getOneConversation={getOneConversation}
-                openOneConversationPopup={openOneConversationPopup}
                 markMessagesAsRead={markMessagesAsRead}
                 onConversation={selectConversation}
               />
@@ -856,6 +847,7 @@ function adCountDecrement(userId) {
                 
                 coversations={coversations}
                 userName={userNameForOneConversationPopup}
+                itemTitle={itemTitleForOneConversationPopup}
         
                 createNewMessage={createNewMessageFromConversationPopup}
                 deleteOneMessage={deleteOneMessage}

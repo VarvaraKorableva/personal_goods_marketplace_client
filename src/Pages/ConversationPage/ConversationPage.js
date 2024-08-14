@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 
-function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName }) {
+function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
@@ -63,14 +63,17 @@ function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id,
         }
     },[isMessageText])
     //{userName.item.title? <h3>{userName.item[0].title}</h3> : <></>}
-    //console.log('userName.item[0].title', userName.item[0].title)
+    //console.log('userName.item', userName.item[0].title)
+    //{userName.item[0]? <h3>{userName.item[0].title}<span className="conversationPage__price">{userName.item[0].price} ₪</span></h3> : <></>}
+    //{userName.item[0].title? <h3>{userName.item[0].title}</h3> : <></>}
+    //console.log(userName.item.title)
     return(
 
         
         <div className="conversationPage__wrapper">
+           <h3>{itemTitle.title}</h3>
            
-           {userName.item.title? <h3>{userName.item[0].title}</h3> : <></>}
-            <ul className="oneConversationPopup__messages-container">
+            <ul className="conversationPage__messages-container">
                 {coversations.map((message) =>(
                   
                   <OneMyMessage 
