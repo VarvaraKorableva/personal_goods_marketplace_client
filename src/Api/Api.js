@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -290,7 +290,22 @@ export const createConversation = ( {conversation_owner_id, item_owner_id, item_
         })
     })
         .then(checkResponse)
-  }; 
+};
+//получение всех посл сообщений из всех конв по 1 юзеру
+/*
+never use
+export const getLastMessagesFromEveryConversationForUser = (user_id) => {
+    return fetch(`${BASE_URL}/conversations/getLastMessagesForUser/${user_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+  }; */
+//getLastMessagesForUser
 
 export const getAllUserConversations = (user_id) => {
     return fetch(`${BASE_URL}/conversations/get_all_user_conversations/${user_id}`, {
@@ -343,9 +358,7 @@ export const getUnreadbleMessages = ( user_id ) => {
         .then(checkResponse)
 };
 
-///
-
-export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) => {
+export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conversation_id} ) => {
     return fetch(`${BASE_URL}/messages`, {
         credentials: 'include',
         method: "POST",
@@ -358,6 +371,7 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text} ) =>
             sender_id,
             item_id,
             message_text,
+            conversation_id,
         })
     })
         .then(checkResponse)

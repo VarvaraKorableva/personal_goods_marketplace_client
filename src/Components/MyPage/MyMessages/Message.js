@@ -4,17 +4,16 @@ import React from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import noPictures from '../../../images/nopictures.png'
 
-function Message({message, openOneConversationPopup, markMessagesAsRead}) {
+function Message({message, markMessagesAsRead, onConversation}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
-    function handleOpenOneConversationPopup(){
-        openOneConversationPopup(message.receiver_id, message.sender_id, message.item_id)
+    function handleConversationClick(){
+        onConversation(message.receiver_id, message.sender_id, message.item_id)
         markMessagesAsRead(message.receiver_id, message.sender_id, message.item_id)
     }
 
-    
     return(
         <li className="message__container">
 
@@ -28,18 +27,26 @@ function Message({message, openOneConversationPopup, markMessagesAsRead}) {
                         </div>
                     }
                 </Link>
-                <div className="one-message__wrapper" onClick={handleOpenOneConversationPopup}>
-                    <div className="message__item-info-container">
-                        {message.item_owner_id === userId && message.receiver_id === userId? 
-                            <p className="message__sender-name">{message.sender_username}</p> 
-                          : 
-                            <p className="message__sender-name">{message.receiver_username}</p>
-                        }
-                        <p className="message__item-name">{message.item_title}</p>
-                        <p className="message__item-price">{message.item_price} ₪</p>
-                    </div>
-                    <p className="message__text">{message.message_text}</p>
-                </div>
+                <Link 
+                    to={`/users/conversation-page/${message.conversation_id}`} 
+                    onClick={handleConversationClick}
+                    className="message__container-link"
+                >
+                    <div className="one-message__wrapper">
+                        <div className="message__item-info-container">
+                            {message.item_owner_id === userId && message.receiver_id === userId? 
+                                <p className="message__sender-name">{message.sender_username}</p> 
+                            : 
+                                <p className="message__sender-name">{message.receiver_username}</p>
+                            }
+                            <p className="message__item-name">{message.item_title}</p>
+                            <p className="message__item-price">{message.item_price} ₪</p>
+                        </div>
+                    
+                        <p className="message__text">{message.message_text}</p>
+                    
+                   </div>
+                </Link>
             </div>
             
         </li>
