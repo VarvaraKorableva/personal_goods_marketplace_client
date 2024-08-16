@@ -274,7 +274,8 @@ function App() {
         const id = res.item_id
         const str_item_id = Number(id)
         formData.append('str_item_id', str_item_id); 
-        Api.uploadFile(formData)
+        //Api.uploadFile(formData)
+        Api.uploadMultipleFiles(formData)
         .then((res) => {
           setMyImages([res[0], ...myImages])
           closeAllPopups()

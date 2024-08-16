@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -238,6 +238,25 @@ export const uploadFile = (formData) => {
   .then(checkResponse);
 };
 
+export const uploadMultipleFiles = (formData) => {
+    return fetch(`${BASE_URL}/files/uploadMultipleFiles`, {
+      credentials: 'include',
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+      throw error;
+    });
+  };
+
+///uploadMultipleFiles
 export const getAllImages = () => {
   return fetch(`${BASE_URL}/files/images/all`, {
       credentials: 'include',
@@ -476,6 +495,17 @@ export const updateIsReserved = ( item_id, user_id ) => {
         .then(checkResponse)
 };  
 
+export const getAllImagesByUserId = ( owner_id ) => {
+    return fetch(`${BASE_URL}/files/images/${owner_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
 /*
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);

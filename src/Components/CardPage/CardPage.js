@@ -64,6 +64,9 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
     const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id)
 
+    console.log('allImages', allImages) 
+    //console.log(allImages.filter((img) => img.item_id === selectedItem[0].item_id)) 
+
     return(
         <section className="cardPage-section">
             <div className="cardPage-main-container">

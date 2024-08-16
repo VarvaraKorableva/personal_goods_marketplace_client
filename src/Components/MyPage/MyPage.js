@@ -4,6 +4,7 @@ import OneAd from '../OneAd/OneAd'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
+import * as Api from '../../Api/Api'
 
 
 import './MyPage.css'
@@ -46,6 +47,15 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
         onAdPopup()
       }
 
+    function getAllImagesByUserId() {
+        Api.getAllImagesByUserId(userId)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }  
 
     return(
         <section>
@@ -53,7 +63,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">
                         <div className="myPage__avatar">
-                            <p className="myPage__avatar-info-text">{translatedContext.temporaryMessage}</p>
+                            <p className="myPage__avatar-info-text" onClick={getAllImagesByUserId}>{translatedContext.temporaryMessage}</p>
                         </div>
                         {/*<button className="myPage__btn">{translatedContext.changeAvatarBtn}</button>*/}
                     </div>
