@@ -1,11 +1,12 @@
 import React from 'react'
+import imageCompression from 'browser-image-compression';
 import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import {cities} from '../../const/Cities/cities'
 
-function AddAdPage({onAddAd, categories, isGood, isLoading}) {
+function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   
@@ -80,9 +81,33 @@ function AddAdPage({onAddAd, categories, isGood, isLoading}) {
 
   const formRef = React.useRef(null);
 
-  function handleImgLinkChange(e) {
+ /*  function handleImgLinkChange(e) {
     setFile(e.target.files[0]);
-  }
+  }*/
+ 
+  const handleImgLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setFile(compressedImage);
+                console.log(compressedImage)
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
 
   function handledesDriptionChange(e) {
     if(e.target.value.length > 900) {
@@ -476,6 +501,14 @@ return (
       ></input>
 
       <span className='popup__inputmistake'>{errorImgMessage}</span>
+
+      {file? 
+        <div className='popup__compressed-pic-wrapper'>
+          <img src={URL.createObjectURL(file)} alt="Compressed" className='popup__compressed-pic'/>
+        </div>
+        : 
+        <></>
+      }
       <button 
         className= {isValid? 'popup__btn_active' : 'add-ad-popup__btn'}
         type='submit'

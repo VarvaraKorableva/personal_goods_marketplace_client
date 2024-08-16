@@ -787,6 +787,8 @@ function adCountDecrement(userId) {
                 isLoggin={isLoggin}
                 isGood={isGood}
                 isLoading={isLoading}
+                openLoading={openLoading}
+                closeLoading={closeLoading}
               />
             </ProtectedRoute>
           }>
@@ -802,6 +804,8 @@ function adCountDecrement(userId) {
                 isLoggin={isLoggin}
                 isGood={isGood}
                 isLoading={isLoading}
+                openLoading={openLoading}
+                closeLoading={closeLoading}
               />
             </ProtectedRoute>
           }>

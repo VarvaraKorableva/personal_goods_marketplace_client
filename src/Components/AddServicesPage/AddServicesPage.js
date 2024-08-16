@@ -1,11 +1,12 @@
 import React from 'react'
+import imageCompression from 'browser-image-compression';
 import '../AddAdPage/AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import {cities} from '../../const/Cities/cities'
 
-function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
+function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
   
@@ -85,9 +86,28 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin}) {
 
   const formRef = React.useRef(null);
 
-  function handleImgLinkChange(e) {
-    setFile(e.target.files[0]);
-  }
+  const handleImgLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setFile(compressedImage);
+                console.log(compressedImage)
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
 
   function handledesDriptionChange(e) {
     if(e.target.value.length > 900) {
