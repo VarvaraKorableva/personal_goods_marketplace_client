@@ -855,13 +855,15 @@ function adCountDecrement(userId) {
                 receiver_id={receiver_idForOneConversationPopup}
                 sender_id={sender_idForOneConversationPopup}
                 item_id={item_idForOneConversationPopup}
-                
+                deleteMyAd={deleteMyAd}
                 coversations={coversations}
                 userName={userNameForOneConversationPopup}
                 itemTitle={itemTitleForOneConversationPopup}
         
                 createNewMessage={createNewMessageFromConversationPopup}
                 deleteOneMessage={deleteOneMessage}
+
+                handleUpdateIsReserved={handleUpdateIsReserved}
 
               />
             </ProtectedRoute>

@@ -41,3 +41,6 @@ function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
 }
 
 export default MainSearchEngine;
+
+
+//<button className="MainSearchEngine-btn-city">Выбрать город</button>

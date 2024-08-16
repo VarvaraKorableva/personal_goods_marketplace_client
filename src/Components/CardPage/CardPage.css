@@ -6,6 +6,7 @@
     background-color: transparent;
     border: 2px solid black;
     margin: 5px;
+    margin-left: 0;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -66,6 +67,12 @@
     margin-left: 10px;
 }
 
+@media screen and (max-width: 600px) {
+    .cardPage-info-container {
+        margin-left: 0;
+    }
+}
+
 .cardPage-main-container {
     display: flex;
     flex-direction: column;
@@ -90,10 +97,12 @@
 .cardPage-info {
     font-weight: 600;
     margin-bottom: 0;
+    text-align: start;
 }
 
 .cardPage-info-title {
     margin-top: 0;
+    text-align: start;
 }
 
 .cardPage-link {
@@ -109,6 +118,7 @@
 
 .cardPage__btn-container {
     display: flex;
+    align-self: flex-start;
 }
 
 .cardPage-image {
@@ -135,6 +145,8 @@
 
 .cardPage__info-about-user {
     margin-top: 20px;
+    display: flex;
+    align-self: flex-start;
 }
 
 @media screen and (max-width: 600px) {
@@ -177,18 +189,13 @@
 }
 
 .cardPage-description-container {
-    max-width: 500px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-}
 
-@media screen and (max-width: 600px) {
-    .cardPage-description-container {
-        width: 252px;
-
-    }
+    align-self: flex-start;
 }
 
 .cardPage-info-description {

@@ -113,8 +113,8 @@ function OneAd({
               </Link>
             
               <div className="oneAdd__text-container">
+                
                 <div className="oneAdd__title-and-like-container">
-                    
                     {isLoggin? 
                         (currentUser.user_id === item.owner_id ?
                           <button className="oneAdd__delete-btn" onClick={handleDeleteMyitem}></button>
@@ -130,26 +130,28 @@ function OneAd({
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
                 <p className="oneAdd__city">{item.city}</p>
-                {isLoggin?
+                
+                { 
+                  isLoggin?
                     (currentUser.user_id !== item.owner_id) ?
-                        <>
+                        <div className="oneAdd__container-msg-text">
                           {item.reserved?
                            <p className="oneAdd__reserved-text">Зарезервировано</p>
                           :
-                           <p className="oneAdd__reserved-text"></p>
+                           <></>
                           }
                           <button className="oneAdd__btn" onClick={handleAddMessagePopupOpen}>
                             Написать владельцу
                           </button>
-                        </>
+                        </div>
                       :
                         (item.reserved?
                           <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Снять резервацию</button>
                           :
                           <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Зарезервировать</button>
                         )
-                :
-                <></>
+                  :
+                    <></>
                 }
                 
             </div>

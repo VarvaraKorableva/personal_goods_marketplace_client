@@ -2,6 +2,7 @@ import React from 'react'
 import MainCategories from './MainCategories/MainCategories'
 import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
+import CityFilterBtn from './CityFilterBtn/CityFilterBtn'
 import './Main.css'
 
 function Main({
@@ -32,7 +33,8 @@ function Main({
                 getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
                 getItemsByParentId={getItemsByParentId}
             />
-            <h2 className='main__title'>All ad</h2>
+            
+            <h2 className='main__title'>Все объявления</h2>
             <ItemsContainer 
                 allImages = {allImages}
                 itemsAfterSearch = {itemsAfterSearch}

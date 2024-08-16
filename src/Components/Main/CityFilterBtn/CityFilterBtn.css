@@ -1,0 +1,53 @@
+.cityFilterBtn__container {
+    display: flex;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .cityFilterBtn__container {
+        width: calc(100% - 40px);
+    }
+}
+
+.cityFilterBtn__btn-city {
+    width: 30%;
+    border-radius: 10px;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+.cityFilterBtn__btn-city:last-of-type {
+    margin-right: 0;
+}
+
+.cityFilterBtn__btn-city:hover {
+    background-color: black;
+    color: #fff;
+}
+
+@media screen and (max-width: 550px) {
+    .cityFilterBtn__btn-city {
+        width: 40%;
+    }
+}
+
+.cityFilterBtn__input-price {
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 10px;
+    background-color: transparent;
+    color: black;
+}

@@ -171,7 +171,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading}) {
       setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
     }
   }
-
+ 
   const handlePriceChange = (e) => {
     if (!e.target.value) {
       setIsPriceSelected(false)
@@ -297,7 +297,11 @@ return (
 
         <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
 
-        <select className='addAdPage__select' onChange={handleSelectChange}>
+        <select 
+          className='addAdPage__select' 
+          onChange={handleSelectChange}
+          //value={selectedCategoryId}
+          >
           <option value="">{translatedContext.choiseACategory}</option>
 
           {language === 'rus' ?

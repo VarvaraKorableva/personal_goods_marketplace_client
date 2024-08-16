@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 
-function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
+function ConversationPage({ deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
@@ -26,6 +26,9 @@ function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id,
         getOneConversation(receiver_id, sender_id, item_id)
     }, [receiver_id, sender_id, item_id])
 
+    function onDeleteMyAd() {
+        deleteMyAd(item_id)
+    }
 
     function handleCreateNewMessage(e) {
         e.preventDefault()
@@ -55,6 +58,10 @@ function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id,
         }
     }
 
+    function onUpdateIsReserved() {
+        handleUpdateIsReserved(itemTitle.item_id)
+      }
+
     useEffect(()=>{
         if(isMessageText) {
             setIsValid(true)
@@ -62,17 +69,29 @@ function ConversationPage({ getOneConversation, receiver_id, sender_id, item_id,
             setIsValid(false)
         }
     },[isMessageText])
-    //{userName.item.title? <h3>{userName.item[0].title}</h3> : <></>}
-    //console.log('userName.item', userName.item[0].title)
-    //{userName.item[0]? <h3>{userName.item[0].title}<span className="conversationPage__price">{userName.item[0].price} ₪</span></h3> : <></>}
-    //{userName.item[0].title? <h3>{userName.item[0].title}</h3> : <></>}
-    //console.log(userName.item.title)
+
     return(
 
-        
         <div className="conversationPage__wrapper">
-           <h3>{itemTitle.title}</h3>
-           
+           <div className="conversationPage__info-container">
+               <div className="conversationPage__title-container">
+                <h3 className="conversationPage__title">{itemTitle.title}</h3>
+                <h3 className="conversationPage__title">{itemTitle.price} ₪</h3>
+               </div>
+              {currentUser.user_id !== itemTitle.owner_id ?
+                <></>
+                :
+                <div>
+                    {itemTitle.reserved?
+        
+                    <button className="conversationPage__reserved-btn" onClick={onUpdateIsReserved}>Снять резервацию</button>
+                    :
+                    <button className="conversationPage__reserved-btn" onClick={onUpdateIsReserved}>Зарезервировать</button>
+                    }
+                    <button className="conversationPage__delete-btn" onClick={onDeleteMyAd}>Delete</button>
+                </div>
+              }
+           </div>
             <ul className="conversationPage__messages-container">
                 {coversations.map((message) =>(
                   

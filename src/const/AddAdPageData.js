@@ -15,6 +15,7 @@ const en = {
     servicePrice: 'Add a Price',
 
     place: 'Where can you give the goods (city)',
+    
     cityServices: 'Where will the service be provided',
     picture: 'Add a Pictures',
 
@@ -61,6 +62,7 @@ const rus = {
     price: 'Укажите стоимость товара (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     servicePrice: 'Укажите стоимость услуги (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     place: 'Где можно забрать товар (город)',
+    
     cityServices: 'Укажите где будет оказана услуга',
     picture: 'Добавить фотографии',
 
