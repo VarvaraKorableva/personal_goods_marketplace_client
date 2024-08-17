@@ -168,12 +168,13 @@ function App() {
       console.log(err);
     }
   }
+//createNewCategory
 
   React.useEffect(()=>{
     getAllImagesForItems()
     getCategory()
     getAllItems()
-    
+  
     //getUnreadbleMessages(userId)
   },[])
 
@@ -267,16 +268,6 @@ function App() {
     })
   }
 
-  function getAllImagesByUserId(owner_id) {
-    Api.getAllImagesByUserId(owner_id)
-    .then((res) => {
-      setAllUserImages(res)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-}  
-/////////////
 function getAllImagesByItemId(item_id) {
   Api.getAllImagesByItemId(item_id)
   .then((res) => {
@@ -287,8 +278,6 @@ function getAllImagesByItemId(item_id) {
       console.log(err)
   })
 }  
-
-//getAllImagesByItemId
 
   function handleAddAdSubmit(data) {
     openLoading()
@@ -861,7 +850,7 @@ function adCountDecrement(userId) {
                 limit={limit}
                 addAds={addAds}
                 handleUpdateIsReserved={handleUpdateIsReserved}
-                getAllImagesByUserId={getAllImagesByUserId}
+                
                 allUserImages={allUserImages}
               />
             </ProtectedRoute>

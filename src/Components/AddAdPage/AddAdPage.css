@@ -34,7 +34,29 @@
         padding-top: 25px;
     }
 }  
-  
+  .popup__input-description {
+    color: black;
+    width: calc(100% - 20px);
+    height: 60px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    padding: 10px;
+    resize: none; 
+  }
+
+  .popup__input-description:hover {
+    border: 2px solid rgba(0, 0, 0, 0.6);
+  } 
+
+  .popup__input-description::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    padding: 3px;
+  }
     .popup__input {
       color: black;
       width: 100%;

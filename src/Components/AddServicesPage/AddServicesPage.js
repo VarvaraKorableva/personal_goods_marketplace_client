@@ -189,15 +189,22 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   }
 
   const handleTitleChange = (e) => {
-    if(!e.target.value) {
+    if(e.target.value.length > 40) {
       setIsTitleSelected(false)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
-      setTitle('')
-    }else {
-      const str = e.target.value
+      setTitleErrorMessage('Длинна названия не может превышать 40 символов')
       setTitle(e.target.value)
+    } else if (e.target.value.length < 3) {
+      setTitleErrorMessage('Название не может быть меньше 3 символов')
+      setIsTitleSelected(false)
+      setTitle(e.target.value)
+    } else if(!e.target.value) {
+      setIsTitleSelected(false)
+      setTitleErrorMessage('')
+      setTitle(e.target.value)
+    } else {
       setIsTitleSelected(true)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
+      setTitleErrorMessage('')
+      setTitle(e.target.value[0].toUpperCase() + e.target.value.slice(1))
     }
   }
 

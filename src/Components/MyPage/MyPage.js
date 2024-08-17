@@ -8,7 +8,7 @@ import * as Api from '../../Api/Api'
 
 import './MyPage.css'
 //allImages,
-function MyPage({ allUserImages, getAllImagesByUserId, onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -36,7 +36,6 @@ function MyPage({ allUserImages, getAllImagesByUserId, onAdPopup, isLoggin, getM
 
     React.useEffect(() => {
         getMyItems(userId)
-        getAllImagesByUserId(userId)
     }, []);
 
     function handleAddMoreAds() {

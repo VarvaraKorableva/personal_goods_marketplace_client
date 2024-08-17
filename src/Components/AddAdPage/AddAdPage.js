@@ -211,7 +211,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       id = Number(selectedThirdSubCategoryId)
     }
 
-    if (firstFile) {
+    if (firstFile || secondFile || thirdFile || fourthFile) {
       const formData = new FormData()
       formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
       formData.append('secondFile', secondFile);
@@ -267,14 +267,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   }
 
   const handleTitleChange = (e) => {
-    if(!e.target.value) {
+    if(e.target.value.length > 40) {
       setIsTitleSelected(false)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
-      setTitle('')
-    }else {
+      setTitleErrorMessage('Длинна названия не может превышать 40 символов')
       setTitle(e.target.value)
+    } else if (e.target.value.length < 3) {
+      setTitleErrorMessage('Название не может быть меньше 3 символов')
+      setIsTitleSelected(false)
+      setTitle(e.target.value)
+    } else if(!e.target.value) {
+      setIsTitleSelected(false)
+      setTitleErrorMessage('')
+      setTitle(e.target.value)
+    } else {
       setIsTitleSelected(true)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
+      setTitleErrorMessage('')
+      setTitle(e.target.value[0].toUpperCase() + e.target.value.slice(1))
     }
   }
  
@@ -509,7 +517,7 @@ return (
 
       <label className='popup__inputname'>{translatedContext.description}
         <textarea
-          className='popup__input'
+          className='popup__input-description'
           name='description'
           type='text'
           value={description}
