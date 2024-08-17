@@ -74,9 +74,12 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
 
                 <div className="cardPage__main-pic-wrapper">
                     {allImagesForOneItem.length?
+                        allImagesForOneItem.length > 1?
                         <ImageSlider 
                             allImagesForOneItem={allImagesForOneItem}>
                         </ImageSlider>
+                        : 
+                        <img className="cardPage__main-pic" alt = {selectedItem.title} src={allImagesForOneItem[0].location}></img>
                     : 
                         <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>
                     }
