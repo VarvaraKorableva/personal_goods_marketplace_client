@@ -1,0 +1,40 @@
+.image-slider {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Задайте ширину по вашему усмотрению */
+    margin: auto;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .image-slider__wrapper {
+    position: relative;
+  }
+  
+  .image-slider__image {
+    width: 100%;
+    height: 250px; /* Задайте высоту по вашему усмотрению */
+    object-fit: cover;
+  }
+  
+  .image-slider__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .image-slider__button--prev {
+    left: 10px;
+  }
+  
+  .image-slider__button--next {
+    right: 10px;
+  }
+  

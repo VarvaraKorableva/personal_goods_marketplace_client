@@ -9,8 +9,12 @@ import {cities} from '../../const/Cities/cities'
 function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
-  
-  const [file, setFile] = React.useState(null);
+
+  const [firstFile, setFirstFile] = React.useState(null);
+  const [secondFile, setSecondFile] = React.useState(null);
+  const [thirdFile, setThirdFile] = React.useState(null);
+  const [fourthFile, setFourthFile] = React.useState(null);
+
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
   const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
@@ -64,7 +68,11 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   const [descriptionErrorMessage, setDescriptionErrorMessage] = React.useState('')
 
 
-  const addItemRef = React.useRef(null);
+  const addFirstPicRef = React.useRef(null);
+  const addSecondPicRef = React.useRef(null);
+  const addThirdPicRef = React.useRef(null);
+  const addFourthPicRef = React.useRef(null);
+  const [files, setFiles] = React.useState([firstFile, secondFile, thirdFile, fourthFile])
 
   const { language } = React.useContext(LanguageContext)
 
@@ -80,12 +88,8 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   }
 
   const formRef = React.useRef(null);
-
- /*  function handleImgLinkChange(e) {
-    setFile(e.target.files[0]);
-  }*/
  
-  const handleImgLinkChange = async (event) => {
+  const handleImgFirstLinkChange = async (event) => {
     openLoading()
         const file = event.target.files[0];
         if (file) {
@@ -97,8 +101,77 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
             try {
                 const compressedImage = await imageCompression(file, options);
-                setFile(compressedImage);
-                console.log(compressedImage)
+                setFirstFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgSecondLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setSecondFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgThirdLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setThirdFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgFourthLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setFourthFile(compressedImage);
+                
                 closeLoading()
 
             } catch (error) {
@@ -114,7 +187,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       setIsDescriptionSelected(false)
       setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
     } else if(e.target.value) {
-      console.log(e.target.value.length)
+      console.log(files)
       setIsDescriptionSelected(true)
       setDescriptionErrorMessage('')
       setDescription(e.target.value)
@@ -138,9 +211,12 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       id = Number(selectedThirdSubCategoryId)
     }
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
+    if (firstFile) {
+      const formData = new FormData()
+      formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
+      formData.append('secondFile', secondFile);
+      formData.append('thirdFile', thirdFile);
+      formData.append('fourthFile', fourthFile);
 
       onAddAd({
         title,
@@ -174,7 +250,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
       setTitle('')
       setCity('')
-      setFile(null)
+      //setFile(null)
       setPrice('')
       setDescription('')
       setSize('')
@@ -183,6 +259,11 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)
+
+      setFirstFile(null)
+      setSecondFile(null)
+      setThirdFile(null)
+      setFourthFile(null)
   }
 
   const handleTitleChange = (e) => {
@@ -485,30 +566,107 @@ return (
 
       <label className='popup__inputname'>{translatedContext.picture}</label>
       <button 
-        onClick={() => addItemRef.current.click()}
+        onClick={() => addFirstPicRef.current.click()}
         className='popup__input-btn'
         type="button">
           {translatedContext.uploadPictureBtn}
       </button> 
       
       <input
-        ref={addItemRef}
+        ref={addFirstPicRef}
         className='popup__input'
-        name='file'
+        name='firstFile'
         type="file"
-        onChange={handleImgLinkChange}
+        onChange={handleImgFirstLinkChange}
+        hidden
+      ></input>
+
+      <label className='popup__inputname'>{translatedContext.picture}</label>
+      <button 
+        onClick={() => addSecondPicRef.current.click()}
+        className='popup__input-btn'
+        type="button">
+          {translatedContext.uploadPictureBtn}
+      </button> 
+      
+      <input
+        ref={addSecondPicRef}
+        className='popup__input'
+        name='secondFile'
+        type="file"
+        onChange={handleImgSecondLinkChange}
+        hidden
+      ></input>
+
+      <label className='popup__inputname'>{translatedContext.picture}</label>
+      <button 
+        onClick={() => addThirdPicRef.current.click()}
+        className='popup__input-btn'
+        type="button">
+          {translatedContext.uploadPictureBtn}
+      </button> 
+      
+      <input
+        ref={addThirdPicRef}
+        className='popup__input'
+        name='thirdFile'
+        type="file"
+        onChange={handleImgThirdLinkChange}
+        hidden
+      ></input>
+
+      <label className='popup__inputname'>{translatedContext.picture}</label>
+      <button 
+        onClick={() => addFourthPicRef.current.click()}
+        className='popup__input-btn'
+        type="button">
+          {translatedContext.uploadPictureBtn}
+      </button> 
+      
+      <input
+        ref={addFourthPicRef}
+        className='popup__input'
+        name='fourthFile'
+        type="file"
+        onChange={handleImgFourthLinkChange}
         hidden
       ></input>
 
       <span className='popup__inputmistake'>{errorImgMessage}</span>
-
-      {file? 
+      <div className='popup__files-container'>
+      {firstFile? 
         <div className='popup__compressed-pic-wrapper'>
-          <img src={URL.createObjectURL(file)} alt="Compressed" className='popup__compressed-pic'/>
+          <img src={URL.createObjectURL(firstFile)} alt="Compressed" className='popup__compressed-pic'/>
         </div>
         : 
         <></>
       }
+
+      {secondFile? 
+        <div className='popup__compressed-pic-wrapper'>
+          <img src={URL.createObjectURL(secondFile)} alt="Compressed" className='popup__compressed-pic'/>
+        </div>
+        : 
+        <></>
+      }
+
+      {thirdFile? 
+        <div className='popup__compressed-pic-wrapper'>
+          <img src={URL.createObjectURL(thirdFile)} alt="Compressed" className='popup__compressed-pic'/>
+        </div>
+        : 
+        <></>
+      }
+
+      {fourthFile? 
+        <div className='popup__compressed-pic-wrapper'>
+          <img src={URL.createObjectURL(fourthFile)} alt="Compressed" className='popup__compressed-pic'/>
+        </div>
+        : 
+        <></>
+      }
+      </div>
+
       <button 
         className= {isValid? 'popup__btn_active' : 'add-ad-popup__btn'}
         type='submit'

@@ -4,11 +4,11 @@ import OneAd from '../OneAd/OneAd'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
-
+import * as Api from '../../Api/Api'
 
 import './MyPage.css'
-
-function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+//allImages,
+function MyPage({ allUserImages, getAllImagesByUserId, onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -36,6 +36,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
 
     React.useEffect(() => {
         getMyItems(userId)
+        getAllImagesByUserId(userId)
     }, []);
 
     function handleAddMoreAds() {
@@ -45,7 +46,6 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
     function handleAddAdClick() {
         onAdPopup()
       }
-
 
     return(
         <section>
@@ -85,7 +85,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
                                 deleteFromFavorites={deleteFromFavorites}
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
-                                allImages={allImages}
+                                allImages={allUserImages}
                                 handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}
