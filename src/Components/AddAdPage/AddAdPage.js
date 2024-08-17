@@ -72,8 +72,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   const addSecondPicRef = React.useRef(null);
   const addThirdPicRef = React.useRef(null);
   const addFourthPicRef = React.useRef(null);
-
-  const files = []
+  const [files, setFiles] = React.useState([firstFile, secondFile, thirdFile, fourthFile])
 
   const { language } = React.useContext(LanguageContext)
 
@@ -103,7 +102,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
             try {
                 const compressedImage = await imageCompression(file, options);
                 setFirstFile(compressedImage);
-                files.push(compressedImage)
+                
                 closeLoading()
 
             } catch (error) {
@@ -126,7 +125,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
             try {
                 const compressedImage = await imageCompression(file, options);
                 setSecondFile(compressedImage);
-                files.push(compressedImage)
+                
                 closeLoading()
 
             } catch (error) {
@@ -149,7 +148,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
             try {
                 const compressedImage = await imageCompression(file, options);
                 setThirdFile(compressedImage);
-                files.push(compressedImage)
+                
                 closeLoading()
 
             } catch (error) {
@@ -172,7 +171,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
             try {
                 const compressedImage = await imageCompression(file, options);
                 setFourthFile(compressedImage);
-                files.push(compressedImage)
+                
                 closeLoading()
 
             } catch (error) {
@@ -188,7 +187,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       setIsDescriptionSelected(false)
       setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
     } else if(e.target.value) {
-      console.log(e.target.value.length)
+      console.log(files)
       setIsDescriptionSelected(true)
       setDescriptionErrorMessage('')
       setDescription(e.target.value)
@@ -212,9 +211,12 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       id = Number(selectedThirdSubCategoryId)
     }
 
-    if (files) {
-      const formData = new FormData();
-      formData.append('files', firstFile, secondFile, thirdFile, fourthFile);
+    if (firstFile) {
+      const formData = new FormData()
+      formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
+      formData.append('secondFile', secondFile);
+      formData.append('thirdFile', thirdFile);
+      formData.append('fourthFile', fourthFile);
 
       onAddAd({
         title,
@@ -262,11 +264,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       setSecondFile(null)
       setThirdFile(null)
       setFourthFile(null)
-
-      delete files[0]
-      delete files[0]
-      delete files[0]
-      delete files[0]
   }
 
   const handleTitleChange = (e) => {

@@ -46,6 +46,9 @@ function App() {
   const [categories, setCategories] = React.useState([])
 
   const [allImages, setAllImages] = React.useState([])
+  const [allUserImages, setAllUserImages] = React.useState([]) //ForMyPage
+  const [allImagesForOneItem, setAllImagesForOneItem] = React.useState([]) //ForCardPage
+  
   const [myImages, setMyImages] = React.useState([])
 
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
@@ -167,7 +170,7 @@ function App() {
   }
 
   React.useEffect(()=>{
-    //getAllImagesForItems()
+    getAllImagesForItems()
     getCategory()
     getAllItems()
     
@@ -264,6 +267,29 @@ function App() {
     })
   }
 
+  function getAllImagesByUserId(owner_id) {
+    Api.getAllImagesByUserId(owner_id)
+    .then((res) => {
+      setAllUserImages(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}  
+/////////////
+function getAllImagesByItemId(item_id) {
+  Api.getAllImagesByItemId(item_id)
+  .then((res) => {
+    console.log(res)
+    setAllImagesForOneItem(res)
+  })
+  .catch((err) => {
+      console.log(err)
+  })
+}  
+
+//getAllImagesByItemId
+
   function handleAddAdSubmit(data) {
     openLoading()
     adCountIncrement(userId)
@@ -274,6 +300,7 @@ function App() {
         const id = res.item_id
         const str_item_id = Number(id)
         formData.append('str_item_id', str_item_id); 
+        formData.append('user_id', userId); 
         //Api.uploadFile(formData)
         Api.uploadMultipleFiles(formData)
         .then((res) => {
@@ -443,7 +470,6 @@ function adCountDecrement(userId) {
       setPopupMessage('Что-то пошло не так :(')
     })
   }
-
 
   function sendVerificationCode(email) {
     openLoading()
@@ -772,8 +798,10 @@ function adCountDecrement(userId) {
               favoriteItems={favoriteItems}
               deleteMyAd={deleteMyAd}
               allImages={allImages}
-
+              
               openFirstMessagePopup={openFirstMessagePopup}
+              getAllImagesByItemId={getAllImagesByItemId}
+              allImagesForOneItem={allImagesForOneItem}
             />
           }
         />
@@ -818,7 +846,7 @@ function adCountDecrement(userId) {
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
                 onAdPopup={handleChoiceOfProductOrServicePopupClick}
-                getUserById={getUserById}
+                
                 getMyItems={getMyItems}
                 myAds={myAds}
                 deleteMyAd={deleteMyAd}
@@ -829,10 +857,12 @@ function adCountDecrement(userId) {
                 deleteFromFavorites={deleteFromFavorites}
                 favorite={favorite}
                 favoriteItems={favoriteItems}
-                allImages={allImages}
+                //allImages={allImages}
                 limit={limit}
                 addAds={addAds}
                 handleUpdateIsReserved={handleUpdateIsReserved}
+                getAllImagesByUserId={getAllImagesByUserId}
+                allUserImages={allUserImages}
               />
             </ProtectedRoute>
           }>

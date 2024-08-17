@@ -6,8 +6,9 @@ import * as Api from '../../Api/Api'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
+import ImageSlider from './ImageSlider.js'
 
-function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
@@ -30,6 +31,7 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
 
     useEffect(() => {
         getItemById(item_id);
+        getAllImagesByItemId(item_id)
     }, []); 
     
     function getUser() {
@@ -62,20 +64,19 @@ function CardPage({ allImages, deleteMyAd, selectedItem, getItemById, addToFavor
       }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
-    const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id)
-
-    console.log('allImages', allImages) 
-    //console.log(allImages.filter((img) => img.item_id === selectedItem[0].item_id)) 
-
+    //const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id) 
+    //console.log(allImagesForOneItem)
+    //{/*<img className="cardPage__main-pic" alt = {selectedItem.title} src={allImagesForOneItem[0].location}></img>*/}
     return(
         <section className="cardPage-section">
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
 
-
                 <div className="cardPage__main-pic-wrapper">
-                    {image.length?
-                        <img className="cardPage__main-pic" alt = {selectedItem.title} src={image[0].location}></img>
+                    {allImagesForOneItem.length?
+                        <ImageSlider 
+                            allImagesForOneItem={allImagesForOneItem}>
+                        </ImageSlider>
                     : 
                         <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>
                     }

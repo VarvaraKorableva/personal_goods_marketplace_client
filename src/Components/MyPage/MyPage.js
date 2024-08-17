@@ -6,10 +6,9 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
 import * as Api from '../../Api/Api'
 
-
 import './MyPage.css'
-
-function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+//allImages,
+function MyPage({ allUserImages, getAllImagesByUserId, onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -37,6 +36,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
 
     React.useEffect(() => {
         getMyItems(userId)
+        getAllImagesByUserId(userId)
     }, []);
 
     function handleAddMoreAds() {
@@ -47,23 +47,13 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
         onAdPopup()
       }
 
-    function getAllImagesByUserId() {
-        Api.getAllImagesByUserId(userId)
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }  
-
     return(
         <section>
             <div className="myPage__container">
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">
                         <div className="myPage__avatar">
-                            <p className="myPage__avatar-info-text" onClick={getAllImagesByUserId}>{translatedContext.temporaryMessage}</p>
+                            <p className="myPage__avatar-info-text">{translatedContext.temporaryMessage}</p>
                         </div>
                         {/*<button className="myPage__btn">{translatedContext.changeAvatarBtn}</button>*/}
                     </div>
@@ -95,7 +85,7 @@ function MyPage({ onAdPopup, getUserById, allImages, isLoggin, getMyItems, myAds
                                 deleteFromFavorites={deleteFromFavorites}
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
-                                allImages={allImages}
+                                allImages={allUserImages}
                                 handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}

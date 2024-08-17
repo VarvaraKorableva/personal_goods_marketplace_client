@@ -506,7 +506,20 @@ export const getAllImagesByUserId = ( owner_id ) => {
     })
         .then(checkResponse)
 };
+
+export const getAllImagesByItemId = ( item_id ) => {
+    return fetch(`${BASE_URL}/files/images/getAllImagesByItemId/${item_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+};
 /*
+/getAllImagesByItemId/:item_id
 files_router.post("/upload-single", upload.single("file"), _uploadSingle);
 files_router.get("/images/all", getAllImages);
 files_router.get("/images/:owner_id", getAllImagesByUserId);
