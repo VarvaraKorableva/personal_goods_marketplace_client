@@ -1,15 +1,22 @@
 import React from 'react'
 import './Footer.css'
+import { Link, useLocation } from 'react-router-dom'
 
 function Footer() {
 
 
     return (
-        <footer className="footer-container">
-            
-            <div className="footer">
-                <p className='footer__title'>Created 2024 by Varvara korableva</p>
-            </div>
+        <footer className="footer">
+          <div className="footer-container">
+            <div className='footer_logo-img'></div>  
+
+            <div className="footer-links-container">
+                <Link className='footer__link'>Правила размещения объявлений</Link>
+                <Link className='footer__link'>Пожаловаться на пользователя</Link>
+                <Link className='footer__link'>Сообщить об ошибке в работе приложения</Link>
+                <Link className='footer__link'>Предложить улучшения для приложения</Link>
+            </div>  
+          </div>
         </footer>
     )
 

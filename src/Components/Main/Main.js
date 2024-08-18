@@ -2,7 +2,7 @@ import React from 'react'
 import MainCategories from './MainCategories/MainCategories'
 import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
-import CityFilterBtn from './CityFilterBtn/CityFilterBtn'
+import FilterBtnContainer from './FilterBtnContainer/FilterBtnContainer'
 import './Main.css'
 
 function Main({
@@ -26,6 +26,7 @@ function Main({
                 categories={categories}
                 startToSearch={startToSearch}
             />
+            <FilterBtnContainer></FilterBtnContainer>
             <MainCategories 
                 onChooseCategory={onChooseCategory}
                 categories={categories}

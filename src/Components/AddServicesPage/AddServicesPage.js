@@ -191,15 +191,15 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   const handleTitleChange = (e) => {
     if(e.target.value.length > 40) {
       setIsTitleSelected(false)
-      setTitleErrorMessage('Длинна названия не может превышать 40 символов')
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessageToLong}`)
       setTitle(e.target.value)
     } else if (e.target.value.length < 3) {
-      setTitleErrorMessage('Название не может быть меньше 3 символов')
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessageToSmall}`)
       setIsTitleSelected(false)
       setTitle(e.target.value)
     } else if(!e.target.value) {
       setIsTitleSelected(false)
-      setTitleErrorMessage('')
+      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
       setTitle(e.target.value)
     } else {
       setIsTitleSelected(true)
@@ -218,7 +218,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
       setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
     } else if (e.target.value.length > 10) {
       setIsPriceSelected(false)
-      setPriceErrorMessage(`Цена не может содержать более 10 цифр`)
+      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageToLongs}`)
     } else {
       setIsPriceSelected(true)
       setPrice(e.target.value)

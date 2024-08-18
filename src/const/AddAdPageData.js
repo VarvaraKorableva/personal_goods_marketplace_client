@@ -34,10 +34,13 @@ const en = {
         },
         titleErrorMessage: {
             errorMessage: 'Add a product title',
+            errorMessageToLong: 'The length of the name cannot exceed 40 characters',
+            errorMessageToSmall: 'The name cannot be less than 3 characters',
         },    
         priceErrorMessage: {
             errorMessage: 'Add a price',
             errorMessageOnlyNumbers: 'Price can only consist of digits',
+            errorMessageToLong: 'The price cannot contain more than 10 digits',
         },
         cityErrorMessage: {
             errorMessage: 'Add a city',
@@ -81,15 +84,18 @@ const rus = {
         },
         titleErrorMessage: {
             errorMessage: 'Добавьте название товара',
+            errorMessageToLong: 'Длинна названия не может превышать 40 символов',
+            errorMessageToSmall: 'Название не может быть меньше 3 символов',
         },    
         priceErrorMessage: {
             errorMessage: 'Добавьте цену',
             errorMessageOnlyNumbers: 'Цена может состоять только из цифр',
+            errorMessageToLong: 'Цена не может содержать более 10 цифр',
         },
         cityErrorMessage: {
             errorMessage: 'Добавьте город',
             errorInCity: 'Вы уверены, что есть такой город? Если да и вы получили ошибку, добавьте ближайший к нему',
-        }    
+        },
     }
 
 
