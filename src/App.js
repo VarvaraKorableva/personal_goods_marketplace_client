@@ -81,6 +81,7 @@ function App() {
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
+  const [isReserved, setIsReserved] = React.useState(false)
 
   const [adCount, setAdCount] = React.useState(0) //count of ads for regulations adding
 
@@ -299,10 +300,12 @@ function getAllImagesByItemId(item_id) {
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           closeLoading()
+          
         })
         .then(()=> {
           getAllItems()
           getAllImagesForItems()
+          navigate(`/users/${userId}`)
         })
         .catch((err)=> {
           console.log(err)
@@ -317,6 +320,7 @@ function getAllImagesByItemId(item_id) {
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           closeLoading()
+          navigate(`/users/${userId}`)
       }
     })
     .catch((err)=> {
@@ -477,7 +481,7 @@ function adCountDecrement(userId) {
     })
   }
 
-  //createMessage create conversation and create first message
+  //createMessage create conversation and create first message popup
   function addNewMessage(message_text) {
     openLoading()
     Api.createConversation({conversation_owner_id: userId, item_owner_id: receiverId, item_id: itemId}) 
@@ -486,7 +490,7 @@ function adCountDecrement(userId) {
         Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text, conversation_id: res.conversation_id}) 
         .then((res) => {
           
-          //closeAllPopups()
+          closeAllPopups()
           //setCoversations([res, ...coversations])
           setReceiverId('')
           setItemId('')
@@ -508,7 +512,7 @@ function adCountDecrement(userId) {
       setPopupMessage('Что-то пошло не так :(')
     })
   }
-
+// create message from page
   function createNewMessageFromConversationPopup(receiver_id, item_id, message_text, conversation_id) {
     openLoading()
     Api.addMessage({receiver_id, sender_id: userId, item_id, message_text, conversation_id}) 
@@ -532,7 +536,7 @@ function adCountDecrement(userId) {
       setCoversations(res.messages)
       setUserNameForOneConversationPopup(res)//.user.username
       setItemTitleForOneConversationPopup(res.item)
-      
+      setIsReserved(res.item.reserved)
       closeLoading()
     })
     .catch((err) => {
@@ -662,10 +666,11 @@ function adCountDecrement(userId) {
   function handleUpdateIsReserved( item_id ) {
     Api.updateIsReserved(item_id, userId)
     .then((res) => {
-      console.log(res)
+      setIsReserved(!isReserved)
     })
     .catch((err) => {
       console.log(err)
+      setPopupMessage("Something wrong, plese try again")
     })
   }
   
@@ -888,6 +893,7 @@ function adCountDecrement(userId) {
                 deleteOneMessage={deleteOneMessage}
 
                 handleUpdateIsReserved={handleUpdateIsReserved}
+                isReserved={isReserved}
 
               />
             </ProtectedRoute>
