@@ -87,6 +87,11 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
 
                     <div className="cardPage-info-container">
                         <div className="cardPage-info-wrapper">
+                            {selectedItem[0].reserved?
+                                <p className="cardPage__reserved-text">Зарезервировано</p>
+                            :
+                                <></>
+                            }
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
                             <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price}</span></p>
                             <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>

@@ -54,7 +54,13 @@ return (
       <h1 className='header_logo'>Marketplace</h1>
     </Link> 
 
-    <button className='header__burger-menu' onClick={handleOpenBurgerMenuPopup}></button>
+    <button className='header__burger-menu' onClick={handleOpenBurgerMenuPopup}>
+      {unreadbleMessages.length > 0? 
+        <div className='header__burger-menu-messages-badge'>{unreadbleMessages.length}</div>
+          :
+        <></>
+      } 
+    </button>
 
     <div className='header__langpic-container'>
       {isLoggin ?

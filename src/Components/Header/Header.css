@@ -311,6 +311,7 @@
 
 .header__burger-menu {
   display: none;
+  position: relative;
 }
 
 @media screen and (max-width: 950px) {
@@ -346,4 +347,19 @@
 
 .header_logo-name {
   color: rgb(127, 127, 197);
+}
+
+.header__burger-menu-messages-badge {
+  border-radius: 50%;
+  background-color: #cc2b1d;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  font-size: 8px;
 }

@@ -145,11 +145,7 @@ function OneAd({
                           </button>
                         </div>
                       :
-                        (item.reserved?
-                          <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Снять резервацию</button>
-                          :
-                          <button className="oneAdd__reserved-btn" onClick={onUpdateIsReserved}>Зарезервировать</button>
-                        )
+                        <></> 
                   :
                     <></>
                 }

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 
-function ConversationPage({ deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
+function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
@@ -14,8 +14,9 @@ function ConversationPage({ deleteMyAd, handleUpdateIsReserved, getOneConversati
     const [isValid, setIsValid] = useState(false)
 
     const messagesEndRef = useRef(null);
-
+    
     useEffect(() => {
+        
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
@@ -82,7 +83,7 @@ function ConversationPage({ deleteMyAd, handleUpdateIsReserved, getOneConversati
                 <></>
                 :
                 <div>
-                    {itemTitle.reserved?
+                    {isReserved?
         
                     <button className="conversationPage__reserved-btn" onClick={onUpdateIsReserved}>Снять резервацию</button>
                     :
