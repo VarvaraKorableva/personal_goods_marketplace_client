@@ -16,8 +16,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   const [showInputFields, setShowInputFields] = React.useState(true);
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
-  const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
-  const [errorDreamLinkMessage, setErrorDreamLinkMessage] = React.useState('')
+
   
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
   const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
@@ -386,13 +385,13 @@ return (
       }
 
       <label className='popup__inputname'>{translatedContext.serviceDescription}</label>
-        <input
-          className='popup__input'
+        <textarea
+          className='popup__input-description'
           name='description'
           type='text'
           value={description}
           onChange={handledesDriptionChange}
-        ></input>
+        ></textarea>
        
        {isDescriptionSelected?
         <span className='popup__mistake-msg'></span>

@@ -2,7 +2,7 @@ import React from 'react'
 import './FilterBtnContainer.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
-import { condition } from '../../../const/Сondition/Сondition'
+import { conditions } from '../../../const/Сonditions/Сonditions'
 
 function FilterBtnContainer({}) {
     const { language } = React.useContext(LanguageContext)
@@ -52,12 +52,12 @@ function FilterBtnContainer({}) {
                 <option value="">Выбрать сотояние</option>
 
                     {language === 'rus' ?
-                        condition.rus.map((item) => (
+                        conditions.rus.map((item) => (
                             <option key={item} value={item}>{item}</option>
                         ))
             
                     :
-                        condition.en.map((item) => (
+                        conditions.en.map((item) => (
                             <option key={item} value={item}>{item}</option>
                         ))
                     }

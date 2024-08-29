@@ -4,7 +4,8 @@ import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
-import {cities} from '../../const/Cities/cities'
+import { cities } from '../../const/Cities/cities'
+import { conditions } from '../../const/Сonditions/Сonditions'
 
 function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -66,6 +67,9 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
   const [isDescriptionSelected, setIsDescriptionSelected] = React.useState(true)
   const [descriptionErrorMessage, setDescriptionErrorMessage] = React.useState('')
+
+  const [isConditionSelected, setIsConditionSelected] = React.useState(false)
+  const [conditionErrorMessage, setConditionErrorMessage] = React.useState('')
 
 
   const addFirstPicRef = React.useRef(null);
@@ -250,7 +254,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
       setTitle('')
       setCity('')
-      //setFile(null)
       setPrice('')
       setDescription('')
       setSize('')
@@ -303,6 +306,18 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       setPriceErrorMessage('')
     }
   };
+
+  const handleConditionChange = (e) => {
+    if(e.target.value){
+      setCondition(e.target.value)
+      setIsConditionSelected(true)
+      setConditionErrorMessage('')
+    } else {
+      setCondition('')
+      setIsConditionSelected(false)
+      setConditionErrorMessage(`${translatedContext.errors.conditionErrorMessage.errorMessage}`)
+    }
+  }
 
   const handleCityChange = (e) => {
     if(e.target.value){
@@ -381,22 +396,22 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
 
         haveSecondSubCategory?
 
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected && isDescriptionSelected)?
+            (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected && isDescriptionSelected)?
               setIsValid(true)
             :
               setIsValid(false)
         :
-            (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isDescriptionSelected)?
+            (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isDescriptionSelected)?
               setIsValid(true)
             :
               setIsValid(false)      
     :
-      (isCategorySelected && isTitleSelected && isPriceSelected && isCitySelected && isDescriptionSelected)?
+      (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isDescriptionSelected)?
         setIsValid(true)
       :
         setIsValid(false) 
 
-  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected, isDescriptionSelected])
+  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isConditionSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected, isDescriptionSelected])
   
   
 return (
@@ -513,6 +528,31 @@ return (
         <span className='popup__mistake-msg'></span>
       : 
         <span className='popup__mistake-msg'>{titleErrorMessage}</span>
+      }
+
+      <select 
+        className='addAdPage__select' 
+        onChange={handleConditionChange}
+        value={condition}
+      >
+        <option value="">{translatedContext.condition}</option>
+
+          {language === 'rus' ?
+            conditions.rus.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+            
+            :
+            conditions.en.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+          }
+      </select>
+
+      {isConditionSelected?
+        <span className='popup__mistake-msg'></span>
+      : 
+        <span className='popup__mistake-msg'>{conditionErrorMessage}</span>
       }
 
       <label className='popup__inputname'>{translatedContext.description}
