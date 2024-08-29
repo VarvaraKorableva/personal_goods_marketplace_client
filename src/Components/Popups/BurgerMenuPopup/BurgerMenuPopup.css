@@ -222,9 +222,10 @@
 
 .burgerMenuPopup_add-announcement-container { 
     display: flex;
+    margin-top: 10px;
 }
 .burgerMenuPopup_add-mypage-pic {
-    background-image: url(../../../images/myPageIcon.png);
+    background-image: url(../../../images/mypageiconpic.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -427,3 +428,21 @@
   }
 }
 
+.burgerMenuPopup_add-main-page-pic {
+  background-image: url(../../../images/myPageIcon.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.burgerMenuPopup_add-main-page-pic:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}

@@ -35,7 +35,7 @@ function Main({
                 getItemsByParentId={getItemsByParentId}
             />
             
-            <h2 className='main__title'>Все объявления</h2>
+            <h2 className='main__title'>Все объявления, количество объявлений {itemsAfterSearch.length}</h2>
             <ItemsContainer 
                 allImages = {allImages}
                 itemsAfterSearch = {itemsAfterSearch}

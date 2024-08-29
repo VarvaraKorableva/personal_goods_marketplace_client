@@ -4,6 +4,7 @@ const en = {
     login: 'LogIn',
     registraion: 'SignUp',
     addNewAddBtnName: 'Place an ad',
+    mainPage: 'Main Page',
     
 }
 
@@ -13,6 +14,7 @@ const rus = {
     login: 'Войти',
     registraion: 'Зарегистрироваться', 
     addNewAddBtnName: 'Добавить объявление',
+    mainPage: 'Главная страница',
 }
 
 const hebrew = {
@@ -22,6 +24,7 @@ const hebrew = {
 
     registraion: 'רישום',
     addNewAddBtnName: 'Добавить объявление - текст на иврите',
+    mainPage: 'Main Page',
 }
 
 const choose = { en, rus, hebrew };

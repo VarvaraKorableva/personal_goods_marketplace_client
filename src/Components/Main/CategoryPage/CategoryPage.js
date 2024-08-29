@@ -1,40 +1,21 @@
 import React from 'react';
-import CategorySearchEngine from '../CategorySearchEngine/CategorySearchEngine'
-import { useParams } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
 
 import './CategoryPage.css'
 
 function CategoryPage({
-    favorite, categories, 
+    favorite, 
     deleteMyAd, isLoggin,allImages,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
-    categoriesToRender, itemsSecondPageSearch, startToSearchSecondPage, 
+    categoriesToRender, itemsSecondPageSearch,
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved
+    handleUpdateIsReserved, adsCategoryName
 }) {
 
-    const [categoryFromPage, setCategoryFromPage] = React.useState(categoriesToRender);
-    let { slug } = useParams();
-
-    React.useEffect(() => {
-        const myCategory = categoriesToRender.find((item) => item.slug === slug);
-        if (categoriesToRender.length > 0 && myCategory) {
-            const filteredCategories = categories.filter((item) => item.parent_id === myCategory.category_id);
-            setCategoryFromPage(filteredCategories);
-        }
-    }, [categoriesToRender, slug]);
-/*
-    if(categoryFromPage.length <= 0) {
-       return <p>Loading ...</p>
-    }
-*/
-    
     return(
         <section className='categoryPage-main-container'>
-        {/*<CategorySearchEngine startToSearchSecondPage={startToSearchSecondPage}/>*/}
 
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (
@@ -48,7 +29,9 @@ function CategoryPage({
                   ))
                 }
             </ul>
-            <h2 className='main__title'>Ads</h2>
+
+            <h2 className='categoryPage__ads-length-title'>Все объявления в категории {adsCategoryName}</h2>
+            <h2 className='categoryPage__ads-length-title'>Количество объявлений {itemsSecondPageSearch.length}</h2>
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.map((item) => (
                     <OneAd

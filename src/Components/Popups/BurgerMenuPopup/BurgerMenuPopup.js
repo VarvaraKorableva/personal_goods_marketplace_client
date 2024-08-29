@@ -53,6 +53,11 @@ return (
       {isLoggin ?
         <div className='burgerMenuPopup_wrapper'>
 
+          <Link to={`/`} className='burgerMenuPopup_link' onClick={handleGetUnreadbleMessages}>
+            <div className='burgerMenuPopup_add-main-page-pic'></div>
+            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.mainPage}</button>
+          </Link>
+
           <div className='burgerMenuPopup_add-announcement-container'>
             <div className='burgerMenuPopup_add-announcement-btn-pic' onClick={handleAddAdClick}></div>
             <button className='burgerMenuPopup_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
@@ -106,10 +111,11 @@ return (
         </Link>
       </div>
       }
+      {/*
       <div className='burgerMenuPopup__lang-container'>
         <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>RU</button>
         <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>EN</button>
-      </div>
+      </div>*/}
       
     </div>
     

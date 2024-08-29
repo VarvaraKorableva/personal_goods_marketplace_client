@@ -91,6 +91,9 @@ function App() {
 
   const [isVerificationCodeSent, setIsVerificationCodeSent] = React.useState(false) 
   const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = React.useState('') 
+
+  const [adsCategoryName, setAdsCategoryName] = React.useState('') 
+
   const [isEmailConfirmed, setIsEmailConfirmed] = React.useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
 
   const [limit, setLimit] = React.useState(3)
@@ -99,6 +102,7 @@ function App() {
   const userId = currentUser.user_id
 
   //setAdCount(currentUser.ad_count)
+  //categoriesToRender categories
 
   useEffect(() => {
     currentUser?
@@ -169,7 +173,6 @@ function App() {
       console.log(err);
     }
   }
-//createNewCategory
 
   React.useEffect(()=>{
     getAllImagesForItems()
@@ -184,6 +187,7 @@ function App() {
       setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
       let myCatToRender = []
       findAllCategoryGrandChildren(category, myCatToRender) 
+      setAdsCategoryName(category.name_rus)
   } 
 
   function findAllCategoryGrandChildren(category, myCatToRenderNew) {
@@ -774,6 +778,8 @@ function adCountDecrement(userId) {
 
               openFirstMessagePopup={openFirstMessagePopup}
               handleUpdateIsReserved={handleUpdateIsReserved}
+
+              adsCategoryName={adsCategoryName}
             />
           }
         />
