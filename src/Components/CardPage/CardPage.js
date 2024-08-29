@@ -104,7 +104,9 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
                             isLoggin?
                                 <div className="cardPage__btn-container">
                                     {currentUser.user_id === selectedItem[0].owner_id ?
-                                        <button className='cardPage__write-message-btn' onClick={hundleDeleteMyAd}>{translatedContext.deleteBtn}</button>
+                                        <>
+                                        {/*<button className='cardPage__write-message-btn' onClick={hundleDeleteMyAd}>{translatedContext.deleteBtn}</button>*/}
+                                        </>
                                     
                                     :
                                         <>

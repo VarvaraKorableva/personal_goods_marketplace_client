@@ -14,6 +14,7 @@ import MyPage from './Components/MyPage/MyPage'
 import MyMessages from './Components/MyPage/MyMessages/MyMessages'
 //import OneMessagePage from './Components/MyPage/MyMessages/OneMessagePage'
 import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
+import RulesPublicationsPage from './Pages/RulesPublicationsPage/RulesPublicationsPage'
 import Preloader from './Components/Preloader/Preloader'
 
 import './App.css'
@@ -941,6 +942,13 @@ function adCountDecrement(userId) {
             </ProtectedRoute>
           }>
         </Route> 
+
+        <Route 
+          path={`/publication-rules`}
+          element={
+            <RulesPublicationsPage />
+          }>
+        </Route>
 
         <Route
           path="*"
