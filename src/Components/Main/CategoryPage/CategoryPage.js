@@ -14,6 +14,7 @@ function CategoryPage({
     handleUpdateIsReserved, adsCategoryName
 }) {
 
+    
     return(
         <section className='categoryPage-main-container'>
 
@@ -29,9 +30,14 @@ function CategoryPage({
                   ))
                 }
             </ul>
-
-            <h2 className='categoryPage__ads-length-title'>Все объявления в категории {adsCategoryName}</h2>
-            <h2 className='categoryPage__ads-length-title'>Количество объявлений {itemsSecondPageSearch.length}</h2>
+            {itemsSecondPageSearch.length?
+                <>
+                    <h2 className='categoryPage__ads-length-title'>Все объявления в категории {adsCategoryName}</h2>
+                    <h2 className='categoryPage__ads-length-title'>Количество объявлений {itemsSecondPageSearch.length}</h2>
+                </>
+            :
+                <h2 className='categoryPage__ads-length-title'>В категории {adsCategoryName}, не добавлено ни одного объявления :(</h2>
+            }
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.map((item) => (
                     <OneAd
