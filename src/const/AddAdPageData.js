@@ -75,7 +75,8 @@ const rus = {
     picture: 'Добавить фотографии',
 
     addBtn: 'Добавить объявление',
-    uploadPictureBtn: 'Загрузить фотографию',
+    //uploadPictureBtn: 'Загрузить фотографию',
+    uploadPictureBtn: '+',
 
     errors: {
         categoryErrorMessage: {
