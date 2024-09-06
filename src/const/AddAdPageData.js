@@ -8,6 +8,7 @@ const en = {
     choiseASubCategoryOfServices: 'Select a Subcategory',
     choiseASecondSubCategoryGoods: 'Select a Subcategory',
     name: 'Add a Name of Good',
+    condition: 'Select condition',
     serviceName: 'Add the name of the service you provide',
     description: 'Add a description here',
     serviceDescription: 'Add a description of the service here',
@@ -45,7 +46,10 @@ const en = {
         cityErrorMessage: {
             errorMessage: 'Add a city',
             errorInCity: 'Are you sure such a city exists? If yes and you still get an error, add the nearest city to it',
-        }    
+        },
+        conditionErrorMessage: {
+            errorMessage: ' Select a condition',
+        },
     }
     
 }
@@ -59,6 +63,7 @@ const rus = {
     choiseASubCategoryOfServices: 'Выберите cубкатегорию',
     choiseASecondSubCategoryGoods: 'Выберите cубкатегорию',
     name: 'Добавьте название товара',
+    condition: 'Выберите состояние товара',
     serviceName: 'Добавьте название услуги, которую вы предлагаете',
     description: 'Добавьте описание товара',
     serviceDescription: 'Добавьте описание услуги, которую вы предлагаете',
@@ -70,7 +75,8 @@ const rus = {
     picture: 'Добавить фотографии',
 
     addBtn: 'Добавить объявление',
-    uploadPictureBtn: 'Загрузить фотографию',
+    //uploadPictureBtn: 'Загрузить фотографию',
+    uploadPictureBtn: '+',
 
     errors: {
         categoryErrorMessage: {
@@ -96,6 +102,9 @@ const rus = {
             errorMessage: 'Добавьте город',
             errorInCity: 'Вы уверены, что есть такой город? Если да и вы получили ошибку, добавьте ближайший к нему',
         },
+        conditionErrorMessage: {
+            errorMessage: 'Выберите состоятие товара',
+        },
     }
 
 
@@ -109,6 +118,7 @@ const hebrew = {
     choiseASubCategory: 'Choise a Subcategory',
     choiseASubCategoryOfServices: 'Choise a Subcategory',
     name: 'Add a Name of Good',
+    condition: 'Select condition',
     serviceName: 'Add the name of the service you provide',
     description: 'Add a description here',
     serviceDescription: 'Add a description of the service here',

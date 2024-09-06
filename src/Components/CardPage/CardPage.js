@@ -93,7 +93,12 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
                                 <></>
                             }
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
-                            <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price}</span></p>
+                            {selectedItem[0].condition.length?
+                                <p className="cardPage-info-title">Состояние: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
+                            : 
+                                <></>
+                            }
+                            <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price} ₪</span></p>
                             <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
                         </div>
 

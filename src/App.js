@@ -29,6 +29,7 @@ import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/Suc
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
 import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup'
 import AddServicesPage from './Components/AddServicesPage/AddServicesPage'
+import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
 
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
@@ -956,6 +957,14 @@ function adCountDecrement(userId) {
             <NotFoundPage />
           }>
         </Route>
+
+        <Route
+          path={`/not-ready-page`}
+          element={
+            <NotReadyPage />
+          }>
+        </Route>
+
       </Routes>
 
       <ChoiceOfProductOrServicePopup
@@ -990,6 +999,7 @@ function adCountDecrement(userId) {
       />
 
       <Footer handleLogout={handleLogout}></Footer>
+      
 
     </div>
     </CurrentUserContext.Provider>  
