@@ -191,7 +191,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
       setIsDescriptionSelected(false)
       setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
     } else if(e.target.value) {
-      console.log(files)
       setIsDescriptionSelected(true)
       setDescriptionErrorMessage('')
       setDescription(e.target.value)

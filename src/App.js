@@ -278,7 +278,6 @@ function App() {
 function getAllImagesByItemId(item_id) {
   Api.getAllImagesByItemId(item_id)
   .then((res) => {
-    console.log(res)
     setAllImagesForOneItem(res)
   })
   .catch((err) => {
@@ -455,7 +454,6 @@ function adCountDecrement(userId) {
     Api.verifyCode(email, code) 
     
     .then((res) => {
-      console.log(res.msg)
       if(res.msg === "Error verifying code." || res.msg === "Invalid or expired verification code."){
         closeLoading()
         closeAllPopups()

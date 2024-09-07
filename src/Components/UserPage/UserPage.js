@@ -15,8 +15,6 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     if(userInfo.length === 0 || myAds.length === 0) {
         return <p>Loading ...</p>;
     }
-
-    console.log(userInfo[0])
     
     return(
         <section className='userPage_main-container'>
