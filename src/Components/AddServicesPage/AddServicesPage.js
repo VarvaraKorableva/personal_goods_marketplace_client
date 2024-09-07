@@ -17,7 +17,11 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
 
-  
+  const [firstFile, setFirstFile] = React.useState(null);
+  const [secondFile, setSecondFile] = React.useState(null);
+  const [thirdFile, setThirdFile] = React.useState(null);
+  const [fourthFile, setFourthFile] = React.useState(null);
+
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
   const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
   
@@ -70,6 +74,12 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
   const addItemRef = React.useRef(null);
 
+  const addFirstPicRef = React.useRef(null);
+  const addSecondPicRef = React.useRef(null);
+  const addThirdPicRef = React.useRef(null);
+  const addFourthPicRef = React.useRef(null);
+  const [files, setFiles] = React.useState([firstFile, secondFile, thirdFile, fourthFile])
+
   const { language } = React.useContext(LanguageContext)
 
   const { en, rus, hebrew } = choose;
@@ -85,7 +95,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
   const formRef = React.useRef(null);
 
-  const handleImgLinkChange = async (event) => {
+  const handleImgFirstLinkChange = async (event) => {
     openLoading()
         const file = event.target.files[0];
         if (file) {
@@ -97,8 +107,77 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
             try {
                 const compressedImage = await imageCompression(file, options);
-                setFile(compressedImage);
-                console.log(compressedImage)
+                setFirstFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgSecondLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setSecondFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgThirdLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setThirdFile(compressedImage);
+                
+                closeLoading()
+
+            } catch (error) {
+                console.error('Ошибка при сжатии изображения:', error);
+                closeLoading()
+            }
+        }
+  };
+
+  const handleImgFourthLinkChange = async (event) => {
+    openLoading()
+        const file = event.target.files[0];
+        if (file) {
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 400, 
+                useWebWorker: true,     
+            };
+
+            try {
+                const compressedImage = await imageCompression(file, options);
+                setFourthFile(compressedImage);
+                
                 closeLoading()
 
             } catch (error) {
@@ -138,9 +217,12 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
       id = Number(thirdSubCategoryId)
     }
     
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
+    if (firstFile || secondFile || thirdFile || fourthFile) {
+      const formData = new FormData()
+      formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
+      formData.append('secondFile', secondFile);
+      formData.append('thirdFile', thirdFile);
+      formData.append('fourthFile', fourthFile);
 
       onAddAd({
         title,
@@ -185,6 +267,11 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)
+
+      setFirstFile(null)
+      setSecondFile(null)
+      setThirdFile(null)
+      setFourthFile(null)
   }
 
   const handleTitleChange = (e) => {
@@ -305,6 +392,18 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
         setIsValid(false) 
 
   }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected])
+
+  function deleteAddedFile(numberOfPic) {
+    if(numberOfPic == 1){
+      setFirstFile(null)
+    }if(numberOfPic == 2) {
+      setSecondFile(null)
+    }if(numberOfPic == 3) {
+      setThirdFile(null)
+    }if(numberOfPic == 4) {
+      setFourthFile(null)
+    }
+  }
 
 return (
     <section className="addAdPage__section">
@@ -440,25 +539,113 @@ return (
         <span className='popup__mistake-msg'>{cityErrorMessage}</span>
       }
 
-      <label className='popup__inputname'>{translatedContext.picture}</label>
-      <button 
-        onClick={() => addItemRef.current.click()}
-        className='popup__input-btn'
-        type="button">
-          {translatedContext.uploadPictureBtn}
-      </button> 
-      
-      <input
-        ref={addItemRef}
-        className='popup__input'
-        name='file'
-        type="file"
-        accept="*/*"
-        onChange={handleImgLinkChange}
-        hidden
-      ></input>
+<label className='popup__inputname'>{translatedContext.picture}</label>
 
-      <span className='popup__inputmistake'>{errorImgMessage}</span>
+      
+<span className='popup__inputmistake'>{errorImgMessage}</span>
+
+<div className='popup__files-container'>
+{firstFile? 
+  <div className='popup__compressed-pic-wrapper'>
+    <img src={URL.createObjectURL(firstFile)} alt="Compressed" className='popup__compressed-pic'/>
+    <button className='popup__compressed-pic-delete-btn' onClick={() => deleteAddedFile(1)} type='button'></button>
+  </div>
+  : 
+  <>
+    <button 
+      onClick={() => addFirstPicRef.current.click()}
+      className='popup__input-btn'
+      type="button">
+        {translatedContext.uploadPictureBtn}
+    </button> 
+
+    <input
+      ref={addFirstPicRef}
+      className='popup__input-pic'
+      name='firstFile'
+      type="file"
+      onChange={handleImgFirstLinkChange}
+      hidden
+    ></input>
+  </>
+}
+
+{secondFile? 
+  <div className='popup__compressed-pic-wrapper'>
+    <img src={URL.createObjectURL(secondFile)} alt="Compressed" className='popup__compressed-pic'/>
+    <button className='popup__compressed-pic-delete-btn' onClick={() => deleteAddedFile(2)} type='button'></button>
+  </div>
+  : 
+  <>
+    <button 
+      onClick={() => addSecondPicRef.current.click()}
+      className='popup__input-btn'
+      type="button">
+        {translatedContext.uploadPictureBtn}
+    </button> 
+
+    <input
+      ref={addSecondPicRef}
+      className='popup__input-pic'
+      name='secondFile'
+      type="file"
+      onChange={handleImgSecondLinkChange}
+      hidden
+    ></input>
+  </>
+}
+
+{thirdFile? 
+  <div className='popup__compressed-pic-wrapper'>
+    <img src={URL.createObjectURL(thirdFile)} alt="Compressed" className='popup__compressed-pic'/>
+    <button className='popup__compressed-pic-delete-btn' onClick={() => deleteAddedFile(3)} type='button'></button>
+  </div>
+  : 
+  <>
+    <button 
+      onClick={() => addThirdPicRef.current.click()}
+      className='popup__input-btn'
+      type="button">
+        {translatedContext.uploadPictureBtn}
+    </button> 
+
+    <input
+      ref={addThirdPicRef}
+      className='popup__input-pic'
+      name='thirdFile'
+      type="file"
+      onChange={handleImgThirdLinkChange}
+      hidden
+    ></input>
+  </>
+}
+
+{fourthFile? 
+  <div className='popup__compressed-pic-wrapper'>
+    <img src={URL.createObjectURL(fourthFile)} alt="Compressed" className='popup__compressed-pic'/>
+    <button className='popup__compressed-pic-delete-btn' onClick={() => deleteAddedFile(4)} type='button'></button>
+  </div>
+  : 
+  <>
+    <button 
+      onClick={() => addFourthPicRef.current.click()}
+      className='popup__input-btn'
+      type="button">
+        {translatedContext.uploadPictureBtn}
+    </button> 
+
+    <input
+      ref={addFourthPicRef}
+      className='popup__input-pic'
+      name='fourthFile'
+      type="file"
+      onChange={handleImgFourthLinkChange}
+      hidden
+    ></input>
+  </>
+}
+</div>
+
       <button 
         className= {isValid? 'popup__btn_active' : 'add-ad-popup__btn'}
         type='submit'
