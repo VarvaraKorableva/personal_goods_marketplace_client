@@ -231,6 +231,8 @@ function handleRegSubmit(e) {
                   : 
                     <></>
                 }
+
+                
         
                 <button
                   type="submit"
@@ -238,6 +240,7 @@ function handleRegSubmit(e) {
                   disabled={!isValid}>
                     {translatedContext.button}
                 </button>
+
                 <div className='register__wrapper'>
                   <p className='register__subtitle'>{translatedContext.question}
                   <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
@@ -266,8 +269,11 @@ function handleRegSubmit(e) {
                       onChange={handleCodeChange}
                     />
                     </label>
+                    <p className='register__inputmistake'>{isVerificationCodeSentMessage}</p>
                     {/*<span className='register__inputmistake'></span>  Нужно передавать сообщение которое придет с бекенда истек срок кода или неверный код*/}
                   </fieldset>
+
+                  {/*<p>ТАЙМЕР</p>*/}
 
                   <button
                     type="submit"
@@ -310,6 +316,7 @@ function handleRegSubmit(e) {
                 </form>
             }
 
+          
           <div className='register__wrapper'>
             <p className='register__subtitle'>{translatedContext.question}
             <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>

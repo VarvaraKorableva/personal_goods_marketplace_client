@@ -109,10 +109,7 @@ function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteM
                 <div>
                     <Link>Edit profile information</Link>
                 </div>
-
-                <div>
-                    <Link>Delete profile</Link>
-                </div>*/}
+                */}
 
 
                 <button className="myPage__btn-logout" onClick={onLogout}>{translatedContext.logOutBtn}</button>

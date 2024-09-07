@@ -29,7 +29,7 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
             <div>
                 <h3>Все объявления {userInfo[0].username}</h3>
                 <ul className="userPage-listings-container">
-                    {myAds.map((item) => (
+                    {myAds.reverse().map((item) => (
                         <OneAd 
                             favoriteItems={favoriteItems}
                             key={item.item_id} 

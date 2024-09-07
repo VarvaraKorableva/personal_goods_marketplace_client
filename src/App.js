@@ -453,12 +453,23 @@ function adCountDecrement(userId) {
   function verifyCode(email, code) {
     openLoading()
     Api.verifyCode(email, code) 
+    
     .then((res) => {
-      closeAllPopups()
-      closeLoading()
-      setIsVerificationCodeSent(false)
-      setIsVerificationCodeSentMessage('')
-      setIsEmailConfirmed(true)
+      console.log(res.msg)
+      if(res.msg === "Error verifying code." || res.msg === "Invalid or expired verification code."){
+        closeLoading()
+        closeAllPopups()
+        setIsVerificationCodeSent(true)
+        setIsVerificationCodeSentMessage('Неверный или истекший код, попробуйте снова')
+        setIsEmailConfirmed(false)
+      }
+      if(res.msg === "Code verified. You can now complete registration.") {
+        closeAllPopups()
+        closeLoading()
+        setIsVerificationCodeSent(false)
+        setIsVerificationCodeSentMessage('')
+        setIsEmailConfirmed(true)
+      }
     })
     .catch((err) => {
       console.log(err)
@@ -477,7 +488,7 @@ function adCountDecrement(userId) {
       closeAllPopups()
       closeLoading()
       setIsVerificationCodeSent(true)
-      setIsVerificationCodeSentMessage(res.msg)
+      //setIsVerificationCodeSentMessage("Код отправлен на почту")
     })
     .catch((err) => {
       console.log(err)
