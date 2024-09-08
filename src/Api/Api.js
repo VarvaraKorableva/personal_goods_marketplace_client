@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -506,3 +506,16 @@ export const getAllImagesByItemId = ( item_id ) => {
     })
         .then(checkResponse)
 };
+
+export const getItemsByFilter = (filters) => {
+    const queryString = new URLSearchParams(filters).toString();
+    return fetch(`${BASE_URL}/items/getItemsByFilter?${queryString}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+             "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+};    

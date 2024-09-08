@@ -83,6 +83,15 @@ function App() {
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
+
+  //filter query
+  const [city, setCity] = React.useState('') 
+  const [lowPrice, setLowPrice] = React.useState(0) 
+  const [highPrice, setHighPrice] = React.useState(0) 
+  const [condition, setCondition] = React.useState('') 
+  const [title, setTitle] = React.useState('') 
+  //
+
   const [isReserved, setIsReserved] = React.useState(false)
 
   const [adCount, setAdCount] = React.useState(0) //count of ads for regulations adding
@@ -598,11 +607,13 @@ function adCountDecrement(userId) {
       console.log(err)
     })
   }
-  
+
+  //don't need anymore
+  /*
   function startToSearch(keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-  }
+  }*/
 
   function startToSearchSecondPage (keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
@@ -688,6 +699,44 @@ function adCountDecrement(userId) {
       setPopupMessage("Something wrong, plese try again")
     })
   }
+
+  //getItemsByFilter
+
+
+  function handleTitleChange(keyWord) {
+    setTitle(keyWord)
+  }
+
+  function handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, highPriceFromInput, conditionFromInput) {
+    setCity(cityFromInput)
+    setLowPrice(lowPriceFromInput)
+    setHighPrice(highPriceFromInput)
+    setCondition(conditionFromInput)
+  }
+
+  function handleGetItemsByFilter() {
+
+    const filters = {
+      city: city,
+      lowPrice: lowPrice,
+      highPrice: highPrice,
+      condition: condition,
+      title: title,
+    };
+
+    Api.getItemsByFilter(filters)
+    .then((res) => {
+      console.log(res)
+      setItemsAfterSearch(res)
+      
+    })
+    .catch((err) => {
+      console.log(err)
+      setPopupMessage("Something wrong, plese try again")
+    })
+
+  }
+  
   
   return (
     <LanguageProvider>
@@ -750,7 +799,7 @@ function adCountDecrement(userId) {
               categories={categories}
               lastFourtyItems={lastFourtyItems} //Need, because of search
               addToFavorites={addToFavorites}
-              startToSearch={startToSearch}
+              
               deleteMyAd={deleteMyAd}
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
@@ -762,6 +811,11 @@ function adCountDecrement(userId) {
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
               handleUpdateIsReserved={handleUpdateIsReserved}
+
+              handleGetItemsByFilter={handleGetItemsByFilter}
+              handleTitleChange={handleTitleChange}
+              handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
+              
             />
           }
         />

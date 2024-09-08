@@ -7,12 +7,12 @@ import './Main.css'
 
 function Main({
     categoriesToRender, isLoggin, 
-    itemsAfterSearch, startToSearch, favorite, 
+    itemsAfterSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
     getItemById, addToFavorites, allImages,
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, }) {
+    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange}) {
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -22,11 +22,13 @@ function Main({
     return(
         <section className='main__section'>
             <MainSearchEngine
-                lastFourtyItems={lastFourtyItems}
-                categories={categories}
-                startToSearch={startToSearch}
+                handleTitleChange={handleTitleChange}
+                handleGetItemsByFilter={handleGetItemsByFilter}
             />
-            <FilterBtnContainer></FilterBtnContainer>
+            <FilterBtnContainer 
+                handleGetItemsByFilter={handleGetItemsByFilter}
+                handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
+            />
             <MainCategories 
                 onChooseCategory={onChooseCategory}
                 categories={categories}

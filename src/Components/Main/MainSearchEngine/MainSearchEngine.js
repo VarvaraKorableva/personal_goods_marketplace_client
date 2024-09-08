@@ -3,7 +3,7 @@ import './MainSearchEngine.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 
-function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
+function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter }) {
     const [keyWord, setKeyWord] = React.useState('')
     const { language } = React.useContext(LanguageContext)
 
@@ -20,22 +20,22 @@ function MainSearchEngine({lastFourtyItems, categories, startToSearch}) {
 
     function handleTakeKeyWord(e) {
         setKeyWord(e.target.value)
+        handleTitleChange(e.target.value)
     }
 
-    function handleSubmitToSearch(e) {
-        e.preventDefault()
-        startToSearch(keyWord)
+    function handleSearchByTitle() {
+        handleGetItemsByFilter()
     }
 
     return(
-        <form className="MainSearchEngine-form" onSubmit={handleSubmitToSearch}>
+        <form className="MainSearchEngine-form">
             <input 
                 className="MainSearchEngine-input"
                 placeholder={translatedContext.placeholder}
                 value={keyWord}
                 onChange={handleTakeKeyWord}
             />
-            <button className="MainSearchEngine-btn" type='submit'>{translatedContext.btnNameSearch}</button>
+            <button className="MainSearchEngine-btn" type='button' onClick={handleSearchByTitle}>{translatedContext.btnNameSearch}</button>
         </form>
     )
 }
