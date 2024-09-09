@@ -661,7 +661,7 @@ function adCountDecrement(userId) {
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
-    if (adCount >= 3) {
+    if (adCount >= 20) {
       setSuccessfulActionPopup(true)
       setPopupMessage(`Можно добавлять не более 3 объявлений, у вас добавлено ${adCount}`)
     } else {

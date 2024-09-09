@@ -176,3 +176,24 @@
 
     }
 }
+
+.myPage_add-new-ad-btn {
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+
+    border-radius: 20px;
+    color: black;
+    border: 1px solid #e4e6e7;
+
+    cursor: pointer;
+
+    padding: 10px;
+
+    background-color: #fff;
+}
+
+.myPage_add-new-ad-btn:hover {
+    background-color: black;
+    color: #fff;
+}

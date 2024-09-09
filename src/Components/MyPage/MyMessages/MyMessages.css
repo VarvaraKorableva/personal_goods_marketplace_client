@@ -13,6 +13,8 @@
     
     margin-top: 0;
     margin-bottom: 0;
+
+    position: relative;
 }
 
 @media screen and (max-width: 900px) {
@@ -239,4 +241,22 @@
 .message__container-link {
     text-decoration: none;
     color: black;
+}
+
+.message__unread-message-badge {
+    width: 15px;
+    height: 15px;
+
+    background-color: red;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    font-size: 8px;
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

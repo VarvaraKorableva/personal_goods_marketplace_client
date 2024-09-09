@@ -70,7 +70,9 @@ function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteM
                     </div>
 
                     :
-                
+                    <>
+                    <button className='myPage_add-new-ad-btn' onClick={handleAddAdClick}>{translatedContext.addNewAdBtnName}</button>
+                    
                     <ul className="myPage-listings-container">
                         {myAds.slice(0, limit).map((item) => (
                             <OneAd 
@@ -89,6 +91,7 @@ function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteM
                             />
                         ))}
                     </ul>
+                    </>
                     }
                     {myAds.length <= limit?
                         <></>

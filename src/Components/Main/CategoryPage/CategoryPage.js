@@ -39,7 +39,7 @@ function CategoryPage({
                 <h2 className='categoryPage__ads-length-title'>В категории {adsCategoryName}, не добавлено ни одного объявления :(</h2>
             }
             <ul className='categoryPage-listings-container'>
-                {itemsSecondPageSearch.map((item) => (
+                {itemsSecondPageSearch.reverse().map((item) => (
                     <OneAd
                         allImages={allImages}
                         key={item.item_id} 
