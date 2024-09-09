@@ -112,9 +112,6 @@ function App() {
   const addAds = () => setLimit(limit + 3);
   const userId = currentUser.user_id
 
-  //setAdCount(currentUser.ad_count)
-  //categoriesToRender categories
-
   useEffect(() => {
     currentUser?
       setAdCount(currentUser.ad_count)
