@@ -14,6 +14,8 @@ function Message({message, markMessagesAsRead, onConversation}) {
         markMessagesAsRead(message.receiver_id, message.sender_id, message.item_id)
     }
 
+    console.log(message.read)
+
     return(
         <li className="message__container">
 
@@ -44,6 +46,8 @@ function Message({message, markMessagesAsRead, onConversation}) {
                         </div>
                     
                         <p className="message__text">{message.message_text}</p>
+
+                        {/*{message.read? <></> : <div className="message__unread-message-badge"></div>}*/}
                     
                    </div>
                 </Link>

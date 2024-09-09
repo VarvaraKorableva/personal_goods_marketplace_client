@@ -29,7 +29,7 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 
-                    {lastMessages.map((item) => (
+                    {lastMessages.reverse().map((item) => (
                         <Message
                             key={item.message_id}
                             message={item}
