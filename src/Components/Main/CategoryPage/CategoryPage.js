@@ -6,7 +6,7 @@ import './CategoryPage.css'
 
 function CategoryPage({
     favorite, 
-    deleteMyAd, isLoggin,allImages,
+    deleteMyAd, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
     categoriesToRender, itemsSecondPageSearch,
@@ -41,7 +41,7 @@ function CategoryPage({
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.reverse().map((item) => (
                     <OneAd
-                        allImages={allImages}
+                        
                         key={item.item_id} 
                         lastFourtyItems={lastFourtyItems} 
                         getItemById={getItemById} 

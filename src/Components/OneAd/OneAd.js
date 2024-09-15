@@ -11,16 +11,13 @@ function OneAd({
     isLoggin, item, getItemById, 
     deleteMyAd, addToFavorites, 
     deleteFromFavorites, favorite, 
-    favoriteItems, allImages, openFirstMessagePopup, handleUpdateIsReserved
+    favoriteItems, openFirstMessagePopup, handleUpdateIsReserved
 }) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
-    const sender_id = currentUser.user_id
 
     const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
-
-    const image = allImages.filter((img) => img.item_id === item.item_id)
 
     const { language } = React.useContext(LanguageContext)
 
@@ -34,7 +31,7 @@ function OneAd({
     } else if (language === 'hebrew') {
       translatedContext = hebrew;
     }
-    //receiver_id, sender_id, item_id  //item.owner_id, sender_id, item.item_id
+
     function handleAddMessagePopupOpen() {
       openFirstMessagePopup(item.owner_id, item.item_id)
     }
@@ -89,8 +86,6 @@ function OneAd({
     // Пример использования
     //const itemCreatedAt = "2024-02-09T07:04:05.187Z"; // Полученное время из базы данных
     const formattedTime = formatDate(item.created_at)
-    const strTitle = item.title //{strTitle[0].toUpperCase() + strTitle.slice(1)}
-    const strCity = item.city //{strCity[0].toUpperCase() + strCity.slice(1)}
 
     return(
         <li className="oneAdd__container">
@@ -105,8 +100,8 @@ function OneAd({
 
             <div className="oneAdd__pic-and-info-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
-                {image.length?
-                  <img className="oneAdd__main-pic" alt = {item.title} src={image[0].location}></img>
+                {item.images?
+                  <img className="oneAdd__main-pic" alt = {item.title} src={item.images[0]}></img>
                 : 
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }

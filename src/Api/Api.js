@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -256,31 +256,6 @@ export const uploadMultipleFiles = (formData) => {
     });
   };
 
-///uploadMultipleFiles
-export const getAllImages = () => {
-  return fetch(`${BASE_URL}/files/images/all`, {
-      credentials: 'include',
-      method: "GET",
-      headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-      },
-  })
-      .then(checkResponse) 
-};
-
-export const getUserImagesById = (owner_id) => {
-  return fetch(`${BASE_URL}/files/images/${owner_id}`, {
-      credentials: 'include',
-      method: "GET",
-      headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-      },
-  })
-      .then(checkResponse) 
-};
-
 export const deleteImage = (item_id) => {
   return fetch(`${BASE_URL}/files/images/${item_id}`, {
       credentials: 'include',
@@ -494,18 +469,6 @@ export const updateIsReserved = ( item_id, user_id ) => {
     })
         .then(checkResponse)
 };  
-
-export const getAllImagesByItemId = ( item_id ) => {
-    return fetch(`${BASE_URL}/files/images/getAllImagesByItemId/${item_id}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse)
-};
 
 export const getItemsByFilter = (filters) => {
     const queryString = new URLSearchParams(filters).toString();

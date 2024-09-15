@@ -3,7 +3,7 @@ import './ImageSlider.css'; // Подключите свой CSS файл
 
 const ImageSlider = ({ allImagesForOneItem }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? allImagesForOneItem.length - 1 : prevIndex - 1
@@ -24,7 +24,7 @@ const ImageSlider = ({ allImagesForOneItem }) => {
       <div className="image-slider__wrapper">
         <img
           className="image-slider__image"
-          src={allImagesForOneItem[currentIndex].location}
+          src={allImagesForOneItem[currentIndex]}
           alt={`Slide ${currentIndex}`}
         />
       </div>

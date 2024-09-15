@@ -7,8 +7,8 @@ import choose from '../../const/myPageData'
 import * as Api from '../../Api/Api'
 
 import './MyPage.css'
-//allImages,
-function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+
+function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -86,7 +86,7 @@ function MyPage({ allUserImages, onAdPopup, isLoggin, getMyItems, myAds, deleteM
                                 deleteFromFavorites={deleteFromFavorites}
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
-                                allImages={allUserImages}
+                                
                                 handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}

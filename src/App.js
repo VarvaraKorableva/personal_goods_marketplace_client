@@ -46,10 +46,6 @@ function App() {
   
   const [myAds, setMyAds] = React.useState([])
   const [categories, setCategories] = React.useState([])
-
-  const [allImages, setAllImages] = React.useState([])
-  const [allUserImages, setAllUserImages] = React.useState([]) //ForMyPage
-  const [allImagesForOneItem, setAllImagesForOneItem] = React.useState([]) //ForCardPage
   
   const [myImages, setMyImages] = React.useState([])
 
@@ -138,6 +134,7 @@ function App() {
     openLoading()
     try {
       const res = await Api.getAllItems();
+      console.log(res)
       setLastFoutryItems(res)
       setItemsAfterSearch(res) 
       closeLoading() 
@@ -173,17 +170,7 @@ function App() {
     }
   }
 
-  async function getAllImagesForItems() {
-    try {
-      const res = await Api.getAllImages();
-      setAllImages(res)
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   React.useEffect(()=>{
-    getAllImagesForItems()
     getCategory()
     getAllItems()
   
@@ -281,16 +268,6 @@ function App() {
     })
   }
 
-function getAllImagesByItemId(item_id) {
-  Api.getAllImagesByItemId(item_id)
-  .then((res) => {
-    setAllImagesForOneItem(res)
-  })
-  .catch((err) => {
-      console.log(err)
-  })
-}  
-
   function handleAddAdSubmit(data) {
     openLoading()
     adCountIncrement(userId)
@@ -315,7 +292,7 @@ function getAllImagesByItemId(item_id) {
         })
         .then(()=> {
           getAllItems()
-          getAllImagesForItems()
+
           navigate(`/users/${userId}`)
         })
         .catch((err)=> {
@@ -803,7 +780,6 @@ function adCountDecrement(userId) {
               favoriteItems={favoriteItems}
               itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
-              allImages={allImages}
               openFirstMessagePopup={openFirstMessagePopup}
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
@@ -834,13 +810,10 @@ function adCountDecrement(userId) {
               isLoggin={isLoggin}
               favorite={favorite}
               favoriteItems={favoriteItems}
-              allImages={allImages}
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
-
               openFirstMessagePopup={openFirstMessagePopup}
               handleUpdateIsReserved={handleUpdateIsReserved}
-
               adsCategoryName={adsCategoryName}
             />
           }
@@ -859,11 +832,7 @@ function adCountDecrement(userId) {
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
               deleteMyAd={deleteMyAd}
-              allImages={allImages}
-              
-              openFirstMessagePopup={openFirstMessagePopup}
-              getAllImagesByItemId={getAllImagesByItemId}
-              allImagesForOneItem={allImagesForOneItem}
+              openFirstMessagePopup={openFirstMessagePopup} 
             />
           }
         />
@@ -919,12 +888,10 @@ function adCountDecrement(userId) {
                 deleteFromFavorites={deleteFromFavorites}
                 favorite={favorite}
                 favoriteItems={favoriteItems}
-                //allImages={allImages}
                 limit={limit}
                 addAds={addAds}
                 handleUpdateIsReserved={handleUpdateIsReserved}
                 
-                allUserImages={allUserImages}
               />
             </ProtectedRoute>
           }>
@@ -982,7 +949,6 @@ function adCountDecrement(userId) {
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
               favorite={favorite}
-              allImages={allImages}
               openFirstMessagePopup={openFirstMessagePopup}
           />
           }>
@@ -998,7 +964,7 @@ function adCountDecrement(userId) {
                 lastFourtyItems={lastFourtyItems}
                 favoriteItems={favoriteItems}
                 deleteFromFavorites={deleteFromFavorites}
-                allImages={allImages}
+                
               />
             </ProtectedRoute>
           }>

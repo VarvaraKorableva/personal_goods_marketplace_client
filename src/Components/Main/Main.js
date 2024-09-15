@@ -9,7 +9,7 @@ function Main({
     categoriesToRender, isLoggin, 
     itemsAfterSearch, favorite, 
     categories, onChooseCategory, lastFourtyItems, 
-    getItemById, addToFavorites, allImages,
+    getItemById, addToFavorites,
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange}) {
@@ -39,7 +39,7 @@ function Main({
             
             <h2 className='main__title'>Все объявления, количество объявлений {itemsAfterSearch.length}</h2>
             <ItemsContainer 
-                allImages = {allImages}
+                
                 itemsAfterSearch = {itemsAfterSearch}
                 lastFourtyItems = {lastFourtyItems} 
                 getItemById = {getItemById} 

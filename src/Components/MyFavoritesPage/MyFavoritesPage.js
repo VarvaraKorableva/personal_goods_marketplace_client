@@ -7,7 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/favoritesPageData'
 
 
-function MyFavoritesPage({allImages, getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
+function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
 
     const currentUser = React.useContext(CurrentUserContext)
 
@@ -44,7 +44,7 @@ function MyFavoritesPage({allImages, getMyFavorites, deleteFromFavorites, favori
                         deleteFromFavorites={deleteFromFavorites}
                         favoriteItems={favoriteItems}
                         favorite={favorite}
-                        allImages={allImages}
+                        
                     />
                 ))}
             </ul>
