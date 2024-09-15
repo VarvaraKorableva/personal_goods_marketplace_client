@@ -6,6 +6,8 @@ import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/Timing'
 
 function OneFavCard({item, deleteFromFavorites, favorite}) {
+    console.log('item', item)
+    console.log('favorite', favorite)
 
     const { language } = React.useContext(LanguageContext)
 
@@ -60,11 +62,12 @@ function OneFavCard({item, deleteFromFavorites, favorite}) {
     const formattedTime = formatDate(item.created_at)
     
     return (
-        <li className="OneFavCard__container">
+        <li className={item.deleted?"OneFavCard__container_unactive" : "OneFavCard__container"}>
 
-            <div className="OneFavCard__wrapper">
+            <div className="OneFavCard__wrapper"> 
+
             <div className="OneFavCard__main-pic-wrapper">
-                {item.images?
+                {item.images ?
                   <img className="OneFavCard__main-pic" alt = {item.title} src={item.images[0]}></img>
                 : 
                   <img className="OneFavCard__no-pic" alt = 'no pic' src={noPictures}></img>
@@ -73,7 +76,11 @@ function OneFavCard({item, deleteFromFavorites, favorite}) {
             
             <div className="OneFavCard__text-container">
                 <div className="OneFavCard__title-and-like-container">
+                {item.deleted? 
+                    <p className="oneAdd__title">{item.title}</p>
+                :
                     <Link to={`/items/${item.item_id}`} className="oneAdd__title">{item.title}</Link>
+                }
                 </div>
                 <p className="OneFavCard__price">{item.price}</p>
                 <p className="OneFavCard__city">{item.city}</p>

@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -168,7 +168,7 @@ export const getAllItems = () => {
 export const deleteItem = (item_id) => {
   return fetch(`${BASE_URL}/items/${item_id}`, {
       credentials: 'include',
-      method: "DELETE",
+      method: "PATCH",
       headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",

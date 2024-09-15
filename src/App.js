@@ -387,8 +387,9 @@ function adCountDecrement(userId) {
     openLoading()
     Api.addToFavoritesServer({ favorite_collector_id, item_id })
       .then((res) => {
-        setFovorite([res, ...favorite])
+        setFovorite([item, ...favoriteItems])
         setFavoriteItems([item, ...favoriteItems]);
+        
         closeLoading()
       })
     .catch((err) => {
@@ -420,10 +421,11 @@ function adCountDecrement(userId) {
     Api.getMyFavorites(favorite_collector_id)
     .then((res) => {
       setFovorite(res)
+      console.log(res)
       const favoriteItemsResult = lastFourtyItems.filter(item =>
-      res.some(favoriteItem => favoriteItem.item_id === item.item_id)
+      res.some(favoriteItem => favoriteItem.item_id === item.item_id) ////из всего всего аррея ищится избранное а в аррее нет тех кто делитед тру
       );
-      setFavoriteItems(favoriteItemsResult);
+      setFavoriteItems(res);
       closeLoading()
     })
     .catch((err) => {

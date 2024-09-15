@@ -10,6 +10,19 @@
     align-items: center;
 }
 
+.OneFavCard__container_unactive {
+    list-style-type: none;
+    box-shadow: 0 3px 6px #999;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
+    opacity: 0.2;
+}
+
 .OneFavCard__wrapper {
     display: flex;
 }
