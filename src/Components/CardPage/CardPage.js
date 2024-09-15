@@ -8,9 +8,9 @@ import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
 import ImageSlider from './ImageSlider.js'
 
-function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
-    let {favorite_items_id} = useParams();
+    //let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
@@ -31,7 +31,7 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
 
     useEffect(() => {
         getItemById(item_id);
-        getAllImagesByItemId(item_id)
+        //getAllImagesByItemId(item_id)
     }, []); 
     
     function getUser() {
@@ -64,22 +64,20 @@ function CardPage({ allImagesForOneItem, getAllImagesByItemId, allImages, delete
       }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
-    //const image = allImages.filter((img) => img.item_id === selectedItem[0].item_id) 
-    //console.log(allImagesForOneItem)
-    //{/*<img className="cardPage__main-pic" alt = {selectedItem.title} src={allImagesForOneItem[0].location}></img>*/}
+
     return(
         <section className="cardPage-section">
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
 
                 <div className="cardPage__main-pic-wrapper">
-                    {allImagesForOneItem.length?
-                        allImagesForOneItem.length > 1?
+                    {selectedItem[0].images?
+                        selectedItem[0].images.length > 1?
                         <ImageSlider 
-                            allImagesForOneItem={allImagesForOneItem}>
+                            allImagesForOneItem={selectedItem[0].images}>
                         </ImageSlider>
                         : 
-                        <img className="cardPage__main-pic" alt = {selectedItem.title} src={allImagesForOneItem[0].location}></img>
+                        <img className="cardPage__main-pic" alt = {selectedItem.title} src={selectedItem[0].images[0]}></img>
                     : 
                         <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>
                     }

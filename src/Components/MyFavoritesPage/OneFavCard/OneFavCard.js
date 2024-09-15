@@ -5,7 +5,7 @@ import noPictures from '../../../images/nopictures.png'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/Timing'
 
-function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
+function OneFavCard({item, deleteFromFavorites, favorite}) {
 
     const { language } = React.useContext(LanguageContext)
 
@@ -23,8 +23,6 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
     if(favorite.length === 0) {
         return <p>Loading ...</p>;
     }
-
-    const image = allImages.filter((img) => img.item_id === item.item_id)
 
     function handleDeleteFavorite() {
         deleteFromFavorites(item)//item_id
@@ -66,8 +64,8 @@ function OneFavCard({item, deleteFromFavorites, favorite, allImages}) {
 
             <div className="OneFavCard__wrapper">
             <div className="OneFavCard__main-pic-wrapper">
-                {image.length?
-                  <img className="OneFavCard__main-pic" alt = {item.title} src={image[0].location}></img>
+                {item.images?
+                  <img className="OneFavCard__main-pic" alt = {item.title} src={item.images[0]}></img>
                 : 
                   <img className="OneFavCard__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
