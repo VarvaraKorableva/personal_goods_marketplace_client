@@ -519,7 +519,7 @@ return (
         onChange={handleCityChange}
         value={city}
       >
-        <option value="">{translatedContext.place}</option>
+        <option value="">{translatedContext.cityServices}</option>
 
           {language === 'rus' ?
             cities.rus.map((item) => (
