@@ -22,20 +22,32 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
         .catch((err) => {
           console.log(err)
         })
+    }
+
+    async function updateConversationIsDeleted(user_id, conversation_id) {
+        try {
+          const res = await Api.updateConversationIsDeleted(user_id, conversation_id)
+          setLastMessages((state) => state.filter((m) => m.conversation_id !== conversation_id))
+          //console.log(res)
+        } catch (err) {
+          console.log(err);
+        }
       }
+  
 
     return(
         <section className="my-messages__section">
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 
-                    {lastMessages.reverse().map((item) => (
+                    {lastMessages.map((item) => (  ///.reverse()
                         <Message
                             key={item.message_id}
                             message={item}
                             getOneConversation={getOneConversation}
                             onConversation={onConversation}
                             markMessagesAsRead={markMessagesAsRead}
+                            updateConversationIsDeleted={updateConversationIsDeleted}
                         />
                     ))}
       

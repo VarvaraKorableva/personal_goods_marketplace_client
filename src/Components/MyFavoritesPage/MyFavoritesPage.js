@@ -35,7 +35,7 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
 
     return(
         <div className="myFavoritesPage-main-container">
-            <h2>{translatedContext.myFavoriteTitle}</h2>
+            <h3>{translatedContext.myFavoriteTitle}</h3>
             <ul className="myFavoritesPage-listings-container">
                 {favorite.map((item) => (
                     <OneFavCard 

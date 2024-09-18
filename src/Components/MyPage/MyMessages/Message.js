@@ -4,25 +4,27 @@ import React from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import noPictures from '../../../images/nopictures.png'
 
-function Message({message, markMessagesAsRead, onConversation}) {
+function Message({message, markMessagesAsRead, onConversation, updateConversationIsDeleted}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
     function handleConversationClick(){
         onConversation(message.receiver_id, message.sender_id, message.item_id)
-        markMessagesAsRead(message.receiver_id, message.sender_id, message.item_id)
+        markMessagesAsRead(message.conversation_id)
     }
 
-    console.log(message.read)
+    function onDelete() {
+        updateConversationIsDeleted(userId, message.conversation_id)
+    }
 
     return(
-        <li className="message__container">
+        <li className={`message__container ${message.deleted ? 'message__container_deleted' : ''}`}>
 
             <div className="message__item-info-wrapper">
                 <Link to={`/items/${message.item_id}`} className="message__main-pic-wrapper" >
-                    {message.image_location?
-                        <img className="message__item-pic" alt = {message.item_title} src={message.image_location}></img>
+                    {message.images?
+                        <img className="message__item-pic" alt = {message.item_title} src={message.images[0]}></img>
                         :
                         <div className="message__no-pic-container">
                             <img className="message__no-pic" alt = 'no pic' src={noPictures}></img>
@@ -47,10 +49,19 @@ function Message({message, markMessagesAsRead, onConversation}) {
                     
                         <p className="message__text">{message.message_text}</p>
 
-                        {/*{message.read? <></> : <div className="message__unread-message-badge"></div>}*/}
-                    
+                        
                    </div>
                 </Link>
+                <div className="message__btn-container">
+                    {message.read ? (
+                        <></>
+                    ) : message.sender_id === userId ? (
+                        <></>
+                    ) : (
+                        <div className="message__unread-message-badge"></div>
+                    )}
+                    <button onClick={onDelete} className="message__delete_btn">X</button>
+                </div>
             </div>
             
         </li>

@@ -115,6 +115,7 @@
 .message__item-info-wrapper {
     display: flex;
     margin: 0;
+    position: relative;
 }
 
 .message__sender-name {
@@ -244,19 +245,59 @@
 }
 
 .message__unread-message-badge {
-    width: 15px;
-    height: 15px;
-
-    background-color: red;
-    border-radius: 50%;
-
-    position: absolute;
-    top: 5px;
-    right: -5px;
+    
+    background-image: url(../../../images/newmessage.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    /*position: absolute;
+    top: -15px;
+    right: -15px;*/
     font-size: 8px;
     color: #fff;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 50%;
+    
+    /* Положение по горизонтали */
+    width: 20px; /* Ширина уголка */
+    height: 20px; /* Высота уголка */
+    
+    
+}
+
+.message__container_deleted {
+    opacity: 0.2;
+}
+
+.message__delete_btn {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    align-self: flex-start;
+    margin-top: 15px;
+    border: 1px;
+}
+
+.message__delete_btn:hover {
+    opacity: 1;
+}
+
+.message__btn-container {
+    position: absolute;
+    
+    bottom: 5px;
+    right: 5px;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }

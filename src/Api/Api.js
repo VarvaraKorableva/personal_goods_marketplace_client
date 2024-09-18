@@ -301,6 +301,9 @@ export const getLastMessagesFromEveryConversationForUser = (user_id) => {
   }; */
 //getLastMessagesForUser
 
+
+//never use
+/*
 export const getAllUserConversations = (user_id) => {
     return fetch(`${BASE_URL}/conversations/get_all_user_conversations/${user_id}`, {
         credentials: 'include',
@@ -311,7 +314,7 @@ export const getAllUserConversations = (user_id) => {
         },
     })
         .then(checkResponse) 
-  };  
+  };  */
 
 
 
@@ -383,9 +386,9 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conv
         .then(checkResponse) 
   };
 
-  export const markMessagesAsRead = ( receiver_id, sender_id, item_id, user_id ) => {
+  export const markMessagesAsRead = ( conversation_id, user_id ) => {
       
-    return fetch(`${BASE_URL}/messages/markMessagesAsRead/${receiver_id}/${sender_id}/${item_id}/${user_id}`, {
+    return fetch(`${BASE_URL}/messages/markMessagesAsRead/${conversation_id}/${user_id}`, {
         credentials: 'include',
         method: "PATCH",
         headers: {
@@ -482,3 +485,22 @@ export const getItemsByFilter = (filters) => {
     })
         .then(checkResponse) 
 };    
+
+
+///deleteConversation
+
+export const updateConversationIsDeleted = ( user_id, conversation_id ) => {
+      
+    return fetch(`${BASE_URL}/conversations/deleteConversation`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+            user_id, conversation_id
+        })
+    })
+        .then(checkResponse)
+};  

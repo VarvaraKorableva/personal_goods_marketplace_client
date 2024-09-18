@@ -134,10 +134,16 @@ function App() {
     openLoading()
     try {
       const res = await Api.getAllItems();
-      console.log(res)
+      //console.log(res)
       setLastFoutryItems(res)
       setItemsAfterSearch(res) 
       closeLoading() 
+    /*
+      const jsonString = JSON.stringify(res);
+      const sizeInBytes = new TextEncoder().encode(jsonString).length;
+      const sizeInKB = sizeInBytes / 1024;
+
+      console.log(`Response size: ${sizeInKB.toFixed(2)} KB`);*/
     } catch (err) {
       console.log(err);
       closeLoading()
@@ -173,11 +179,10 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getAllItems()
-  
+    
     //getUnreadbleMessages(userId)
   },[])
-
-
+  
   function chooseCategory(category) {
       setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
       let myCatToRender = []
@@ -564,8 +569,8 @@ function adCountDecrement(userId) {
     })
   }
 
-  function markMessagesAsRead( r_id, s_id, i_id ) {
-    Api.markMessagesAsRead(r_id, s_id, i_id, userId)
+  function markMessagesAsRead( conversation_id ) {
+    Api.markMessagesAsRead(conversation_id, userId)
     .then((res) => {
       getUnreadbleMessages(userId)
     })
