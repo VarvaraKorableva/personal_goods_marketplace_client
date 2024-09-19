@@ -23,7 +23,9 @@ function Category({category, onChooseCategory, getItemsByCategoryCategoryId, get
     return (
         <li className="category-container" >
             <Link to={`/category/${category.slug}`} onClick={handleChoose} className="category__link">
-              <img src={category.image_url} className="category-pic"></img>
+              <div className="category-pic-container">
+                <img src={category.image_url} className="category-pic"></img>
+              </div>
               {language === 'rus' ?
                 <p className="category-title">{category.name_rus}</p>
               :
