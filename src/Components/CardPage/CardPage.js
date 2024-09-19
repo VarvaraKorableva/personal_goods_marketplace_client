@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
 import * as Api from '../../Api/Api'
@@ -10,6 +10,7 @@ import ImageSlider from './ImageSlider.js'
 
 function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
+    const navigate = useNavigate()
     //let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
@@ -33,6 +34,10 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
         getItemById(item_id);
         //getAllImagesByItemId(item_id)
     }, []); 
+
+    const goBack = () => {
+        navigate(-1);
+    };
     
     function getUser() {
         Api.getUserById(selectedItem[0].owner_id)
@@ -67,6 +72,7 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
 
     return(
         <section className="cardPage-section">
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
 

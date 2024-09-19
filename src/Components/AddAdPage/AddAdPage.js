@@ -1,4 +1,5 @@
 import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import imageCompression from 'browser-image-compression';
 import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
@@ -10,6 +11,7 @@ import { conditions } from '../../const/Сonditions/Сonditions'
 function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
+  const navigate = useNavigate()
 
   const [firstFile, setFirstFile] = React.useState(null);
   const [secondFile, setSecondFile] = React.useState(null);
@@ -90,6 +92,10 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   } else if (language === 'hebrew') {
     translatedContext = hebrew;
   }
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const formRef = React.useRef(null);
  
@@ -426,7 +432,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   
 return (
     <section className="addAdPage__section">
-
+      <p className='back-btn' onClick={goBack}>← Назад</p>
       <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
       <form 
         ref={formRef}

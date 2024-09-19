@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
 
@@ -13,11 +14,15 @@ function CategoryPage({
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, adsCategoryName
 }) {
+    const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
     
     return(
         <section className='categoryPage-main-container'>
-
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (
                     <Category 

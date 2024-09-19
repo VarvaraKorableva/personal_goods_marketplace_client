@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneFavCard from './OneFavCard/OneFavCard'
 import "./MyFavoritesPage.css"
@@ -10,6 +11,7 @@ import choose from '../../const/favoritesPageData'
 function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
 
     const currentUser = React.useContext(CurrentUserContext)
+    const navigate = useNavigate()
 
     const { language } = React.useContext(LanguageContext)
 
@@ -33,8 +35,13 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
                 </div>;
     }
 
+    const goBack = () => {
+      navigate(-1);
+    };
+
     return(
         <div className="myFavoritesPage-main-container">
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             <h3>{translatedContext.myFavoriteTitle}</h3>
             <ul className="myFavoritesPage-listings-container">
                 {favorite.map((item) => (

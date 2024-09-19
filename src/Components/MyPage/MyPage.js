@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+
+import { useParams, useNavigate } from 'react-router-dom'
 import OneAd from '../OneAd/OneAd'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
@@ -12,6 +13,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
+    const navigate = useNavigate()
 
     const { language } = React.useContext(LanguageContext)
 
@@ -44,10 +46,15 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
 
     function handleAddAdClick() {
         onAdPopup()
-      }
+    }
+
+    const goBack = () => {
+        navigate(-1);
+    }; 
 
     return(
         <section>
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             <div className="myPage__container">
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">

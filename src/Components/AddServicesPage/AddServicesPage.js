@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import imageCompression from 'browser-image-compression';
 import '../AddAdPage/AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
@@ -9,6 +10,7 @@ import {cities} from '../../const/Cities/cities'
 function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
+  const navigate = useNavigate()
   
   const [file, setFile] = React.useState(null);
   const [fileData, setFileData] = React.useState(null);
@@ -94,6 +96,10 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   }
 
   const formRef = React.useRef(null);
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const handleImgFirstLinkChange = async (event) => {
     openLoading()
@@ -407,6 +413,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
 return (
     <section className="addAdPage__section">
+    <p className='back-btn' onClick={goBack}>← Назад</p>
     <h2 className="addAdPage__title">{translatedContext.adANewService}</h2>
     <form 
       ref={formRef}

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect } from "react";
 import Message from './Message'
 import './MyMessages.css'
@@ -8,7 +8,8 @@ import React from 'react'
 function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) {
     const [lastMessages, setLastMessages] = React.useState({})
     const userId = useParams()
-    
+    const navigate = useNavigate()
+
     useEffect(()=>{
         getLastMessageFromEveryConversation(userId.userId)
     },[])
@@ -34,9 +35,13 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
         }
       }
   
+      const goBack = () => {
+        navigate(-1);
+    }; 
 
     return(
         <section className="my-messages__section">
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 

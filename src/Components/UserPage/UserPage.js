@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
@@ -6,6 +6,7 @@ import './UserPage.css'
 function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite, openFirstMessagePopup}) {
     
     const owner_id = useParams()
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         getUserById(Number(owner_id.owner_id));
@@ -15,9 +16,14 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     if(userInfo.length === 0 || myAds.length === 0) {
         return <p>Loading ...</p>;
     }
+
+    const goBack = () => {
+        navigate(-1);
+    };
     
     return(
         <section className='userPage_main-container'>
+            <p className='back-btn' onClick={goBack}>← Назад</p>
             <div className="userPage-user-info-container">
                 <div className="userPage-user-info-pic"></div>
                 <p className="userPage-user-info-name">{userInfo[0].username}</p>
