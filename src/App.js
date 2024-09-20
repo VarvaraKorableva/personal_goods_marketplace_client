@@ -52,6 +52,7 @@ function App() {
   const [categoriesToRender, setCategoriesToRender] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
+  const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
 
   const [itemsSecondPageSearch, setItemsSecondPageSearch] = React.useState([])//items
   const [startItemsSecondPage, setStartItemsSecondPage] = React.useState([])//items
@@ -134,9 +135,9 @@ function App() {
     openLoading()
     try {
       const res = await Api.getAllItems();
-      //console.log(res)
-      setLastFoutryItems(res)
-      setItemsAfterSearch(res) 
+      setLastFoutryItems(res.result)
+      setItemsAfterSearch(res.result) 
+      setTotalCountOfAds(res.totalCount)
       closeLoading() 
     /*
       const jsonString = JSON.stringify(res);
@@ -779,6 +780,7 @@ function adCountDecrement(userId) {
               getItemById={getItemById}
               categories={categories}
               lastFourtyItems={lastFourtyItems} //Need, because of search
+              totalCountOfAds={totalCountOfAds}
               addToFavorites={addToFavorites}
               
               deleteMyAd={deleteMyAd}

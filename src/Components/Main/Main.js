@@ -8,7 +8,7 @@ import './Main.css'
 function Main({
     categoriesToRender, isLoggin, 
     itemsAfterSearch, favorite, 
-    categories, onChooseCategory, lastFourtyItems, 
+    categories, onChooseCategory, lastFourtyItems, totalCountOfAds,
     getItemById, addToFavorites,
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
@@ -37,7 +37,7 @@ function Main({
                 getItemsByParentId={getItemsByParentId}
             />
             
-            <h2 className='main__title'>Все объявления, количество объявлений {itemsAfterSearch.length}</h2>
+            <h2 className='main__title'>Все объявления, количество объявлений на сайте {totalCountOfAds}</h2>
             <ItemsContainer 
                 
                 itemsAfterSearch = {itemsAfterSearch}
