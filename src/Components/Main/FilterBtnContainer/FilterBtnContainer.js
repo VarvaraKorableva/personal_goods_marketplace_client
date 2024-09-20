@@ -57,7 +57,7 @@ function FilterBtnContainer({handleGetItemsByFilter, handleCityPriceAndCondition
     return(
         <div className="filterBtnContainer__container">
             <div className="filterBtnContainer__price-wrapper">
-              <p className="filterBtnContainer__price-title">Выбрать диапозон цен</p>
+              <p className="filterBtnContainer__price-title">Выбрать диапазон цен</p>
               <div className="filterBtnContainer__numbers-container">
                 <input 
                     className="filterBtnContainer__input-price"
