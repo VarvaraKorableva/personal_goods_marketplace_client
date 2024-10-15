@@ -96,7 +96,7 @@ function OneAd({
               <div className="oneAdd__badge-free">{translatedContext.free}</div>  
             }
             
-            <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
+            
 
             <div className="oneAdd__pic-and-info-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
@@ -106,8 +106,10 @@ function OneAd({
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
               </Link>
+              <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
             
               <div className="oneAdd__text-container">
+              
                 
                 <div className="oneAdd__title-and-like-container">
                     {isLoggin? 

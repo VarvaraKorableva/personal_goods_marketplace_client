@@ -3,6 +3,7 @@
     box-shadow: 0 3px 6px #999;
     border-radius: 10px;
     padding: 10px;
+    
     margin: 5px;
     display: flex;
     flex-direction: column;
@@ -20,15 +21,19 @@
 @media screen and (max-width: 500px) {
     .oneAdd__container {
         width: 140px;
+        
         padding: 8px;
+        padding-top: 0;
         padding-left: 0;
         padding-right: 0;
+        justify-content: center;
     }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 450px) {
     .oneAdd__container {
         width: 130px;
+        width: 45%;
     }
 }
 
@@ -51,16 +56,22 @@
 
 .oneAdd__title {
     margin: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 80%;
+    margin-top: 5px;
+    width: 90%; /* ширина 80% от контейнера */
+    overflow: hidden; /* скрыть текст, который не влезает */
+    text-overflow: ellipsis; /* добавить многоточие */
+    display: -webkit-box; /* для поддержки многопоточности */
+    -webkit-box-orient: vertical; /* вертикальная ориентация */
+    -webkit-line-clamp: 2; /* максимальное количество строк */
+    line-height: 1.2; /* высота строки для лучшего отображения */
+    max-height: 2.4em;
     text-decoration: none;
     color: black;
     font-weight: 400;
     cursor: pointer;
     opacity: 1;
     font-size: 14px;
+    text-align: left;
 }
 
 .oneAdd__title:hover {
@@ -198,8 +209,10 @@
 
 @media screen and (max-width: 900px) {
     .oneAdd__main-pic-wrapper {
-        width: 100px;
-        height: 100px;
+        /*width: 100px;
+        height: 100px;*/
+        width: 120px;
+        height: 120px;
     }
 }
 
