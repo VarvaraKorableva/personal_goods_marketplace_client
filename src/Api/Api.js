@@ -457,18 +457,14 @@ export const verifyCode = ( email, code ) => {
   };  
 
 
-export const updateIsReserved = ( item_id, user_id ) => {
-      
-    return fetch(`${BASE_URL}/items/updateIsReserved`, {
+export const updateIsReserved = ( item_id, user_id ) => { 
+    return fetch(`${BASE_URL}/items/updateIsReserved/${item_id}/${user_id}`, {
         credentials: 'include',
         method: "PATCH",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-            item_id, user_id
-        })
     })
         .then(checkResponse)
 };  

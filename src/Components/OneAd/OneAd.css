@@ -57,13 +57,13 @@
 .oneAdd__title {
     margin: 0;
     margin-top: 5px;
-    width: 90%; /* ширина 80% от контейнера */
-    overflow: hidden; /* скрыть текст, который не влезает */
-    text-overflow: ellipsis; /* добавить многоточие */
-    display: -webkit-box; /* для поддержки многопоточности */
-    -webkit-box-orient: vertical; /* вертикальная ориентация */
-    -webkit-line-clamp: 2; /* максимальное количество строк */
-    line-height: 1.2; /* высота строки для лучшего отображения */
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.2;
     height: 2.4em;
     text-decoration: none;
     color: black;

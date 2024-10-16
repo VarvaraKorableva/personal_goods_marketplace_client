@@ -69,7 +69,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
                     </div>
                 </div>
                 <div className="myPage__listings-wrapper">
-                    <h3 className="myPage__title">{translatedContext.myListingsTitle}</h3>
+                    <h3 className="myPage__title">{translatedContext.myListingsTitle}({myAds.length}):</h3>
                     {myAds.length === 0?
                     <div className="myPage__add-ad-container">
                         <h3>{translatedContext.noAdsMessage}</h3>
@@ -93,7 +93,6 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
                                 deleteFromFavorites={deleteFromFavorites}
                                 favorite={favorite}
                                 favoriteItems={favoriteItems}
-                                
                                 handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}

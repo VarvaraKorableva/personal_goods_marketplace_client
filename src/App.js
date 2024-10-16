@@ -671,7 +671,7 @@ function adCountDecrement(userId) {
   }
 
   //updateIsReserved
-  function handleUpdateIsReserved( item_id ) {
+  function handleUpdateIsReserved(item_id) {
     Api.updateIsReserved(item_id, userId)
     .then((res) => {
       setIsReserved(!isReserved)

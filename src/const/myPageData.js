@@ -1,7 +1,7 @@
 //myPageData
 const en = {
     changeAvatarBtn: 'Change Avatar',
-    myListingsTitle: 'My listings:', 
+    myListingsTitle: 'My listings ', 
     logOutBtn: 'Log out',
     addMoreAdsBtn: 'Add more',
     noAdsMessage: "You haven't added any ads yet",
@@ -11,7 +11,7 @@ const en = {
 
 const rus = {
     changeAvatarBtn: 'Изменить аватар',
-    myListingsTitle: 'Мои объявления:', 
+    myListingsTitle: 'Мои объявления ', 
     logOutBtn: 'Выйти из приложения',
     addMoreAdsBtn: 'Посмотреть остальные',
     noAdsMessage: "Вы еще не добавили ни одного объявления",
@@ -21,7 +21,7 @@ const rus = {
 
 const hebrew = {
     changeAvatarBtn: 'Change Avatar',
-    myListingsTitle: 'My listings:', 
+    myListingsTitle: 'My listings ', 
     logOutBtn: 'Log out',
     addMoreAdsBtn: 'Add more ads',
     noAdsMessage: "You haven't added any ads yet",
