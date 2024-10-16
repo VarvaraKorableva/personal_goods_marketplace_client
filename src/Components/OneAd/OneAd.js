@@ -89,15 +89,13 @@ function OneAd({
 
     return(
         <li className="oneAdd__container">
-
+          
             {item.price > 0?
               <></>
             :
               <div className="oneAdd__badge-free">{translatedContext.free}</div>  
             }
             
-            
-
             <div className="oneAdd__pic-and-info-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {item.images?
@@ -106,11 +104,9 @@ function OneAd({
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
               </Link>
-              <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
-            
               <div className="oneAdd__text-container">
+              <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
               
-                
                 <div className="oneAdd__title-and-like-container">
                     {isLoggin? 
                         (currentUser.user_id === item.owner_id ?

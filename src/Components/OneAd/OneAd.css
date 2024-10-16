@@ -64,7 +64,7 @@
     -webkit-box-orient: vertical; /* вертикальная ориентация */
     -webkit-line-clamp: 2; /* максимальное количество строк */
     line-height: 1.2; /* высота строки для лучшего отображения */
-    max-height: 2.4em;
+    height: 2.4em;
     text-decoration: none;
     color: black;
     font-weight: 400;
