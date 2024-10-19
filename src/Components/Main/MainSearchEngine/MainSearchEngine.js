@@ -3,10 +3,9 @@ import './MainSearchEngine.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 
-function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter }) {
+function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter, getTitle }) {
     const [keyWord, setKeyWord] = React.useState('')
     const { language } = React.useContext(LanguageContext)
-
     const { en, rus, hebrew } = choose;
 
     let translatedContext = '';
@@ -25,6 +24,7 @@ function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter }) {
 
     function handleSearchByTitle() {
         handleGetItemsByFilter()
+        getTitle(keyWord)
     }
 
     return(

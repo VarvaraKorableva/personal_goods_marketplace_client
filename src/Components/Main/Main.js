@@ -13,10 +13,16 @@ function Main({
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange}) {
+
+    const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
+
+    function getTitle(keyWord) {
+        setSearchByKeyWord(keyWord)
+    }  
 
 
     return(
@@ -24,6 +30,7 @@ function Main({
             <MainSearchEngine
                 handleTitleChange={handleTitleChange}
                 handleGetItemsByFilter={handleGetItemsByFilter}
+                getTitle={getTitle}
             />
             <FilterBtnContainer 
                 handleGetItemsByFilter={handleGetItemsByFilter}
@@ -36,8 +43,19 @@ function Main({
                 getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
                 getItemsByParentId={getItemsByParentId}
             />
-            
+            {itemsAfterSearch.length?
+
+            (searchByKeyWord.length?
+            <h2 className='main__title'>Объявления по запросу "{searchByKeyWord}"</h2>
+            :
             <h2 className='main__title'>Количество объявлений на сайте {totalCountOfAds}</h2>
+            )
+
+            :
+            <h2 className='main__title'>Объявлений не найдено</h2>
+
+            }
+
             <ItemsContainer 
                 
                 itemsAfterSearch = {itemsAfterSearch}
