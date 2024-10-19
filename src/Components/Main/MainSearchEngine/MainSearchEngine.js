@@ -2,8 +2,9 @@ import React from 'react'
 import './MainSearchEngine.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
+import { LuSettings2 } from "react-icons/lu";
 
-function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter, getTitle }) {
+function MainSearchEngine({resetTitle, getAllItems, handleTitleChange, handleGetItemsByFilter, getTitle, handleFilterBtnClick }) {
     const [keyWord, setKeyWord] = React.useState('')
     const { language } = React.useContext(LanguageContext)
     const { en, rus, hebrew } = choose;
@@ -25,22 +26,30 @@ function MainSearchEngine({ handleTitleChange, handleGetItemsByFilter, getTitle 
     function handleSearchByTitle() {
         handleGetItemsByFilter()
         getTitle(keyWord)
+        //console.log(keyWord)
+    }
+
+    function handleReset() {
+        setKeyWord('')
+        getAllItems()
+        resetTitle()
     }
 
     return(
         <form className="MainSearchEngine-form">
+            <LuSettings2 className="MainSearchEngine-filter-btn" onClick={handleFilterBtnClick}/>
             <input 
                 className="MainSearchEngine-input"
                 placeholder={translatedContext.placeholder}
                 value={keyWord}
                 onChange={handleTakeKeyWord}
             />
-            <button className="MainSearchEngine-btn" type='button' onClick={handleSearchByTitle}>{translatedContext.btnNameSearch}</button>
+            <div className="MainSearchEngine-btn-container">
+                <button className="MainSearchEngine-reset-btn" type='button' onClick={handleReset}>X</button>
+                <button className="MainSearchEngine-btn" type='button' onClick={handleSearchByTitle}>{translatedContext.btnNameSearch}</button>
+            </div>
         </form>
     )
 }
 
 export default MainSearchEngine;
-
-
-//<button className="MainSearchEngine-btn-city">Выбрать город</button>

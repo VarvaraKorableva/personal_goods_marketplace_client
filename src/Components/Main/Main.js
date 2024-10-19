@@ -7,14 +7,15 @@ import './Main.css'
 
 function Main({
     categoriesToRender, isLoggin, 
-    itemsAfterSearch, favorite, 
+    itemsAfterSearch, favorite, getAllItems,
     categories, onChooseCategory, lastFourtyItems, totalCountOfAds,
     getItemById, addToFavorites,
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange}) {
+    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange, resetAllfilters,}) {
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
+    const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
     
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -24,6 +25,13 @@ function Main({
         setSearchByKeyWord(keyWord)
     }  
 
+    function handleFilterBtnClick() {
+        setIsFilterBtnClicked(!isFilterBtnClicked)
+    }
+
+    function resetTitle(){
+        setSearchByKeyWord('')
+    }
 
     return(
         <section className='main__section'>
@@ -31,11 +39,23 @@ function Main({
                 handleTitleChange={handleTitleChange}
                 handleGetItemsByFilter={handleGetItemsByFilter}
                 getTitle={getTitle}
+                handleFilterBtnClick={handleFilterBtnClick}
+                getAllItems={getAllItems}
+                resetTitle={resetTitle}
             />
-            <FilterBtnContainer 
-                handleGetItemsByFilter={handleGetItemsByFilter}
-                handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
-            />
+            {
+                isFilterBtnClicked?
+            
+                <FilterBtnContainer 
+                    handleGetItemsByFilter={handleGetItemsByFilter}
+                    handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
+                    resetAllfilters={resetAllfilters}
+                    getAllItems={getAllItems}
+                    resetTitle={resetTitle}
+                />
+                :
+                <></>
+            }
             <MainCategories 
                 onChooseCategory={onChooseCategory}
                 categories={categories}

@@ -470,6 +470,7 @@ export const updateIsReserved = ( item_id, user_id ) => {
 };  
 
 export const getItemsByFilter = (filters) => {
+    console.log(filters)
     const queryString = new URLSearchParams(filters).toString();
     return fetch(`${BASE_URL}/items/getItemsByFilter?${queryString}`, {
         credentials: 'include',

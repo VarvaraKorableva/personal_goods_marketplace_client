@@ -4,7 +4,7 @@ import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 import { conditions } from '../../../const/Сonditions/Сonditions'
 
-function FilterBtnContainer({handleGetItemsByFilter, handleCityPriceAndConditionChange}) {
+function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, handleCityPriceAndConditionChange, resetAllfilters}) {
     const { language } = React.useContext(LanguageContext)
     const [cityFromInput, setCityFromInput] = React.useState('')
     const [lowPriceFromInput, setLowPriceFromInput] = React.useState('')
@@ -52,6 +52,9 @@ function FilterBtnContainer({handleGetItemsByFilter, handleCityPriceAndCondition
     setLowPriceFromInput(0)
     setHighPriceFromInput(0)
     setConditionFromInput('')
+    resetAllfilters()
+    getAllItems()
+    resetTitle()
   }
 
     return(

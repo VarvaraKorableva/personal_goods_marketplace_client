@@ -696,6 +696,13 @@ function adCountDecrement(userId) {
     setCondition(conditionFromInput)
   }
 
+  function resetAllfilters() {
+    setCity('')
+    setLowPrice(0)
+    setHighPrice(0)
+    setCondition('')
+  }
+
   function handleGetItemsByFilter() {
 
     const filters = {
@@ -798,6 +805,9 @@ function adCountDecrement(userId) {
               handleTitleChange={handleTitleChange}
               handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
               
+              resetAllfilters={resetAllfilters}
+
+              getAllItems={getAllItems}
             />
           }
         />

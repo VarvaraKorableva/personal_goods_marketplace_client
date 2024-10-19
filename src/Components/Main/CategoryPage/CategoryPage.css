@@ -23,6 +23,13 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 500px) {
+    .categoryPage-categories-container {
+        margin-top: 0;
+    }
+}
+
 .categoryPage__ads-length-title {
     font-size: 14px;
+    max-width: 95%;
 }

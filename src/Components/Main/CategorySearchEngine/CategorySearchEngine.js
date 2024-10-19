@@ -3,7 +3,7 @@ import React from 'react'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 
-function CategorySearchEngine({ startToSearchSecondPage }) {
+function CategorySearchEngine({}) {
     const [keyWord, setKeyWord] = React.useState('')
 
     const { language } = React.useContext(LanguageContext)
@@ -18,14 +18,15 @@ function CategorySearchEngine({ startToSearchSecondPage }) {
       } else if (language === 'hebrew') {
         translatedContext = hebrew;
     }
-
+    
     function handleTakeKeyWord(e) {
         setKeyWord(e.target.value)
     }
 
     function handleSubmitToSearch(e) {
         e.preventDefault()
-        startToSearchSecondPage(keyWord)
+        console.log(keyWord)
+        //startToSearchSecondPage(keyWord)
     }
 
     return(

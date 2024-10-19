@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
-
+//import CategorySearchEngine from '../CategorySearchEngine/CategorySearchEngine'
+//<CategorySearchEngine/>
 import './CategoryPage.css'
 
 function CategoryPage({
@@ -12,10 +13,10 @@ function CategoryPage({
     favoriteItems, lastFourtyItems,  chooseCategory, 
     categoriesToRender, itemsSecondPageSearch,
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, adsCategoryName
+    handleUpdateIsReserved, adsCategoryName,
 }) {
     const navigate = useNavigate()
-
+    const [searchByKeyWord, setSearchByKeyWord] = React.useState('')
     const goBack = () => {
         navigate(-1);
     };
@@ -23,6 +24,7 @@ function CategoryPage({
     return(
         <section className='categoryPage-main-container'>
             <p className='back-btn' onClick={goBack}>← Назад</p>
+            
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (
                     <Category 
