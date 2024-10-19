@@ -42,7 +42,7 @@
     }
   
     .popup__close-button {
-      background-image: url(../../images/Close_Icon.png);
+      /*background-image: url(../../images/Close_Icon.png);*/
       width: 32px;
       height: 32px;
       background-position: center;
@@ -350,7 +350,7 @@
   }
 
   .popup__close-button-successfulActionPopup {
-    background-image: url(../../images/Close_Icon.png);
+    /*background-image: url(../../images/Close_Icon.png);*/
     width: 32px;
     height: 32px;
     background-position: center;

@@ -7,6 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
 import ImageSlider from './ImageSlider.js'
+import { TbEdit } from "react-icons/tb";
 
 function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
@@ -105,15 +106,24 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
                             <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price} ₪</span></p>
                             <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
                         </div>
-
-                        <div className="cardPage__info-about-user">
-                            <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
-                        </div>
+                        {
+                            isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
+                                <div className="cardPage__info-about-user">
+                                    <TbEdit className="cardPage-edit-icon"/>
+                                    <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">Изменить объявление</Link>
+                                </div>
+                                
+                            :
+                            <div className="cardPage__info-about-user">
+                                <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
+                            </div>
+                        }
                         {
                             isLoggin?
                                 <div className="cardPage__btn-container">
                                     {currentUser.user_id === selectedItem[0].owner_id ?
                                         <>
+                                        
                                         {/*<button className='cardPage__write-message-btn' onClick={hundleDeleteMyAd}>{translatedContext.deleteBtn}</button>*/}
                                         </>
                                     

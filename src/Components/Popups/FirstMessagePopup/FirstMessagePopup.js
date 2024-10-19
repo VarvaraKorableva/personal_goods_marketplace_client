@@ -2,6 +2,7 @@ import React from 'react'
 import '../Popups.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/Popups/FirstMessagePopupData'
+import { IoMdCloseCircleOutline } from "react-icons/io"
 
 function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
     const [messageText, setMessageText] = React.useState('')
@@ -49,11 +50,16 @@ function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
     return(
         <div className={`popup ${isOpen && 'popup__opened'}`}>
         <div className="popup__container">
-            <button 
+            {/*<button 
               className="popup__close-button" 
               type="button" 
               onClick={onClose}>
-            </button>
+            </button>*/}
+            < IoMdCloseCircleOutline
+              className="popup__close-button" 
+              type="button" 
+              onClick={onClose}
+            />
     
         <h2 className="popup__title-ChoiceOfProductOrServicePopup">{translatedContext.popupTitle}</h2>
         <form className='firstMessagePopup__form' onSubmit={handleCreateNewMessage}>

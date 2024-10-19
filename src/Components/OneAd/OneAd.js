@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import noPictures from '../../images/nopictures.png'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
+import { TbEdit } from "react-icons/tb";
 
 function OneAd({
     isLoggin, item, getItemById, 
@@ -97,6 +98,14 @@ function OneAd({
             }
             
             <div className="oneAdd__pic-and-info-container">
+              {isLoggin && currentUser.user_id === item.owner_id?
+                <Link to={`/users`} className="oneAdd__edit-link">
+                  <TbEdit className="oneAdd-edit-icon"/>
+                </Link>
+                                
+                :
+                <></>
+              }
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {item.images?
                   <img className="oneAdd__main-pic" alt = {item.title} src={item.images[0]}></img>
