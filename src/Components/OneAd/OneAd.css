@@ -3,7 +3,6 @@
     box-shadow: 0 3px 6px #999;
     border-radius: 10px;
     padding: 10px;
-    
     margin: 5px;
     display: flex;
     flex-direction: column;
@@ -21,7 +20,6 @@
 @media screen and (max-width: 500px) {
     .oneAdd__container {
         width: 140px;
-        
         padding: 8px;
         padding-top: 0;
         padding-left: 0;
@@ -32,8 +30,9 @@
 
 @media screen and (max-width: 450px) {
     .oneAdd__container {
-        width: 130px;
+        /*width: 130px;*/
         width: 45%;
+        min-width: 140px;
     }
 }
 

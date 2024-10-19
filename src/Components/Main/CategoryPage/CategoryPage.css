@@ -32,4 +32,6 @@
 .categoryPage__ads-length-title {
     font-size: 14px;
     max-width: 95%;
+    text-align: center;
+    margin-right: 0px;
 }
