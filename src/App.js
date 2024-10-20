@@ -90,8 +90,9 @@ function App() {
   const [condition, setCondition] = React.useState('') 
   const [title, setTitle] = React.useState('') 
 
-  //title for edit popup
+  //title and itemId for edit popup
   const [editPopupName, setEditPopupName] = React.useState('') 
+  const [popupEditItemId, setPopupEditItemId] = React.useState(0) 
 
   const [isReserved, setIsReserved] = React.useState(false)
 
@@ -634,8 +635,9 @@ function adCountDecrement(userId) {
     setIsBurgerMenuPopup(true)
   }
 
-  function openEditPopup(popupName) {
+  function openEditPopup(popup_item_id, popupName) {
     setEditPopupName(popupName)
+    setPopupEditItemId(popup_item_id)
     setIsEditPopup(true)
 
   }
@@ -737,9 +739,40 @@ function adCountDecrement(userId) {
   }
   
   function updateItemCity(item_id, city) {
-    console.log('item_id', item_id)
-    console.log('city', city)
     Api.updateItemCity(item_id, city)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      setPopupMessage("Something wrong, plese try again")
+    })
+  }
+
+  function updatePrice(item_id, price) {
+    Api.updatePrice(item_id, price)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      setPopupMessage("Something wrong, plese try again")
+    })
+  }
+
+  function updateDescription(item_id, description) {
+    Api.updateDescription(item_id, description)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      setPopupMessage("Something wrong, plese try again")
+    })
+  }
+
+  function updateCondition(item_id, condition) {
+    Api.updateCondition(item_id, condition)
     .then((res) => {
       console.log(res)
     })
@@ -1066,7 +1099,11 @@ function adCountDecrement(userId) {
         isOpen={isEditPopup}
         onClose={closeAllPopups}
         title={editPopupName}
-        //onSubmitFunction={onSubmitFunction}
+        updateItemCity={updateItemCity}
+        updatePrice={updatePrice}
+        updateDescription={updateDescription}
+        updateCondition={updateCondition}
+        popupEditItemId={popupEditItemId}
 
       />
 

@@ -70,19 +70,19 @@ function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToF
     }
 
     function handleOpenConditionEditPopup() {
-        openEditPopup("condition")
+        openEditPopup(selectedItem[0].item_id, "condition")
     }
 
     function handleOpenPriceEditPopup() {
-        openEditPopup("price")
+        openEditPopup(selectedItem[0].item_id, "price")
     }
 
     function handleOpenCityEditPopup() {
-        openEditPopup("city")
+        openEditPopup(selectedItem[0].item_id, "city")
     }
 
     function handleOpenDescriptionEditPopup() {
-        openEditPopup("description")
+        openEditPopup(selectedItem[0].item_id, "description")
     }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)

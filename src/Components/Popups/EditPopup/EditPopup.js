@@ -6,7 +6,12 @@ import { IoMdCloseCircleOutline } from "react-icons/io"
 import { cities } from '../../../const/Cities/cities'
 import { conditions } from '../../../const/Сonditions/Сonditions'
 
-function EditPopup ({onClose, isOpen, title}) {//, onSubmitFunction
+
+function EditPopup ({
+  onClose, isOpen, title, 
+  updateItemCity, updatePrice, 
+  updateDescription, updateCondition, popupEditItemId
+}) {
     const [text, setText] = React.useState('')
     const [isMessageText, setIsMessageText] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState('')
@@ -24,10 +29,24 @@ function EditPopup ({onClose, isOpen, title}) {//, onSubmitFunction
       translatedContext = hebrew;
     }
 
+    function handleOnClose() {
+      onClose()
+      setIsMessageText(false)
+      setErrorMessage('')
+      setText('')
+    }
+
     function onEditBtn(e) {
         e.preventDefault()
-        //onSubmitFunction(text)
-        console.log(text)
+        if(title === "condition"){
+          updateCondition(popupEditItemId, text)
+        } else if(title === "city") {
+          updateItemCity(popupEditItemId, text)
+        } else if(title === "price") {
+          updatePrice(popupEditItemId, text)
+        } else if(title === "description") {
+          updateDescription(popupEditItemId, text)
+        }
         setIsMessageText(false)
         setText('')
     }
@@ -60,6 +79,21 @@ function EditPopup ({onClose, isOpen, title}) {//, onSubmitFunction
       }
     };
 
+    function handledesDriptionChange(e) {
+      if(e.target.value.length > 900) {
+        setIsMessageText(false)
+        setErrorMessage('Длинна описания не может превышать 900 символов')
+      } else if(e.target.value) {
+        setIsMessageText(true)
+        setErrorMessage('')
+        setText(e.target.value)
+      } else {
+        setIsMessageText(true)
+        setErrorMessage('')
+        setText('')
+      }
+    }
+
 
     React.useEffect(() => {
       if(isMessageText) {
@@ -76,7 +110,7 @@ function EditPopup ({onClose, isOpen, title}) {//, onSubmitFunction
             <IoMdCloseCircleOutline
               className="popup__close-button" 
               type="button" 
-              onClick={onClose}
+              onClick={handleOnClose}
             />
         <form className='firstMessagePopup__form' onSubmit={onEditBtn}>
             <label className='editItemPopup__title'>Изменить {title}</label>
@@ -121,18 +155,27 @@ function EditPopup ({onClose, isOpen, title}) {//, onSubmitFunction
                 ))
               }
               </select> 
-            : 
+            : (
+              title === 'price' ?
               <>
               <input 
-                className='popup__input' 
-                //onChange={handleEditInfo}
-                onChange={title === 'price' ? handlePriceChange : handleEditInfo} 
+                className='popup__input'
+                onChange={handlePriceChange} 
                 value={text}
               >
               </input>
               <span className='popup__mistake-msg'>{errorMessage}</span>
               </>
-            )}
+              :
+              <>
+              <textarea 
+                className='firstMessagePopup__text'
+                onChange={handledesDriptionChange} 
+                value={text}
+              />
+              <span className='popup__mistake-msg'>{errorMessage}</span>
+              </>
+            ))}
 
             <button 
               className={isValid? 'firstMessagePopup__btn_active':'firstMessagePopup__btn'} 

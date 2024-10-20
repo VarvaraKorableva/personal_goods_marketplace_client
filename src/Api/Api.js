@@ -501,7 +501,6 @@ export const updateConversationIsDeleted = ( user_id, conversation_id ) => {
         .then(checkResponse)
 };  
 
-///updateTitle
 export const updateItemCity = (item_id, city) => {
     return fetch(`${BASE_URL}/items/updateCity/${item_id}`, {
         credentials: 'include',
