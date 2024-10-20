@@ -9,7 +9,7 @@ import noPictures from '../../images/nopictures.png'
 import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
 
-function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
     //let {favorite_items_id} = useParams();
@@ -67,7 +67,23 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
 
     function handleAddMessagePopupOpen() {
         openFirstMessagePopup(selectedItem[0].owner_id, selectedItem[0].item_id)
-      }
+    }
+
+    function handleOpenConditionEditPopup() {
+        openEditPopup("condition")
+    }
+
+    function handleOpenPriceEditPopup() {
+        openEditPopup("price")
+    }
+
+    function handleOpenCityEditPopup() {
+        openEditPopup("city")
+    }
+
+    function handleOpenDescriptionEditPopup() {
+        openEditPopup("description")
+    }
 
     const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
 
@@ -99,20 +115,45 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
                             }
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
                             {selectedItem[0].condition.length?
-                                <p className="cardPage-info-title">Состояние: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
+                                <div className="cardPage-info-edit-container">
+                                    {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
+                                        <button className="cardPage-edit-btn" onClick={handleOpenConditionEditPopup}>
+                                            <TbEdit className="cardPage-edit-icon"/>
+                                        </button>
+                                        :
+                                        <></>
+                                    }
+                                    <p className="cardPage-info-title">Состояние: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
+                                </div>
                             : 
                                 <></>
                             }
-                            <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price} ₪</span></p>
-                            <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
+                            <div className="cardPage-info-edit-container">
+                                {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
+                                    <button className="cardPage-edit-btn" onClick={handleOpenPriceEditPopup}>
+                                        <TbEdit className="cardPage-edit-icon"/>
+                                    </button>
+                                    :
+                                    <></>
+                                }
+                                <p className="cardPage-info-title">{translatedContext.price}: <span className="cardPage-info">{selectedItem[0].price} ₪</span></p>
+                            </div>
+
+                            <div className="cardPage-info-edit-container">
+                                {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
+                                    <button className="cardPage-edit-btn" onClick={handleOpenCityEditPopup}>
+                                        <TbEdit className="cardPage-edit-icon"/>
+                                    </button>
+                                    :
+                                    <></>
+                                }
+                                <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
+                            </div>
+                            
                         </div>
                         {
                             isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
-                                <div className="cardPage__info-about-user">
-                                    <TbEdit className="cardPage-edit-icon"/>
-                                    <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">Изменить объявление</Link>
-                                </div>
-                                
+                                <></>
                             :
                             <div className="cardPage__info-about-user">
                                 <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
@@ -147,10 +188,29 @@ function CardPage({ deleteMyAd, selectedItem, getItemById, addToFavorites, isLog
                     </div>
                 </div>
                 {selectedItem[0].description.length <= 0 ? 
-                <></> 
+                 (
+                    isLoggin && currentUser.user_id === selectedItem[0].owner_id?
+                        <button className="cardPage-edit-btn-description" onClick={handleOpenDescriptionEditPopup}>
+                            <TbEdit className="cardPage-edit-icon"/>
+                            <p className="cardPage-add-description">Добавить описание</p>
+                        </button>
+
+                        :
+                        <></>
+                    
+                 ) 
                 :
                 <div className="cardPage-description-container">
-                    <p className="cardPage-info">{translatedContext.description}:</p>
+                    <div className="cardPage-info-edit-container">
+                        {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
+                            <button className="cardPage-edit-btn-description" onClick={handleOpenDescriptionEditPopup}>
+                                <TbEdit className="cardPage-edit-icon"/>
+                            </button>
+                            :
+                            <></>
+                        }
+                        <p className="cardPage-info">{translatedContext.description}:</p>
+                    </div>
                     <p className="cardPage-info-description">{selectedItem[0].description}</p>
                 </div>
                 }

@@ -470,7 +470,6 @@ export const updateIsReserved = ( item_id, user_id ) => {
 };  
 
 export const getItemsByFilter = (filters) => {
-    console.log(filters)
     const queryString = new URLSearchParams(filters).toString();
     return fetch(`${BASE_URL}/items/getItemsByFilter?${queryString}`, {
         credentials: 'include',
@@ -501,3 +500,58 @@ export const updateConversationIsDeleted = ( user_id, conversation_id ) => {
     })
         .then(checkResponse)
 };  
+
+///updateTitle
+export const updateItemCity = (item_id, city) => {
+    return fetch(`${BASE_URL}/items/updateCity/${item_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ city }),
+    })
+    .then(checkResponse);
+};
+export const updatePrice = (item_id, price) => {
+    return fetch(`${BASE_URL}/items/updatePrice/${item_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ price }),
+    })
+    .then(checkResponse);
+};
+export const updateDescription = (item_id, description) => {
+    return fetch(`${BASE_URL}/items/updateDescription/${item_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ description }),
+    })
+    .then(checkResponse);
+};
+export const updateCondition = (item_id, condition) => {
+    return fetch(`${BASE_URL}/items/updateCondition/${item_id}`, {
+        credentials: 'include',
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ condition }),
+    })
+    .then(checkResponse);
+};
+/*
+item_router.patch('/updatePrice/:item_id', updatePrice)
+item_router.patch('/updateDescription/:item_id', updateDescription)
+item_router.patch('/updateCondition/:item_id', updateCondition)
+*/

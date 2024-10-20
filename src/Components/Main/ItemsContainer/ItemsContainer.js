@@ -6,7 +6,7 @@ function ItemsContainer({
     isLoggin, itemsAfterSearch, 
     getItemById, 
     addToFavorites, deleteFromFavorites, 
-    favorite, favoriteItems, deleteMyAd, openFirstMessagePopup, handleUpdateIsReserved
+    favorite, favoriteItems, deleteMyAd, openFirstMessagePopup, handleUpdateIsReserved, updateItemCity,
 }) {
 
     return(
@@ -24,6 +24,7 @@ function ItemsContainer({
                     deleteMyAd={deleteMyAd}
                     openFirstMessagePopup = {openFirstMessagePopup}
                     handleUpdateIsReserved={handleUpdateIsReserved}
+                    updateItemCity={updateItemCity}
                 />
             ))}
             </ul>

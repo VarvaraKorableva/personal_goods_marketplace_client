@@ -12,7 +12,7 @@ function OneAd({
     isLoggin, item, getItemById, 
     deleteMyAd, addToFavorites, 
     deleteFromFavorites, favorite, 
-    favoriteItems, openFirstMessagePopup, handleUpdateIsReserved
+    favoriteItems, openFirstMessagePopup, handleUpdateIsReserved,
 }) {
 
     const currentUser = React.useContext(CurrentUserContext)
@@ -98,14 +98,7 @@ function OneAd({
             }
             
             <div className="oneAdd__pic-and-info-container">
-              {isLoggin && currentUser.user_id === item.owner_id?
-                <Link to={`/users`} className="oneAdd__edit-link">
-                  <TbEdit className="oneAdd-edit-icon"/>
-                </Link>
-                                
-                :
-                <></>
-              }
+              
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {item.images?
                   <img className="oneAdd__main-pic" alt = {item.title} src={item.images[0]}></img>

@@ -12,7 +12,8 @@ function Main({
     getItemById, addToFavorites,
     deleteFromFavorites, favoriteItems, deleteMyAd, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange, resetAllfilters,}) {
+    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange,
+    resetAllfilters,}) {
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
@@ -77,7 +78,6 @@ function Main({
             }
 
             <ItemsContainer 
-                
                 itemsAfterSearch = {itemsAfterSearch}
                 lastFourtyItems = {lastFourtyItems} 
                 getItemById = {getItemById} 

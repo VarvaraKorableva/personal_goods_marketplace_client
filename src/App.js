@@ -24,6 +24,7 @@ import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Components/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Components/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
+import EditPopup from './Components/Popups/EditPopup/EditPopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
@@ -40,6 +41,7 @@ function App() {
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
+  const [isEditPopup, setIsEditPopup] = React.useState(false)
   const [popupMessage, setPopupMessage] = React.useState('')
   const [isOneConversationPopup, setIsOneConversationPopup] = React.useState(false)
   const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
@@ -87,7 +89,9 @@ function App() {
   const [highPrice, setHighPrice] = React.useState(0) 
   const [condition, setCondition] = React.useState('') 
   const [title, setTitle] = React.useState('') 
-  //
+
+  //title for edit popup
+  const [editPopupName, setEditPopupName] = React.useState('') 
 
   const [isReserved, setIsReserved] = React.useState(false)
 
@@ -180,7 +184,6 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getAllItems()
-    
     //getUnreadbleMessages(userId)
   },[])
   
@@ -631,6 +634,12 @@ function adCountDecrement(userId) {
     setIsBurgerMenuPopup(true)
   }
 
+  function openEditPopup(popupName) {
+    setEditPopupName(popupName)
+    setIsEditPopup(true)
+
+  }
+
   function handleAddAdClick(data){
     setIsGood(data)
 
@@ -658,6 +667,7 @@ function adCountDecrement(userId) {
     setPopupMessage("")
     setIsOneConversationPopup(false)
     setIsBurgerMenuPopup(false)
+    setIsEditPopup(false)
   }
 
 
@@ -726,6 +736,18 @@ function adCountDecrement(userId) {
 
   }
   
+  function updateItemCity(item_id, city) {
+    console.log('item_id', item_id)
+    console.log('city', city)
+    Api.updateItemCity(item_id, city)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      setPopupMessage("Something wrong, plese try again")
+    })
+  }
   
   return (
     <LanguageProvider>
@@ -852,6 +874,7 @@ function adCountDecrement(userId) {
               favoriteItems={favoriteItems}
               deleteMyAd={deleteMyAd}
               openFirstMessagePopup={openFirstMessagePopup} 
+              openEditPopup={openEditPopup}
             />
           }
         />
@@ -1037,6 +1060,14 @@ function adCountDecrement(userId) {
         isOpen={isFirstMessagePopup}
         onClose={closeAllPopups}
         createNewMessage={addNewMessage}
+      />
+
+      <EditPopup
+        isOpen={isEditPopup}
+        onClose={closeAllPopups}
+        title={editPopupName}
+        //onSubmitFunction={onSubmitFunction}
+
       />
 
       <Preloader 

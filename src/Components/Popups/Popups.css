@@ -671,3 +671,8 @@
     font-size: 12px;
   }
 }
+ 
+.editItemPopup__title {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
