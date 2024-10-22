@@ -8,11 +8,6 @@ return (
     
   <div className={`popup ${isOpen && 'popup__opened'}`}>
     <div className="popup__container">
-        {/*<button 
-            className="popup__close-button-successfulActionPopup" 
-            type="button" 
-            onClick={onClose}>
-        </button>*/}
         <IoMdCloseCircleOutline 
             className="popup__close-button-successfulActionPopup" 
             type="button" 

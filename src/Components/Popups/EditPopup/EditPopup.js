@@ -112,8 +112,10 @@ function EditPopup ({
               type="button" 
               onClick={handleOnClose}
             />
-        <form className='firstMessagePopup__form' onSubmit={onEditBtn}>
-            <label className='editItemPopup__title'>Изменить {title}</label>
+        <form className='editItemPopup__form' onSubmit={onEditBtn}>
+            <label className='editItemPopup__title'>
+              Изменить {`${translatedContext.titles[title]}`}
+            </label>
             {title === 'condition'? 
             <select 
             className='addAdPage__select' 
@@ -182,7 +184,7 @@ function EditPopup ({
               type='sumbit' 
               disabled={!isValid}
             >
-              Изменить
+              {`${translatedContext.editPopupBtn.changeBtn}`}
             </button>
         </form>  
         </div>

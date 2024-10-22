@@ -289,7 +289,6 @@ function App() {
         const str_item_id = Number(id)
         formData.append('str_item_id', str_item_id); 
         formData.append('user_id', userId); 
-        //Api.uploadFile(formData)
         Api.uploadMultipleFiles(formData)
         .then((res) => {
           setMyImages([res[0], ...myImages])
@@ -298,15 +297,12 @@ function App() {
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           closeLoading()
-          
         })
         .then(()=> {
           getAllItems()
-
           navigate(`/users/${userId}`)
         })
         .catch((err)=> {
-          console.log(err)
           closeAllPopups()
           setPopupMessage("Something wrong, plese try again")
           openSuccessfulActionPopup()
@@ -672,7 +668,6 @@ function adCountDecrement(userId) {
     setIsEditPopup(false)
   }
 
-
   function handleLogout() {
       setIsLoggin(false)
       localStorage.removeItem('isLogin')
@@ -682,7 +677,6 @@ function adCountDecrement(userId) {
       navigate(`/`)
   }
 
-  //updateIsReserved
   function handleUpdateIsReserved(item_id) {
     Api.updateIsReserved(item_id, userId)
     .then((res) => {
@@ -693,9 +687,6 @@ function adCountDecrement(userId) {
       setPopupMessage("Something wrong, plese try again")
     })
   }
-
-  //getItemsByFilter
-
 
   function handleTitleChange(keyWord) {
     setTitle(keyWord)
@@ -716,7 +707,7 @@ function adCountDecrement(userId) {
   }
 
   function handleGetItemsByFilter() {
-
+    openLoading()
     const filters = {
       city: city,
       lowPrice: lowPrice,
@@ -727,58 +718,82 @@ function adCountDecrement(userId) {
 
     Api.getItemsByFilter(filters)
     .then((res) => {
-      console.log(res)
       setItemsAfterSearch(res)
-      
+      closeLoading()
     })
     .catch((err) => {
-      console.log(err)
+      closeLoading()
       setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
 
   }
   
   function updateItemCity(item_id, city) {
+    openLoading()
     Api.updateItemCity(item_id, city)
     .then((res) => {
-      console.log(res)
+      closeAllPopups()
+      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      openSuccessfulActionPopup()
+      closeLoading()
     })
     .catch((err) => {
-      console.log(err)
+      closeAllPopups()
+      closeLoading()
       setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 
   function updatePrice(item_id, price) {
+    openLoading()
     Api.updatePrice(item_id, price)
     .then((res) => {
-      console.log(res)
+      closeAllPopups()
+      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      openSuccessfulActionPopup()
+      closeLoading()
     })
     .catch((err) => {
-      console.log(err)
+      closeAllPopups()
+      closeLoading()
       setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 
   function updateDescription(item_id, description) {
+    openLoading()
     Api.updateDescription(item_id, description)
     .then((res) => {
-      console.log(res)
+      closeAllPopups()
+      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      openSuccessfulActionPopup()
+      closeLoading()
     })
     .catch((err) => {
-      console.log(err)
+      closeAllPopups()
+      closeLoading()
       setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
 
   function updateCondition(item_id, condition) {
+    openLoading()
     Api.updateCondition(item_id, condition)
     .then((res) => {
-      console.log(res)
+      closeAllPopups()
+      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      openSuccessfulActionPopup()
+      closeLoading()
     })
     .catch((err) => {
-      console.log(err)
+      closeAllPopups()
+      closeLoading()
       setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
     })
   }
   

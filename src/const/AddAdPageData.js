@@ -50,8 +50,17 @@ const en = {
         conditionErrorMessage: {
             errorMessage: ' Select a condition',
         },
+    },
+    titles: {
+        condition: 'condition',
+        city: 'city',
+        price: 'price',
+        description: 'description',
+    },
+    editPopupBtn: {
+        changeBtn: 'Change'
     }
-    
+  
 }
 
 const rus = {
@@ -105,9 +114,16 @@ const rus = {
         conditionErrorMessage: {
             errorMessage: 'Выберите состоятие товара',
         },
+    },
+    titles: {
+        condition: 'состояние',
+        city: 'город',
+        price: 'цену',
+        description: 'описание',
+    },
+    editPopupBtn: {
+        changeBtn: 'Изменить'
     }
-
-
 }
 
 const hebrew = {
