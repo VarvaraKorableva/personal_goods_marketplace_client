@@ -35,13 +35,13 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
         }
       }
   
-      const goBack = () => {
+    const goBack = () => {
         navigate(-1);
     }; 
 
     return(
         <section className="my-messages__section">
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 

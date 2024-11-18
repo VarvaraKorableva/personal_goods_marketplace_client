@@ -23,7 +23,7 @@ function CategoryPage({
     
     return(
         <section className='categoryPage-main-container'>
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (

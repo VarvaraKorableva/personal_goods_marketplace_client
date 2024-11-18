@@ -543,23 +543,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 20px);
+
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
 }
 
 .oneConversationPopup__textarea {
   border-radius: 10px;
   padding: 10px;
-  width: 100%;
+  width: calc(100% - 20px);
   min-height: 60px;
-
+  font-size: 16px;
   resize: none;
   
-}
-
-@media screen and (max-width: 500px) {
-  .oneConversationPopup__textarea {
-    width: calc(300px - (30px*2));
-  }
 }
 
 .oneConversationPopup__submit-btn {
@@ -575,6 +573,7 @@
     font-weight: 400;
     font-size: 14px;
     transition: 1s ease;
+
 }
 
 .oneConversationPopup__submit-btn_active {
@@ -591,15 +590,17 @@
   cursor: pointer;
   transition: 2s ease;
   opacity: 1;
+
 }
 
 .oneConversationPopup__oneMessage_user {
   align-self: flex-end;
   width: 50%;
-  
   min-height: fit-content;
-  
-  background-color: rgb(220, 172, 230);
+
+  border: 1px solid #e4e6e7;
+  background-color: transparent;
+
   color:rgba(0, 0, 0, 0.6);
   list-style-type: none;
   margin-bottom: 5px;
@@ -614,20 +615,21 @@
 .oneConversationPopup__oneMessage {
   align-self: flex-start;
   width: 50%;
-  
   min-height: fit-content;
-  
-  background-color: rgb(94, 187, 204);
+
   color:rgba(0, 0, 0, 0.6);
   list-style-type: none;
   border-radius:  0 50px 50px 50px;
+  border: 1px solid rgb(13, 136, 23);
+  background-color: rgb(202, 235, 197);
+  /*background-color: rgb(101, 199, 89);*/
+
   margin-bottom: 5px;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
-
   position: relative;
 }
 
@@ -643,7 +645,7 @@
 }
 
 .oneConversationPopup__userName {
-  color: #fff;
+  color: #1f1f1f;
   margin: 0;
   text-align: start;
   width: 150px;
@@ -652,23 +654,19 @@
   overflow: hidden;
   text-align: start;
   font-weight: 600;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 500px) {
   .oneConversationPopup__userName {
-    font-size: 12px;
+    color: #1f1f1f;
     width: 100px;
   }
 }
 
 .oneConversationPopup__text {
   text-align: start;
-}
-
-@media screen and (max-width: 500px) {
-  .oneConversationPopup__text {
-    font-size: 12px;
-  }
+  font-size: 16px;
 }
  
 .editItemPopup__title {

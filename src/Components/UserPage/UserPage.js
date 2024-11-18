@@ -23,7 +23,7 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     
     return(
         <section className='userPage_main-container'>
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             <div className="userPage-user-info-container">
                 <div className="userPage-user-info-pic"></div>
                 <p className="userPage-user-info-name">{userInfo[0].username}</p>

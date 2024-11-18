@@ -89,7 +89,7 @@ function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToF
 
     return(
         <section className="cardPage-section">
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
 

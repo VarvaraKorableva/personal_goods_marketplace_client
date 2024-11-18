@@ -1,13 +1,14 @@
 import '../../Components/Popups/Popups.css'
 import './ConversationPage.css'
 import React, { useEffect, useState, useRef } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 
 function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
-
+    const navigate = useNavigate()
     const [messageText, setMessageText] = useState('')
     const [isMessageText, setIsMessageText] = useState(false)
     const [messageTextErrorMessage, setMessageTextErrorMessage] = useState('')
@@ -71,8 +72,14 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
         }
     },[isMessageText])
 
-    return(
+    const goBack = () => {
+        navigate(-1);
+    }
 
+    return(
+        <section>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
+        
         <div className="conversationPage__wrapper">
            <div className="conversationPage__info-container">
                <div className="conversationPage__title-container">
@@ -126,6 +133,7 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
             </form>
 
         </div>
+        </section>
     )
 }
 

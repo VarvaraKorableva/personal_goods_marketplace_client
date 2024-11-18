@@ -41,7 +41,7 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
 
     return(
         <div className="myFavoritesPage-main-container">
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             <h3>{translatedContext.myFavoriteTitle}</h3>
             <ul className="myFavoritesPage-listings-container">
                 {favorite.map((item) => (

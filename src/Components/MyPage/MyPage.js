@@ -54,7 +54,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
 
     return(
         <section>
-            <p className='back-btn' onClick={goBack}>← Назад</p>
+            <button className='back-btn' onClick={goBack}>← Назад</button>
             <div className="myPage__container">
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">
