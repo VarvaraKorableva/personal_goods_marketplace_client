@@ -97,8 +97,6 @@ function OneAd({
               <div className="oneAdd__badge-free">{translatedContext.free}</div>  
             }
             
-            <div className="oneAdd__pic-and-info-container">
-              
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
                 {item.images?
                   <img className="oneAdd__main-pic" alt = {item.title} src={item.images[0]}></img>
@@ -106,6 +104,13 @@ function OneAd({
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
               </Link>
+            <div className="oneAdd__pic-and-info-container"> 
+             
+                {isLoggin && (currentUser.user_id !== item.owner_id) && item.reserved ?
+                    <p className="oneAdd__reserved-text">Зарезервировано</p>
+                    :
+                    <></>
+                }
               <div className="oneAdd__text-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
               
@@ -125,8 +130,8 @@ function OneAd({
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
                 <p className="oneAdd__city">{item.city}</p>
-                
-                { 
+
+                {/*
                   isLoggin?
                     (currentUser.user_id !== item.owner_id) ?
                         <div className="oneAdd__container-msg-text">
@@ -140,10 +145,12 @@ function OneAd({
                           </button>
                         </div>
                       :
-                        <></> 
+                        <button className="oneAdd__btn">
+                          Продвинуть объявление
+                        </button> 
                   :
                     <></>
-                }
+                        */}
                 
             </div>
             </div>
