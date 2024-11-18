@@ -800,14 +800,15 @@ function adCountDecrement(userId) {
   return (
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
-    <div className='App'>
-      <Header 
+    <Header 
         isLoggin={isLoggin} 
         onAdPopup={handleChoiceOfProductOrServicePopupClick}
         unreadbleMessages={unreadbleMessages}
         getUnreadbleMessages={getUnreadbleMessages}
         onOpenBurgerMenuPopup={openBurgerMenuPopup}
-      />
+    />
+
+    <div className='App'>
 
       <Routes>
         <Route
@@ -1125,11 +1126,8 @@ function adCountDecrement(userId) {
       <Preloader 
         isLoading={isLoading}
       />
-
-      <Footer handleLogout={handleLogout}></Footer>
-      
-
     </div>
+    <Footer handleLogout={handleLogout}></Footer>
     </CurrentUserContext.Provider>  
     </LanguageProvider>
   );

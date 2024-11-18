@@ -432,7 +432,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   
 return (
     <section className="addAdPage__section">
-      <p className='back-btn' onClick={goBack}>← Назад</p>
+      <button className='back-btn' onClick={goBack}>← Назад</button>
       <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
       <form 
         ref={formRef}

@@ -2,20 +2,25 @@
   text-align: center;
   background-color: #fff;
   min-height: 100vh;
+  max-width: 880px;
+  margin: auto;
 }
 
 .back-btn {
   cursor: pointer;
   text-align: start;
-  
+  align-self: flex-start;
+  border: none;
+  background-color: transparent;
   font-size: 12px;
   padding: 10px;
   padding-right: 0;
-  max-width: 320px;
+  max-width: 800px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .back-btn:hover {
