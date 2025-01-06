@@ -154,12 +154,13 @@ function App() {
 
       closeLoading();
       setIsPageItemsLoading(false)
+      window.dispatchEvent(new Event('resize'));
     } catch (err) {
       console.log(err);
       closeLoading();
     }
   }
-
+/*
   const handleScroll = () => {
     const bottom = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
       === Math.max(document.documentElement.scrollTop + window.innerHeight, document.body.scrollTop + window.innerHeight);
@@ -168,15 +169,26 @@ function App() {
       setIsPageItemsLoading(true);
       setPage(prevPage => prevPage + 1);
     }
-  };
+  };*/
 
-  const handleTouchScroll = () => {
+  const handleScroll = () => {
+    const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
+  
+    if (bottom && !isPageItemsLoading && lastFourtyItems.length < totalCountOfAds) {
+      setIsPageItemsLoading(true);
+      setPage(prevPage => prevPage + 1);
+    }
+  };
+  
+
+  const handleTouchScroll = (e) => {
+    e.preventDefault();
     handleScroll();
   };
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchmove', handleTouchScroll);
+    window.addEventListener('touchmove', handleTouchScroll, { passive: false });
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchmove', handleTouchScroll);
