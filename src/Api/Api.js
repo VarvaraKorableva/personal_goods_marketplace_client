@@ -153,17 +153,19 @@ export const getUserById = (user_id) => {
       .then(checkResponse) 
 };
 
-export const getAllItems = () => {
-  return fetch(`${BASE_URL}/items/all`, {
+export const getAllItems = ({ page = 1, limit = 20 }) => {
+    console.log(limit)
+    return fetch(`${BASE_URL}/items/all/${page}/${limit}`, {
       credentials: 'include',
       method: "GET",
       headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
       },
-  })
-      .then(checkResponse) 
-};
+    })
+    .then(checkResponse);
+  };
+  
 
 export const deleteItem = (item_id) => {
   return fetch(`${BASE_URL}/items/${item_id}`, {

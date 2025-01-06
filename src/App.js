@@ -135,7 +135,21 @@ function App() {
       closeLoading()
     }
   }
-
+  async function getAllItems(page = 1, limit = 20) {
+    openLoading();
+    try {
+      const res = await Api.getAllItems({ page, limit });
+      setLastFoutryItems(res.result);
+      setItemsAfterSearch(res.result);
+      setTotalCountOfAds(res.totalCount);
+      
+      closeLoading();
+    } catch (err) {
+      console.log(err);
+      closeLoading();
+    }
+  }
+/*
   async function getAllItems() {
     openLoading()
     try {
@@ -144,17 +158,11 @@ function App() {
       setItemsAfterSearch(res.result) 
       setTotalCountOfAds(res.totalCount)
       closeLoading() 
-    /*
-      const jsonString = JSON.stringify(res);
-      const sizeInBytes = new TextEncoder().encode(jsonString).length;
-      const sizeInKB = sizeInBytes / 1024;
-
-      console.log(`Response size: ${sizeInKB.toFixed(2)} KB`);*/
     } catch (err) {
       console.log(err);
       closeLoading()
     }
-  }
+  }*/ 
 
   async function getItemsByCategoryCategoryId(category_id) {
     openLoading()
@@ -185,6 +193,7 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getAllItems()
+    
     //getUnreadbleMessages(userId)
   },[])
   
