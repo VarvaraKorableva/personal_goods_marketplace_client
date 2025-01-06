@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -154,8 +154,7 @@ export const getUserById = (user_id) => {
 };
 
 export const getAllItems = ({ page = 1, limit = 20 }) => {
-    console.log(limit)
-    return fetch(`${BASE_URL}/items/all/${page}/${limit}`, {
+    return fetch(`${BASE_URL}/items/all/${page.page}/${limit}`, {
       credentials: 'include',
       method: "GET",
       headers: {

@@ -70,6 +70,9 @@ function App() {
   const [isLoginError, setIsLoginError] = React.useState(false)
   const [isRegError, setIsRegError] = React.useState(false)
 
+  const [page, setPage] = React.useState(1);
+  const [isPageItemsLoading, setIsPageItemsLoading] = React.useState(false);
+
   //for messages 
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('')
@@ -139,30 +142,41 @@ function App() {
     openLoading();
     try {
       const res = await Api.getAllItems({ page, limit });
-      setLastFoutryItems(res.result);
-      setItemsAfterSearch(res.result);
-      setTotalCountOfAds(res.totalCount);
-      
+      if(page == 1) {
+        setTotalCountOfAds(res.totalCount);
+        setLastFoutryItems(res.result);
+        setItemsAfterSearch(res.result)
+      }
+      else {
+        setLastFoutryItems(prevItems => [...prevItems, ...res.result]);
+        setItemsAfterSearch(prevItems => [...prevItems, ...res.result]);
+      }
+
       closeLoading();
+      setIsPageItemsLoading(false)
     } catch (err) {
       console.log(err);
       closeLoading();
     }
   }
-/*
-  async function getAllItems() {
-    openLoading()
-    try {
-      const res = await Api.getAllItems();
-      setLastFoutryItems(res.result)
-      setItemsAfterSearch(res.result) 
-      setTotalCountOfAds(res.totalCount)
-      closeLoading() 
-    } catch (err) {
-      console.log(err);
-      closeLoading()
+
+  const handleScroll = () => {
+    const bottom = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+      === Math.max(document.documentElement.scrollTop + window.innerHeight, document.body.scrollTop + window.innerHeight);
+  
+    if (bottom && !isPageItemsLoading && lastFourtyItems.length < totalCountOfAds) {
+      setIsPageItemsLoading(true);
+      setPage(page + 1);
+      
     }
-  }*/ 
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
 
   async function getItemsByCategoryCategoryId(category_id) {
     openLoading()
@@ -436,7 +450,6 @@ function adCountDecrement(userId) {
     Api.getMyFavorites(favorite_collector_id)
     .then((res) => {
       setFovorite(res)
-      console.log(res)
       const favoriteItemsResult = lastFourtyItems.filter(item =>
       res.some(favoriteItem => favoriteItem.item_id === item.item_id) ////из всего всего аррея ищится избранное а в аррее нет тех кто делитед тру
       );
@@ -888,6 +901,8 @@ function adCountDecrement(userId) {
               resetAllfilters={resetAllfilters}
 
               getAllItems={getAllItems}
+              page={page}
+              isPageItemsLoading={isPageItemsLoading}
             />
           }
         />

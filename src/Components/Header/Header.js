@@ -6,8 +6,6 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 
 function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages, onOpenBurgerMenuPopup}) {
-  console.log('unreadbleMessages', unreadbleMessages)
-  
 const currentUser = React.useContext(CurrentUserContext)
 
 const userId = currentUser.user_id
