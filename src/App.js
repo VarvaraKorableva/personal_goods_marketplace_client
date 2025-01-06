@@ -166,15 +166,20 @@ function App() {
   
     if (bottom && !isPageItemsLoading && lastFourtyItems.length < totalCountOfAds) {
       setIsPageItemsLoading(true);
-      setPage(page + 1);
-      
+      setPage(prevPage => prevPage + 1);
     }
+  };
+
+  const handleTouchScroll = () => {
+    handleScroll();
   };
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('touchmove', handleTouchScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchmove', handleTouchScroll);
     };
   }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
 
