@@ -181,14 +181,13 @@ function App() {
   };
   
 
-  const handleTouchScroll = (e) => {
-    e.preventDefault();
+  const handleTouchScroll = () => {
     handleScroll();
   };
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchmove', handleTouchScroll, { passive: false });
+    window.addEventListener('touchmove', handleTouchScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchmove', handleTouchScroll);
