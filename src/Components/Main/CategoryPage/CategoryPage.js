@@ -5,6 +5,7 @@ import Category from '../Сategory/Сategory'
 //import CategorySearchEngine from '../CategorySearchEngine/CategorySearchEngine'
 //<CategorySearchEngine/>
 import './CategoryPage.css'
+import BackBtn from '../../../UK-kit/BackBtn'
 
 function CategoryPage({
     favorite, 
@@ -23,7 +24,7 @@ function CategoryPage({
     
     return(
         <section className='categoryPage-main-container'>
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             
             <ul className='categoryPage-categories-container'>
                 {categoriesToRender.map((subCategory) => (

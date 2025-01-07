@@ -6,6 +6,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import {cities} from '../../const/Cities/cities'
+import BackBtn from '../../UK-kit/BackBtn'
 
 function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -413,7 +414,7 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
 return (
     <section className="addAdPage__section">
-    <button className='back-btn' onClick={goBack}>← Назад</button>
+    <BackBtn/>
     <h2 className="addAdPage__title">{translatedContext.adANewService}</h2>
     <form 
       ref={formRef}

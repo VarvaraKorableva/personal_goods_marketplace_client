@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import React from 'react'
 import OneAd from '../OneAd/OneAd'
 import './UserPage.css'
+import BackBtn from '../../UK-kit/BackBtn'
 
 function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite, openFirstMessagePopup}) {
     
@@ -23,7 +24,7 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
     
     return(
         <section className='userPage_main-container'>
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             <div className="userPage-user-info-container">
                 <div className="userPage-user-info-pic"></div>
                 <p className="userPage-user-info-name">{userInfo[0].username}</p>

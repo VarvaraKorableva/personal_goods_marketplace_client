@@ -6,6 +6,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
 import * as Api from '../../Api/Api'
+import BackBtn from '../../UK-kit/BackBtn'
 
 import './MyPage.css'
 
@@ -54,7 +55,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
 
     return(
         <section>
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             <div className="myPage__container">
                 <div className="myPage__info-container">
                     <div className="myPage__avatar-container">

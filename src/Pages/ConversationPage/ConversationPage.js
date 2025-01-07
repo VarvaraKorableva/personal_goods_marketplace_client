@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
+import BackBtn from '../../UK-kit/BackBtn'
 
 function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
@@ -78,8 +79,7 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
 
     return(
         <section>
-            <button className='back-btn' onClick={goBack}>← Назад</button>
-        
+        <BackBtn/>
         <div className="conversationPage__wrapper">
            <div className="conversationPage__info-container">
                <div className="conversationPage__title-container">

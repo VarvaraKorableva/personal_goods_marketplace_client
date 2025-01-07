@@ -7,6 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import { cities } from '../../const/Cities/cities'
 import { conditions } from '../../const/Сonditions/Сonditions'
+import BackBtn from '../../UK-kit/BackBtn'
 
 function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -432,7 +433,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
   
 return (
     <section className="addAdPage__section">
-      <button className='back-btn' onClick={goBack}>← Назад</button>
+      <BackBtn/>
       <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
       <form 
         ref={formRef}

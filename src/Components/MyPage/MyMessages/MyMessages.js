@@ -4,6 +4,7 @@ import Message from './Message'
 import './MyMessages.css'
 import * as Api from '../../../Api/Api'
 import React from 'react'
+import BackBtn from '../../../UK-kit/BackBtn'
 
 function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) {
     const [lastMessages, setLastMessages] = React.useState({})
@@ -41,7 +42,7 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
 
     return(
         <section className="my-messages__section">
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 

@@ -8,6 +8,7 @@ import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
 import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
+import BackBtn from '../../UK-kit/BackBtn'
 
 function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
@@ -89,7 +90,7 @@ function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToF
 
     return(
         <section className="cardPage-section">
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             <div className="cardPage-main-container">
                 <div className="cardPage-container">
 

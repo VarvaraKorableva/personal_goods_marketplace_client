@@ -6,7 +6,7 @@ import "./MyFavoritesPage.css"
 import {Link} from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/favoritesPageData'
-
+import BackBtn from '../../UK-kit/BackBtn'
 
 function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
 
@@ -41,7 +41,7 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
 
     return(
         <div className="myFavoritesPage-main-container">
-            <button className='back-btn' onClick={goBack}>← Назад</button>
+            <BackBtn/>
             <h3>{translatedContext.myFavoriteTitle}</h3>
             <ul className="myFavoritesPage-listings-container">
                 {favorite.map((item) => (
