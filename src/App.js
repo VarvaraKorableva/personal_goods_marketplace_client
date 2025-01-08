@@ -709,7 +709,7 @@ function adCountDecrement(userId) {
       getMyFavorites([])
       navigate(`/`)
   }
-///////////
+
 function updatePassword(email, newPassword) {
   Api.updatePassword(email, newPassword)
   .then((res) => {
