@@ -6,21 +6,18 @@ import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../../Components/Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function PasswordRecoveryCodeRequestPage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
+function PasswordRecoveryCodeRequestPage({updatePassword, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
 
 const [email, setEmail] = React.useState('')
 const [code, setCode] = React.useState('')
-const [username, setName] = React.useState('')
-const [password, setPassword] = React.useState('')
+const [newPassword, setPassword] = React.useState('')
 
 const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
 const [errorCodeMessage, setErrorCodeMessage] = React.useState('')
 const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
-const [errorNameMessage, setErrorNameMessage] = React.useState('')
 
 const [errorEmail, setErrorEmail] = React.useState(true)
 const [errorCode, setErrorCode] = React.useState(true)
-const [errorName, setErrorName] = React.useState(true)
 const [errorPassword, setErrorPassword] = React.useState(true)
 
 const [isValid, setIsValid] = React.useState(false);
@@ -42,29 +39,25 @@ const { en, rus, hebrew } = choose;
 const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.alreadyRegisteredError)  
 
 //регистрация 
-function handleRegSubmit(e) {
+function fake(e) {
   e.preventDefault()
+  //создать функцию смены пароля
 
-  onRegister({
-    username,
-    email,
-    password
+  updatePassword({
+    email, newPassword
   })
 
   setIsRegErrorEmailChanging(false)
   setEmail('')
   setCode('')
   setPassword('')
-  setName('')
 
   setErrorEmailMessage('')
   setErrorCodeMessage('')
   setErrorPasswordMessage('')
-  setErrorNameMessage('')
 
   setErrorEmail(true)
   setErrorCode(true)
-  setErrorName(true)
   setErrorPassword(true) 
 
   setIsValid(false)
@@ -120,31 +113,6 @@ function handleRegSubmit(e) {
     setEmail(e.target.value)
   }
 
-  const handleNameChange = (e) => {
-
-    if (!e.target.value.length) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameFieldMustBeFilledIn)
-      setErrorName(true);
-
-     } else if (e.target.value.length < 2) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameMustBeAtLeastCharactersLong)
-      setErrorName(true);
-
-     } else if (!e.target.value) {
-      setErrorNameMessage(translatedContext.mistakesName.theUsernameShouldOnlyContainLatinLettersCyrillicLetters)
-      setErrorName(true);
-
-     } else if (e.target.value.length > 30) {
-      setErrorNameMessage(translatedContext.mistakesName.usernameMustBeNoMoreThan)
-      setErrorName(true);
-
-     } else {
-      setErrorNameMessage('')
-      setErrorName(false);
-      setName(e.target.value[0].toUpperCase() + e.target.value.slice(1));
-     }
-  }
-
   const handlePasswordChange = (e) => {
     if (!e.target.value.length) {
       setErrorPasswordMessage(translatedContext.mistakesPassword.passwordMustBeFilledIn);
@@ -172,12 +140,12 @@ function handleRegSubmit(e) {
 
 
   React.useEffect(() => {
-    if (errorName || errorPassword) {
+    if (errorPassword) {
       setIsValid(false)
     } else {
       setIsValid(true)
     }
-  }, [errorName, errorPassword])
+  }, [errorPassword])
 
   return (
     <section className='register'>
@@ -188,31 +156,18 @@ function handleRegSubmit(e) {
         {isEmailConfirmed?
               <form 
                 className='form'
-                onSubmit={handleRegSubmit}
+                onSubmit={fake}
               >
-                <Heading>{translatedContext.greetings}</Heading>
+                <Heading>Восстановление пароля</Heading>
                 
-                <p className='register__title-stage'>{translatedContext.secondStepTitle}</p>
-                <p className='register__title-stage'>{translatedContext.emailIsConfirmTitle}</p>
                 <fieldset className='fieldset'>
                   <label className='register__inputname'>{translatedContext.email}
                     <div className='register__input-email'>{email}</div>
                   </label>
                   <span className='register__inputmistake'></span> 
 
-                  <label className='register__inputname'>{translatedContext.name}<span className='register__inputname-span'>*</span>
-                    <input className='register__input'
-                      required
-                      name="name"
-                      type="text"
-                      autoComplete="on"
-                      defaultValue=""
-                      onChange={handleNameChange}
-                    />
-                  </label>
-                  <span className='register__inputmistake'>{errorNameMessage}</span>  
-        
-                  <label className='register__inputname'>{translatedContext.password}<span className='register__inputname-span'>*</span>
+
+                  <p className='register__title-stage'>Введите новый пароль</p>
                     <input className='register__input'
                       required
                       name="password"
@@ -223,7 +178,7 @@ function handleRegSubmit(e) {
                       defaultValue=""
                       onChange={handlePasswordChange}
                     />
-                  </label>
+                  
                   <span className='register__inputmistake'>{errorPasswordMessage}</span>
                 </fieldset>
         
@@ -239,7 +194,7 @@ function handleRegSubmit(e) {
                   type="submit"
                   className={`'register__btn' ${isValid? 'register__btn_active': 'register__btn'}`}
                   disabled={!isValid}>
-                    {translatedContext.button}
+                    Изменить пароль
                 </button>
 
                 <div className='register__wrapper'>

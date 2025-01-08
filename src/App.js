@@ -709,7 +709,32 @@ function adCountDecrement(userId) {
       getMyFavorites([])
       navigate(`/`)
   }
-
+///////////
+function updatePassword(email, newPassword) {
+  Api.updatePassword(email, newPassword)
+  .then((res) => {
+    console.log(res)
+      setIsLoginError(false)
+      setIsLoggin(true)
+      localStorage.setItem('isLogin', true)
+      setCurrentUser(res)
+      localStorage.setItem('user', res)
+      const favorite_collector_id = res.user_id
+      getMyFavorites(favorite_collector_id)
+      navigate(`/`)
+      getUnreadbleMessages(res.user_id)
+      closeLoading()
+  })
+  .catch((err) => {
+    closeLoading()
+      if(err == 401) {
+        setIsLoginError(true)
+        setTimeout(function(){
+          setIsLoginError(false)
+        }, 3000)
+      }
+  })
+}
   function handleUpdateIsReserved(item_id) {
     Api.updateIsReserved(item_id, userId)
     .then((res) => {
@@ -901,7 +926,8 @@ function adCountDecrement(userId) {
               isVerificationCodeSentMessage={isVerificationCodeSentMessage}
               verifyCode={verifyCode}
               isEmailConfirmed={isEmailConfirmed}
-              onRegister={handleRegSubmit}
+
+              updatePassword={updatePassword}
             />
             }>
           </Route>
