@@ -31,6 +31,7 @@ import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessag
 import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup'
 import AddServicesPage from './Pages/AddServicesPage/AddServicesPage'
 import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
+import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage'
 
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
@@ -878,6 +879,13 @@ function adCountDecrement(userId) {
               isLoginError={isLoginError}
               isLoading={isLoading}
             />
+          }>
+        </Route>
+
+        <Route
+          path="/recover-password"
+          element={
+            <RecoverPasswordPage onSendBtn={sendVerificationCode}/>
           }>
         </Route>
 

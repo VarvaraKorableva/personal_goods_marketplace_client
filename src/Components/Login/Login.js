@@ -131,6 +131,11 @@ const { language } = React.useContext(LanguageContext)
               <Link className='login__entrylink' to="/signup-first-stage"> {translatedContext.signUp}</Link>
             </p>
           </div>
+          <div className='login__wrapper'>
+            <p className='login__subtitle'>Забыли пароль?
+              <Link className='login__entrylink' to="/recover-password">Восстановить пароль</Link>
+            </p>
+          </div>
         </form>
       }
     </section>
