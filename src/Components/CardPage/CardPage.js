@@ -90,8 +90,9 @@ function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToF
 
     return(
         <section className="cardPage-section">
-            <BackBtn/>
+            
             <div className="cardPage-main-container">
+                <BackBtn/>
                 <div className="cardPage-container">
 
                 <div className="cardPage__main-pic-wrapper">

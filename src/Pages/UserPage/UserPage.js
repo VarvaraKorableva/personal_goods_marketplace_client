@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import React from 'react'
-import OneAd from '../OneAd/OneAd'
+import OneAd from '../../Components/OneAd/OneAd'
 import './UserPage.css'
 import BackBtn from '../../UK-kit/BackBtn'
 

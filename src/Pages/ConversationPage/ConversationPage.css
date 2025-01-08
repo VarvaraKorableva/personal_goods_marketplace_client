@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: start;
     align-items: flex-start;
-    max-width: 800px;
     margin: auto;
     padding-bottom: 250px;
     padding-left: 10px;
@@ -13,6 +12,8 @@
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(0, 0, 0, 0.15);
     position: relative;
+    width: calc(100% - 10px);
+    box-sizing: border-box;
 }
 
 .conversationPage__price {

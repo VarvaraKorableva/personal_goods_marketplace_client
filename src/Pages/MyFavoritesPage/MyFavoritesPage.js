@@ -64,17 +64,3 @@ function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFou
 }
 
 export default MyFavoritesPage;
-/* 
-if(favorite_collector_id) {
-        React.useEffect(() => {
-        const favoriteItemsResult = lastFourtyItems.filter(item =>
-          favorite.some(favoriteItem => favoriteItem.item_id === item.item_id)
-        );
-        setFavoriteItems(favoriteItemsResult);
-      }, [lastFourtyItems, favorite]);
-    
-    React.useEffect(() => {
-        getMyFavorites(favorite_collector_id)
-    },[favorite_collector_id])
-}
-*/

@@ -79,8 +79,9 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
 
     return(
         <section>
-        <BackBtn/>
+        
         <div className="conversationPage__wrapper">
+            <BackBtn/>
            <div className="conversationPage__info-container">
                <div className="conversationPage__title-container">
                 <h3 className="conversationPage__title">{itemTitle.title}</h3>
