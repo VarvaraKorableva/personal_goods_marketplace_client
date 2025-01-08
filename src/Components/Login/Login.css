@@ -68,6 +68,8 @@
      flex-direction: column;
      padding: 0;
      border: none;
+
+     border: 1px solid red;
    }
 
    .login__inputname {

@@ -1,12 +1,12 @@
 import React from 'react'
-import './Registration.css'
+
 import { Link } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
-import Preloader from '../Preloader/Preloader'
+import Preloader from '../../Components/Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function RegistrationFirstStage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
+function PasswordRecoveryCodeRequestPage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
 
 const [email, setEmail] = React.useState('')
 const [code, setCode] = React.useState('')
@@ -191,6 +191,7 @@ function handleRegSubmit(e) {
                 onSubmit={handleRegSubmit}
               >
                 <Heading>{translatedContext.greetings}</Heading>
+                
                 <p className='register__title-stage'>{translatedContext.secondStepTitle}</p>
                 <p className='register__title-stage'>{translatedContext.emailIsConfirmTitle}</p>
                 <fieldset className='fieldset'>
@@ -248,15 +249,14 @@ function handleRegSubmit(e) {
             </form>
         :
           <>
-            <Heading>{translatedContext.greetings}</Heading>
-            <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
-
+            
+            
             {
               isVerificationCodeSent?
                 <form 
                   className='form'
                   onSubmit={onVerifyCode}>
-
+                  <Heading>Восстановление пароля</Heading>
                   <fieldset className='fieldset'>
                     <p>Код отправлен на электронную почту {email}</p>
                     <label className='register__inputname'>{translatedContext.verificationCodeLabel}
@@ -290,9 +290,10 @@ function handleRegSubmit(e) {
                 <form 
                   className='form' 
                   onSubmit={handleSubmit}>
+                  <Heading>Восстановление пароля</Heading>
 
                   <fieldset className='fieldset'>
-                    <label className='register__inputname'>{translatedContext.verificationEmailLabel}
+                    <label className='register__inputname'>Введите email, на него будет отправлен код для восстановления пароля
                     <input className='register__input'
                       required
                       name="email"
@@ -316,11 +317,6 @@ function handleRegSubmit(e) {
                 </form>
             }
 
-          
-          <div className='register__wrapper'>
-            <p className='register__subtitle'>{translatedContext.question}
-            <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
-          </div>
 
           </>
         }
@@ -330,4 +326,4 @@ function handleRegSubmit(e) {
   );
 }
 
-export default RegistrationFirstStage;
+export default PasswordRecoveryCodeRequestPage

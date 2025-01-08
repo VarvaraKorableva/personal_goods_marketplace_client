@@ -32,6 +32,7 @@ import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup
 import AddServicesPage from './Pages/AddServicesPage/AddServicesPage'
 import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
 import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage'
+import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequestPage/PasswordRecoveryCodeRequestPage'
 
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
@@ -890,6 +891,22 @@ function adCountDecrement(userId) {
         </Route>
 
         <Route
+          path="/password-recovery-code-request"
+          element={
+            <PasswordRecoveryCodeRequestPage   
+              onSendBtn={sendVerificationCode}
+              isRegError={isRegError}
+              isLoading={isLoading}
+              isVerificationCodeSent={isVerificationCodeSent}
+              isVerificationCodeSentMessage={isVerificationCodeSentMessage}
+              verifyCode={verifyCode}
+              isEmailConfirmed={isEmailConfirmed}
+              onRegister={handleRegSubmit}
+            />
+            }>
+          </Route>
+
+          <Route
           path="/"
           element={
             <Main 

@@ -4,6 +4,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Login'
 import { Link } from 'react-router-dom'
 import Preloader from '../../Components/Preloader/Preloader'
+import Heading from '../../UK-kit/Heading/Heading'
 
 function Login({ isLoginError, onLogin, isLoading }) {
 
@@ -87,10 +88,9 @@ const { language } = React.useContext(LanguageContext)
       {isLoading? 
         <Preloader/>
       :
-      <form className='login__form' onSubmit={handleSubmit}>
-        <h2 className='login__title'>{translatedContext.title}</h2>
-
-        <fieldset className='login__fieldset'>
+      <form className='form' onSubmit={handleSubmit}>
+        <Heading>{translatedContext.title}</Heading>
+        <fieldset className='fieldset'>
           <label  className='login__inputname'>{translatedContext.email}
             <input className='login__input'
                  pattern="^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$"
@@ -133,7 +133,7 @@ const { language } = React.useContext(LanguageContext)
           </div>
           <div className='login__wrapper'>
             <p className='login__subtitle'>Забыли пароль?
-              <Link className='login__entrylink' to="/recover-password">Восстановить пароль</Link>
+              <Link className='login__entrylink' to="/password-recovery-code-request">Восстановить пароль</Link>
             </p>
           </div>
         </form>
