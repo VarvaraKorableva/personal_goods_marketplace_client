@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
 import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
@@ -125,6 +125,11 @@ function App() {
   }, [userId])
   
   const navigate = useNavigate()
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   async function getCategory() {
     openLoading()
@@ -151,7 +156,6 @@ function App() {
         setLastFoutryItems(prevItems => [...prevItems, ...res.result]);
         setItemsAfterSearch(prevItems => [...prevItems, ...res.result]);
       }
-
       closeLoading();
       setIsPageItemsLoading(false)
       window.dispatchEvent(new Event('resize'));
@@ -160,16 +164,6 @@ function App() {
       closeLoading();
     }
   }
-/*
-  const handleScroll = () => {
-    const bottom = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
-      === Math.max(document.documentElement.scrollTop + window.innerHeight, document.body.scrollTop + window.innerHeight);
-  
-    if (bottom && !isPageItemsLoading && lastFourtyItems.length < totalCountOfAds) {
-      setIsPageItemsLoading(true);
-      setPage(prevPage => prevPage + 1);
-    }
-  };*/
 
   const handleScroll = () => {
     const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
@@ -223,7 +217,6 @@ function App() {
   React.useEffect(()=>{
     getCategory()
     getAllItems()
-    
     //getUnreadbleMessages(userId)
   },[])
   
