@@ -73,7 +73,7 @@ function Main({
             {itemsAfterSearch.length?
 
             (searchByKeyWord.length?
-            <h2 className='main__title'>Объявления по запросу "{searchByKeyWord}"</h2>
+            <h2 className='main__title'>Объявления по запросу «{searchByKeyWord}»</h2>
             :
             <h2 className='main__title'>Количество объявлений на сайте {totalCountOfAds}</h2>
             )

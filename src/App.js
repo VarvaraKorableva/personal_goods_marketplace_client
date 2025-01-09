@@ -37,9 +37,8 @@ import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequest
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
-  const [isLoggin, setIsLoggin] = React.useState(false)
-  const [currentUser, setCurrentUser] = React.useState({})
-
+  const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
+  const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
@@ -118,7 +117,6 @@ function App() {
 
   const addAds = () => setLimit(limit + 3);
   const userId = currentUser.user_id
-
   useEffect(() => {
     currentUser?
       setAdCount(currentUser.ad_count)
@@ -176,7 +174,6 @@ function App() {
     }
   };
   
-
   const handleTouchScroll = () => {
     handleScroll();
   };
@@ -254,7 +251,7 @@ function App() {
       setIsRegError(false)
       setCurrentUser(data.user)
       
-      localStorage.setItem('user', data.user)
+      localStorage.setItem('user', JSON.stringify(data.user))
       setMyAds([]);
       setIsLoggin(true)
       localStorage.setItem('isLogin', true)
@@ -281,7 +278,7 @@ function App() {
       localStorage.setItem('isLogin', true)
       setCurrentUser(res.user)
       
-      localStorage.setItem('user', res.user)
+      localStorage.setItem('user', JSON.stringify(res.user))
       const favorite_collector_id = res.user.user_id
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
@@ -718,7 +715,7 @@ function updatePassword(email, newPassword) {
       setIsLoggin(true)
       localStorage.setItem('isLogin', true)
       setCurrentUser(res)
-      localStorage.setItem('user', res)
+      localStorage.setItem('user', JSON.stringify(res))
       const favorite_collector_id = res.user_id
       getMyFavorites(favorite_collector_id)
       navigate(`/`)
