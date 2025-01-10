@@ -6,28 +6,49 @@
     align-items: center;
    }
    
-   .register__form {
-     width: 396px;
-     margin: auto;
-     
-     display: flex;
-     flex-direction: column;
-   }
-   
-   @media screen and (max-width: 500px) {
-     .register__form  {
-       width: 300px;
-       margin-bottom: 30px;
-     }
-   }
-   
-   @media screen and (max-width: 450px) {
-     .register__form  {
-       width: 260px;
-     }
-   }
+.register__form {
+    width: 396px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
 
-   .registrationFirstStage__form {
+.register__agreement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.register__agreement__link {
+    color: #1f1f1f;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.register__agreement__input {
+  border: 1px solid #1f1f1f;
+  border-radius: 8px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+}  
+   
+@media screen and (max-width: 500px) {
+    .register__form  {
+      width: 300px;
+      margin-bottom: 30px;
+    }
+}
+   
+@media screen and (max-width: 450px) {
+    .register__form  {
+      width: 260px;
+    }
+}
+
+.registrationFirstStage__form {
     width: 396px;
     margin: auto;
     margin-top: 0;
@@ -101,7 +122,7 @@
     font-weight: 500;
     color: black;
     margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     width: 396px;
   }
 

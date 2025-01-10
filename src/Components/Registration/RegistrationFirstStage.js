@@ -12,16 +12,19 @@ const [email, setEmail] = React.useState('')
 const [code, setCode] = React.useState('')
 const [username, setName] = React.useState('')
 const [password, setPassword] = React.useState('')
+const [isAgreement, setIsAgreement] = React.useState(false)
 
 const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
 const [errorCodeMessage, setErrorCodeMessage] = React.useState('')
 const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
 const [errorNameMessage, setErrorNameMessage] = React.useState('')
+const [errorAgreementMessage, setErrorAgreementMessage] = React.useState('')
 
 const [errorEmail, setErrorEmail] = React.useState(true)
 const [errorCode, setErrorCode] = React.useState(true)
 const [errorName, setErrorName] = React.useState(true)
 const [errorPassword, setErrorPassword] = React.useState(true)
+const [errorAgreement, setErrorAgreement] = React.useState(true)
 
 const [isValid, setIsValid] = React.useState(false);
 
@@ -61,11 +64,13 @@ function handleRegSubmit(e) {
   setErrorCodeMessage('')
   setErrorPasswordMessage('')
   setErrorNameMessage('')
+  setErrorAgreementMessage('')
 
   setErrorEmail(true)
   setErrorCode(true)
   setErrorName(true)
   setErrorPassword(true) 
+  setErrorAgreement(true)
 
   setIsValid(false)
 }
@@ -162,6 +167,17 @@ function handleRegSubmit(e) {
     setPassword(e.target.value);
   };
 
+  const handleAgreementChange = (e) => {
+  if(e.target.checked) {
+    setIsAgreement(e.target.checked) 
+    setErrorAgreement(false)
+  } else {
+    setIsAgreement(e.target.checked) 
+    setErrorAgreement(true)
+    setErrorAgreementMessage("Укажите, что вы согласны с правилами размещения объявлений")
+  }
+  }
+
   React.useEffect(() => {
     if (errorEmail || errorCode) {
       setIsValid(false)
@@ -172,12 +188,12 @@ function handleRegSubmit(e) {
 
 
   React.useEffect(() => {
-    if (errorName || errorPassword) {
+    if (errorName || errorPassword || errorAgreement) {
       setIsValid(false)
     } else {
       setIsValid(true)
     }
-  }, [errorName, errorPassword])
+  }, [errorName, errorPassword, errorAgreement])
 
   return (
     <section className='register'>
@@ -224,6 +240,21 @@ function handleRegSubmit(e) {
                     />
                   </label>
                   <span className='register__inputmistake'>{errorPasswordMessage}</span>
+
+                  
+                  <div className="register__agreement">
+                      <input
+                        type="checkbox"
+                        name="termsAgreement"
+                        required
+                        className="register__agreement__input"
+                        onChange={handleAgreementChange}
+                      />
+                         
+                      <Link to="/publication-rules" target="_blank" className="register__agreement__link">Согласие с правилами размещения объявлений</Link>
+                      
+                  </div>
+                  <span className='register__inputmistake'>{errorAgreementMessage}</span>
                 </fieldset>
         
                 {isRegError && !isRegErrorEmailChanging?
