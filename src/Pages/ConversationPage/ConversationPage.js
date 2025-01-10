@@ -1,7 +1,6 @@
 import '../../Components/Popups/Popups.css'
 import './ConversationPage.css'
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 import BackBtn from '../../UK-kit/BackBtn'
@@ -9,7 +8,6 @@ import BackBtn from '../../UK-kit/BackBtn'
 function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
-    const navigate = useNavigate()
     const [messageText, setMessageText] = useState('')
     const [isMessageText, setIsMessageText] = useState(false)
     const [messageTextErrorMessage, setMessageTextErrorMessage] = useState('')
@@ -72,10 +70,6 @@ function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved,
             setIsValid(false)
         }
     },[isMessageText])
-
-    const goBack = () => {
-        navigate(-1);
-    }
 
     return(
         <section>

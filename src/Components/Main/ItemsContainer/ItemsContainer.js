@@ -1,6 +1,5 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
-import testData from '../../../const/testData'
 
 function ItemsContainer({
     isLoggin, itemsAfterSearch, 

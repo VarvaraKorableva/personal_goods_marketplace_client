@@ -1,12 +1,10 @@
 import React from 'react'
-//import { useParams } from 'react-router-dom'
 import './OneAd.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import { Link } from 'react-router-dom'
 import noPictures from '../../images/nopictures.png'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
-import { TbEdit } from "react-icons/tb";
 
 function OneAd({
     isLoggin, item, getItemById, 

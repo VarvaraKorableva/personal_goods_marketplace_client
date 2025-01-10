@@ -563,9 +563,3 @@ export const updatePassword = (email, newPassword) => {
     })
     .then(checkResponse);
 };
-/*
-/updatepassword
-item_router.patch('/updatePrice/:item_id', updatePrice)
-item_router.patch('/updateDescription/:item_id', updateDescription)
-item_router.patch('/updateCondition/:item_id', updateCondition)
-*/

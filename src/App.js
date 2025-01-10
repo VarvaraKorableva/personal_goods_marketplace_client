@@ -1096,18 +1096,14 @@ function updatePassword(email, newPassword) {
                 receiver_id={receiver_idForOneConversationPopup}
                 sender_id={sender_idForOneConversationPopup}
                 item_id={item_idForOneConversationPopup}
-                deleteMyAd={deleteMyAd}
                 openDeletePopup={openDeletePopup}
                 coversations={coversations}
                 userName={userNameForOneConversationPopup}
                 itemTitle={itemTitleForOneConversationPopup}
-        
                 createNewMessage={createNewMessageFromConversationPopup}
                 deleteOneMessage={deleteOneMessage}
-
                 handleUpdateIsReserved={handleUpdateIsReserved}
                 isReserved={isReserved}
-
               />
             </ProtectedRoute>
           }>  
