@@ -10,7 +10,7 @@ import { TbEdit } from "react-icons/tb";
 
 function OneAd({
     isLoggin, item, getItemById, 
-    deleteMyAd, addToFavorites, 
+    openDeletePopup, addToFavorites, 
     deleteFromFavorites, favorite, 
     favoriteItems, openFirstMessagePopup, handleUpdateIsReserved,
 }) {
@@ -50,7 +50,7 @@ function OneAd({
     }
 
     function handleDeleteMyitem() {
-        deleteMyAd(item.item_id)
+      openDeletePopup(item.item_id)
     }
 
     function onUpdateIsReserved() {

@@ -25,6 +25,7 @@ import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 import EditPopup from './Components/Popups/EditPopup/EditPopup'
+import AreYouSurePopup from './Components/Popups/AreYouSurePopup/AreYouSurePopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
@@ -43,6 +44,9 @@ function App() {
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
   const [isEditPopup, setIsEditPopup] = React.useState(false)
+  const [isDeletePopup, setIsDeletePopup] = React.useState(false)
+  const [itemIdDelete, setItemIdDelete] = React.useState(0)
+  
   const [popupMessage, setPopupMessage] = React.useState('')
   const [isOneConversationPopup, setIsOneConversationPopup] = React.useState(false)
   const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
@@ -413,6 +417,7 @@ function adCountDecrement(userId) {
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
       adCountDecrement(userId)
       closeLoading()
+      closeAllPopups()
     })
     .catch((err) => {
       console.log(err)
@@ -665,7 +670,11 @@ function adCountDecrement(userId) {
     setEditPopupName(popupName)
     setPopupEditItemId(popup_item_id)
     setIsEditPopup(true)
+  }
 
+  function openDeletePopup(item_id) {
+    setIsDeletePopup(true)
+    setItemIdDelete(item_id)
   }
 
   function handleAddAdClick(data){
@@ -696,6 +705,7 @@ function adCountDecrement(userId) {
     setIsOneConversationPopup(false)
     setIsBurgerMenuPopup(false)
     setIsEditPopup(false)
+    setIsDeletePopup(false)
   }
 
   function handleLogout() {
@@ -939,7 +949,7 @@ function updatePassword(email, newPassword) {
               lastFourtyItems={lastFourtyItems} //Need, because of search
               totalCountOfAds={totalCountOfAds}
               addToFavorites={addToFavorites}
-              deleteMyAd={deleteMyAd}
+              openDeletePopup={openDeletePopup}
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
@@ -967,7 +977,7 @@ function updatePassword(email, newPassword) {
               chooseCategory={chooseCategory}
               categoriesToRender={categoriesToRender}
               categories={categories}
-              deleteMyAd={deleteMyAd}
+              openDeletePopup={openDeletePopup}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               getItemById={getItemById} 
@@ -998,7 +1008,7 @@ function updatePassword(email, newPassword) {
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
               favoriteItems={favoriteItems}
-              deleteMyAd={deleteMyAd}
+              openDeletePopup={openDeletePopup}
               openFirstMessagePopup={openFirstMessagePopup} 
               openEditPopup={openEditPopup}
             />
@@ -1045,10 +1055,9 @@ function updatePassword(email, newPassword) {
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
                 onAdPopup={handleChoiceOfProductOrServicePopupClick}
-                
                 getMyItems={getMyItems}
                 myAds={myAds}
-                deleteMyAd={deleteMyAd}
+                openDeletePopup={openDeletePopup}
                 handleLogout={handleLogout}
                 isLoggin={isLoggin}
                 getItemById={getItemById}
@@ -1088,6 +1097,7 @@ function updatePassword(email, newPassword) {
                 sender_id={sender_idForOneConversationPopup}
                 item_id={item_idForOneConversationPopup}
                 deleteMyAd={deleteMyAd}
+                openDeletePopup={openDeletePopup}
                 coversations={coversations}
                 userName={userNameForOneConversationPopup}
                 itemTitle={itemTitleForOneConversationPopup}
@@ -1197,7 +1207,13 @@ function updatePassword(email, newPassword) {
         updateDescription={updateDescription}
         updateCondition={updateCondition}
         popupEditItemId={popupEditItemId}
+      />
 
+      <AreYouSurePopup
+        isOpen={isDeletePopup}
+        onClose={closeAllPopups}
+        deleteMyAd={deleteMyAd}
+        itemIdDelete={itemIdDelete}
       />
 
       <Preloader 

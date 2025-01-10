@@ -9,7 +9,7 @@ import BackBtn from '../../../UK-kit/BackBtn'
 
 function CategoryPage({
     favorite, 
-    deleteMyAd, isLoggin,
+    openDeletePopup, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
     favoriteItems, lastFourtyItems,  chooseCategory, 
     categoriesToRender, itemsSecondPageSearch,
@@ -49,7 +49,6 @@ function CategoryPage({
             <ul className='categoryPage-listings-container'>
                 {itemsSecondPageSearch.reverse().map((item) => (
                     <OneAd
-                        
                         key={item.item_id} 
                         lastFourtyItems={lastFourtyItems} 
                         getItemById={getItemById} 
@@ -59,7 +58,7 @@ function CategoryPage({
                         favoriteItems={favoriteItems}
                         isLoggin={isLoggin}
                         item={item}
-                        deleteMyAd={deleteMyAd}
+                        openDeletePopup={openDeletePopup}
                         openFirstMessagePopup={openFirstMessagePopup}
                         handleUpdateIsReserved={handleUpdateIsReserved}
                     />    

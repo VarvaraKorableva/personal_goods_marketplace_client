@@ -10,7 +10,7 @@ import BackBtn from '../../UK-kit/BackBtn'
 
 import './MyPage.css'
 
-function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -86,7 +86,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, deleteMyAd, handleLogo
                             <OneAd 
                                 key={item.item_id} 
                                 item={item} 
-                                deleteMyAd={deleteMyAd} 
+                                openDeletePopup={openDeletePopup} 
                                 isLoggin={isLoggin}
                                 getItemById={getItemById}
 

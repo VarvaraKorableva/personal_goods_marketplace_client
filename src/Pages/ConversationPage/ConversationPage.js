@@ -6,7 +6,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 import BackBtn from '../../UK-kit/BackBtn'
 
-function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
+function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
     const navigate = useNavigate()
@@ -29,8 +29,8 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
         getOneConversation(receiver_id, sender_id, item_id)
     }, [receiver_id, sender_id, item_id])
 
-    function onDeleteMyAd() {
-        deleteMyAd(item_id)
+    function handleDeletePopup() {
+        openDeletePopup(item_id)
     }
 
     function handleCreateNewMessage(e) {
@@ -97,7 +97,7 @@ function ConversationPage({ isReserved, deleteMyAd, handleUpdateIsReserved, getO
                     :
                     <button className="conversationPage__reserved-btn" onClick={onUpdateIsReserved}>Зарезервировать</button>
                     }
-                    <button className="conversationPage__delete-btn" onClick={onDeleteMyAd}>Delete</button>
+                    <button className="conversationPage__delete-btn" onClick={handleDeletePopup}>Delete</button>
                 </div>
               }
            </div>

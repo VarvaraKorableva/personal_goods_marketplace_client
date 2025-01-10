@@ -10,7 +10,7 @@ import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
 import BackBtn from '../../UK-kit/BackBtn'
 
-function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
     //let {favorite_items_id} = useParams();
@@ -55,7 +55,7 @@ function CardPage({ openEditPopup, deleteMyAd, selectedItem, getItemById, addToF
     } 
 
     function hundleDeleteMyAd() {
-        deleteMyAd(selectedItem[0].item_id)
+        openDeletePopup(selectedItem[0].item_id)
     }
 
     function handleAddToFavorites() {

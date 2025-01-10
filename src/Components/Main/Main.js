@@ -10,7 +10,7 @@ function Main({
     itemsAfterSearch, favorite, getAllItems,
     categories, onChooseCategory, lastFourtyItems, totalCountOfAds,
     getItemById, addToFavorites,
-    deleteFromFavorites, favoriteItems, deleteMyAd, 
+    deleteFromFavorites, favoriteItems, openDeletePopup, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange,
     resetAllfilters, page, isPageItemsLoading}) {
@@ -93,7 +93,7 @@ function Main({
                 favorite = {favorite}
                 favoriteItems = {favoriteItems}
                 isLoggin = {isLoggin}
-                deleteMyAd ={ deleteMyAd}
+                openDeletePopup ={openDeletePopup}
                 openFirstMessagePopup = {openFirstMessagePopup}
                 handleUpdateIsReserved={handleUpdateIsReserved}
             />
