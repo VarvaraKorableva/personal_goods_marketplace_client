@@ -37,6 +37,7 @@ function Main({
     React.useEffect(() => {
         if (page > 1) {
           getAllItems({ page, limit: 20 });
+          console.log('main') 
         }
     }, [page]);
 

@@ -939,7 +939,6 @@ function updatePassword(email, newPassword) {
               lastFourtyItems={lastFourtyItems} //Need, because of search
               totalCountOfAds={totalCountOfAds}
               addToFavorites={addToFavorites}
-              
               deleteMyAd={deleteMyAd}
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
@@ -950,13 +949,10 @@ function updatePassword(email, newPassword) {
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
               handleUpdateIsReserved={handleUpdateIsReserved}
-
               handleGetItemsByFilter={handleGetItemsByFilter}
               handleTitleChange={handleTitleChange}
               handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
-              
               resetAllfilters={resetAllfilters}
-
               getAllItems={getAllItems}
               page={page}
               isPageItemsLoading={isPageItemsLoading}
