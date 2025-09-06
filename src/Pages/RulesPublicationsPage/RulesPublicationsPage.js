@@ -20,7 +20,7 @@ function RulesPublicationsPage() {
 
                 <li className="rulesPublicationsPage__rule-container">
                     <h3 className="rulesPublicationsPage__rule-subtitle">Срок размещения объявлений</h3>
-                    <p className="rulesPublicationsPage__text">В экспериментальном варианте сайта объявления будет перенесены в "Неактивные объявления", через 30 дней после их опубликования.</p>
+                    <p className="rulesPublicationsPage__text">В экспериментальном варианте сайта объявления будет перенесены в "Неактивные объявления", через 60 дней после их опубликования.</p>
                     <p className="rulesPublicationsPage__text">Для изменения их статуса на "Активное объявление" и их повторного опубликования, необходимо изменить статус самостоятельно, в разделе "Неактивные объявления" на странице "Моя страница".</p>
                 </li>
             </ul>

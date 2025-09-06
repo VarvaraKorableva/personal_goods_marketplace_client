@@ -1,0 +1,16 @@
+.categoryCardContainerAdmin {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    padding: 20px;
+    box-sizing: border-box;
+    
+}
+
+.categoryCardAdmin {
+    border: 2px solid #1f1f1f;
+    border-radius: 20px;
+    list-style-type: none;
+    padding: 10px;
+}

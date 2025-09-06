@@ -563,3 +563,37 @@ export const updatePassword = (email, newPassword) => {
     })
     .then(checkResponse);
 };
+
+//////создание категорий админом
+
+export const createCategory = (data) => {
+    return fetch(`${BASE_URL}/category/create`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: data.name,
+        is_good: data.is_good,
+        parent_id: data.parent_id,
+        image_url: data.image_url,
+        slug: data.slug,
+        name_rus: data.name_rus,        
+      })
+    })
+      .then(checkResponse);
+  }
+
+  export const deleteCategory = (category_id) => {
+    return fetch(`${BASE_URL}/category/${category_id}`, {
+        credentials: 'include',
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+  };

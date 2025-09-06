@@ -18,7 +18,8 @@ import RulesPublicationsPage from './Pages/RulesPublicationsPage/RulesPublicatio
 import Preloader from './Components/Preloader/Preloader'
 
 import './App.css'
-
+import AdminPage from './Pages/AdminPage/AdminPage'
+import ChangeCategoryPage from './Pages/AdminPage/ChangeCategoryPage/ChangeCategoryPage'
 import AddAdPage from './Pages/AddAdPage/AddAdPage'
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
@@ -1148,6 +1149,20 @@ function updatePassword(email, newPassword) {
           path={`/publication-rules`}
           element={
             <RulesPublicationsPage />
+          }>
+        </Route>
+
+        <Route 
+          path={`/admin`}
+          element={
+            <AdminPage />
+          }>
+        </Route>
+
+        <Route 
+          path={`/category-admin`}
+          element={
+            <ChangeCategoryPage/>
           }>
         </Route>
 

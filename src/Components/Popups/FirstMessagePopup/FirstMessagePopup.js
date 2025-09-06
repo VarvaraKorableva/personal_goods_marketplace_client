@@ -71,7 +71,7 @@ function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
             </textarea>
             <button 
               className={isValid? 'firstMessagePopup__btn_active':'firstMessagePopup__btn'} 
-              type='sumbit' 
+              type='submit' 
               disabled={!isValid}
             >
               {translatedContext.submitBtn}

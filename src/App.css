@@ -6,6 +6,11 @@
   margin: auto;
 }
 
+.page-title {
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
 .back-btn {
   cursor: pointer;
   text-align: start;
