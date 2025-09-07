@@ -63,15 +63,12 @@ function ChangeCategoryPage() {
       }; 
 
       const handleCreateSubCategory = () => {
-        createCategoryAdmin({
-          name: "Swimwear",
-          is_good: true,
-          parent_id: 14, 
-          image_url: "https://images.unsplash.com/photo-1624280217162-466a76286d0f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjYyfHxzd2ltd2VhcnxlbnwwfHwwfHx8MA%3D%3D",
-          slug: "swimwear",
-          name_rus: "Купальники"
-        });
-        //setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
+        /*createCategoryAdmin(
+            {
+
+            }
+        );*/
+        setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 
       async function getAllCategory() {
