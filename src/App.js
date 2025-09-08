@@ -297,7 +297,7 @@ function App() {
     openLoading()
     Api.getUserItems(owner_id)
     .then((res) => {
-      setMyAds(res)
+      setMyAds(res.reverse())
       closeLoading()
     })
     .catch((err) => {
@@ -311,9 +311,8 @@ function App() {
     const { formData, ...otherData } = data;
     Api.createItem(otherData)
     .then((res)=> {
-      localStorage.setItem('user', JSON.stringify(res.user))
       if(formData) {
-        const id = res.item.item_id
+        const id = res.item_id
         const str_item_id = Number(id)
         formData.append('str_item_id', str_item_id); 
         formData.append('user_id', userId); 
@@ -329,7 +328,7 @@ function App() {
           closeLoading()
         })
         .then(()=> {
-          getAllItems()
+          //getAllItems()
           navigate(`/users/${userId}`)
         })
         .catch((err)=> {
@@ -341,11 +340,10 @@ function App() {
       }else {
           closeAllPopups()
           setPopupMessage("Ad added successful!")
-          setMyAds([res.item, ...myAds])
+          setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           //adCountIncrement(userId)
           closeLoading()
-          localStorage.setItem('user', JSON.stringify(res.user))
           navigate(`/users/${userId}`)
       }
     })
