@@ -105,8 +105,6 @@ function App() {
 
   const [isReserved, setIsReserved] = React.useState(false)
 
-  const [adCount, setAdCount] = React.useState(0) //count of ads for regulations adding
-
   const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
 
   const [isLoading, setIsLoading] = React.useState(false) 
@@ -122,13 +120,7 @@ function App() {
 
   const addAds = () => setLimit(limit + 3);
   const userId = currentUser.user_id
-  useEffect(() => {
-    currentUser?
-      setAdCount(currentUser.ad_count)
-    :
-      setAdCount(0)
-  }, [userId])
-  
+
   const navigate = useNavigate()
   const location = useLocation();
 
@@ -316,15 +308,16 @@ function App() {
 
   function handleAddAdSubmit(data) {
     openLoading()
-    adCountIncrement(userId)
     const { formData, ...otherData } = data;
     Api.createItem(otherData)
     .then((res)=> {
+      localStorage.setItem('user', JSON.stringify(res.user))
       if(formData) {
-        const id = res.item_id
+        const id = res.item.item_id
         const str_item_id = Number(id)
         formData.append('str_item_id', str_item_id); 
         formData.append('user_id', userId); 
+        
         Api.uploadMultipleFiles(formData)
         .then((res) => {
           setMyImages([res[0], ...myImages])
@@ -332,6 +325,7 @@ function App() {
           setPopupMessage("Ad added successful!")
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
+          //adCountIncrement(userId)
           closeLoading()
         })
         .then(()=> {
@@ -347,9 +341,11 @@ function App() {
       }else {
           closeAllPopups()
           setPopupMessage("Ad added successful!")
-          setMyAds([res, ...myAds])
+          setMyAds([res.item, ...myAds])
           openSuccessfulActionPopup()
+          //adCountIncrement(userId)
           closeLoading()
+          localStorage.setItem('user', JSON.stringify(res.user))
           navigate(`/users/${userId}`)
       }
     })
@@ -360,26 +356,6 @@ function App() {
       closeLoading()
     })
   }
-
-function adCountIncrement(userId) {
-  Api.adCountIncrement(userId)
-  .then((res)=> {
-    setAdCount(res);
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
-function adCountDecrement(userId) {
-  Api.adCountDecrement(userId)
-  .then((res)=> {
-    setAdCount(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
 
   function getItemById(item_id) {
     openLoading()
@@ -416,7 +392,6 @@ function adCountDecrement(userId) {
       setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
-      adCountDecrement(userId)
       closeLoading()
       closeAllPopups()
     })
@@ -690,9 +665,9 @@ function adCountDecrement(userId) {
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
-    if (adCount >= 20) {
+    if (myAds.length >= 20) {
       setSuccessfulActionPopup(true)
-      setPopupMessage(`Можно добавлять не более 3 объявлений, у вас добавлено ${adCount}`)
+      setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${myAds.length}`)
     } else {
       setIsChoiceOfProductOrServicePopup(true)
     }
@@ -714,7 +689,8 @@ function adCountDecrement(userId) {
       localStorage.removeItem('isLogin')
       localStorage.removeItem('user')
       setCurrentUser({})
-      getMyFavorites([])
+      setFovorite([])
+      setFavoriteItems([])
       navigate(`/`)
   }
 

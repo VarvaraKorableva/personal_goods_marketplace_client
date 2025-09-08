@@ -612,13 +612,13 @@ return (
         <option value="">{translatedContext.place}</option>
 
           {language === 'rus' ?
-            cities.rus.map((item) => (
-              <option key={item} value={item}>{item}</option>
+            cities.rus.map((item, index) => (
+              <option key={index} value={item}>{item}</option>
             ))
             
             :
-            cities.en.map((item) => (
-              <option key={item} value={item}>{item}</option>
+            cities.en.map((item, index) => (
+              <option key={index} value={item}>{item}</option>
             ))
           }
       </select>
