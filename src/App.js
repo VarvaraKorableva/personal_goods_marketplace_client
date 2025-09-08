@@ -1,3 +1,4 @@
+import useFavorites from "./hooks/useFavorites";
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
@@ -39,6 +40,16 @@ import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequest
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
+  const {
+    favorite,
+    favoriteItems,
+    addToFavorites,
+    deleteFromFavorites,
+    getMyFavorites,
+    resetFavorites,
+  } = useFavorites(openLoading, closeLoading);
+
+
   const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
@@ -69,8 +80,6 @@ function App() {
 
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([])
-  const [favorite, setFovorite] = React.useState([])
-  const [favoriteItems, setFavoriteItems] = React.useState([])
   
   const [isGood, setIsGood] = React.useState(true)
   const [isLoginError, setIsLoginError] = React.useState(false)
@@ -399,55 +408,6 @@ function App() {
     })
   }
 
-  function addToFavorites(favorite_collector_id, item_id, item) {
-    openLoading()
-    Api.addToFavoritesServer({ favorite_collector_id, item_id })
-      .then((res) => {
-        setFovorite([item, ...favoriteItems])
-        setFavoriteItems([item, ...favoriteItems]);
-        
-        closeLoading()
-      })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
- 
-  function deleteFromFavorites(favItem) {
-    openLoading()
-    Api.deleteFromFavoritesServer(favItem.item_id)
-      .then((res) => {
-        setFovorite((state) => 
-          state.filter((item) => 
-          item.item_id !== favItem.item_id)
-          
-        )
-        setFavoriteItems((state) => state.filter((item) => item.item_id !== favItem.item_id));
-        closeLoading()
-      })
-      .catch((err) => {
-        console.log(err)
-        closeLoading()
-      })
-  }
-
-  function getMyFavorites(favorite_collector_id) {
-    openLoading()
-    Api.getMyFavorites(favorite_collector_id)
-    .then((res) => {
-      setFovorite(res)
-      const favoriteItemsResult = lastFourtyItems.filter(item =>
-      res.some(favoriteItem => favoriteItem.item_id === item.item_id) ////из всего всего аррея ищится избранное а в аррее нет тех кто делитед тру
-      );
-      setFavoriteItems(res);
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
   //sendVerificationCode verifyCode
   function verifyCode(email, code) {
     openLoading()
@@ -687,8 +647,7 @@ function App() {
       localStorage.removeItem('isLogin')
       localStorage.removeItem('user')
       setCurrentUser({})
-      setFovorite([])
-      setFavoriteItems([])
+      resetFavorites()
       navigate(`/`)
   }
 
