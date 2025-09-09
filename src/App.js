@@ -1,4 +1,5 @@
 import useFavorites from "./hooks/useFavorites";
+import useMessages from "./hooks/useMessages";
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
@@ -40,15 +41,8 @@ import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequest
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
-  const {
-    favorite,
-    favoriteItems,
-    addToFavorites,
-    deleteFromFavorites,
-    getMyFavorites,
-    resetFavorites,
-  } = useFavorites(openLoading, closeLoading);
 
+  
 
   const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
@@ -97,9 +91,11 @@ function App() {
   //popups
   const [userNameForOneConversationPopup, setUserNameForOneConversationPopup] = React.useState({})
   const [itemTitleForOneConversationPopup, setItemTitleForOneConversationPopup] = React.useState({})
+
+/*
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
-  const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')
+  const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')*/
 
   //filter query
   const [city, setCity] = React.useState('') 
@@ -132,6 +128,7 @@ function App() {
 
   const navigate = useNavigate()
   const location = useLocation();
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -582,13 +579,13 @@ function App() {
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-
+/*
 //onConversation
   function selectConversation(r_id, s_id, i_id) {
     setReceiver_idForOneConversationPopup(r_id)
     setSender_idForOneConversationPopup(s_id) 
     setItem_idForOneConversationPopup(i_id)
-  }
+  }*/
 
   function openFirstMessagePopup(receiver_id, item_id) {
     setIsFirstMessagePopup(true)
@@ -795,6 +792,22 @@ function updatePassword(email, newPassword) {
       openSuccessfulActionPopup()
     })
   }
+
+  const {
+    favorite,
+    favoriteItems,
+    addToFavorites,
+    deleteFromFavorites,
+    getMyFavorites,
+    resetFavorites,
+  } = useFavorites(openLoading, closeLoading);
+
+  const {
+    selectConversation,
+    receiver_idForOneConversationPopup,
+    sender_idForOneConversationPopup,
+    item_idForOneConversationPopup,
+  } = useMessages(userId, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup);
   
   return (
     <LanguageProvider>
