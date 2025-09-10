@@ -4,6 +4,7 @@ import useItemFavorites from "./hooks/items/useItemFavorites";
 import useAuthActions from "./hooks/useAuthActions";
 import useMessages from "./hooks/useMessages";
 import useCategory from "./hooks/category/useCategory"
+import usePopup from "./hooks/popups/usePopups"
 
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
@@ -49,17 +50,7 @@ function App() {
   const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
 
-  const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
-  const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
-  const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
-  const [isEditPopup, setIsEditPopup] = React.useState(false)
-  const [isDeletePopup, setIsDeletePopup] = React.useState(false)
-
   const [itemIdDelete, setItemIdDelete] = React.useState(0)
-  
-  const [popupMessage, setPopupMessage] = React.useState('')
-  const [isOneConversationPopup, setIsOneConversationPopup] = React.useState(false)
-  const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
   
   const [myAds, setMyAds] = React.useState([])
   const [myImages, setMyImages] = React.useState([])
@@ -92,10 +83,6 @@ function App() {
   const [highPrice, setHighPrice] = React.useState(0) 
   const [condition, setCondition] = React.useState('') 
   const [title, setTitle] = React.useState('') 
-
-  //title and itemId for edit popup
-  const [editPopupName, setEditPopupName] = React.useState('') 
-  const [popupEditItemId, setPopupEditItemId] = React.useState(0) 
 
   const [isReserved, setIsReserved] = React.useState(false)
 
@@ -288,31 +275,6 @@ function App() {
     setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
-  function openSuccessfulActionPopup() {
-    setSuccessfulActionPopup(true)
-  }
-
-  function openFirstMessagePopup(receiver_id, item_id) {
-    setIsFirstMessagePopup(true)
-    setReceiverId(receiver_id) 
-    setItemId(item_id)
-  }
-
-  function openBurgerMenuPopup() {
-    setIsBurgerMenuPopup(true)
-  }
-
-  function openEditPopup(popup_item_id, popupName) {
-    setEditPopupName(popupName)
-    setPopupEditItemId(popup_item_id)
-    setIsEditPopup(true)
-  }
-
-  function openDeletePopup(item_id) {
-    setIsDeletePopup(true)
-    setItemIdDelete(item_id)
-  }
-
   function handleAddAdClick(data){
     setIsGood(data)
 
@@ -322,26 +284,6 @@ function App() {
     navigate(`/add-new-service`)
     
     closeAllPopups()
-  }
-
-  function handleChoiceOfProductOrServicePopupClick() {
-    if (myAds.length >= 20) {
-      setSuccessfulActionPopup(true)
-      setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${myAds.length}`)
-    } else {
-      setIsChoiceOfProductOrServicePopup(true)
-    }
-  }
-
-  function closeAllPopups() {
-    setIsChoiceOfProductOrServicePopup(false)
-    setSuccessfulActionPopup(false)
-    setIsFirstMessagePopup(false)
-    setPopupMessage("")
-    setIsOneConversationPopup(false)
-    setIsBurgerMenuPopup(false)
-    setIsEditPopup(false)
-    setIsDeletePopup(false)
   }
 
 function updatePassword(email, newPassword) {
@@ -411,6 +353,29 @@ function updatePassword(email, newPassword) {
   }
 
   const {
+    closeAllPopups,
+    openSuccessfulActionPopup,
+    openFirstMessagePopup,
+    openBurgerMenuPopup,
+    openEditPopup,
+    openDeletePopup,
+    handleChoiceOfProductOrServicePopupClick,
+
+    isChoiceOfProductOrServicePopup,
+    isSuccessfulActionPopup,
+    isFirstMessagePopup,
+    isEditPopup,
+    isDeletePopup,
+    popupMessage,
+    isOneConversationPopup,
+    isBurgerMenuPopup,
+    editPopupName,
+    popupEditItemId,
+    setPopupMessage,
+    setSuccessfulActionPopup,
+  } = usePopup({setReceiverId, myAds, setItemId, setItemIdDelete});
+
+  const {
     getCategory,
     categories,
     categoriesToRender,
@@ -464,7 +429,7 @@ function updatePassword(email, newPassword) {
     setConversations,
     conversations,
   } = useMessages(
-      userId, {
+    userId, {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
     });
