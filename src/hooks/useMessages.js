@@ -38,7 +38,7 @@ export default function useMessages(
     Api.markMessagesAsRead(conversation_id, userId)
       .then(() => getUnreadbleMessages(userId))
       .catch(console.log);
-  };
+  };  
 
   // получить непрочитанные
   const getUnreadbleMessages = (userId) => {
@@ -104,23 +104,22 @@ export default function useMessages(
       openSuccessfulActionPopup()
     })
   }
-/*
-    function deleteOneMessage(message_id) {
-      openLoading()
-      Api.deleteMessage(message_id)
-      .then((res) => {
-        setConversations((state) => state.filter((item) => item.message_id !== message_id))
-        closeLoading()
-      })
-      .catch((err) => {
-        console.log(err)
-        closeLoading()
-        closeAllPopups()
-        setPopupMessage("Something wrong, plese try again")
-        openSuccessfulActionPopup()
-      })
-    }  
-*/
+
+  const deleteOneMessage = (message_id) => {
+    openLoading()
+    Api.deleteMessage(message_id)
+    .then((res) => {
+      setConversations((state) => state.filter((item) => item.message_id !== message_id))
+      closeLoading()
+    })
+    .catch((err) => {
+      console.log(err)
+      closeLoading()
+      closeAllPopups()
+      setPopupMessage("Something wrong, plese try again")
+      openSuccessfulActionPopup()
+    })
+  }
   return {
     createNewMessageFromConversationPopup,
     selectConversation,
@@ -131,8 +130,9 @@ export default function useMessages(
     itemTitleForOneConversationPopup,
     addNewMessage,
     getOneConversation,
-    setConversations,
     conversations,
-    
+    deleteOneMessage,
+    markMessagesAsRead,
+    getUnreadbleMessages,
   };
 }

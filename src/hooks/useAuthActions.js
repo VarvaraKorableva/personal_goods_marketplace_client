@@ -128,6 +128,33 @@ export default function useAuthActions({
         })
     }
 
+    function updatePassword(email, newPassword) {
+      Api.updatePassword(email, newPassword)
+      .then((res) => {
+        console.log(res)
+          setIsLoginError(false)
+          setIsLoggin(true)
+          localStorage.setItem('isLogin', true)
+          setCurrentUser(res)
+          localStorage.setItem('user', JSON.stringify(res))
+          const favorite_collector_id = res.user_id
+          getMyFavorites(favorite_collector_id, lastFourtyItems)
+          navigate(`/`)
+          getUnreadbleMessages(res.user_id)
+          closeLoading()
+      })
+      .catch((err) => {
+        closeLoading()
+          if(err == 401) {
+            setIsLoginError(true)
+            setTimeout(function(){
+              setIsLoginError(false)
+            }, 3000)
+          }
+      })
+    }
+
+
 
   return {
     sendVerificationCode,
@@ -139,6 +166,7 @@ export default function useAuthActions({
     handleLoginSubmit,
     handleRegSubmit,
     isRegError,
+    updatePassword,
   };
 
 };

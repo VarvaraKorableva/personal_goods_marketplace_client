@@ -161,43 +161,6 @@ function App() {
       closeLoading()
     })
   }
-
-  function deleteOneMessage(message_id) {
-    openLoading()
-    Api.deleteMessage(message_id)
-    .then((res) => {
-      setConversations((state) => state.filter((item) => item.message_id !== message_id))
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-      closeAllPopups()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
-
-  function markMessagesAsRead( conversation_id ) {
-    Api.markMessagesAsRead(conversation_id, userId)
-    .then((res) => {
-      getUnreadbleMessages(userId)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
-  function getUnreadbleMessages(userId) {
-    Api.getUnreadbleMessages(userId)
-    .then((res) => {
-      setUnreadbleMessages(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
   //don't need anymore
   /*
   function startToSearch(keyWord) {
@@ -220,32 +183,6 @@ function App() {
     
     closeAllPopups()
   }
-
-function updatePassword(email, newPassword) {
-  Api.updatePassword(email, newPassword)
-  .then((res) => {
-    console.log(res)
-      setIsLoginError(false)
-      setIsLoggin(true)
-      localStorage.setItem('isLogin', true)
-      setCurrentUser(res)
-      localStorage.setItem('user', JSON.stringify(res))
-      const favorite_collector_id = res.user_id
-      getMyFavorites(favorite_collector_id, lastFourtyItems)
-      navigate(`/`)
-      getUnreadbleMessages(res.user_id)
-      closeLoading()
-  })
-  .catch((err) => {
-    closeLoading()
-      if(err == 401) {
-        setIsLoginError(true)
-        setTimeout(function(){
-          setIsLoginError(false)
-        }, 3000)
-      }
-  })
-}
 
   function handleTitleChange(keyWord) {
     setTitle(keyWord)
@@ -286,8 +223,6 @@ function updatePassword(email, newPassword) {
       openSuccessfulActionPopup()
     })
   }
-
-
 
   const {
     closeAllPopups,
@@ -346,6 +281,25 @@ function updatePassword(email, newPassword) {
     resetFavorites,
   } = useItemFavorites(openLoading, closeLoading);
 
+  const {
+    createNewMessageFromConversationPopup,
+    selectConversation,
+    receiver_idForOneConversationPopup,
+    sender_idForOneConversationPopup,
+    item_idForOneConversationPopup,
+    userNameForOneConversationPopup,
+    itemTitleForOneConversationPopup,
+    addNewMessage,
+    getOneConversation,
+    conversations,
+    deleteOneMessage,
+    markMessagesAsRead,
+    getUnreadbleMessages,
+  } = useMessages(
+    userId, {
+      openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
+      setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
+    });
 
   const {
     sendVerificationCode,
@@ -357,6 +311,7 @@ function updatePassword(email, newPassword) {
     handleLoginSubmit,
     handleRegSubmit,
     isRegError,
+    updatePassword,
   } = useAuthActions({
     setIsLoggin, setCurrentUser, resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
     setIsLoginError, getMyFavorites, getUnreadbleMessages, lastFourtyItems, setMyAds,
@@ -369,24 +324,6 @@ function updatePassword(email, newPassword) {
     updateCondition,
     handleUpdateIsReserved,
   } = useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,})
-
-  const {
-    createNewMessageFromConversationPopup,
-    selectConversation,
-    receiver_idForOneConversationPopup,
-    sender_idForOneConversationPopup,
-    item_idForOneConversationPopup,
-    userNameForOneConversationPopup,
-    itemTitleForOneConversationPopup,
-    addNewMessage,
-    getOneConversation,
-    setConversations,
-    conversations,
-  } = useMessages(
-    userId, {
-      openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
-      setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
-    });
 
   useEffect(() => {
     getMyFavorites(userId,lastFourtyItems)
