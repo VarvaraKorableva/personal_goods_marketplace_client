@@ -9,8 +9,8 @@ import choose from '../../const/favoritesPageData'
 import BackBtn from '../../UK-kit/BackBtn'
 
 function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
-
     const currentUser = React.useContext(CurrentUserContext)
+
     const navigate = useNavigate()
 
     const { language } = React.useContext(LanguageContext)

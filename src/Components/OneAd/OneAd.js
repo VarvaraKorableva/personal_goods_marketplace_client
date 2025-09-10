@@ -13,6 +13,8 @@ function OneAd({
     favoriteItems, openFirstMessagePopup, handleUpdateIsReserved,
 }) {
 
+ console.log('favoriteItems', favoriteItems)
+
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 

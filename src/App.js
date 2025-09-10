@@ -1,5 +1,10 @@
-import useFavorites from "./hooks/useFavorites";
+import useItem from "./hooks/items/useItem"
+import useItemUpdate from "./hooks/items/useItemUpdate"
+import useItemFavorites from "./hooks/items/useItemFavorites";
+import useAuthActions from "./hooks/useAuthActions";
 import useMessages from "./hooks/useMessages";
+import useCategory from "./hooks/category/useCategory"
+
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
@@ -41,16 +46,15 @@ import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequest
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
-
-  
-
   const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
+
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
   const [isEditPopup, setIsEditPopup] = React.useState(false)
   const [isDeletePopup, setIsDeletePopup] = React.useState(false)
+
   const [itemIdDelete, setItemIdDelete] = React.useState(0)
   
   const [popupMessage, setPopupMessage] = React.useState('')
@@ -58,11 +62,7 @@ function App() {
   const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
   
   const [myAds, setMyAds] = React.useState([])
-  const [categories, setCategories] = React.useState([])
-  
   const [myImages, setMyImages] = React.useState([])
-
-  const [categoriesToRender, setCategoriesToRender] = React.useState([])
 
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
@@ -77,7 +77,7 @@ function App() {
   
   const [isGood, setIsGood] = React.useState(true)
   const [isLoginError, setIsLoginError] = React.useState(false)
-  const [isRegError, setIsRegError] = React.useState(false)
+
 
   const [page, setPage] = React.useState(1);
   const [isPageItemsLoading, setIsPageItemsLoading] = React.useState(false);
@@ -85,17 +85,6 @@ function App() {
   //for messages 
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('')
-
-  const [coversations, setCoversations] = React.useState([])
-
-  //popups
-  const [userNameForOneConversationPopup, setUserNameForOneConversationPopup] = React.useState({})
-  const [itemTitleForOneConversationPopup, setItemTitleForOneConversationPopup] = React.useState({})
-
-/*
-  const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = React.useState('')
-  const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = React.useState('')
-  const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = React.useState('')*/
 
   //filter query
   const [city, setCity] = React.useState('') 
@@ -114,13 +103,6 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false) 
 
-  const [isVerificationCodeSent, setIsVerificationCodeSent] = React.useState(false) 
-  const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = React.useState('') 
-
-  const [adsCategoryName, setAdsCategoryName] = React.useState('') 
-
-  const [isEmailConfirmed, setIsEmailConfirmed] = React.useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
-
   const [limit, setLimit] = React.useState(3)
 
   const addAds = () => setLimit(limit + 3);
@@ -128,45 +110,19 @@ function App() {
 
   const navigate = useNavigate()
   const location = useLocation();
+  
 
+  function openLoading() {
+    setIsLoading(true)
+  }
+
+  function closeLoading() {
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  async function getCategory() {
-    openLoading()
-    try {
-      const res = await Api.getCategory();
-      setCategories(res);
-      setCategoriesToRender(res);
-      closeLoading()
-    } catch (err) {
-      console.log(err);
-      closeLoading()
-    }
-  }
-  async function getAllItems(page = 1, limit = 20) {
-    openLoading();
-    try {
-      const res = await Api.getAllItems({ page, limit });
-      if(page == 1) {
-        setTotalCountOfAds(res.totalCount);
-        setLastFoutryItems(res.result);
-        setItemsAfterSearch(res.result)
-      }
-      else {
-        setLastFoutryItems(prevItems => [...prevItems, ...res.result]);
-        setItemsAfterSearch(prevItems => [...prevItems, ...res.result]);
-      }
-      closeLoading();
-      setIsPageItemsLoading(false)
-      window.dispatchEvent(new Event('resize'));
-    } catch (err) {
-      console.log(err);
-      closeLoading();
-    }
-  }
 
   const handleScroll = () => {
     const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
@@ -221,96 +177,6 @@ function App() {
     getAllItems()
     //getUnreadbleMessages(userId)
   },[])
-  
-  function chooseCategory(category) {
-      setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
-      let myCatToRender = []
-      findAllCategoryGrandChildren(category, myCatToRender) 
-      setAdsCategoryName(category.name_rus)
-  } 
-
-  function findAllCategoryGrandChildren(category, myCatToRenderNew) {
-    let childrens = categories.filter((item) => item.parent_id === category.category_id)
-
-    if(childrens.length === 0) {
-      myCatToRenderNew.push(category.category_id)
-    } else {
-      childrens.forEach((item) => {
-        findAllCategoryGrandChildren(item, myCatToRenderNew)
-      })
-    }
-    return myCatToRenderNew
-  }
-
-  function handleRegSubmit(userData) {
-    openLoading()
-    setIsRegError(false)
-    Api.register({
-      username:userData.username,
-      email: userData.email,
-      password: userData.password,
-    })
-    .then((data) => {
-      setIsRegError(false)
-      setCurrentUser(data.user)
-      
-      localStorage.setItem('user', JSON.stringify(data.user))
-      setMyAds([]);
-      setIsLoggin(true)
-      localStorage.setItem('isLogin', true)
-      navigate(`/`)
-      closeLoading()
-    })  
-    .catch((err) => {
-      if(err == 400) {
-        setIsRegError(true)
-        closeLoading()
-      }
-    })
-  }
-
-  function handleLoginSubmit(userData){
-    openLoading()
-    Api.authorize({
-      password: userData.password, 
-      email: userData.email
-    })
-    .then ((res) => {
-      setIsLoginError(false)
-      setIsLoggin(true)
-      localStorage.setItem('isLogin', true)
-      setCurrentUser(res.user)
-      
-      localStorage.setItem('user', JSON.stringify(res.user))
-      const favorite_collector_id = res.user.user_id
-      getMyFavorites(favorite_collector_id)
-      navigate(`/`)
-      getUnreadbleMessages(res.user.user_id)
-      closeLoading()
-    })  
-    .catch((err) => {
-      closeLoading()
-      if(err == 401) {
-        setIsLoginError(true)
-        setTimeout(function(){
-          setIsLoginError(false)
-        }, 3000)
-      }
-    })
-  }
-
-  function getMyItems(owner_id) {
-    openLoading()
-    Api.getUserItems(owner_id)
-    .then((res) => {
-      setMyAds(res.reverse())
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
 
   function handleAddAdSubmit(data) {
     openLoading()
@@ -361,20 +227,6 @@ function App() {
     })
   }
 
-  function getItemById(item_id) {
-    openLoading()
-    Api.getItemById(item_id)
-    .then((res)=> {
-      setSelectedItem(res)
-      setIsLoading(false)
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
-
   function getUserById(user_id) {
     openLoading()
     Api.getUserById(user_id)
@@ -388,143 +240,11 @@ function App() {
     })
   }
 
-  function deleteMyAd(item_id) {
-    openLoading()
-    Api.deleteItem(item_id)
-    .then((res) => {
-      setMyAds((state) => state.filter((item) => item.item_id !== item_id))
-      setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
-      setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
-      setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
-      closeLoading()
-      closeAllPopups()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
-
-  //sendVerificationCode verifyCode
-  function verifyCode(email, code) {
-    openLoading()
-    Api.verifyCode(email, code) 
-    
-    .then((res) => {
-      if(res.msg === "Error verifying code." || res.msg === "Invalid or expired verification code."){
-        closeLoading()
-        closeAllPopups()
-        setIsVerificationCodeSent(true)
-        setIsVerificationCodeSentMessage('Неверный или истекший код, попробуйте снова')
-        setIsEmailConfirmed(false)
-      }
-      if(res.msg === "Code verified. You can now complete registration.") {
-        closeAllPopups()
-        closeLoading()
-        setIsVerificationCodeSent(false)
-        setIsVerificationCodeSentMessage('')
-        setIsEmailConfirmed(true)
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-      closeAllPopups()
-      setIsVerificationCodeSent(false)
-      setSuccessfulActionPopup(true)
-      setPopupMessage('Что-то пошло не так :(')
-    })
-  }
-
-  function sendVerificationCode(email) {
-    openLoading()
-    Api.sendVerificationCode(email) 
-    .then((res) => {
-      closeAllPopups()
-      closeLoading()
-      setIsVerificationCodeSent(true)
-      //setIsVerificationCodeSentMessage("Код отправлен на почту")
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-      closeAllPopups()
-      setIsVerificationCodeSent(false)
-    })
-  }
-
-  //createMessage create conversation and create first message popup
-  function addNewMessage(message_text) {
-    openLoading()
-    Api.createConversation({conversation_owner_id: userId, item_owner_id: receiverId, item_id: itemId}) 
-      .then((res)=> {
-        
-        Api.addMessage({receiver_id: receiverId, sender_id: userId, item_id: itemId, message_text, conversation_id: res.conversation_id}) 
-        .then((res) => {
-          
-          closeAllPopups()
-          //setCoversations([res, ...coversations])
-          setReceiverId('')
-          setItemId('')
-          closeLoading()
-          setSuccessfulActionPopup(true)
-          setPopupMessage('Сообщение отправлено')
-        })
-        .catch((err) => {
-          closeLoading()
-          closeAllPopups()
-          setSuccessfulActionPopup(true)
-          setPopupMessage('Что-то пошло не так :(')
-        })
-      })
-    .catch((err) => {
-      closeLoading()
-      closeAllPopups()
-      setSuccessfulActionPopup(true)
-      setPopupMessage('Что-то пошло не так :(')
-    })
-  }
-// create message from page
-  function createNewMessageFromConversationPopup(receiver_id, item_id, message_text, conversation_id) {
-    openLoading()
-    Api.addMessage({receiver_id, sender_id: userId, item_id, message_text, conversation_id}) 
-    .then((res) => {
-      getOneConversation(receiver_id, userId, item_id)
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-      closeAllPopups()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
-
-  function getOneConversation(r_id, s_id, i_id) {
-    openLoading()
-    Api.getOneConversation(r_id, s_id, i_id, userId)
-    .then((res) => {
-      setCoversations(res.messages)
-      setUserNameForOneConversationPopup(res)//.user.username
-      setItemTitleForOneConversationPopup(res.item)
-      setIsReserved(res.item.reserved)
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-      closeAllPopups()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
-
   function deleteOneMessage(message_id) {
     openLoading()
     Api.deleteMessage(message_id)
     .then((res) => {
-      setCoversations((state) => state.filter((item) => item.message_id !== message_id))
+      setConversations((state) => state.filter((item) => item.message_id !== message_id))
       closeLoading()
     })
     .catch((err) => {
@@ -568,24 +288,9 @@ function App() {
     setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }
 
-  function openLoading() {
-    setIsLoading(true)
-  }
-
-  function closeLoading() {
-    setIsLoading(false)
-  }
-
   function openSuccessfulActionPopup() {
     setSuccessfulActionPopup(true)
   }
-/*
-//onConversation
-  function selectConversation(r_id, s_id, i_id) {
-    setReceiver_idForOneConversationPopup(r_id)
-    setSender_idForOneConversationPopup(s_id) 
-    setItem_idForOneConversationPopup(i_id)
-  }*/
 
   function openFirstMessagePopup(receiver_id, item_id) {
     setIsFirstMessagePopup(true)
@@ -639,15 +344,6 @@ function App() {
     setIsDeletePopup(false)
   }
 
-  function handleLogout() {
-      setIsLoggin(false)
-      localStorage.removeItem('isLogin')
-      localStorage.removeItem('user')
-      setCurrentUser({})
-      resetFavorites()
-      navigate(`/`)
-  }
-
 function updatePassword(email, newPassword) {
   Api.updatePassword(email, newPassword)
   .then((res) => {
@@ -658,7 +354,7 @@ function updatePassword(email, newPassword) {
       setCurrentUser(res)
       localStorage.setItem('user', JSON.stringify(res))
       const favorite_collector_id = res.user_id
-      getMyFavorites(favorite_collector_id)
+      getMyFavorites(favorite_collector_id, lastFourtyItems)
       navigate(`/`)
       getUnreadbleMessages(res.user_id)
       closeLoading()
@@ -673,16 +369,6 @@ function updatePassword(email, newPassword) {
       }
   })
 }
-  function handleUpdateIsReserved(item_id) {
-    Api.updateIsReserved(item_id, userId)
-    .then((res) => {
-      setIsReserved(!isReserved)
-    })
-    .catch((err) => {
-      console.log(err)
-      setPopupMessage("Something wrong, plese try again")
-    })
-  }
 
   function handleTitleChange(keyWord) {
     setTitle(keyWord)
@@ -722,76 +408,15 @@ function updatePassword(email, newPassword) {
       setPopupMessage("Something wrong, plese try again")
       openSuccessfulActionPopup()
     })
-
-  }
-  
-  function updateItemCity(item_id, city) {
-    openLoading()
-    Api.updateItemCity(item_id, city)
-    .then((res) => {
-      closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
-      openSuccessfulActionPopup()
-      closeLoading()
-    })
-    .catch((err) => {
-      closeAllPopups()
-      closeLoading()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
   }
 
-  function updatePrice(item_id, price) {
-    openLoading()
-    Api.updatePrice(item_id, price)
-    .then((res) => {
-      closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
-      openSuccessfulActionPopup()
-      closeLoading()
-    })
-    .catch((err) => {
-      closeAllPopups()
-      closeLoading()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
-
-  function updateDescription(item_id, description) {
-    openLoading()
-    Api.updateDescription(item_id, description)
-    .then((res) => {
-      closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
-      openSuccessfulActionPopup()
-      closeLoading()
-    })
-    .catch((err) => {
-      closeAllPopups()
-      closeLoading()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
-
-  function updateCondition(item_id, condition) {
-    openLoading()
-    Api.updateCondition(item_id, condition)
-    .then((res) => {
-      closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
-      openSuccessfulActionPopup()
-      closeLoading()
-    })
-    .catch((err) => {
-      closeAllPopups()
-      closeLoading()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
-  }
+  const {
+    getCategory,
+    categories,
+    categoriesToRender,
+    chooseCategory,
+    adsCategoryName,
+  } = useCategory({closeLoading, openLoading, });
 
   const {
     favorite,
@@ -800,14 +425,60 @@ function updatePassword(email, newPassword) {
     deleteFromFavorites,
     getMyFavorites,
     resetFavorites,
-  } = useFavorites(openLoading, closeLoading);
+  } = useItemFavorites(openLoading, closeLoading);
+
 
   const {
+    sendVerificationCode,
+    verifyCode,
+    handleLogout,
+    isEmailConfirmed,
+    isVerificationCodeSent,
+    isVerificationCodeSentMessage,
+    handleLoginSubmit,
+    handleRegSubmit,
+    isRegError,
+  } = useAuthActions({
+    setIsLoggin, setCurrentUser, resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
+    setIsLoginError, getMyFavorites, getUnreadbleMessages, lastFourtyItems, setMyAds,
+  })
+
+  const {
+    updateDescription,
+    updatePrice,
+    updateItemCity,
+    updateCondition,
+    handleUpdateIsReserved,
+  } = useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,})
+
+  const {
+    createNewMessageFromConversationPopup,
     selectConversation,
     receiver_idForOneConversationPopup,
     sender_idForOneConversationPopup,
     item_idForOneConversationPopup,
-  } = useMessages(userId, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup);
+    userNameForOneConversationPopup,
+    itemTitleForOneConversationPopup,
+    addNewMessage,
+    getOneConversation,
+    setConversations,
+    conversations,
+  } = useMessages(
+      userId, {
+      openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
+      setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
+    });
+
+  const {
+    getAllItems,
+    deleteMyAd,
+    getMyItems,
+    getItemById,
+  } = useItem({setItemsAfterSearch, setMyAds, setLastFoutryItems, setItemsAfterSearch, setItemsSecondPageSearch, openLoading, closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading,})
+
+  useEffect(() => {
+    getMyFavorites(userId,lastFourtyItems)
+  }, []);
   
   return (
     <LanguageProvider>
@@ -1044,7 +715,7 @@ function updatePassword(email, newPassword) {
                 sender_id={sender_idForOneConversationPopup}
                 item_id={item_idForOneConversationPopup}
                 openDeletePopup={openDeletePopup}
-                coversations={coversations}
+                conversations={conversations}
                 userName={userNameForOneConversationPopup}
                 itemTitle={itemTitleForOneConversationPopup}
                 createNewMessage={createNewMessageFromConversationPopup}

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import * as Api from '../Api/Api'
+import * as Api from '../../Api/Api'
 
-export default function useFavorites(openLoading, closeLoading) {
+export default function useItemFavorites(openLoading, closeLoading) {
   const [favorite, setFavorite] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
 

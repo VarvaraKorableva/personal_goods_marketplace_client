@@ -4,7 +4,7 @@ import React from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import noPictures from '../../../images/nopictures.png'
 
-function Message({message, markMessagesAsRead, onConversation, updateConversationIsDeleted}) {
+function Message({message, markMessagesAsRead, onConversation, updateConversationIsDeleted, getOneConversation}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id

@@ -4,8 +4,12 @@ import React, { useEffect, useState, useRef } from 'react'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import OneMyMessage from './OneMyMessage'
 import BackBtn from '../../UK-kit/BackBtn'
-
-function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved, getOneConversation, receiver_id, sender_id, item_id, coversations, createNewMessage, deleteOneMessage, userName, itemTitle }) {
+///страница открытой переписки (после клика на конверсейшен открывается эта страница)
+function ConversationPage({ 
+    openDeletePopup, isReserved, handleUpdateIsReserved, getOneConversation, 
+    receiver_id, sender_id, item_id, conversations, createNewMessage, 
+    deleteOneMessage, userName, itemTitle 
+}) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
     const [messageText, setMessageText] = useState('')
@@ -15,12 +19,13 @@ function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved,
 
     const messagesEndRef = useRef(null);
     
+    
     useEffect(() => {
         
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-    }, [coversations]);
+    }, [conversations]);
     
 
     useEffect(() => {
@@ -35,9 +40,9 @@ function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved,
         e.preventDefault()
 
         receiver_id === userId?
-            createNewMessage(sender_id, item_id, messageText, coversations[0].conversation_id)
+            createNewMessage(sender_id, item_id, messageText, conversations[0].conversation_id)
         :
-            createNewMessage(receiver_id, item_id, messageText, coversations[0].conversation_id)
+            createNewMessage(receiver_id, item_id, messageText, conversations[0].conversation_id)
 
         setMessageText('')
         setIsMessageText(false)
@@ -96,7 +101,7 @@ function ConversationPage({ openDeletePopup, isReserved, handleUpdateIsReserved,
               }
            </div>
             <ul className="conversationPage__messages-container">
-                {coversations.map((message) =>(
+                {conversations.map((message) =>(
                   
                   <OneMyMessage 
                     key={message.message_id}
