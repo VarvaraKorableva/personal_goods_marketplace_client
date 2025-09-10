@@ -1,8 +1,17 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
+import { useNavigate } from 'react-router-dom'
 
-export default function useItem({setItemsAfterSearch, setMyAds, setLastFoutryItems, setItemsSecondPageSearch, openLoading, closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading, }) {
+export default function useItem({
+  setItemsAfterSearch, setLastFoutryItems, openLoading, closeLoading, closeAllPopups, 
+  setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading, 
+  setMyImages, openSuccessfulActionPopup, 
+  userId, myImages, setPopupMessage, myAds, setMyAds,
+}) {
+  const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
+  const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
 
+  const navigate = useNavigate()
 
   const deleteMyAd = (item_id) => {
     openLoading()
@@ -70,11 +79,76 @@ export default function useItem({setItemsAfterSearch, setMyAds, setLastFoutryIte
     })
   }
 
+  async function getItemsByParentId(parent_id) {
+    openLoading()
+    try {
+      const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
+      setStartItemsSecondPage(res)
+      setItemsSecondPageSearch(res)
+      closeLoading()
+    } catch (err) {
+      console.log(err);
+      closeLoading()
+    }
+  }
+
+  function handleAddAdSubmit(data) {
+    openLoading()
+    const { formData, ...otherData } = data;
+    Api.createItem(otherData)
+    .then((res)=> {
+      if(formData) {
+        const id = res.item_id
+        const str_item_id = Number(id)
+        formData.append('str_item_id', str_item_id); 
+        formData.append('user_id', userId); 
+        
+        Api.uploadMultipleFiles(formData)
+        .then((res) => {
+          setMyImages([res[0], ...myImages])
+          closeAllPopups()
+          setPopupMessage("Ad added successful!")
+          setMyAds([res, ...myAds])
+          openSuccessfulActionPopup()
+          //adCountIncrement(userId)
+          closeLoading()
+        })
+        .then(()=> {
+          //getAllItems()
+          navigate(`/users/${userId}`)
+        })
+        .catch((err)=> {
+          closeAllPopups()
+          setPopupMessage("Something wrong, plese try again")
+          openSuccessfulActionPopup()
+          closeLoading()
+        })
+      }else {
+          closeAllPopups()
+          setPopupMessage("Ad added successful!")
+          setMyAds([res, ...myAds])
+          openSuccessfulActionPopup()
+          //adCountIncrement(userId)
+          closeLoading()
+          navigate(`/users/${userId}`)
+      }
+    })
+    .catch((err)=> {
+      closeAllPopups()
+      setPopupMessage("Something wrong, please try again")
+      openSuccessfulActionPopup()
+      closeLoading()
+    })
+  }
 
   return {
     getAllItems,
     deleteMyAd,
     getMyItems,
     getItemById, 
+    getItemsByParentId,
+    startItemsSecondPage,
+    itemsSecondPageSearch,
+    handleAddAdSubmit,
   };
 }

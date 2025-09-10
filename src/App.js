@@ -58,9 +58,6 @@ function App() {
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
 
-  const [itemsSecondPageSearch, setItemsSecondPageSearch] = React.useState([])//items
-  const [startItemsSecondPage, setStartItemsSecondPage] = React.useState([])//items
-
   const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
 
   const [selectedItem, setSelectedItem] = React.useState([])
@@ -146,73 +143,11 @@ function App() {
     }
   }
 
-  async function getItemsByParentId(parent_id) {
-    openLoading()
-    try {
-      const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
-      setStartItemsSecondPage(res)
-      setItemsSecondPageSearch(res)
-      closeLoading()
-    } catch (err) {
-      console.log(err);
-      closeLoading()
-    }
-  }
-
   React.useEffect(()=>{
     getCategory()
     getAllItems()
     //getUnreadbleMessages(userId)
   },[])
-
-  function handleAddAdSubmit(data) {
-    openLoading()
-    const { formData, ...otherData } = data;
-    Api.createItem(otherData)
-    .then((res)=> {
-      if(formData) {
-        const id = res.item_id
-        const str_item_id = Number(id)
-        formData.append('str_item_id', str_item_id); 
-        formData.append('user_id', userId); 
-        
-        Api.uploadMultipleFiles(formData)
-        .then((res) => {
-          setMyImages([res[0], ...myImages])
-          closeAllPopups()
-          setPopupMessage("Ad added successful!")
-          setMyAds([res, ...myAds])
-          openSuccessfulActionPopup()
-          //adCountIncrement(userId)
-          closeLoading()
-        })
-        .then(()=> {
-          //getAllItems()
-          navigate(`/users/${userId}`)
-        })
-        .catch((err)=> {
-          closeAllPopups()
-          setPopupMessage("Something wrong, plese try again")
-          openSuccessfulActionPopup()
-          closeLoading()
-        })
-      }else {
-          closeAllPopups()
-          setPopupMessage("Ad added successful!")
-          setMyAds([res, ...myAds])
-          openSuccessfulActionPopup()
-          //adCountIncrement(userId)
-          closeLoading()
-          navigate(`/users/${userId}`)
-      }
-    })
-    .catch((err)=> {
-      closeAllPopups()
-      setPopupMessage("Something wrong, please try again")
-      openSuccessfulActionPopup()
-      closeLoading()
-    })
-  }
 
   function getUserById(user_id) {
     openLoading()
@@ -352,6 +287,8 @@ function updatePassword(email, newPassword) {
     })
   }
 
+
+
   const {
     closeAllPopups,
     openSuccessfulActionPopup,
@@ -374,6 +311,23 @@ function updatePassword(email, newPassword) {
     setPopupMessage,
     setSuccessfulActionPopup,
   } = usePopup({setReceiverId, myAds, setItemId, setItemIdDelete});
+
+  const {
+    getAllItems,
+    deleteMyAd,
+    getMyItems,
+    getItemById,
+    getItemsByParentId,
+    startItemsSecondPage,
+    itemsSecondPageSearch,
+    setItemsSecondPageSearch,
+    setStartItemsSecondPage,
+    handleAddAdSubmit,
+  } = useItem({
+    setItemsAfterSearch, setLastFoutryItems, setItemsAfterSearch, openLoading, 
+    closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, 
+    setIsLoading, setMyImages, openSuccessfulActionPopup, userId, myImages, setPopupMessage, myAds, setMyAds,
+  })
 
   const {
     getCategory,
@@ -433,13 +387,6 @@ function updatePassword(email, newPassword) {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
     });
-
-  const {
-    getAllItems,
-    deleteMyAd,
-    getMyItems,
-    getItemById,
-  } = useItem({setItemsAfterSearch, setMyAds, setLastFoutryItems, setItemsAfterSearch, setItemsSecondPageSearch, openLoading, closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading,})
 
   useEffect(() => {
     getMyFavorites(userId,lastFourtyItems)

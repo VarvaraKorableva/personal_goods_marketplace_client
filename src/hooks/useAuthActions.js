@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import * as Api from '../Api/Api'
 
 export default function useAuthActions({ 
@@ -8,10 +8,10 @@ export default function useAuthActions({
     setMyAds, 
  }) {
 
-    const [isEmailConfirmed, setIsEmailConfirmed] = React.useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
-    const [isVerificationCodeSent, setIsVerificationCodeSent] = React.useState(false) 
-    const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = React.useState('') 
-    const [isRegError, setIsRegError] = React.useState(false)
+    const [isEmailConfirmed, setIsEmailConfirmed] = useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
+    const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false) 
+    const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = useState('') 
+    const [isRegError, setIsRegError] = useState(false)
 
     const navigate = useNavigate()
 
