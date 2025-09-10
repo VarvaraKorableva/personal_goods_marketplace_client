@@ -6,6 +6,8 @@ function OneMyMessage({message, deleteOneMessage, userName}) {
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
 
+    const isMyMessage = message.sender_id === userId;
+
     function onMessagesDelete() {
         deleteOneMessage(message.message_id)
     }

@@ -1,7 +1,7 @@
 .conversationPage__wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: flex-start;
     margin: auto;
     padding-bottom: 250px;
@@ -107,6 +107,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     margin: auto;
 }
