@@ -56,11 +56,6 @@ export default function useFilters({openLoading, closeLoading, setPopupMessage, 
         handleGetItemsByFilter,
         handleCityPriceAndConditionChange,
         handleTitleChange,
-        city,
-        lowPrice,
-        highPrice,
-        condition,
-        title,
         itemsAfterSearch,
   };
 }

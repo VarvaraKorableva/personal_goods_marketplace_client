@@ -6,9 +6,12 @@ import useMessages from "./hooks/useMessages";
 import useCategory from "./hooks/category/useCategory"
 import usePopup from "./hooks/popups/usePopups"
 import useFilters from "./hooks/items/useFilters"
+import useUser from "./hooks/useUser"
+import useLoading from "./hooks/useLoading"
+import useScroll from "./hooks/useScroll"
 
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
 import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
@@ -54,96 +57,39 @@ function App() {
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
   const [selectedItem, setSelectedItem] = React.useState([])
-  const [userInfo, setUserInfo] = React.useState([])
-  const [isGood, setIsGood] = React.useState(true)
+  
   const [isLoginError, setIsLoginError] = React.useState(false)
-  const [page, setPage] = React.useState(1);
-  const [isPageItemsLoading, setIsPageItemsLoading] = React.useState(false);
+  
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
-  const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
-  const [isLoading, setIsLoading] = React.useState(false) 
+  
   const [limit, setLimit] = React.useState(3)
+
   const addAds = () => setLimit(limit + 3);
+
   const userId = currentUser.user_id
-  const navigate = useNavigate()
+  
   const location = useLocation();
   
-
-  function openLoading() {
-    setIsLoading(true)
-  }
-
-  function closeLoading() {
-    setIsLoading(false)
-  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const handleScroll = () => {
-    const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
-  
-    if (bottom && !isPageItemsLoading && lastFourtyItems.length < totalCountOfAds) {
-      setIsPageItemsLoading(true);
-      setPage(prevPage => prevPage + 1);
-    }
-  };
-  
-  const handleTouchScroll = () => {
-    handleScroll();
-  };
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchmove', handleTouchScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('touchmove', handleTouchScroll);
-    };
-  }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
 
   React.useEffect(()=>{
     getCategory()
     getAllItems()
   },[])
 
-  function getUserById(user_id) {
-    openLoading()
-    Api.getUserById(user_id)
-    .then((res) => {
-      setUserInfo(res)
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
-  //don't need anymore
-  /*
-  function startToSearch(keyWord) {
-    const keywordLowerCase = keyWord.toLowerCase()
-    setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-  }*/
-  /*
-  function startToSearchSecondPage (keyWord) {
-    const keywordLowerCase = keyWord.toLowerCase()
-    setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-  }*/
-
-  function handleAddAdClick(data){
-    setIsGood(data)
-
-    data?
-    navigate(`/add-ad`) 
-    :
-    navigate(`/add-new-service`)
-    
-    closeAllPopups()
-  }
+  const {
+    openLoading,
+    closeLoading,
+    isLoading,
+    isPageItemsLoading,
+    setIsPageItemsLoading
+  } = useLoading();
 
   const {
     closeAllPopups,
@@ -153,20 +99,20 @@ function App() {
     openEditPopup,
     openDeletePopup,
     handleChoiceOfProductOrServicePopupClick,
-
     isChoiceOfProductOrServicePopup,
     isSuccessfulActionPopup,
     isFirstMessagePopup,
     isEditPopup,
     isDeletePopup,
     popupMessage,
-    isOneConversationPopup,
     isBurgerMenuPopup,
     editPopupName,
     popupEditItemId,
     setPopupMessage,
     setSuccessfulActionPopup,
     itemIdDelete,
+    handleAddAdClick,
+    isGood,
   } = usePopup({setReceiverId, myAds, setItemId, });
 
   const {
@@ -175,11 +121,6 @@ function App() {
     handleGetItemsByFilter,
     handleCityPriceAndConditionChange,
     handleTitleChange,
-    city,
-    lowPrice,
-    highPrice,
-    condition,
-    title,
     itemsAfterSearch,
   } = useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup,});
 
@@ -199,8 +140,14 @@ function App() {
   } = useItem({
     setItemsAfterSearch, setLastFoutryItems, openLoading, 
     closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, 
-    setIsLoading, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
+    openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
   })
+
+  const {
+    handleScroll,
+    handleTouchScroll,
+    page,
+  } = useScroll({setIsPageItemsLoading, isPageItemsLoading, lastFourtyItems, totalCountOfAds });
 
   const {
     getCategory,
@@ -233,11 +180,17 @@ function App() {
     deleteOneMessage,
     markMessagesAsRead,
     getUnreadbleMessages,
+    unreadbleMessages,
   } = useMessages(
     userId, {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
     });
+  
+  const {
+    getUserById,
+    userInfo,
+  } = useUser({openLoading, closeLoading,});
 
   const {
     sendVerificationCode,
@@ -262,6 +215,15 @@ function App() {
     updateCondition,
     handleUpdateIsReserved,
   } = useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,})
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('touchmove', handleTouchScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchmove', handleTouchScroll);
+    };
+  }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
 
   useEffect(() => {
     getMyFavorites(userId,lastFourtyItems)

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function useItem({
   setItemsAfterSearch, setLastFoutryItems, openLoading, closeLoading, closeAllPopups, 
-  setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading, 
+  setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, 
   openSuccessfulActionPopup, 
   userId, setPopupMessage, myAds, setMyAds,
 }) {
@@ -71,7 +71,6 @@ export default function useItem({
     Api.getItemById(item_id)
     .then((res)=> {
       setSelectedItem(res)
-      setIsLoading(false)
       closeLoading()
     })
     .catch((err) => {
