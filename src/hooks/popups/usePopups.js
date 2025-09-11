@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import * as Api from '../../Api/Api'
 
-export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDelete}) {
+export default function usePopups({setReceiverId, myAds, setItemId,}) {
 
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
@@ -14,6 +14,7 @@ export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDel
   const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
   const [editPopupName, setEditPopupName] = React.useState('') 
   const [popupEditItemId, setPopupEditItemId] = React.useState(0)
+  const [itemIdDelete, setItemIdDelete] = React.useState(0)
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
@@ -81,6 +82,7 @@ export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDel
     popupEditItemId,
     setPopupMessage,
     setSuccessfulActionPopup,
+    itemIdDelete,
   };
 
 };

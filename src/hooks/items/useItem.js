@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom'
 export default function useItem({
   setItemsAfterSearch, setLastFoutryItems, openLoading, closeLoading, closeAllPopups, 
   setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading, 
-  setMyImages, openSuccessfulActionPopup, 
-  userId, myImages, setPopupMessage, myAds, setMyAds,
+  openSuccessfulActionPopup, 
+  userId, setPopupMessage, myAds, setMyAds,
 }) {
   const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
   const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
+  const [myImages, setMyImages] = useState([])
 
   const navigate = useNavigate()
 
@@ -141,6 +142,19 @@ export default function useItem({
     })
   }
 
+  async function getItemsByCategoryCategoryId(category_id) {
+    openLoading()
+    try {
+      const res = await Api.getItemsByCategory(category_id)
+      setStartItemsSecondPage(res)
+      setItemsSecondPageSearch(res)
+      closeLoading()
+    } catch (err) {
+      console.log(err);
+      closeLoading()
+    }
+  }
+
   return {
     getAllItems,
     deleteMyAd,
@@ -150,5 +164,7 @@ export default function useItem({
     startItemsSecondPage,
     itemsSecondPageSearch,
     handleAddAdSubmit,
+    getItemsByCategoryCategoryId,
+    myImages,
   };
 }

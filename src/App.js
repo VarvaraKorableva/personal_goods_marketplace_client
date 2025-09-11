@@ -5,6 +5,7 @@ import useAuthActions from "./hooks/useAuthActions";
 import useMessages from "./hooks/useMessages";
 import useCategory from "./hooks/category/useCategory"
 import usePopup from "./hooks/popups/usePopups"
+import useFilters from "./hooks/items/useFilters"
 
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
@@ -49,49 +50,23 @@ import ConversationPage from './Pages/ConversationPage/ConversationPage'
 function App() {
   const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
-
-  const [itemIdDelete, setItemIdDelete] = React.useState(0)
-  
   const [myAds, setMyAds] = React.useState([])
-  const [myImages, setMyImages] = React.useState([])
-
   const [lastFourtyItems, setLastFoutryItems] = React.useState([])
   const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
-
-  const [itemsAfterSearch, setItemsAfterSearch] = React.useState([])
-
   const [selectedItem, setSelectedItem] = React.useState([])
   const [userInfo, setUserInfo] = React.useState([])
-  
   const [isGood, setIsGood] = React.useState(true)
   const [isLoginError, setIsLoginError] = React.useState(false)
-
-
   const [page, setPage] = React.useState(1);
   const [isPageItemsLoading, setIsPageItemsLoading] = React.useState(false);
-
-  //for messages 
   const [receiverId, setReceiverId] = React.useState('')
-  const [itemId, setItemId] = React.useState('')
-
-  //filter query
-  const [city, setCity] = React.useState('') 
-  const [lowPrice, setLowPrice] = React.useState(0) 
-  const [highPrice, setHighPrice] = React.useState(0) 
-  const [condition, setCondition] = React.useState('') 
-  const [title, setTitle] = React.useState('') 
-
+  const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
-
   const [unreadbleMessages, setUnreadbleMessages]= React.useState([])
-
   const [isLoading, setIsLoading] = React.useState(false) 
-
   const [limit, setLimit] = React.useState(3)
-
   const addAds = () => setLimit(limit + 3);
   const userId = currentUser.user_id
-
   const navigate = useNavigate()
   const location = useLocation();
   
@@ -130,23 +105,9 @@ function App() {
     };
   }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
 
-  async function getItemsByCategoryCategoryId(category_id) {
-    openLoading()
-    try {
-      const res = await Api.getItemsByCategory(category_id)
-      setStartItemsSecondPage(res)
-      setItemsSecondPageSearch(res)
-      closeLoading()
-    } catch (err) {
-      console.log(err);
-      closeLoading()
-    }
-  }
-
   React.useEffect(()=>{
     getCategory()
     getAllItems()
-    //getUnreadbleMessages(userId)
   },[])
 
   function getUserById(user_id) {
@@ -167,11 +128,11 @@ function App() {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsAfterSearch(lastFourtyItems.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
   }*/
-
+  /*
   function startToSearchSecondPage (keyWord) {
     const keywordLowerCase = keyWord.toLowerCase()
     setItemsSecondPageSearch(startItemsSecondPage.filter((item) => item.title.toLowerCase().includes(keywordLowerCase)))
-  }
+  }*/
 
   function handleAddAdClick(data){
     setIsGood(data)
@@ -182,46 +143,6 @@ function App() {
     navigate(`/add-new-service`)
     
     closeAllPopups()
-  }
-
-  function handleTitleChange(keyWord) {
-    setTitle(keyWord)
-  }
-
-  function handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, highPriceFromInput, conditionFromInput) {
-    setCity(cityFromInput)
-    setLowPrice(lowPriceFromInput)
-    setHighPrice(highPriceFromInput)
-    setCondition(conditionFromInput)
-  }
-
-  function resetAllfilters() {
-    setCity('')
-    setLowPrice(0)
-    setHighPrice(0)
-    setCondition('')
-  }
-
-  function handleGetItemsByFilter() {
-    openLoading()
-    const filters = {
-      city: city,
-      lowPrice: lowPrice,
-      highPrice: highPrice,
-      condition: condition,
-      title: title,
-    };
-
-    Api.getItemsByFilter(filters)
-    .then((res) => {
-      setItemsAfterSearch(res)
-      closeLoading()
-    })
-    .catch((err) => {
-      closeLoading()
-      setPopupMessage("Something wrong, plese try again")
-      openSuccessfulActionPopup()
-    })
   }
 
   const {
@@ -245,7 +166,22 @@ function App() {
     popupEditItemId,
     setPopupMessage,
     setSuccessfulActionPopup,
-  } = usePopup({setReceiverId, myAds, setItemId, setItemIdDelete});
+    itemIdDelete,
+  } = usePopup({setReceiverId, myAds, setItemId, });
+
+  const {
+    setItemsAfterSearch,
+    resetAllfilters,
+    handleGetItemsByFilter,
+    handleCityPriceAndConditionChange,
+    handleTitleChange,
+    city,
+    lowPrice,
+    highPrice,
+    condition,
+    title,
+    itemsAfterSearch,
+  } = useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup,});
 
   const {
     getAllItems,
@@ -258,10 +194,12 @@ function App() {
     setItemsSecondPageSearch,
     setStartItemsSecondPage,
     handleAddAdSubmit,
+    getItemsByCategoryCategoryId,
+    myImages,
   } = useItem({
-    setItemsAfterSearch, setLastFoutryItems, setItemsAfterSearch, openLoading, 
+    setItemsAfterSearch, setLastFoutryItems, openLoading, 
     closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, 
-    setIsLoading, setMyImages, openSuccessfulActionPopup, userId, myImages, setPopupMessage, myAds, setMyAds,
+    setIsLoading, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
   })
 
   const {
@@ -450,7 +388,6 @@ function App() {
               getItemById={getItemById} 
               lastFourtyItems={lastFourtyItems}
               itemsSecondPageSearch={itemsSecondPageSearch}
-              startToSearchSecondPage={startToSearchSecondPage}
               isLoggin={isLoggin}
               favorite={favorite}
               favoriteItems={favoriteItems}
