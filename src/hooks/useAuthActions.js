@@ -1,13 +1,29 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import * as Api from '../Api/Api'
+import { useItemsContext } from "../contexts/ItemsContext";
 
 export default function useAuthActions({ 
-    setIsLoggin, setCurrentUser, resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
-    setIsLoginError, getMyFavorites, getUnreadbleMessages, lastFourtyItems,
-    setMyAds, 
+    resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
+    getMyFavorites, getUnreadbleMessages, 
+    setMyAds, currentUser, setCurrentUser
  }) {
+ 
+  const {
+      lastFourtyItems,
+      setLastFourtyItems,
+      itemsAfterSearch,
+      setItemsAfterSearch,
+      totalCountOfAds,
+      setTotalCountOfAds,
+      page,
+      setPage,
+      isPageItemsLoading,
+      setIsPageItemsLoading,
+    } = useItemsContext();
 
+    const [isLoginError, setIsLoginError] = useState(false)
+    const [isLoggin, setIsLoggin] = useState(localStorage.getItem('user') == null ? false : true)
     const [isEmailConfirmed, setIsEmailConfirmed] = useState(false) ///использовать при разверешии или нет для перехода на страницу регистрации
     const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false) 
     const [isVerificationCodeSentMessage, setIsVerificationCodeSentMessage] = useState('') 
@@ -167,6 +183,8 @@ export default function useAuthActions({
     handleRegSubmit,
     isRegError,
     updatePassword,
+    isLoggin,
+    isLoginError,
   };
 
 };

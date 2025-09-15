@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import noPictures from '../../images/nopictures.png'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
+//import { useItemsContext } from "../../contexts/ItemsContext";
 
 function OneAd({
     isLoggin, item, getItemById, 
@@ -12,8 +13,6 @@ function OneAd({
     deleteFromFavorites, favorite, 
     favoriteItems, openFirstMessagePopup, handleUpdateIsReserved,
 }) {
-
- console.log('favoriteItems', favoriteItems)
 
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
@@ -98,19 +97,21 @@ function OneAd({
             }
             
               <Link to={`/items/${item.item_id}`} className="oneAdd__main-pic-wrapper">
+                <>
                 {item.images?
                   <img className="oneAdd__main-pic" alt = {item.title} src={item.images[0]}></img>
                 : 
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
-              </Link>
-            <div className="oneAdd__pic-and-info-container"> 
-             
                 {isLoggin && (currentUser.user_id !== item.owner_id) && item.reserved ?
                     <p className="oneAdd__reserved-text">Зарезервировано</p>
                     :
                     <></>
                 }
+                </>
+              </Link>
+            <div className="oneAdd__pic-and-info-container"> 
+            
               <div className="oneAdd__text-container">
               <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
               

@@ -7,9 +7,22 @@ import {Link} from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/favoritesPageData'
 import BackBtn from '../../UK-kit/BackBtn'
+import { useItemsContext } from "../../contexts/ItemsContext";
 
-function MyFavoritesPage({getMyFavorites, deleteFromFavorites, favorite, lastFourtyItems, favoriteItems}) {
+function MyFavoritesPage({ deleteFromFavorites, favorite, favoriteItems}) {
     const currentUser = React.useContext(CurrentUserContext)
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+      } = useItemsContext();
 
     const navigate = useNavigate()
 

@@ -3,17 +3,30 @@ import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
 import './CategoryPage.css'
 import BackBtn from '../../../UK-kit/BackBtn'
+import { useItemsContext } from "../../../contexts/ItemsContext";
 
 function CategoryPage({
     favorite, 
     openDeletePopup, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
-    favoriteItems, lastFourtyItems,  chooseCategory, 
+    favoriteItems, chooseCategory, 
     categoriesToRender, itemsSecondPageSearch,
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, adsCategoryName,
 }) {
 
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+      } = useItemsContext();
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')
     
     return(
@@ -43,7 +56,7 @@ function CategoryPage({
                 {itemsSecondPageSearch.reverse().map((item) => (
                     <OneAd
                         key={item.item_id} 
-                        lastFourtyItems={lastFourtyItems} 
+                        
                         getItemById={getItemById} 
                         addToFavorites={addToFavorites}
                         deleteFromFavorites={deleteFromFavorites}

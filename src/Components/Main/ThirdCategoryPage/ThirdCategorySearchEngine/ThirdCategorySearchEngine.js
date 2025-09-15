@@ -1,7 +1,7 @@
 import React from 'react'
 import './ThirdCategorySearchEngine.css'
 
-function ThirdCategorySearchEngine({lastFourtyItems, categories, startToSearch}) {
+function ThirdCategorySearchEngine({startToSearch}) {
     const [keyWord, setKeyWord] = React.useState('')
 
     function handleTakeKeyWord(e) {

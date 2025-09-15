@@ -1,12 +1,26 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
+import { useItemsContext } from "../../../contexts/ItemsContext";
 
 function ItemsContainer({
-    isLoggin, itemsAfterSearch, 
+    isLoggin,
     getItemById, 
     addToFavorites, deleteFromFavorites, 
     favorite, favoriteItems, openDeletePopup, openFirstMessagePopup, handleUpdateIsReserved, updateItemCity,
 }) {
+    
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+      } = useItemsContext();
 
     return(
         <ul className="itemsContainer-listings-container">

@@ -2,8 +2,21 @@
 
 import OneAd from '../../../OneAd/OneAd'
 import './ThirdCategoryItemsContainer.css';
+import { useItemsContext } from "../../contexts/ItemsContext";
 
-function ThirdCategoryItemsContainer({itemsAfterSearch, lastFourtyItems, getItemById, addToFavorites, deleteFromFavorites, favorite}) {
+function ThirdCategoryItemsContainer({ getItemById, addToFavorites, deleteFromFavorites, favorite }) {
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+      } = useItemsContext();
 
     return(
         <ul className="thirdCategoryItemsContainer-listings-container">

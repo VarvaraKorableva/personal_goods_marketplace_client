@@ -4,23 +4,40 @@ import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
 import FilterBtnContainer from './FilterBtnContainer/FilterBtnContainer'
 import './Main.css'
+//import useScroll from "../../hooks/useScroll"
+import { useItemsContext } from "../../contexts/ItemsContext";
 
 function Main({
     categoriesToRender, isLoggin, 
-    itemsAfterSearch, favorite, getAllItems,
-    categories, onChooseCategory, lastFourtyItems, totalCountOfAds,
+    favorite, getAllItems,
+    categories, onChooseCategory,
     getItemById, addToFavorites,
     deleteFromFavorites, favoriteItems, openDeletePopup, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange,
-    resetAllfilters, page, isPageItemsLoading}) {
+    resetAllfilters, handleScroll,
+    getCategory, userId, getMyFavorites,
+}) {
+
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+      } = useItemsContext();
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
-    
+   /* 
     React.useEffect(() => {
         window.scrollTo(0, 0);
-      }, []);
+      }, []);*/
 
     function getTitle(keyWord) {
         setSearchByKeyWord(keyWord)
@@ -34,12 +51,22 @@ function Main({
         setSearchByKeyWord('')
     }
 
-    React.useEffect(() => {
-        if (page > 1) {
-          getAllItems({ page, limit: 20 });
-          console.log('main') 
+
+      React.useEffect(()=>{
+        getCategory()
+        if(userId) {
+          getMyFavorites(userId, lastFourtyItems)
         }
-    }, [page]);
+        if (lastFourtyItems.length === 0) {
+            getAllItems(1);
+          }
+      },[])
+    
+      React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+        
+      }, [handleScroll]);
 
     return(
         <section className='main__section'>
@@ -85,8 +112,6 @@ function Main({
             }
 
             <ItemsContainer 
-                itemsAfterSearch = {itemsAfterSearch}
-                lastFourtyItems = {lastFourtyItems} 
                 getItemById = {getItemById} 
                 addToFavorites = {addToFavorites}
                 deleteFromFavorites = {deleteFromFavorites}

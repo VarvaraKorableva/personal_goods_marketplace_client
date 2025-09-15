@@ -1,9 +1,23 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
+import { useItemsContext } from "../../contexts/ItemsContext";
 
 export default function useItemFavorites(openLoading, closeLoading) {
   const [favorite, setFavorite] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
+  
+  const {
+    lastFourtyItems,
+    setLastFourtyItems,
+    itemsAfterSearch,
+    setItemsAfterSearch,
+    totalCountOfAds,
+    setTotalCountOfAds,
+    page,
+    setPage,
+    isPageItemsLoading,
+    setIsPageItemsLoading,
+    } = useItemsContext();
 
   const addToFavorites = (favorite_collector_id, item_id, item) => {
     openLoading();

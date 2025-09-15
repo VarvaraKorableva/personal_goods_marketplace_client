@@ -8,14 +8,17 @@ import usePopup from "./hooks/popups/usePopups"
 import useFilters from "./hooks/items/useFilters"
 import useUser from "./hooks/useUser"
 import useLoading from "./hooks/useLoading"
-import useScroll from "./hooks/useScroll"
+import useScroll from "./hooks/useScroll";
+
+import './App.css'
 
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
+
 import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
-import * as Api from './Api/Api'
+
 import Registration from './Components/Registration/Registration'
 import RegistrationFirstStage from './Components/Registration/RegistrationFirstStage'
 import Login from './Components/Login/Login'
@@ -24,12 +27,9 @@ import Main from './Components/Main/Main'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import MyMessages from './Components/MyPage/MyMessages/MyMessages'
-//import OneMessagePage from './Components/MyPage/MyMessages/OneMessagePage'
 import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
 import RulesPublicationsPage from './Pages/RulesPublicationsPage/RulesPublicationsPage'
 import Preloader from './Components/Preloader/Preloader'
-
-import './App.css'
 import AdminPage from './Pages/AdminPage/AdminPage'
 import ChangeCategoryPage from './Pages/AdminPage/ChangeCategoryPage/ChangeCategoryPage'
 import AddAdPage from './Pages/AddAdPage/AddAdPage'
@@ -47,48 +47,23 @@ import AddServicesPage from './Pages/AddServicesPage/AddServicesPage'
 import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
 import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage'
 import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequestPage/PasswordRecoveryCodeRequestPage'
-
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 
 function App() {
-  const [isLoggin, setIsLoggin] = React.useState(localStorage.getItem('user') == null ? false : true)
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
+  const userId = currentUser.user_id
   const [myAds, setMyAds] = React.useState([])
-  const [lastFourtyItems, setLastFoutryItems] = React.useState([])
-  const [totalCountOfAds, setTotalCountOfAds] = React.useState(0)
-  const [selectedItem, setSelectedItem] = React.useState([])
-  
-  const [isLoginError, setIsLoginError] = React.useState(false)
-  
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
-  
-  const [limit, setLimit] = React.useState(3)
-
-  const addAds = () => setLimit(limit + 3);
-
-  const userId = currentUser.user_id
-  
+  const [limit, setLimit] = React.useState(5)
+  const addAds = () => setLimit(limit + 5);
   const location = useLocation();
-  
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
-
-
-  React.useEffect(()=>{
-    getCategory()
-    getAllItems()
-  },[])
 
   const {
     openLoading,
     closeLoading,
     isLoading,
-    isPageItemsLoading,
-    setIsPageItemsLoading
   } = useLoading();
 
   const {
@@ -116,38 +91,33 @@ function App() {
   } = usePopup({setReceiverId, myAds, setItemId, });
 
   const {
-    setItemsAfterSearch,
     resetAllfilters,
     handleGetItemsByFilter,
     handleCityPriceAndConditionChange,
     handleTitleChange,
-    itemsAfterSearch,
   } = useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup,});
 
   const {
     getAllItems,
     deleteMyAd,
     getMyItems,
-    getItemById,
+    getItemById, 
     getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
-    setItemsSecondPageSearch,
-    setStartItemsSecondPage,
+    myImages,
+    selectedItem,
     handleAddAdSubmit,
     getItemsByCategoryCategoryId,
-    myImages,
   } = useItem({
-    setItemsAfterSearch, setLastFoutryItems, openLoading, 
-    closeLoading, closeAllPopups, setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, 
-    openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
+    openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
   })
 
-  const {
-    handleScroll,
-    handleTouchScroll,
-    page,
-  } = useScroll({setIsPageItemsLoading, isPageItemsLoading, lastFourtyItems, totalCountOfAds });
+  const { 
+    handleScroll 
+  } = useScroll({ 
+    getAllItems, 
+  });
 
   const {
     getCategory,
@@ -186,11 +156,6 @@ function App() {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
     });
-  
-  const {
-    getUserById,
-    userInfo,
-  } = useUser({openLoading, closeLoading,});
 
   const {
     sendVerificationCode,
@@ -203,10 +168,18 @@ function App() {
     handleRegSubmit,
     isRegError,
     updatePassword,
+    isLoggin,
+    isLoginError,
+
   } = useAuthActions({
-    setIsLoggin, setCurrentUser, resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
-    setIsLoginError, getMyFavorites, getUnreadbleMessages, lastFourtyItems, setMyAds,
+    resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
+    getMyFavorites, getUnreadbleMessages, setMyAds, currentUser, setCurrentUser
   })
+  
+  const {
+    getUserById,
+    userInfo,
+  } = useUser({openLoading, closeLoading,});
 
   const {
     updateDescription,
@@ -216,20 +189,12 @@ function App() {
     handleUpdateIsReserved,
   } = useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,})
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchmove', handleTouchScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('touchmove', handleTouchScroll);
-    };
-  }, [isPageItemsLoading, lastFourtyItems, totalCountOfAds]);
-
   useEffect(() => {
-    getMyFavorites(userId,lastFourtyItems)
-  }, []);
-  
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
+    
     <LanguageProvider>
     <CurrentUserContext.Provider value={currentUser}>  
     <Header 
@@ -241,7 +206,7 @@ function App() {
     />
 
     <div className='App'>
-
+    
       <Routes>
         <Route
           path="/signup"
@@ -313,14 +278,11 @@ function App() {
               onChooseCategory={chooseCategory}
               getItemById={getItemById}
               categories={categories}
-              lastFourtyItems={lastFourtyItems} //Need, because of search
-              totalCountOfAds={totalCountOfAds}
               addToFavorites={addToFavorites}
               openDeletePopup={openDeletePopup}
               deleteFromFavorites={deleteFromFavorites}
               favorite={favorite}
               favoriteItems={favoriteItems}
-              itemsAfterSearch={itemsAfterSearch}
               isLoggin={isLoggin}
               openFirstMessagePopup={openFirstMessagePopup}
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
@@ -331,8 +293,10 @@ function App() {
               handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
               resetAllfilters={resetAllfilters}
               getAllItems={getAllItems}
-              page={page}
-              isPageItemsLoading={isPageItemsLoading}
+              handleScroll={handleScroll}
+              getCategory={getCategory}
+              userId={userId} 
+              getMyFavorites={getMyFavorites}
             />
           }
         />
@@ -348,7 +312,7 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               getItemById={getItemById} 
-              lastFourtyItems={lastFourtyItems}
+              
               itemsSecondPageSearch={itemsSecondPageSearch}
               isLoggin={isLoggin}
               favorite={favorite}
@@ -501,7 +465,7 @@ function App() {
               <MyFavoritesPage 
                 getMyFavorites={getMyFavorites}
                 favorite={favorite}
-                lastFourtyItems={lastFourtyItems}
+                
                 favoriteItems={favoriteItems}
                 deleteFromFavorites={deleteFromFavorites}
                 
@@ -599,6 +563,7 @@ function App() {
     <Footer handleLogout={handleLogout}></Footer>
     </CurrentUserContext.Provider>  
     </LanguageProvider>
+    
   );
 }
 

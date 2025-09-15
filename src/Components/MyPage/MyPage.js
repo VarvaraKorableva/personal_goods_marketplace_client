@@ -24,10 +24,10 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handl
       } else if (language === 'hebrew') {
         translatedContext = hebrew;
     }
-
+/*
     React.useEffect(() => {
         window.scrollTo(0, 0);
-      }, []);
+      }, []);*/
 
     function onLogout() {
         handleLogout()

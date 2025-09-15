@@ -1,14 +1,26 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
+import { useItemsContext } from "../../contexts/ItemsContext";
 
 export default function useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup, }) {
-    //filter query
+  const {
+    lastFourtyItems,
+    setLastFourtyItems,
+    itemsAfterSearch,
+    setItemsAfterSearch,
+    totalCountOfAds,
+    setTotalCountOfAds,
+    page,
+    setPage,
+    isPageItemsLoading,
+    setIsPageItemsLoading,
+  } = useItemsContext();
+
     const [city, setCity] = useState('') 
     const [lowPrice, setLowPrice] = useState(0) 
     const [highPrice, setHighPrice] = useState(0) 
     const [condition, setCondition] = useState('') 
     const [title, setTitle] = useState('') 
-    const [itemsAfterSearch, setItemsAfterSearch] = useState([])
 
     const resetAllfilters = () => {
         setCity('')
@@ -51,11 +63,9 @@ export default function useFilters({openLoading, closeLoading, setPopupMessage, 
       }
 
   return {
-        setItemsAfterSearch,
         resetAllfilters,
         handleGetItemsByFilter,
         handleCityPriceAndConditionChange,
         handleTitleChange,
-        itemsAfterSearch,
   };
 }
