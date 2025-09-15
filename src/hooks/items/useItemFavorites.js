@@ -1,11 +1,17 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
 import { useItemsContext } from "../../contexts/ItemsContext";
+import { useFavorites } from "../../contexts/FavoritesContext"
 
 export default function useItemFavorites(openLoading, closeLoading) {
-  const [favorite, setFavorite] = useState([]);
-  const [favoriteItems, setFavoriteItems] = useState([]);
-  
+//
+const {
+    favorite, 
+    setFavorite, 
+    favoriteItems,
+    setFavoriteItems
+  } = useFavorites();
+
   const {
     lastFourtyItems,
     setLastFourtyItems,
@@ -72,8 +78,6 @@ export default function useItemFavorites(openLoading, closeLoading) {
   };
 
   return {
-    favorite,
-    favoriteItems,
     addToFavorites,
     deleteFromFavorites,
     getMyFavorites,

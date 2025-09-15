@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ItemsProvider } from "./contexts/ItemsContext";
+import { FavoritesProvider } from "./contexts/FavoritesContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ItemsProvider>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <FavoritesProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </FavoritesProvider>
   </ItemsProvider>
 );
 

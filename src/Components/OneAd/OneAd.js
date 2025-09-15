@@ -6,18 +6,25 @@ import noPictures from '../../images/nopictures.png'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
 //import { useItemsContext } from "../../contexts/ItemsContext";
+import { useFavorites } from "../../contexts/FavoritesContext"
 
 function OneAd({
     isLoggin, item, getItemById, 
     openDeletePopup, addToFavorites, 
-    deleteFromFavorites, favorite, 
-    favoriteItems, openFirstMessagePopup, handleUpdateIsReserved,
+    deleteFromFavorites,
+    openFirstMessagePopup, handleUpdateIsReserved,
 }) {
-
+  
+    const {
+      favorite, 
+      setFavorite, 
+      favoriteItems,
+      setFavoriteItems
+    } = useFavorites();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
-    const isLiked = favoriteItems.some((i) => i.item_id === item.item_id)
+    const isLiked = favorite.some((i) => i.item_id === item.item_id)
 
     const { language } = React.useContext(LanguageContext)
 

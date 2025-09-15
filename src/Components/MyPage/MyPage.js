@@ -4,10 +4,9 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
 import BackBtn from '../../UK-kit/BackBtn'
-
 import './MyPage.css'
 
-function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handleLogout, getItemById, addToFavorites, deleteFromFavorites, favorite, favoriteItems, limit, addAds, handleUpdateIsReserved}) {
+function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handleLogout, getItemById, addToFavorites, deleteFromFavorites, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -84,8 +83,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handl
 
                                 addToFavorites={addToFavorites} 
                                 deleteFromFavorites={deleteFromFavorites}
-                                favorite={favorite}
-                                favoriteItems={favoriteItems}
+                                
                                 handleUpdateIsReserved={handleUpdateIsReserved}
                             />
                         ))}

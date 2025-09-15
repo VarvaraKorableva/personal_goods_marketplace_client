@@ -1,14 +1,24 @@
 import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
 import { useItemsContext } from "../../../contexts/ItemsContext";
+import { useFavorites } from "../../../contexts/FavoritesContext"
 
 function ItemsContainer({
     isLoggin,
     getItemById, 
     addToFavorites, deleteFromFavorites, 
-    favorite, favoriteItems, openDeletePopup, openFirstMessagePopup, handleUpdateIsReserved, updateItemCity,
+    openDeletePopup, openFirstMessagePopup, handleUpdateIsReserved, updateItemCity,
 }) {
+
     
+    const {
+        favorite, 
+        setFavorite, 
+        favoriteItems,
+        setFavoriteItems
+    } = useFavorites();
+    console.log('favorite', favorite)
+    console.log('favoriteItems',favoriteItems)
     const {
         lastFourtyItems,
         setLastFourtyItems,
@@ -33,7 +43,7 @@ function ItemsContainer({
                     deleteFromFavorites={deleteFromFavorites}
                     favorite={favorite}
                     isLoggin={isLoggin}
-                    favoriteItems={favoriteItems}
+                    
                     openDeletePopup={openDeletePopup}
                     openFirstMessagePopup = {openFirstMessagePopup}
                     handleUpdateIsReserved={handleUpdateIsReserved}

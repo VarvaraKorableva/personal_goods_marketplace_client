@@ -128,8 +128,6 @@ function App() {
   } = useCategory({closeLoading, openLoading, });
 
   const {
-    favorite,
-    favoriteItems,
     addToFavorites,
     deleteFromFavorites,
     getMyFavorites,
@@ -281,8 +279,6 @@ function App() {
               addToFavorites={addToFavorites}
               openDeletePopup={openDeletePopup}
               deleteFromFavorites={deleteFromFavorites}
-              favorite={favorite}
-              favoriteItems={favoriteItems}
               isLoggin={isLoggin}
               openFirstMessagePopup={openFirstMessagePopup}
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
@@ -315,8 +311,8 @@ function App() {
               
               itemsSecondPageSearch={itemsSecondPageSearch}
               isLoggin={isLoggin}
-              favorite={favorite}
-              favoriteItems={favoriteItems}
+              
+              
               getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
               getItemsByParentId={getItemsByParentId}
               openFirstMessagePopup={openFirstMessagePopup}
@@ -337,7 +333,6 @@ function App() {
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
-              favoriteItems={favoriteItems}
               openDeletePopup={openDeletePopup}
               openFirstMessagePopup={openFirstMessagePopup} 
               openEditPopup={openEditPopup}
@@ -393,8 +388,6 @@ function App() {
                 getItemById={getItemById}
                 addToFavorites={addToFavorites} 
                 deleteFromFavorites={deleteFromFavorites}
-                favorite={favorite}
-                favoriteItems={favoriteItems}
                 limit={limit}
                 addAds={addAds}
                 handleUpdateIsReserved={handleUpdateIsReserved}
@@ -451,8 +444,8 @@ function App() {
               getMyItems={getMyItems}
               getItemById={getItemById}
               isLoggin={isLoggin}
-              favoriteItems={favoriteItems}
-              favorite={favorite}
+            
+             
               openFirstMessagePopup={openFirstMessagePopup}
           />
           }>
@@ -464,9 +457,6 @@ function App() {
             <ProtectedRoute isLoggin={isLoggin}>
               <MyFavoritesPage 
                 getMyFavorites={getMyFavorites}
-                favorite={favorite}
-                
-                favoriteItems={favoriteItems}
                 deleteFromFavorites={deleteFromFavorites}
                 
               />

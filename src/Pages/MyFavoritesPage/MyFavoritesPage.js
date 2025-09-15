@@ -8,9 +8,17 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/favoritesPageData'
 import BackBtn from '../../UK-kit/BackBtn'
 import { useItemsContext } from "../../contexts/ItemsContext";
+import { useFavorites } from "../../contexts/FavoritesContext"
 
-function MyFavoritesPage({ deleteFromFavorites, favorite, favoriteItems}) {
+function MyFavoritesPage({ deleteFromFavorites,}) {
+  
     const currentUser = React.useContext(CurrentUserContext)
+    const {
+      favorite, 
+      setFavorite, 
+      favoriteItems,
+      setFavoriteItems
+    } = useFavorites();
     const {
         lastFourtyItems,
         setLastFourtyItems,
@@ -62,8 +70,6 @@ function MyFavoritesPage({ deleteFromFavorites, favorite, favoriteItems}) {
                         key={item.item_id} 
                         item={item}
                         deleteFromFavorites={deleteFromFavorites}
-                        favoriteItems={favoriteItems}
-                        favorite={favorite}
                         
                     />
                 ))}

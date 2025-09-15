@@ -9,10 +9,10 @@ import { useItemsContext } from "../../contexts/ItemsContext";
 
 function Main({
     categoriesToRender, isLoggin, 
-    favorite, getAllItems,
+    getAllItems,
     categories, onChooseCategory,
     getItemById, addToFavorites,
-    deleteFromFavorites, favoriteItems, openDeletePopup, 
+    deleteFromFavorites, openDeletePopup, 
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
     handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange,
     resetAllfilters, handleScroll,
@@ -115,8 +115,6 @@ function Main({
                 getItemById = {getItemById} 
                 addToFavorites = {addToFavorites}
                 deleteFromFavorites = {deleteFromFavorites}
-                favorite = {favorite}
-                favoriteItems = {favoriteItems}
                 isLoggin = {isLoggin}
                 openDeletePopup ={openDeletePopup}
                 openFirstMessagePopup = {openFirstMessagePopup}
