@@ -4,10 +4,15 @@ import React from 'react'
 import noPictures from '../../../images/nopictures.png'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/Timing'
+import { useFavorites } from "../../../contexts/FavoritesContext"
 
-function OneFavCard({item, deleteFromFavorites, favorite}) {
-    console.log('item', item)
-    console.log('favorite', favorite)
+function OneFavCard({ item, deleteFromFavorites }) {
+    const {
+        favorite, 
+        setFavorite, 
+        favoriteItems,
+        setFavoriteItems
+      } = useFavorites();
 
     const { language } = React.useContext(LanguageContext)
 

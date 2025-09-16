@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as Api from '../Api/Api'
+import { useItemsContext } from '../contexts/ItemsContext';
 
 export default function useMessages( 
   
@@ -15,7 +16,6 @@ export default function useMessages(
   const [receiver_idForOneConversationPopup, setReceiver_idForOneConversationPopup] = useState("");
   const [sender_idForOneConversationPopup, setSender_idForOneConversationPopup] = useState("");
   const [item_idForOneConversationPopup, setItem_idForOneConversationPopup] = useState("");
-
 
   // добавить сообщение в существующую переписку +++++++++++
   const createNewMessageFromConversationPopup = (receiver_id, item_id, message_text, conversation_id) => {
@@ -134,5 +134,6 @@ export default function useMessages(
     deleteOneMessage,
     markMessagesAsRead,
     getUnreadbleMessages,
+    unreadbleMessages,
   };
 }

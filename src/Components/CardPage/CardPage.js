@@ -9,13 +9,21 @@ import noPictures from '../../images/nopictures.png'
 import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
 import BackBtn from '../../UK-kit/BackBtn'
+import { useFavorites } from "../../contexts/FavoritesContext"
 
-function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, addToFavorites, isLoggin, favoriteItems, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
     //let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
+
+    const {
+        favorite, 
+        setFavorite, 
+        favoriteItems,
+        setFavoriteItems
+    } = useFavorites();
 
     const [userInfo, setUserInfo] = React.useState([])
 
@@ -34,7 +42,6 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
 
     useEffect(() => {
         getItemById(item_id);
-        //getAllImagesByItemId(item_id)
     }, []); 
 
     const goBack = () => {
@@ -86,7 +93,7 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
         openEditPopup(selectedItem[0].item_id, "description")
     }
 
-    const isLiked = favoriteItems.some((i) => i.item_id === selectedItem[0].item_id)
+    const isLiked = favorite.some((i) => i.item_id === selectedItem[0].item_id)
 
     return(
         <section className="cardPage-section">

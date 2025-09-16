@@ -154,7 +154,7 @@ export const getUserById = (user_id) => {
 };
 
 export const getAllItems = ({ page = 1, limit = 20 }) => {
-    return fetch(`${BASE_URL}/items/all/${page.page}/${limit}`, {
+    return fetch(`${BASE_URL}/items/all/${page}/${limit}`, {
       credentials: 'include',
       method: "GET",
       headers: {

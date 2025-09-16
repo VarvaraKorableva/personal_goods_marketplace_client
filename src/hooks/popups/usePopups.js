@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import * as Api from '../../Api/Api'
+import { useItemsContext } from '../../contexts/ItemsContext';
 
-export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDelete}) {
+export default function usePopups({setReceiverId, myAds, setItemId,}) {
+  const navigate = useNavigate()
 
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
@@ -14,6 +16,8 @@ export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDel
   const [isBurgerMenuPopup, setIsBurgerMenuPopup] = React.useState(false)
   const [editPopupName, setEditPopupName] = React.useState('') 
   const [popupEditItemId, setPopupEditItemId] = React.useState(0)
+  const [itemIdDelete, setItemIdDelete] = React.useState(0)
+  const [isGood, setIsGood] = React.useState(true)
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
@@ -60,6 +64,17 @@ export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDel
     }
   }
 
+  function handleAddAdClick(data){
+    setIsGood(data)
+
+    data?
+    navigate(`/add-ad`) 
+    :
+    navigate(`/add-new-service`)
+    
+    closeAllPopups()
+  }
+
   return {
     closeAllPopups,
     openSuccessfulActionPopup,
@@ -68,19 +83,20 @@ export default function usePopups({setReceiverId, myAds, setItemId, setItemIdDel
     openEditPopup,
     openDeletePopup,
     handleChoiceOfProductOrServicePopupClick,
-
     isChoiceOfProductOrServicePopup,
     isSuccessfulActionPopup,
     isFirstMessagePopup,
     isEditPopup,
     isDeletePopup,
     popupMessage,
-    isOneConversationPopup,
     isBurgerMenuPopup,
     editPopupName,
     popupEditItemId,
     setPopupMessage,
     setSuccessfulActionPopup,
+    itemIdDelete,
+    handleAddAdClick,
+    isGood,
   };
 
 };

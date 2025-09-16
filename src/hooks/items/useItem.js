@@ -1,24 +1,40 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
 import { useNavigate } from 'react-router-dom'
+import { useItemsContext } from '../../contexts/ItemsContext';
 
 export default function useItem({
-  setItemsAfterSearch, setLastFoutryItems, openLoading, closeLoading, closeAllPopups, 
-  setTotalCountOfAds, setIsPageItemsLoading, setSelectedItem, setIsLoading, 
-  setMyImages, openSuccessfulActionPopup, 
-  userId, myImages, setPopupMessage, myAds, setMyAds,
+  openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
 }) {
+
+  const {
+    lastFourtyItems,
+    setLastFourtyItems,
+    itemsAfterSearch,
+    setItemsAfterSearch,
+    totalCountOfAds,
+    setTotalCountOfAds,
+    page,
+    setPage,
+    isPageItemsLoading,
+    setIsPageItemsLoading,
+  } = useItemsContext();
+
   const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
   const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
+  const [myImages, setMyImages] = useState([])
+  const [selectedItem, setSelectedItem] = useState([])
+  const limit = 20;
 
   const navigate = useNavigate()
 
   const deleteMyAd = (item_id) => {
+    
     openLoading()
     Api.deleteItem(item_id)
     .then((res) => {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
-      setLastFoutryItems((state) => state.filter((item) => item.item_id !== item_id))
+      setLastFourtyItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
       closeLoading()
@@ -31,21 +47,26 @@ export default function useItem({
   }
 
   async function getAllItems(page = 1, limit = 20) {
+    setIsPageItemsLoading(true);
     openLoading();
+
     try {
       const res = await Api.getAllItems({ page, limit });
+      console.log("page:", page);
       if(page == 1) {
         setTotalCountOfAds(res.totalCount);
-        setLastFoutryItems(res.result);
+        setLastFourtyItems(res.result);
         setItemsAfterSearch(res.result)
       }
       else {
-        setLastFoutryItems(prevItems => [...prevItems, ...res.result]);
+        setLastFourtyItems(prevItems => [...prevItems, ...res.result]);
         setItemsAfterSearch(prevItems => [...prevItems, ...res.result]);
       }
       closeLoading();
-      setIsPageItemsLoading(false)
-      window.dispatchEvent(new Event('resize'));
+      //console.log("page:", page, res.result);
+      //window.dispatchEvent(new Event('resize'));
+      setIsPageItemsLoading(false);
+      console.log("Загружаем страницу:", page);
     } catch (err) {
       console.log(err);
       closeLoading();
@@ -70,7 +91,6 @@ export default function useItem({
     Api.getItemById(item_id)
     .then((res)=> {
       setSelectedItem(res)
-      setIsLoading(false)
       closeLoading()
     })
     .catch((err) => {
@@ -141,6 +161,19 @@ export default function useItem({
     })
   }
 
+  async function getItemsByCategoryCategoryId(category_id) {
+    openLoading()
+    try {
+      const res = await Api.getItemsByCategory(category_id)
+      setStartItemsSecondPage(res)
+      setItemsSecondPageSearch(res)
+      closeLoading()
+    } catch (err) {
+      console.log(err);
+      closeLoading()
+    }
+  }
+
   return {
     getAllItems,
     deleteMyAd,
@@ -149,6 +182,9 @@ export default function useItem({
     getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
+    myImages,
+    selectedItem,
     handleAddAdSubmit,
+    getItemsByCategoryCategoryId,
   };
 }

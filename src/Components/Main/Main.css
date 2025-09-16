@@ -1,6 +1,15 @@
 .main__title {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
+    margin-top: 50px;
+    font-family: "Martel", serif;
+    font-weight: 600;
+    /*font-family: 'Oxygen';
+    
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    */
 }
 
 .main__section {

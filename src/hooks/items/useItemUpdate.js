@@ -1,8 +1,21 @@
 import { useState } from "react";
 import * as Api from '../../Api/Api'
+import { useItemsContext } from '../../contexts/ItemsContext';
 
 export default function useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,}) {
 
+  const {
+    lastFourtyItems,
+    setLastFourtyItems,
+    itemsAfterSearch,
+    setItemsAfterSearch,
+    totalCountOfAds,
+    setTotalCountOfAds,
+    page,
+    setPage,
+    isPageItemsLoading,
+    setIsPageItemsLoading,
+  } = useItemsContext();
 
   const updateDescription = (item_id, description) => {
     openLoading()

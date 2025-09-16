@@ -3,9 +3,16 @@ import React from 'react'
 import OneAd from '../../Components/OneAd/OneAd'
 import './UserPage.css'
 import BackBtn from '../../UK-kit/BackBtn'
+import { useFavorites } from "../../contexts/FavoritesContext"
 
-function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, favorite, openFirstMessagePopup}) {
-    
+function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
+
+    const {
+        favorite, 
+        setFavorite, 
+        favoriteItems,
+        setFavoriteItems
+    } = useFavorites();
     const owner_id = useParams()
     const navigate = useNavigate()
 
@@ -36,13 +43,11 @@ function UserPage({allImages, favoriteItems, getUserById, userInfo, myAds, getMy
                 <ul className="userPage-listings-container">
                     {myAds.map((item) => (
                         <OneAd 
-                            favoriteItems={favoriteItems}
                             key={item.item_id} 
                             isLoggin={isLoggin} 
                             item={item} 
                             getItemById={getItemById} 
                             addToFavorites={addToFavorites}
-
                             deleteFromFavorites={deleteFromFavorites}
                             favorite={favorite}
                             allImages={allImages}
