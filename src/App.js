@@ -299,7 +299,7 @@ function App() {
         />
 
         <Route 
-          path='/category/:slug' 
+          path='/category/*' 
           element={
             <CategoryPage 
               chooseCategory={chooseCategory}

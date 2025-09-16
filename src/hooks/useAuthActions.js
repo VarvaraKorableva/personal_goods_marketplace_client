@@ -82,6 +82,7 @@ export default function useAuthActions({
         setIsLoggin(false)
         localStorage.removeItem('isLogin')
         localStorage.removeItem('user')
+        localStorage.removeItem('category')
         setCurrentUser({})
         resetFavorites()
         navigate(`/`)

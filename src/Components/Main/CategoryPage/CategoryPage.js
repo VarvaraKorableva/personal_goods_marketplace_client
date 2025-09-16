@@ -1,17 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import OneAd from '../../OneAd/OneAd.js'
 import Category from '../Сategory/Сategory'
 import './CategoryPage.css'
 import BackBtn from '../../../UK-kit/BackBtn'
+import useCategory from "../../../hooks/category/useCategory"
+import useLoading from "../../../hooks/useLoading"
+
 
 function CategoryPage({
     openDeletePopup, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
-    chooseCategory, 
-    categoriesToRender, itemsSecondPageSearch,
+    itemsSecondPageSearch,
     getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, adsCategoryName,
+    handleUpdateIsReserved,
 }) {
+    const {
+        openLoading,
+        closeLoading,
+        isLoading,
+    } = useLoading();  
+    
+    const {
+        getCategory,
+        categories,
+        categoriesToRender,
+        chooseCategory,
+        adsCategoryName,
+      } = useCategory({closeLoading, openLoading, });
+
+
+    const { "*": rest } = useParams(); // <-- вытаскиваем хвост
+    const slugs = rest ? rest.split("/") : [];
+  
+    useEffect(() => {
+        // если категории ещё не загружены, грузим их
+        if (!categories.length) {
+          getCategory();
+          return;
+        }
+      
+        if (slugs.length > 0) {
+          const currentSlug = slugs[slugs.length - 1];
+          const currentCategory = categories.find(cat => cat.slug === currentSlug);
+      
+          if (currentCategory) {
+            chooseCategory(currentCategory);
+      
+            if (currentCategory.parent_id) {
+              getItemsByCategoryCategoryId(currentCategory.category_id);
+            } else {
+              getItemsByParentId(currentCategory.category_id);
+            }
+          }
+        }
+      }, [rest, categories]);
+      
+
     
     return(
         <section className='categoryPage-main-container'>
@@ -21,6 +66,7 @@ function CategoryPage({
                     <Category 
                         key={subCategory.category_id} 
                         category={subCategory} 
+                        categories={categories}
                         onChooseCategory={chooseCategory}
                         getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
                         getItemsByParentId={getItemsByParentId}
