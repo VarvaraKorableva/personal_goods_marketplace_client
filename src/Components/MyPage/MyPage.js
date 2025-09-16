@@ -5,8 +5,9 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/myPageData'
 import BackBtn from '../../UK-kit/BackBtn'
 import './MyPage.css'
+import Button from '../../UK-kit/Button/Button'
 
-function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handleLogout, getItemById, addToFavorites, deleteFromFavorites, limit, addAds, handleUpdateIsReserved}) {
+function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getItemById, addToFavorites, deleteFromFavorites, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
@@ -28,10 +29,6 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handl
         window.scrollTo(0, 0);
       }, []);*/
 
-    function onLogout() {
-        handleLogout()
-    }
-
     React.useEffect(() => {
         getMyItems(userId)
     }, []);
@@ -43,7 +40,8 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handl
     function handleAddAdClick() {
         onAdPopup()
     }
-
+//Неактивные объявления
+//Активные Объявления
     return(
         <section>
             <BackBtn/>
@@ -110,9 +108,6 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, handl
                     <Link>Edit profile information</Link>
                 </div>
                 */}
-
-
-                <button className="myPage__btn-logout" onClick={onLogout}>{translatedContext.logOutBtn}</button>
 
 
             </div>

@@ -48,6 +48,7 @@ import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
 import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage'
 import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequestPage/PasswordRecoveryCodeRequestPage'
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
+import ClientsAdminPage from './Pages/AdminPage/ClientsAdminPage/ClientsAdminPage'
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
@@ -383,7 +384,7 @@ function App() {
                 getMyItems={getMyItems}
                 myAds={myAds}
                 openDeletePopup={openDeletePopup}
-                handleLogout={handleLogout}
+                
                 isLoggin={isLoggin}
                 getItemById={getItemById}
                 addToFavorites={addToFavorites} 
@@ -485,6 +486,13 @@ function App() {
           }>
         </Route>
 
+        <Route 
+          path={`/clients-admin`}
+          element={
+            <ClientsAdminPage/>
+          }>
+        </Route>
+
         <Route
           path="*"
           element={
@@ -550,7 +558,7 @@ function App() {
         isLoading={isLoading}
       />
     </div>
-    <Footer handleLogout={handleLogout}></Footer>
+    <Footer handleLogout={handleLogout} isLoggin={isLoggin}></Footer>
     </CurrentUserContext.Provider>  
     </LanguageProvider>
     

@@ -40,7 +40,6 @@ const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.a
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(username)
     onRegister({
       username,
       email,

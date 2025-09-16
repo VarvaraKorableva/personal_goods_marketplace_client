@@ -52,7 +52,6 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
         Api.getUserById(selectedItem[0].owner_id)
             .then((res) => {
                 setUserInfo(res)
-                console.log(res)
             })    
             .catch(error => console.error('Error fetching user:', error));
     }

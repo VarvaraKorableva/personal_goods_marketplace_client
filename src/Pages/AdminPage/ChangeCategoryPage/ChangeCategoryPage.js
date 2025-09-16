@@ -2,13 +2,15 @@
 
 import React from 'react'
 import './ChangeCategoryPage.css'
-
+import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import { Link, useLocation } from 'react-router-dom'
 import Button from '../../../UK-kit/Button/Button'
 //import createCategory from '../../../Api/Api'
 import * as Api from '../../../Api/Api'
+import NotFoundPage from '../../NotFoundPage/NotFoundPage'
 
 function ChangeCategoryPage() {
+    const currentUser = React.useContext(CurrentUserContext)
     const [categories, setCategories] = React.useState([])
     const [message, setMessage] = React.useState('')
     const [id, setId] = React.useState("");
@@ -85,13 +87,33 @@ function ChangeCategoryPage() {
         Api.deleteCategory(category_id)
           .then((res) => {
             setMessage('deleted')
-            console.log(res)
+           
           })
           .catch((err) => {
             console.log(err)
             setMessage('что-то пошло не так')
           })
       }
+
+      async function handleUpdateCategoryImg() {
+        try {
+          const result = await Api.updateCategoryImg(61, "https://images.unsplash.com/photo-1619970984080-2666543ed883?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fCVEMCVBOCVEMCVCQSVEMCVCRSVEMCVCQiVEMSU4QyVEMCVCRCVEMSU4QiVEMCVCNSUyMCVEMCVCRiVEMSU4MCVEMCVCOCVEMCVCRCVEMCVCMCVEMCVCNCVEMCVCQiVEMCVCNSVEMCVCNiVEMCVCRCVEMCVCRSVEMSU4MSVEMSU4MiVEMCVCOHxlbnwwfHwwfHx8MA%3D%3D");
+          console.log(result.msg); // "Successfully updated"
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      async function handleUpdateCategoryNameRus() {
+        try {
+          const result = await Api.updateCategoryNameRus(61, "Товары для школы");
+          console.log(result.msg); // "Successfully updated"
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      //
 
       const handleChange = (e) => {
         setId(e.target.value);
@@ -103,6 +125,10 @@ function ChangeCategoryPage() {
         deleteCategoryAdmin(numericId)
       };
 
+      if (currentUser.email !== process.env.REACT_APP_ADMIN) {
+        return <NotFoundPage></NotFoundPage>
+      }
+
     return(
         <>
             <h1>Add Category Page</h1>
@@ -111,6 +137,8 @@ function ChangeCategoryPage() {
                 <Button onClick={handleCreateSubCategory}>Добавить суб категорию</Button> {/*onClick={openSubAddCategoryAdminForm}*/}
                 <Button onClick={openDeleteCategoryAdminForm}>Удалить Категорию</Button> {/*onClick={openDeleteCategoryAdminForm}*/}
                 <Button onClick={getAllCategory}>Посмотреть все категории</Button>
+                <Button onClick={handleUpdateCategoryImg}>Изменить картинку категории</Button>
+                <Button onClick={handleUpdateCategoryNameRus}>Изменить название категории</Button>
             </>
             
             {

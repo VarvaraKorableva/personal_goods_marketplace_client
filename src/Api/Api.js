@@ -597,3 +597,43 @@ export const createCategory = (data) => {
     })
         .then(checkResponse) 
   };
+
+  export const getUsers = () => {
+    return fetch(`${BASE_URL}/users/`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse)
+        
+};
+
+
+export const updateCategoryImg = (category_id, image_url) => {
+    return fetch(`${BASE_URL}/category/updateimg`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ category_id, image_url }),
+    })
+      .then(checkResponse);
+  }
+
+export const updateCategoryNameRus = (category_id, name_rus) => {
+    return fetch(`${BASE_URL}/category/updatename`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ category_id, name_rus }),
+    })
+      .then(checkResponse);
+}  

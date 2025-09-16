@@ -7,6 +7,8 @@
     background-color: #e4e6e7;
     width: 100%;
     padding: 25px 0 50px 0;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
 }
 
 @media screen and (max-width: 500px) {
@@ -44,6 +46,11 @@
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 0;
+    border: none;
+    background-color: transparent;
+    font-family: "Source Serif 4", serif;
+    font-weight: 400;
+    padding: 0;
 }
 
 .footer__link:hover {
@@ -59,9 +66,9 @@
 
 @media screen and (max-width: 500px) {
     .footer-links-container  {
-        align-items: center;
         margin-top: 0;
         margin-bottom: 20px;
+        align-items: flex-start;
     }
   }
 

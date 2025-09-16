@@ -147,7 +147,6 @@ export default function useAuthActions({
     function updatePassword(email, newPassword) {
       Api.updatePassword(email, newPassword)
       .then((res) => {
-        console.log(res)
           setIsLoginError(false)
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)
