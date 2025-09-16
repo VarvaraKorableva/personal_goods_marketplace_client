@@ -47,16 +47,12 @@
     font-weight: 400;
     cursor: pointer;
     opacity: 1;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
 }
 
 .oneAdd__title:hover {
     opacity: 0.7;
-}
-
-@media screen and (max-width: 500px) {
-
 }
 
 .oneAdd__like-btn {
@@ -122,22 +118,22 @@
 }
 
 .oneAdd__price {
-    margin-top: 5px;
+    margin-top: 3px;
     margin-bottom: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
-    font-size: 12px;
+    font-size: 14px;
 }
 .oneAdd__city {
-    margin-top: 5px;
+    margin-top: 3px;
     margin-bottom: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .oneAdd__time {
@@ -179,8 +175,8 @@
 }
 
 .oneAdd__main-pic {
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     object-fit: cover; 
     border: none;
     border-radius: 10px;
@@ -198,7 +194,8 @@
     background-color: rgb(236, 91, 181);
     box-shadow: 0 3px 6px rgb(235, 182, 213);
     color: #fff;
-    font-size: 8px;
+    font-size: 10px;
+    font-weight: 500;
     padding: 3px;
     z-index: 4;
 }
@@ -301,9 +298,64 @@
         height: 280px;
         margin: 5px;
     }
+
+    .oneAdd__main-pic {
+        width: 100%;
+        height: 150px;
+    }
 }
 
 @media screen and (max-width: 500px) {
+    .oneAdd__pic-and-info-container {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 122px;
+
+        
+    }
+
+    .oneAdd__main-pic-wrapper {
+        margin-right: 0;
+        width: 100%;
+        height: 140px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .oneAdd__main-pic {
+        width: 100%;
+        height: 140px;
+    }
+
+    .oneAdd__time {
+        font-size: 10px;
+    }
+
+    .oneAdd__container {
+        width: 180px;
+        padding: 8px;
+        padding-top: 0px;
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: center;
+        height: 250px;
+        justify-content: end;
+    }
+
+    .oneAdd__title {
+        font-size: 14px;
+    }
+
+    .oneAdd__price {
+        font-size: 12px;
+    }
+    .oneAdd__city {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 380px) {
     .oneAdd__pic-and-info-container {
         flex-direction: column;
         justify-content: flex-start;
@@ -319,12 +371,17 @@
         left: 0;
     }
 
+    .oneAdd__main-pic {
+        width: 100%;
+        height: 120px;
+    }
+
     .oneAdd__time {
         font-size: 10px;
     }
 
     .oneAdd__container {
-        width: 140px;
+        width: 160px;
         padding: 8px;
         padding-top: 0px;
         padding-left: 0;
@@ -335,7 +392,20 @@
     }
 
     .oneAdd__title {
+        font-size: 14px;
+    }
+
+    .oneAdd__price {
         font-size: 12px;
+    }
+    .oneAdd__city {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .oneAdd__container {
+        width: 140px;
     }
 }
 

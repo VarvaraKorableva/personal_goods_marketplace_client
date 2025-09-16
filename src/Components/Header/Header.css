@@ -8,6 +8,7 @@
     /*background-color: #e4e6e7;*/
     background-color: var(--light-grey-color);
     height: 70px;
+    height: 90px;
     width: 100%;
   }
   
@@ -45,7 +46,7 @@
   
   .header_logo {
     color: black;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     margin: 0;
     text-decoration: none;
@@ -53,20 +54,20 @@
   
   @media screen and (max-width: 550px) {
     .header_logo {
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 700;
     }
   }
   
   @media screen and (max-width: 310px) {
     .header_logo {
-      font-size: 10px;
+      font-size: 14px;
     }
   }
   
   @media screen and (max-width: 276px) {
     .header_logo {
-      font-size: 8px;
+      font-size: 10px;
     }
   }
   
@@ -170,14 +171,15 @@
 }  
 
 .header_add-announcement-btn {
-  height: 30px;
+  height: 40px;
+  font-size: 14px;
   background-color: #fff;
   border-radius: 35px;
   cursor: pointer;
   color: black;
   border: none;
   margin-right: 10px;
-  padding: 10px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,8 +228,8 @@
 }
 
 .header__lang-btn {
-  width: fit-content;
-  height: 20px;
+  width: 35px;
+  height: 30px;
   border-radius: 30px;
   display: flex;
   justify-content: center;
@@ -249,8 +251,8 @@
 }
 
 .header__lang-btn_active {
-  width: calc(fit-content + 2px) ;
-  height: 20px;
+  width: 35px;;
+  height: 30px;
   border-radius: 30px;
   border: none;
   display: flex;
@@ -270,8 +272,8 @@
 
 
 .header__message-pic {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background-image: url(../../images/messagepic.png);
   background-repeat: no-repeat;
   background-position: center;

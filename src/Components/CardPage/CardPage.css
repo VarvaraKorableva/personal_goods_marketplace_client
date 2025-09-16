@@ -81,6 +81,7 @@
     width: 100%;
     margin: 0;
     margin-left: 0;
+    
 }
 
 .cardPage-main-container {
@@ -91,10 +92,11 @@
     border-radius: 10px;
     
     padding: 20px;
-    box-shadow: 0 3px 6px #999;
+    
     width: calc(100% - 20px);
     margin: auto;
     box-sizing: border-box;
+
 }
 
 .cardPage-info {
@@ -161,13 +163,14 @@
 .cardPage__main-pic-wrapper {
     width: 350px;
     height: 350px;
-    border: 1px solid rgb(170, 168, 168);
+    
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 3px 6px #999;
 }
 
 @media screen and (max-width: 600px) {

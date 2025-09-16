@@ -42,7 +42,6 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
 
     useEffect(() => {
         getItemById(item_id);
-        //getAllImagesByItemId(item_id)
     }, []); 
 
     const goBack = () => {
