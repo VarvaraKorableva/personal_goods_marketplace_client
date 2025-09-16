@@ -52,7 +52,7 @@ export default function useItem({
 
     try {
       const res = await Api.getAllItems({ page, limit });
-      console.log("page:", page);
+      
       if(page == 1) {
         setTotalCountOfAds(res.totalCount);
         setLastFourtyItems(res.result);
@@ -66,7 +66,7 @@ export default function useItem({
       //console.log("page:", page, res.result);
       //window.dispatchEvent(new Event('resize'));
       setIsPageItemsLoading(false);
-      console.log("Загружаем страницу:", page);
+      
     } catch (err) {
       console.log(err);
       closeLoading();

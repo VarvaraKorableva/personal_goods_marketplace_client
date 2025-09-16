@@ -4,9 +4,12 @@ import { Link, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 
 
-function Footer() {
+function Footer({handleLogout, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
 
+  function onLogout() {
+    handleLogout()
+}
     return (
         <footer className="footer">
           <div className="footer-container">
@@ -23,6 +26,11 @@ function Footer() {
                     <Link className='footer__link' to={'/admin'}>Админ</Link>
                   :
                     <></>
+                }
+                {isLoggin?
+                  <button onClick={onLogout} className='footer__link'>Выйти из приложения</button>
+                :
+                  <></>
                 }
             </div>  
           </div>

@@ -82,6 +82,7 @@ export default function useAuthActions({
         setIsLoggin(false)
         localStorage.removeItem('isLogin')
         localStorage.removeItem('user')
+        localStorage.removeItem('category')
         setCurrentUser({})
         resetFavorites()
         navigate(`/`)
@@ -147,7 +148,6 @@ export default function useAuthActions({
     function updatePassword(email, newPassword) {
       Api.updatePassword(email, newPassword)
       .then((res) => {
-        console.log(res)
           setIsLoginError(false)
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)

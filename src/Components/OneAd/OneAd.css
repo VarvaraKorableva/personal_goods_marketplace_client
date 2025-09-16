@@ -8,7 +8,7 @@
     width: 200px;
     align-items: center;
     position: relative;
-    height: 330px;
+    height: 335px;
     justify-content: flex-start;
 }
 
@@ -295,7 +295,7 @@
     }
 
     .oneAdd__container {
-        height: 280px;
+        height: 285px;
         margin: 5px;
     }
 

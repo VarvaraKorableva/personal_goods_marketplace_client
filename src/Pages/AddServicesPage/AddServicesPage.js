@@ -199,7 +199,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
       setIsDescriptionSelected(false)
       setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
     } else if(e.target.value) {
-      console.log(e.target.value.length)
       setIsDescriptionSelected(true)
       setDescriptionErrorMessage('')
       setDescription(e.target.value)

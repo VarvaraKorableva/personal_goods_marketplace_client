@@ -17,8 +17,7 @@ function ItemsContainer({
         favoriteItems,
         setFavoriteItems
     } = useFavorites();
-    console.log('favorite', favorite)
-    console.log('favoriteItems',favoriteItems)
+
     const {
         lastFourtyItems,
         setLastFourtyItems,

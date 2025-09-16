@@ -25,7 +25,6 @@ function CategorySearchEngine({}) {
 
     function handleSubmitToSearch(e) {
         e.preventDefault()
-        console.log(keyWord)
         //startToSearchSecondPage(keyWord)
     }
 

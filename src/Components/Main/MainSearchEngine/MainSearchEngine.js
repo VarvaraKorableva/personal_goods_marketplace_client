@@ -26,7 +26,6 @@ function MainSearchEngine({resetTitle, getAllItems, handleTitleChange, handleGet
     function handleSearchByTitle() {
         handleGetItemsByFilter()
         getTitle(keyWord)
-        //console.log(keyWord)
     }
 
     function handleReset() {

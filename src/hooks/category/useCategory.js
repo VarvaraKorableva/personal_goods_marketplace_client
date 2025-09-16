@@ -10,8 +10,18 @@ export default function useCategory({closeLoading, openLoading, }) {
 
     async function getCategory() {
         openLoading()
+        const savedCategories = localStorage.getItem('category');
+
+        let categoriesSaved;
+        if (savedCategories) {
+          categoriesSaved = JSON.parse(savedCategories);
+          setCategories(categoriesSaved);
+          setCategoriesToRender(categoriesSaved);
+          closeLoading()
+        } else {
         try {
           const res = await Api.getCategory();
+          localStorage.setItem('category', JSON.stringify(res))
           setCategories(res);
           setCategoriesToRender(res);
           closeLoading()
@@ -19,6 +29,8 @@ export default function useCategory({closeLoading, openLoading, }) {
           console.log(err);
           closeLoading()
         }
+      }
+
     }
 
     const chooseCategory = (category) => {
