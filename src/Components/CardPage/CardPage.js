@@ -10,12 +10,30 @@ import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
 import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
+import { useItemsContext } from "../../contexts/ItemsContext"
 
-function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
+
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+        myImages,
+        setMyImages,
+        selectedItem,
+        setSelectedItem,
+      } = useItemsContext();
 
     const {
         favorite, 
@@ -41,7 +59,8 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
 
     useEffect(() => {
         getItemById(item_id);
-    }, []); 
+
+    }, []);
 
     const goBack = () => {
         navigate(-1);
@@ -156,13 +175,28 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
                                 }
                                 <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
                             </div>
-                            
+
+                            <p className="cardPage-info-title">{translatedContext.seller}: <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{selectedItem[0].owner_name}</Link></p>
+                            {/*<button className="btn">{translatedContext.btn.messageTheSellerOnTelegram}</button>*/}
+                            {selectedItem[0].owner_telegram?
+                              <a 
+                                className="btn" 
+                                href={`https://t.me/${selectedItem[0].owner_telegram}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                              >
+                                {translatedContext.btn.messageTheSellerOnTelegram}
+                              </a>
+                            :
+                              <></>
+                            }
                         </div>
                         {
                             isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
                                 <></>
                             :
                             <div className="cardPage__info-about-user">
+                                
                                 <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
                             </div>
                         }
@@ -176,16 +210,16 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
                                         </>
                                     
                                     :
-                                        <>
+                                        <div className="cardPage__btn-container">
                                         {isLiked? 
                                     
-                                           <button onClick={hundleDeleteFromFavorites} className='cardPage__favorite-btn'>{translatedContext.deleteFromFavBtn}</button>
+                                           <button onClick={hundleDeleteFromFavorites} className="btn">{translatedContext.btn.deleteFromFavBtn}</button>
                                         :
-                                           <button onClick={handleAddToFavorites} className='cardPage__favorite-btn'>{translatedContext.addToFavBtn}</button>
+                                           <button onClick={handleAddToFavorites} className="btn">{translatedContext.btn.addToFavBtn}</button>
                                         }
                                     
-                                        <button className='cardPage__write-message-btn' onClick={handleAddMessagePopupOpen}>{translatedContext.writeAMessageBtn}</button>
-                                        </>
+                                        <button className="btn" onClick={handleAddMessagePopupOpen}>{translatedContext.btn.writeAMessageBtn}</button>
+                                        </div>
                                     }
                                 </div>
                             :

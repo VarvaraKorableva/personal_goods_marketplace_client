@@ -22,11 +22,12 @@
   border-radius: 30px;
   padding: 5px 10px;
   font-family: "Source Serif 4", serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: #1f1f1f;
   border: 1px solid #e4e6e7;
   background-color: transparent;
+  text-decoration: none;
 }
 
 .btn:hover {

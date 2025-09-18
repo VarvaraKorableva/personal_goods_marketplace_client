@@ -38,8 +38,6 @@ import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
 
-import AddUserInfoPopup from './Components/Popups/AddUserInfoPopup/AddUserInfoPopup'
-
 import EditPopup from './Components/Popups/EditPopup/EditPopup'
 import AreYouSurePopup from './Components/Popups/AreYouSurePopup/AreYouSurePopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
@@ -115,8 +113,6 @@ function App() {
     getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
-    myImages,
-    selectedItem,
     handleAddAdSubmit,
     getItemsByCategoryCategoryId,
   } = useItem({
@@ -331,7 +327,7 @@ function App() {
           path='/items/:item_id' 
           element={
             <CardPage 
-              selectedItem={selectedItem}
+              
               getItemById={getItemById}
               getUserById={getUserById}
               userInfo={userInfo}
