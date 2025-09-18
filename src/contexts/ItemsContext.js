@@ -10,6 +10,8 @@ export const ItemsProvider = ({ children }) => {
   const [totalCountOfAds, setTotalCountOfAds] = useState(0);
   const [page, setPage] = useState(1);
   const [isPageItemsLoading, setIsPageItemsLoading] = useState(false);
+  const [myImages, setMyImages] = useState([])
+  const [selectedItem, setSelectedItem] = useState([])
 
   return (
     <ItemsContext.Provider
@@ -24,6 +26,10 @@ export const ItemsProvider = ({ children }) => {
         setPage,
         isPageItemsLoading,
         setIsPageItemsLoading,
+        myImages,
+        setMyImages,
+        selectedItem,
+        setSelectedItem,
       }}
     >
       {children}

@@ -24,19 +24,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .cardPage__favorite-btn:hover {
     background-color: black;
     color: #fff;
-
 }
 
 .cardPage__write-message-btn:hover {
     background-color: black;
     color: #fff;
-
 }
 
 .cardPage-img-container {
@@ -52,25 +49,11 @@
     width: 100%;
 }
 
-@media screen and (max-width: 600px) {
-    .cardPage-container {
-      flex-direction: column;
-      justify-content: center;
-      align-items: start;
-    }
-}
-
 .cardPage-info-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-left: 10px;
-}
-
-@media screen and (max-width: 600px) {
-    .cardPage-info-container {
-        margin-left: 0;
-    }
 }
 
 .cardPage-section {
@@ -81,7 +64,6 @@
     width: 100%;
     margin: 0;
     margin-left: 0;
-    
 }
 
 .cardPage-main-container {
@@ -90,13 +72,10 @@
     justify-content: center;
     align-items: start;
     border-radius: 10px;
-    
     padding: 20px;
-    
     width: calc(100% - 20px);
     margin: auto;
     box-sizing: border-box;
-
 }
 
 .cardPage-info {
@@ -124,20 +103,13 @@
 .cardPage__btn-container {
     display: flex;
     align-self: flex-start;
+    gap: 10px;
 }
 
 .cardPage-image {
     width: 300px;
     height: 300px;
     object-fit: cover;
-}
-
-@media screen and (max-width: 600px) {
-    .cardPage-image {
-        width: 100%;
-        height: 350px;
-
-    }
 }
 
 .cardPage-info-wrapper {
@@ -147,42 +119,25 @@
     justify-content: flex-start;
 }
 
-
 .cardPage__info-about-user {
     margin-top: 20px;
     display: flex;
     align-self: flex-start;
 }
 
-@media screen and (max-width: 600px) {
-    .cardPage__info-about-user {
-      margin-bottom: 20px;
-    }
-}
-
 .cardPage__main-pic-wrapper {
     min-width: 350px;
     min-height: 350px;
-
     width: fit-content;
+    min-height: fit-content;
     height: fit-content;
-    
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     
-}
-
-@media screen and (max-width: 600px) {
-    .cardPage__main-pic-wrapper {
-        margin-right: 0;
-        margin-bottom: 25px;
-        width: 100%;
-        height: 250px;
-    }
 }
 
 .cardPage__main-pic {
@@ -273,4 +228,49 @@
 
 .cardPage-add-description {
     margin-left: 10px; 
+}
+
+@media screen and (max-width: 800px) {
+    .cardPage-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .cardPage-info-container {
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+
+}
+
+@media screen and (max-width: 600px) {
+    .cardPage-image {
+        max-width: 100%;
+    }
+
+    .cardPage__info-about-user {
+        margin-bottom: 20px;
+    }
+
+    .cardPage__main-pic-wrapper {
+        margin-right: 0;
+        margin-bottom: 25px;
+        max-width: 100%;
+        min-width: 200px;
+        min-height: 200px;
+    }  
+
+    .cardPage__main-pic {
+        max-width: 300px;
+        max-height: 300px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .cardPage__main-pic {
+        max-width: 250px;
+        max-height: 250px;
+    }
 }

@@ -10,7 +10,7 @@ export const checkResponse = (res) => {
     }
 };
 
-export const register = ( {username, email, password} ) => {
+export const register = ( {username, email, password, telegram = null} ) => {
   return fetch(`${BASE_URL}/users/signup`, {
     credentials: 'include',
     method: 'POST',
@@ -21,7 +21,8 @@ export const register = ( {username, email, password} ) => {
     body: JSON.stringify({
       username: username,
       email: email,
-      password: password
+      password: password,
+      telegram: telegram,
       })
   }).then((res) => {
     return checkResponse(res);
@@ -634,6 +635,19 @@ export const updateCategoryNameRus = (category_id, name_rus) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ category_id, name_rus }),
+    })
+      .then(checkResponse);
+}  
+
+export const updateTelegram = (user_id, telegram) => {
+    return fetch(`${BASE_URL}/users/updatetelegram`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ user_id, telegram }),
     })
       .then(checkResponse);
 }  

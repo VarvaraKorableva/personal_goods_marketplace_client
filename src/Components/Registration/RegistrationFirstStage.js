@@ -12,6 +12,8 @@ const [email, setEmail] = React.useState('')
 const [code, setCode] = React.useState('')
 const [username, setName] = React.useState('')
 const [password, setPassword] = React.useState('')
+const [telegram, setTelegram] = React.useState('')
+
 const [isAgreement, setIsAgreement] = React.useState(false)
 
 const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
@@ -51,7 +53,8 @@ function handleRegSubmit(e) {
   onRegister({
     username,
     email,
-    password
+    password,
+    telegram,
   })
 
   setIsRegErrorEmailChanging(false)
@@ -59,6 +62,7 @@ function handleRegSubmit(e) {
   setCode('')
   setPassword('')
   setName('')
+  setTelegram('')
 
   setErrorEmailMessage('')
   setErrorCodeMessage('')
@@ -90,6 +94,12 @@ function handleRegSubmit(e) {
     setIsValid(false)
     setErrorCode(true) 
   }
+
+  //setTelegram
+
+  const handleTelegramChange = (e) => {
+      setTelegram(e.target.value);
+  };
 
   const handleCodeChange = (e) => {
     if (!e.target.value.length) {
@@ -226,6 +236,18 @@ function handleRegSubmit(e) {
                     />
                   </label>
                   <span className='register__inputmistake'>{errorNameMessage}</span>  
+
+                  <label className='register__inputname'>{translatedContext.telegram}
+                    <input className='register__input'
+                      
+                      name="name"
+                      type="text"
+                      autoComplete="on"
+                      defaultValue=""
+                      onChange={handleTelegramChange}
+                    />
+                  </label>
+                  
         
                   <label className='register__inputname'>{translatedContext.password}<span className='register__inputname-span'>*</span>
                     <input className='register__input'

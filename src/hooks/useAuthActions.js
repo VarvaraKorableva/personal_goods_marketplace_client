@@ -125,6 +125,7 @@ export default function useAuthActions({
           username:userData.username,
           email: userData.email,
           password: userData.password,
+          telegram: userData.telegram, 
         })
         .then((data) => {
           setIsRegError(false)

@@ -37,6 +37,7 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
+
 import EditPopup from './Components/Popups/EditPopup/EditPopup'
 import AreYouSurePopup from './Components/Popups/AreYouSurePopup/AreYouSurePopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
@@ -89,7 +90,13 @@ function App() {
     itemIdDelete,
     handleAddAdClick,
     isGood,
-  } = usePopup({setReceiverId, myAds, setItemId, });
+  } = usePopup({setReceiverId, myAds, setItemId,});
+
+  const {
+    getUserById,
+    userInfo,
+    updateTelegram,
+  } = useUser({openLoading, closeLoading, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup});
 
   const {
     resetAllfilters,
@@ -106,8 +113,6 @@ function App() {
     getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
-    myImages,
-    selectedItem,
     handleAddAdSubmit,
     getItemsByCategoryCategoryId,
   } = useItem({
@@ -174,11 +179,6 @@ function App() {
     resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
     getMyFavorites, getUnreadbleMessages, setMyAds, currentUser, setCurrentUser
   })
-  
-  const {
-    getUserById,
-    userInfo,
-  } = useUser({openLoading, closeLoading,});
 
   const {
     updateDescription,
@@ -264,7 +264,7 @@ function App() {
               isVerificationCodeSentMessage={isVerificationCodeSentMessage}
               verifyCode={verifyCode}
               isEmailConfirmed={isEmailConfirmed}
-
+              handleLogout={handleLogout}
               updatePassword={updatePassword}
             />
             }>
@@ -327,7 +327,7 @@ function App() {
           path='/items/:item_id' 
           element={
             <CardPage 
-              selectedItem={selectedItem}
+              
               getItemById={getItemById}
               getUserById={getUserById}
               userInfo={userInfo}
@@ -380,6 +380,7 @@ function App() {
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
+                openEditPopup={openEditPopup}
                 onAdPopup={handleChoiceOfProductOrServicePopupClick}
                 getMyItems={getMyItems}
                 myAds={myAds}
@@ -545,6 +546,7 @@ function App() {
         updateDescription={updateDescription}
         updateCondition={updateCondition}
         popupEditItemId={popupEditItemId}
+        updateTelegram={updateTelegram}
       />
 
       <AreYouSurePopup

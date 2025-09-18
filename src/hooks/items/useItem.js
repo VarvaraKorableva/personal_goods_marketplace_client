@@ -18,12 +18,14 @@ export default function useItem({
     setPage,
     isPageItemsLoading,
     setIsPageItemsLoading,
+    myImages,
+    setMyImages,
+    selectedItem,
+    setSelectedItem,
   } = useItemsContext();
 
   const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
   const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
-  const [myImages, setMyImages] = useState([])
-  const [selectedItem, setSelectedItem] = useState([])
   const limit = 20;
 
   const navigate = useNavigate()
@@ -44,6 +46,18 @@ export default function useItem({
       console.log(err)
       closeLoading()
     })
+  }
+
+  const getItemById = (item_id) => { 
+    openLoading()
+    Api.getItemById(item_id) 
+    .then((res)=> { 
+      setSelectedItem(res) 
+      closeLoading() }) 
+      .catch((err) => { 
+        console.log(err) 
+        closeLoading() 
+      }) 
   }
 
   async function getAllItems(page = 1, limit = 20) {
@@ -86,18 +100,7 @@ export default function useItem({
     })
   }
 
-  const getItemById = (item_id) => {
-    openLoading()
-    Api.getItemById(item_id)
-    .then((res)=> {
-      setSelectedItem(res)
-      closeLoading()
-    })
-    .catch((err) => {
-      console.log(err)
-      closeLoading()
-    })
-  }
+ 
 
   async function getItemsByParentId(parent_id) {
     openLoading()
@@ -182,8 +185,6 @@ export default function useItem({
     getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
-    myImages,
-    selectedItem,
     handleAddAdSubmit,
     getItemsByCategoryCategoryId,
   };

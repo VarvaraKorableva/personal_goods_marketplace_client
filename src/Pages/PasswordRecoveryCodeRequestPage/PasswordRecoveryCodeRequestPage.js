@@ -6,7 +6,7 @@ import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../../Components/Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function PasswordRecoveryCodeRequestPage({updatePassword, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
+function PasswordRecoveryCodeRequestPage({updatePassword, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed, handleLogout}){
 
 const [email, setEmail] = React.useState('')
 const [code, setCode] = React.useState('')
@@ -69,6 +69,7 @@ function fake(e) {
     setIsRegErrorEmailChanging(false)
     setIsValid(false)
     setErrorCode(true)
+    //handleLogout()
   }
 
   function onVerifyCode(e) {

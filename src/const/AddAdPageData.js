@@ -21,6 +21,7 @@ const en = {
     picture: 'Add a Pictures',
 
     addBtn: 'Add the Ad',
+    changeBtn: 'Edit',
     uploadPictureBtn: 'Upload picture',
 
     errors: {
@@ -52,10 +53,11 @@ const en = {
         },
     },
     titles: {
-        condition: 'condition',
-        city: 'city',
-        price: 'price',
-        description: 'description',
+        condition: 'Condition',
+        city: 'City',
+        price: 'Price',
+        description: 'Description',
+        telegram: 'Telegram',
     },
     editPopupBtn: {
         changeBtn: 'Change'
@@ -84,6 +86,7 @@ const rus = {
     picture: 'Добавить фотографии',
 
     addBtn: 'Добавить объявление',
+    changeBtn: 'Изменить',
     //uploadPictureBtn: 'Загрузить фотографию',
     uploadPictureBtn: '+',
 
@@ -120,6 +123,7 @@ const rus = {
         city: 'город',
         price: 'цену',
         description: 'описание',
+        telegram: 'Telegram',
     },
     editPopupBtn: {
         changeBtn: 'Изменить'
@@ -144,6 +148,7 @@ const hebrew = {
     place: 'Where can you give the goods (city)',
     picture: 'Add a Picture',
     addBtn: 'Add the Ad',
+    changeBtn: 'Edit',
     uploadPictureBtn: 'Upload picture',
 }
 
