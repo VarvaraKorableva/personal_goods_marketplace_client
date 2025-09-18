@@ -14,7 +14,6 @@ import { useFavorites } from "../../contexts/FavoritesContext"
 function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
-    //let {favorite_items_id} = useParams();
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
@@ -131,7 +130,7 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
                                         :
                                         <></>
                                     }
-                                    <p className="cardPage-info-title">Состояние: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
+                                    <p className="cardPage-info-title">{translatedContext.condition}: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
                                 </div>
                             : 
                                 <></>
@@ -200,7 +199,7 @@ function CardPage({ openEditPopup, openDeletePopup, selectedItem, getItemById, a
                     isLoggin && currentUser.user_id === selectedItem[0].owner_id?
                         <button className="cardPage-edit-btn-description" onClick={handleOpenDescriptionEditPopup}>
                             <TbEdit className="cardPage-edit-icon"/>
-                            <p className="cardPage-add-description">Добавить описание</p>
+                            <p className="cardPage-add-description">{translatedContext.addDescription}</p>
                         </button>
 
                         :

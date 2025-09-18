@@ -1,21 +1,24 @@
 import React from 'react'
 import '../Popups.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
+import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import choose from '../../../const/AddAdPageData'
 import { IoMdCloseCircleOutline } from "react-icons/io"
 import { cities } from '../../../const/Cities/cities'
 import { conditions } from '../../../const/Сonditions/Сonditions'
-
+import EditField from "./EditField";
 
 function EditPopup ({
   onClose, isOpen, title, 
   updateItemCity, updatePrice, 
-  updateDescription, updateCondition, popupEditItemId
+  updateDescription, updateCondition, popupEditItemId, updateTelegram,
 }) {
     const [text, setText] = React.useState('')
     const [isMessageText, setIsMessageText] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState('')
     const [isValid, setIsValid] = React.useState(false)
+    const currentUser = React.useContext(CurrentUserContext)
+    const userId = currentUser.user_id
     const { language } = React.useContext(LanguageContext)
 
     const { en, rus, hebrew } = choose;
@@ -46,11 +49,40 @@ function EditPopup ({
           updatePrice(popupEditItemId, text)
         } else if(title === "description") {
           updateDescription(popupEditItemId, text)
+        } else if(title === "telegram") {
+          updateTelegram(userId, text)
         }
         setIsMessageText(false)
         setText('')
     }
 
+    function handleChange(e) {
+      const value = e.target.value;
+      setText(value);
+  
+      if (!value) {
+        setIsValid(false);
+        return;
+      }
+  
+      // простая валидация для телеграма
+      if (title === "telegram" && value.length > 50) {
+        setErrorMessage("Длина Telegram не может превышать 50 символов");
+        setIsValid(false);
+        return;
+      }
+  
+      // простая валидация для цены
+      if (title === "price" && !/^\d+$/.test(value)) {
+        setErrorMessage("Цена должна содержать только цифры");
+        setIsValid(false);
+        return;
+      }
+  
+      setErrorMessage("");
+      setIsValid(true);
+    }
+/*
     function handleEditInfo(e) {
       if(!e.target.value) {
         setIsMessageText(false)
@@ -94,6 +126,21 @@ function EditPopup ({
       }
     }
 
+    function handledeTelegramChange(e) {
+      if(e.target.value.length > 50) {
+        setIsMessageText(false)
+        setErrorMessage('Длинна telegram не может превышать 50 символов')
+      } else if(e.target.value) {
+        setIsMessageText(true)
+        setErrorMessage('')
+        setText(e.target.value)
+      } else {
+        setIsMessageText(true)
+        setErrorMessage('')
+        setText('')
+      }
+    }*/
+
 
     React.useEffect(() => {
       if(isMessageText) {
@@ -114,8 +161,9 @@ function EditPopup ({
             />
         <form className='editItemPopup__form' onSubmit={onEditBtn}>
             <label className='editItemPopup__title'>
-              Изменить {`${translatedContext.titles[title]}`}
+              {translatedContext.changeBtn} {`${translatedContext.titles[title]}`}
             </label>
+            {/*}
             {title === 'condition'? 
             <select 
             className='addAdPage__select' 
@@ -135,7 +183,7 @@ function EditPopup ({
                   <option key={item} value={item}>{item}</option>
                 ))
               }
-          </select>
+            </select>
             : 
             (title === 'city'? 
               
@@ -177,7 +225,14 @@ function EditPopup ({
               />
               <span className='popup__mistake-msg'>{errorMessage}</span>
               </>
-            ))}
+            ))}*/}
+            <EditField
+              title={title}
+              language={language}
+              text={text}
+              onChange={handleChange}
+              errorMessage={errorMessage}
+            />
 
             <button 
               className={isValid? 'firstMessagePopup__btn_active':'firstMessagePopup__btn'} 

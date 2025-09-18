@@ -6,12 +6,13 @@ import choose from '../../const/myPageData'
 import BackBtn from '../../UK-kit/BackBtn'
 import './MyPage.css'
 import Button from '../../UK-kit/Button/Button'
+import { TbEdit } from "react-icons/tb";
 
-function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getItemById, addToFavorites, deleteFromFavorites, limit, addAds, handleUpdateIsReserved}) {
+function MyPage({openEditPopup, onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getItemById, addToFavorites, deleteFromFavorites, limit, addAds, handleUpdateIsReserved}) {
 
     const currentUser = React.useContext(CurrentUserContext)
     const userId = currentUser.user_id
-
+    const [isWhyImportantClicked, setIsWhyImportantClicked] = React.useState(false)
     const { language } = React.useContext(LanguageContext)
 
     const { en, rus, hebrew } = choose;
@@ -33,12 +34,19 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getIt
         getMyItems(userId)
     }, []);
 
+    function showTelergamInfo() {
+        setIsWhyImportantClicked(!isWhyImportantClicked)
+    }
     function handleAddMoreAds() {
         addAds()
     }
 
     function handleAddAdClick() {
         onAdPopup()
+    }
+
+    function openAddTelegramPopup() {
+        openEditPopup(userId, "telegram")
     }
 //Неактивные объявления
 //Активные Объявления
@@ -55,6 +63,25 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getIt
                     </div>
                     <div className="myPage__info-wrapper">
                         <p className="myPage__name">{currentUser.username}</p>
+                        {currentUser.telegram?
+                            <button className="myPage__btn-container">
+                                <TbEdit className="cardPage-edit-icon" onClick={openAddTelegramPopup}/>
+                                <p className="myPage__name font">{currentUser.telegram}</p>
+                            </button>
+                            
+                        :
+                            <>
+                            <button className="btn" onClick={openAddTelegramPopup}>{translatedContext.btnNames.addTelegram}</button>
+                            <button onClick={showTelergamInfo} className="myPage__infoBtn">{translatedContext.btnNames.whyDoesThisMatter}</button>
+
+                            {isWhyImportantClicked? 
+                                <p className="myPage__name">{translatedContext.whyAddTelegramIsImportant}</p>
+                            :
+                                <></>
+                            }
+
+                            </>
+                        }
                         <p className="myPage__my-rating"></p>
                     </div>
                 </div>
@@ -62,8 +89,8 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getIt
                     <h3 className="myPage__title">{translatedContext.myListingsTitle}({myAds.length}):</h3>
                     {myAds.length === 0?
                     <div className="myPage__add-ad-container">
-                        <h3>{translatedContext.noAdsMessage}</h3>
-                        <button className='myPage_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAdBtnName}</button>
+                        <h3 className='myPage__noAdsMessage'>{translatedContext.noAdsMessage}</h3>
+                        <button className='btn' onClick={handleAddAdClick}>{translatedContext.addNewAdBtnName}</button>
                     </div>
 
                     :
@@ -91,7 +118,7 @@ function MyPage({ onAdPopup, isLoggin, getMyItems, myAds, openDeletePopup, getIt
                     {myAds.length <= limit?
                         <></>
                         :
-                        <button className="myPage__btn" onClick={handleAddMoreAds}>{translatedContext.addMoreAdsBtn}</button>
+                        <button className="btn" onClick={handleAddMoreAds}>{translatedContext.addMoreAdsBtn}</button>
                     }
                 </div>
 

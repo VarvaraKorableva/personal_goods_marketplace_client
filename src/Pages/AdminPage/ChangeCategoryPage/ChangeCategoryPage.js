@@ -97,8 +97,8 @@ function ChangeCategoryPage() {
 
       async function handleUpdateCategoryImg() {
         try {
-          const result = await Api.updateCategoryImg(61, "https://images.unsplash.com/photo-1619970984080-2666543ed883?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fCVEMCVBOCVEMCVCQSVEMCVCRSVEMCVCQiVEMSU4QyVEMCVCRCVEMSU4QiVEMCVCNSUyMCVEMCVCRiVEMSU4MCVEMCVCOCVEMCVCRCVEMCVCMCVEMCVCNCVEMCVCQiVEMCVCNSVEMCVCNiVEMCVCRCVEMCVCRSVEMSU4MSVEMSU4MiVEMCVCOHxlbnwwfHwwfHx8MA%3D%3D");
-          console.log(result.msg); // "Successfully updated"
+          //const result = await Api.updateCategoryImg(61, "https://images.unsplash.com/photo-1619970984080-2666543ed883?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fCVEMCVBOCVEMCVCQSVEMCVCRSVEMCVCQiVEMSU4QyVEMCVCRCVEMSU4QiVEMCVCNSUyMCVEMCVCRiVEMSU4MCVEMCVCOCVEMCVCRCVEMCVCMCVEMCVCNCVEMCVCQiVEMCVCNSVEMCVCNiVEMCVCRCVEMCVCRSVEMSU4MSVEMSU4MiVEMCVCOHxlbnwwfHwwfHx8MA%3D%3D");
+          console.log('Successfully updated'); // "Successfully updated"
         } catch (err) {
           console.error(err);
         }
@@ -106,8 +106,8 @@ function ChangeCategoryPage() {
 
       async function handleUpdateCategoryNameRus() {
         try {
-          const result = await Api.updateCategoryNameRus(61, "Товары для школы");
-          console.log(result.msg); // "Successfully updated"
+          //const result = await Api.updateCategoryNameRus(61, "Товары для школы");
+          console.log('result.msg'); // "Successfully updated"
         } catch (err) {
           console.error(err);
         }

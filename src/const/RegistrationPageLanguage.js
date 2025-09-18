@@ -4,6 +4,7 @@ const en = {
     greetingsText: 'You can register here',
     name: 'Name',
     email: 'E-mail',
+    telegram: 'Telegram',
     verificationEmailLabel: "Enter your email address to receive a verification code.",
     emailIsConfirmTitle: 'Your email has been confirmed.',
     secondStepTitle: 'Second step - complete your registration by providing your name and password for login.',
@@ -46,6 +47,7 @@ const rus = {
 
     name: 'Имя',
     email: 'Электронная почта',
+    telegram: 'Telegram',
     verificationEmailLabel: "Введите адрес электронной почты, чтобы получить код для подтверждения",
     password: 'Пароль',
     verificationCodeLabel: 'Введите код, который пришел вам на почту',
@@ -85,6 +87,7 @@ const hebrew = {
     name: 'שם',
     email: 'דוא"ל',
     password: 'סיסמה',
+    telegram: 'Telegram',
     verificationCodeLabel: 'Enter the code that was sent to your email',
 
     button: 'הירשם',

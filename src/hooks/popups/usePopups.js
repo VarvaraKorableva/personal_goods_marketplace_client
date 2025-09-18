@@ -18,6 +18,7 @@ export default function usePopups({setReceiverId, myAds, setItemId,}) {
   const [popupEditItemId, setPopupEditItemId] = React.useState(0)
   const [itemIdDelete, setItemIdDelete] = React.useState(0)
   const [isGood, setIsGood] = React.useState(true)
+  
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)

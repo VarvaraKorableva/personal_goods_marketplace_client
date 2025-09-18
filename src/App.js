@@ -37,6 +37,9 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
+
+import AddUserInfoPopup from './Components/Popups/AddUserInfoPopup/AddUserInfoPopup'
+
 import EditPopup from './Components/Popups/EditPopup/EditPopup'
 import AreYouSurePopup from './Components/Popups/AreYouSurePopup/AreYouSurePopup'
 import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOrServicePopup/ChoiceOfProductOrServicePopup'
@@ -89,7 +92,13 @@ function App() {
     itemIdDelete,
     handleAddAdClick,
     isGood,
-  } = usePopup({setReceiverId, myAds, setItemId, });
+  } = usePopup({setReceiverId, myAds, setItemId,});
+
+  const {
+    getUserById,
+    userInfo,
+    updateTelegram,
+  } = useUser({openLoading, closeLoading, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup});
 
   const {
     resetAllfilters,
@@ -174,11 +183,6 @@ function App() {
     resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
     getMyFavorites, getUnreadbleMessages, setMyAds, currentUser, setCurrentUser
   })
-  
-  const {
-    getUserById,
-    userInfo,
-  } = useUser({openLoading, closeLoading,});
 
   const {
     updateDescription,
@@ -264,7 +268,7 @@ function App() {
               isVerificationCodeSentMessage={isVerificationCodeSentMessage}
               verifyCode={verifyCode}
               isEmailConfirmed={isEmailConfirmed}
-
+              handleLogout={handleLogout}
               updatePassword={updatePassword}
             />
             }>
@@ -380,6 +384,7 @@ function App() {
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <MyPage
+                openEditPopup={openEditPopup}
                 onAdPopup={handleChoiceOfProductOrServicePopupClick}
                 getMyItems={getMyItems}
                 myAds={myAds}
@@ -545,6 +550,7 @@ function App() {
         updateDescription={updateDescription}
         updateCondition={updateCondition}
         popupEditItemId={popupEditItemId}
+        updateTelegram={updateTelegram}
       />
 
       <AreYouSurePopup

@@ -111,3 +111,22 @@
         height: 76px;
     }
 }
+
+@media screen and (max-width: 380px) {
+
+    .category-container {
+        width: 75px;
+        height: 110px;
+    }
+
+    .category-pic-container {
+        width: 75px;
+        height: 75px;
+    }
+
+    .category-pic {
+        width: 71px;
+        height: 71px;
+    }
+}
+
