@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import * as Api from '../../Api/Api'
@@ -52,29 +51,6 @@ export default function useCategory({closeLoading, openLoading, }) {
       }
       return myCatToRenderNew
     }
-
-    /*
-    function findAllCategoryGrandChildrenIterative(category, categories) {
-  let stack = [category]             // начинаем с выбранной категории
-  let result = []
-
-  while (stack.length > 0) {
-    const current = stack.pop()      // берём последнюю категорию из стека
-    const childrens = categories.filter(
-      (item) => item.parent_id === current.category_id
-    )
-
-    if (childrens.length === 0) {
-      // если нет детей — это "лист", добавляем id
-      result.push(current.category_id)
-    } else {
-      // если есть дети — добавляем их в стек для дальнейшего обхода
-      stack.push(...childrens)
-    }
-  }
-  return result
-}
-    */
 
   return {
     getCategory,

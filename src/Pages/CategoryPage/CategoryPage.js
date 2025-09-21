@@ -54,8 +54,7 @@ function CategoryPage({
             }
           }
         }
-      }, [rest, categories]);
-      
+      }, [rest, categories]);  
 
     
     return(

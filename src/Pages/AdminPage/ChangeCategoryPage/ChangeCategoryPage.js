@@ -96,6 +96,23 @@ function ChangeCategoryPage() {
           })
       }
 
+      //
+
+      async function handleUpdateCategorySlug() {
+        setMessage("")
+        try {
+          const result = await Api.updateCategorySlug(
+            45,
+            "mens-boots"
+          );
+          // в случае успеха
+          setMessage("Изменение прошло")
+        } catch (err) {
+          console.log(err);
+          setMessage("что-то пошло не так");
+        }
+      }
+
       async function handleUpdateCategoryImg() {
         setMessage("")
         try {
@@ -132,20 +149,16 @@ function ChangeCategoryPage() {
           const result = await Api.updateCategoryNameEng(
             36, 
             "Jackets and Coats"
-//Tshirts_and_Polos
-
-
-//Sweaters and Hoodies
-
-
-//Jackets_and_Coats
-
           );
           setMessage("Изменение прошло")
         } catch (err) {
           console.error(err);
           setMessage("что-то пошло не так")
         }
+      }
+
+      function onUpdateCategorySlug() {
+       //handleUpdateCategorySlug()
       }
 
       function onUpdateCategoryNameRus() {
@@ -185,6 +198,7 @@ function ChangeCategoryPage() {
                 <Button onClick={onUpdateCategoryImg}>Изменить картинку категории</Button>
                 <Button onClick={onUpdateCategoryNameRus}>Изменить название категории rus</Button>
                 <Button onClick={onUpdateCategoryNameEng}>Изменить название категории eng</Button>
+                <Button onClick={onUpdateCategorySlug}>Изменить Slug</Button>
             </>
             
             {

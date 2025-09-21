@@ -626,7 +626,20 @@ export const createCategory = (data) => {
         .then(checkResponse)
         
 };
+///
 
+export const updateCategorySlug = (category_id, slug) => {
+    return fetch(`${BASE_URL}/category/updatecategoryslug`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ category_id, slug }),
+    })
+      .then(checkResponse);
+  }
 
 export const updateCategoryImg = (category_id, image_url) => {
     return fetch(`${BASE_URL}/category/updateimg`, {

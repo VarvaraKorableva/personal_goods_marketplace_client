@@ -10,6 +10,7 @@ import './ModerationAdmin.css'
 function ModerationAdminPage() {
     const currentUser = React.useContext(CurrentUserContext)
     const [allUnModeratedItems, setAllUnModeratedItems] = React.useState([])
+    
 
     if (currentUser.email !== process.env.REACT_APP_ADMIN) {
         return <NotFoundPage></NotFoundPage>
@@ -81,7 +82,7 @@ function ModerationAdminPage() {
                         <></>
                         }
 
-                        <Button className='ModerationAdminPage__no-consent-btn'>Написать комментарии и не одобрять</Button>
+                        <Button className='ModerationAdminPage__no-consent-btn'>не одобрять, удалить</Button>
                     </li>
                 ))}
             </ul>

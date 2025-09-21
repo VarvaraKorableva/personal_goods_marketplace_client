@@ -191,16 +191,17 @@ function MyPage({
   const filters = [
     { label: "Активные объявления", value: "active", condition: ad => ad.moderated === true },
     { label: "На проверке модератором", value: "pending", condition: ad => ad.moderated === false },
+    //{ label: "Завершенные", value: "deleted", condition: ad => ad.deleted === true },
+    //
     // сюда можно добавить ещё до 5
     // { label: "Завершенные", value: "closed", condition: ad => ad.closed === true },
   ];
 
   const [selectedFilter, setSelectedFilter] = React.useState(filters[0].value);
 
-  // 🔑 Фильтрация объявлений
   const filteredAds = myAds.filter(ad => {
     const currentFilter = filters.find(f => f.value === selectedFilter);
-    return currentFilter ? currentFilter.condition(ad) : true;
+    return currentFilter && currentFilter.condition ? currentFilter.condition(ad) : true;
   });
 
   return (
@@ -247,15 +248,20 @@ function MyPage({
               {filter.label}
             </Button>
           ))}
+          <Button onClick={handleAddAdClick}>Добавить объявление</Button>
         </div>
 
         <div className="myPage__listings-wrapper">
-          <h3 className="myPage__title">
-              
+          {/*<h3 className="myPage__title">
             {translatedContext.myListingsTitle} ({filteredAds.length}):
           </h3>
+          
+                        <button className='myPage_add-new-ad-btn' onClick={handleAddAdClick}>
+                {translatedContext.addNewAdBtnName}
+              </button>
+          */}
 
-          {filteredAds.length === 0 ? (
+          {myAds.length === 0 ? (
             <div className="myPage__add-ad-container">
               <h3 className='myPage__noAdsMessage'>{translatedContext.noAdsMessage}</h3>
               <button className='btn' onClick={handleAddAdClick}>
@@ -264,9 +270,7 @@ function MyPage({
             </div>
           ) : (
             <>
-              <button className='myPage_add-new-ad-btn' onClick={handleAddAdClick}>
-                {translatedContext.addNewAdBtnName}
-              </button>
+
               <ul className="myPage-listings-container">
                 {filteredAds.slice(0, limit).map((item) => (
                   <OneAd 
@@ -285,9 +289,9 @@ function MyPage({
           )}
 
           {filteredAds.length > limit && (
-            <button className="btn" onClick={handleAddMoreAds}>
+            <Button onClick={handleAddMoreAds}>
               {translatedContext.addMoreAdsBtn}
-            </button>
+            </Button>
           )}
         </div>
       </div>
