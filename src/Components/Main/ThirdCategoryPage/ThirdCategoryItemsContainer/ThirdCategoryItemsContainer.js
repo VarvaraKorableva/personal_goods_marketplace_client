@@ -1,6 +1,6 @@
 ////ThirdCategoryItemsContainer
 
-import OneAd from '../../../OneAd/OneAd'
+/*import OneAd from '../../../OneAd/OneAd'
 import './ThirdCategoryItemsContainer.css';
 import { useItemsContext } from "../../contexts/ItemsContext";
 
@@ -34,4 +34,4 @@ function ThirdCategoryItemsContainer({ getItemById, addToFavorites, deleteFromFa
     )
 }
 
-export default ThirdCategoryItemsContainer;
+export default ThirdCategoryItemsContainer;*/

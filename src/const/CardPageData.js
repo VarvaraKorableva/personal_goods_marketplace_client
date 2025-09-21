@@ -1,5 +1,6 @@
 const en = {
     name: 'Name',
+    category: 'Category',
     condition: 'Condition',
     price: 'Price',
     city: 'City',
@@ -18,6 +19,7 @@ const en = {
 
 const rus = {
     name: 'Название',
+    category: 'Категория',
     condition: 'Состояние',
     price: 'Цена',
     city: 'Город',
@@ -36,6 +38,7 @@ const rus = {
 
 const hebrew = {
     name: 'Name',
+    category: 'Category',
     condition: 'Condition',
     price: 'Price',
     city: 'City',

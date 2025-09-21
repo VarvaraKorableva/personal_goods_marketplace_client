@@ -22,6 +22,12 @@ function AdminPage() {
                 <Button as={Link} to="/clients-admin">
                     Клиенты
                 </Button>
+                <Button as={Link} to="/listings-admin">
+                    Объявления
+                </Button>
+                <Button as={Link} to="/add-new-ads-as-admin">
+                    Модерация
+                </Button>
             </div>
         </>
 

@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import React from 'react'
 import OneAd from '../../Components/OneAd/OneAd'
 import './UserPage.css'
@@ -14,7 +14,6 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
         setFavoriteItems
     } = useFavorites();
     const owner_id = useParams()
-    const navigate = useNavigate()
 
     React.useEffect(() => {
         getUserById(Number(owner_id.owner_id));
@@ -25,9 +24,7 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
         return <p>Loading ...</p>;
     }
 
-    const goBack = () => {
-        navigate(-1);
-    };
+    const moderatedAds = myAds.filter(ad => ad.moderated === true);
     
     return(
         <section className='userPage_main-container'>
@@ -41,7 +38,7 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
             <div>
                 <h3>Все объявления {userInfo[0].username}</h3>
                 <ul className="userPage-listings-container">
-                    {myAds.map((item) => (
+                    {moderatedAds.map((item) => (
                         <OneAd 
                             key={item.item_id} 
                             isLoggin={isLoggin} 

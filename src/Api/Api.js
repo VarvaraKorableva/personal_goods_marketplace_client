@@ -287,6 +287,21 @@ export const createConversation = ( {conversation_owner_id, item_owner_id, item_
     })
         .then(checkResponse)
 };
+
+export const getItemsByCategoryRecursive = (category_id) => {
+    return fetch(`${BASE_URL}/items/getItemsByCategoryRecursive/${category_id}`, {
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+        .then(checkResponse) 
+  };
+
+///getItemsByCategoryRecursive/:category_id
+
 //получение всех посл сообщений из всех конв по 1 юзеру
 /*
 never use
@@ -625,6 +640,20 @@ export const updateCategoryImg = (category_id, image_url) => {
     })
       .then(checkResponse);
   }
+
+  export const updateCategoryNameEng = (category_id, name) => {
+      
+    return fetch(`${BASE_URL}/category/updatenameeng`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ category_id, name }),
+    })
+      .then(checkResponse);
+} 
 
 export const updateCategoryNameRus = (category_id, name_rus) => {
     return fetch(`${BASE_URL}/category/updatename`, {

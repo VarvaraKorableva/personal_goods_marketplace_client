@@ -85,6 +85,8 @@ export default function useAuthActions({
         localStorage.removeItem('category')
         setCurrentUser({})
         resetFavorites()
+        setMyAds([])
+
         navigate(`/`)
     }
 

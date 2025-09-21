@@ -34,10 +34,6 @@ function Main({
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
-   /* 
-    React.useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);*/
 
     function getTitle(keyWord) {
         setSearchByKeyWord(keyWord)
@@ -50,7 +46,6 @@ function Main({
     function resetTitle(){
         setSearchByKeyWord('')
     }
-
 
       React.useEffect(()=>{
         getCategory()
@@ -69,7 +64,7 @@ function Main({
       }, [handleScroll]);
 
     return(
-        <section className='main__section'>
+        <section className='main__section'> {/*Только на главной странице категории, поисковик и объявления*/}
             <MainSearchEngine
                 handleTitleChange={handleTitleChange}
                 handleGetItemsByFilter={handleGetItemsByFilter}

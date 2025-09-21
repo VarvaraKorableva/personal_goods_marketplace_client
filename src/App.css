@@ -28,12 +28,15 @@
   border: 1px solid #e4e6e7;
   background-color: transparent;
   text-decoration: none;
+  width: fit-content;
+  align-self: center;
 }
 
 .btn:hover {
   background-color: #e4e6e7;
   color: #1f1f1f;
   border: 1px solid #e4e6e7;
+  width: fit-content;
 }
 
 .back-btn {

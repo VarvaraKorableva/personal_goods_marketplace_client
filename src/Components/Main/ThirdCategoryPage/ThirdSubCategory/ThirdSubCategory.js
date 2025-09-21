@@ -1,5 +1,5 @@
 //import '../Сategory/Сategory.css'
-import { useParams, Link } from 'react-router-dom'
+/*mport { useParams, Link } from 'react-router-dom'
 
 function ThirdSubCategory({thirdSubCategory}) {
 
@@ -16,6 +16,6 @@ function ThirdSubCategory({thirdSubCategory}) {
     )
 }
 
-export default ThirdSubCategory;
+export default ThirdSubCategory;*/
 
 ////third-category-page
