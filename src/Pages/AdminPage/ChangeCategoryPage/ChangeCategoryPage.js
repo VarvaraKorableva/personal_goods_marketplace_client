@@ -40,15 +40,13 @@ function ChangeCategoryPage() {
     }
 
     function createCategoryAdmin(data) {
-        
+        setMessage("")
         Api.createCategory(data)
           .then((res) => {
-            console.log("Категория создана!", res);
-            
+            setMessage("Категория создана")
           })
           .catch((err) => {
-            console.error("Ошибка при создании категории:", err);
-            
+            setMessage("Ошибка при создании категории")
           });
       }
       
@@ -65,11 +63,14 @@ function ChangeCategoryPage() {
       }; 
 
       const handleCreateSubCategory = () => {
-        /*createCategoryAdmin(
-            {
-
-            }
-        );*/
+        /*createCategoryAdmin({
+            name: "Homemade Food",
+            is_good: true,
+!!!!!!            parent_id: null, ///добавить
+            image_url: "https://images.unsplash.com/photo-1500816159285-731ab12cbd82?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTB8fEhvbWVtYWRlJTIwRm9vZHxlbnwwfHwwfHx8MA%3D%3D",
+            slug: "homemade-food",
+            name_rus: "Домашняя еда"
+        }); */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 
@@ -95,25 +96,82 @@ function ChangeCategoryPage() {
           })
       }
 
-      async function handleUpdateCategoryImg() {
+      //
+
+      async function handleUpdateCategorySlug() {
+        setMessage("")
         try {
-          //const result = await Api.updateCategoryImg(61, "https://images.unsplash.com/photo-1619970984080-2666543ed883?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fCVEMCVBOCVEMCVCQSVEMCVCRSVEMCVCQiVEMSU4QyVEMCVCRCVEMSU4QiVEMCVCNSUyMCVEMCVCRiVEMSU4MCVEMCVCOCVEMCVCRCVEMCVCMCVEMCVCNCVEMCVCQiVEMCVCNSVEMCVCNiVEMCVCRCVEMCVCRSVEMSU4MSVEMSU4MiVEMCVCOHxlbnwwfHwwfHx8MA%3D%3D");
-          console.log('Successfully updated'); // "Successfully updated"
+          const result = await Api.updateCategorySlug(
+            45,
+            "mens-boots"
+          );
+          // в случае успеха
+          setMessage("Изменение прошло")
         } catch (err) {
-          console.error(err);
+          console.log(err);
+          setMessage("что-то пошло не так");
         }
       }
+
+      async function handleUpdateCategoryImg() {
+        setMessage("")
+        try {
+          const result = await Api.updateCategoryImg(
+            2,
+            "https://images.unsplash.com/photo-1563662931846-29b0af7443ff?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTcxfHxoZWVsc3xlbnwwfHwwfHx8MA%3D%3D"
+          );
+          // в случае успеха
+          setMessage("Изменение прошло")
+        } catch (err) {
+          console.log(err);
+          setMessage("что-то пошло не так");
+        }
+      }
+      
 
       async function handleUpdateCategoryNameRus() {
+        setMessage("")
         try {
-          //const result = await Api.updateCategoryNameRus(61, "Товары для школы");
-          console.log('result.msg'); // "Successfully updated"
+          const result = await Api.updateCategoryNameRus(
+            22, 
+            "Товары для школы"
+          );
+          setMessage("Изменение прошло")
         } catch (err) {
           console.error(err);
+          setMessage("что-то пошло не так")
         }
       }
 
-      //
+      async function handleUpdateCategoryNameEng() {
+        setMessage("")
+        try {
+          const result = await Api.updateCategoryNameEng(
+            36, 
+            "Jackets and Coats"
+          );
+          setMessage("Изменение прошло")
+        } catch (err) {
+          console.error(err);
+          setMessage("что-то пошло не так")
+        }
+      }
+
+      function onUpdateCategorySlug() {
+       //handleUpdateCategorySlug()
+      }
+
+      function onUpdateCategoryNameRus() {
+        //handleUpdateCategoryNameRus()
+      }
+
+      function onUpdateCategoryNameEng() {
+        //handleUpdateCategoryNameEng()
+      }
+
+      function onUpdateCategoryImg() {
+        //handleUpdateCategoryImg()
+      }
 
       const handleChange = (e) => {
         setId(e.target.value);
@@ -137,8 +195,10 @@ function ChangeCategoryPage() {
                 <Button onClick={handleCreateSubCategory}>Добавить суб категорию</Button> {/*onClick={openSubAddCategoryAdminForm}*/}
                 <Button onClick={openDeleteCategoryAdminForm}>Удалить Категорию</Button> {/*onClick={openDeleteCategoryAdminForm}*/}
                 <Button onClick={getAllCategory}>Посмотреть все категории</Button>
-                <Button onClick={handleUpdateCategoryImg}>Изменить картинку категории</Button>
-                <Button onClick={handleUpdateCategoryNameRus}>Изменить название категории</Button>
+                <Button onClick={onUpdateCategoryImg}>Изменить картинку категории</Button>
+                <Button onClick={onUpdateCategoryNameRus}>Изменить название категории rus</Button>
+                <Button onClick={onUpdateCategoryNameEng}>Изменить название категории eng</Button>
+                <Button onClick={onUpdateCategorySlug}>Изменить Slug</Button>
             </>
             
             {

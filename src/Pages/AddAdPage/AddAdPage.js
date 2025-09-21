@@ -94,10 +94,6 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
     translatedContext = hebrew;
   }
 
-  const goBack = () => {
-    navigate(-1);
-  };
-
   const formRef = React.useRef(null);
  
   const handleImgFirstLinkChange = async (event) => {
@@ -105,7 +101,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 1,
+                maxSizeMB: 0.3,
                 maxWidthOrHeight: 400, 
                 useWebWorker: true,     
             };
@@ -128,7 +124,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 1,
+                maxSizeMB: 0.3,
                 maxWidthOrHeight: 400, 
                 useWebWorker: true,     
             };
@@ -151,7 +147,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 1,
+                maxSizeMB: 0.3,
                 maxWidthOrHeight: 400, 
                 useWebWorker: true,     
             };
@@ -174,7 +170,7 @@ function AddAdPage({onAddAd, categories, isGood, isLoading, openLoading, closeLo
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 1,
+                maxSizeMB: 0.3,
                 maxWidthOrHeight: 400, 
                 useWebWorker: true,     
             };

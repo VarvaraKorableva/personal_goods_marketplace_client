@@ -31,7 +31,6 @@ export default function useItem({
   const navigate = useNavigate()
 
   const deleteMyAd = (item_id) => {
-    
     openLoading()
     Api.deleteItem(item_id)
     .then((res) => {
@@ -100,12 +99,11 @@ export default function useItem({
     })
   }
 
- 
-
-  async function getItemsByParentId(parent_id) {
+  async function getItemsByParentId(category_id) {
     openLoading()
     try {
-      const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
+      const res = await Api.getItemsByCategoryRecursive(category_id)
+      //const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
       closeLoading()
@@ -167,7 +165,8 @@ export default function useItem({
   async function getItemsByCategoryCategoryId(category_id) {
     openLoading()
     try {
-      const res = await Api.getItemsByCategory(category_id)
+      const res = await Api.getItemsByCategoryRecursive(category_id)
+      //const res = await Api.getItemsByCategory(category_id)
       setStartItemsSecondPage(res)
       setItemsSecondPageSearch(res)
       closeLoading()

@@ -7,6 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
 //import { useItemsContext } from "../../contexts/ItemsContext";
 import { useFavorites } from "../../contexts/FavoritesContext"
+import Button from '../../UK-kit/Button/Button'
 
 function OneAd({
     isLoggin, item, getItemById, 
@@ -111,7 +112,7 @@ function OneAd({
                   <img className="oneAdd__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
                 {isLoggin && (currentUser.user_id !== item.owner_id) && item.reserved ?
-                    <p className="oneAdd__reserved-text">Зарезервировано</p>
+                    <p className='oneAdd__reserved-text'>Зарезервировано</p>
                     :
                     <></>
                 }

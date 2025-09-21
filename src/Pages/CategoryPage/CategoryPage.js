@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import OneAd from '../../OneAd/OneAd.js'
-import Category from '../Сategory/Сategory'
+import OneAd from '../../Components/OneAd/OneAd.js'
+import Category from '../../Components/Main/Сategory/Сategory'
 import './CategoryPage.css'
-import BackBtn from '../../../UK-kit/BackBtn'
-import useCategory from "../../../hooks/category/useCategory"
-import useLoading from "../../../hooks/useLoading"
+import BackBtn from '../../UK-kit/BackBtn'
+import useCategory from "../../hooks/category/useCategory"
+import useLoading from "../../hooks/useLoading"
 
 
 function CategoryPage({
@@ -54,8 +54,7 @@ function CategoryPage({
             }
           }
         }
-      }, [rest, categories]);
-      
+      }, [rest, categories]);  
 
     
     return(

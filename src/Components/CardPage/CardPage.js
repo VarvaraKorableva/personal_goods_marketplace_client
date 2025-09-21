@@ -11,6 +11,7 @@ import { TbEdit } from "react-icons/tb";
 import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
 import { useItemsContext } from "../../contexts/ItemsContext"
+import Button from '../../UK-kit/Button/Button'
 
 function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
     let { item_id } = useParams();
@@ -57,6 +58,8 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
       translatedContext = hebrew;
     }
 
+    console.log('selectedItem', selectedItem)
+    
     useEffect(() => {
         getItemById(item_id);
 
@@ -135,11 +138,13 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                     <div className="cardPage-info-container">
                         <div className="cardPage-info-wrapper">
                             {selectedItem[0].reserved?
-                                <p className="cardPage__reserved-text">Зарезервировано</p>
+                                <Button>Зарезервировано</Button>
                             :
                                 <></>
                             }
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
+                            <p className="cardPage-info-title">{translatedContext.category}: <span className="cardPage-info">{selectedItem[0].parent_category_name_rus}</span></p>
+                            
                             {selectedItem[0].condition.length?
                                 <div className="cardPage-info-edit-container">
                                     {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
@@ -176,8 +181,19 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                                 <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
                             </div>
 
+
                             <p className="cardPage-info-title">{translatedContext.seller}: <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{selectedItem[0].owner_name}</Link></p>
-                            {/*<button className="btn">{translatedContext.btn.messageTheSellerOnTelegram}</button>*/}
+                            
+                            {
+                            isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
+                                <></>
+                            :
+                            <div className="cardPage__info-about-user">
+                                
+                                <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
+                            </div>
+                            }
+
                             {selectedItem[0].owner_telegram?
                               <a 
                                 className="btn" 
@@ -191,15 +207,6 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                               <></>
                             }
                         </div>
-                        {
-                            isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
-                                <></>
-                            :
-                            <div className="cardPage__info-about-user">
-                                
-                                <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
-                            </div>
-                        }
                         {
                             isLoggin?
                                 <div className="cardPage__btn-container">
@@ -225,6 +232,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             :
                             <></>
                         }
+
 
                     </div>
                 </div>

@@ -27,7 +27,7 @@ import Main from './Components/Main/Main'
 import Footer from './Components/Footer/Footer'
 import MyPage from './Components/MyPage/MyPage'
 import MyMessages from './Components/MyPage/MyMessages/MyMessages'
-import CategoryPage from './Components/Main/CategoryPage/CategoryPage'
+import CategoryPage from './Pages/CategoryPage/CategoryPage'
 import RulesPublicationsPage from './Pages/RulesPublicationsPage/RulesPublicationsPage'
 import Preloader from './Components/Preloader/Preloader'
 import AdminPage from './Pages/AdminPage/AdminPage'
@@ -50,6 +50,8 @@ import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage
 import PasswordRecoveryCodeRequestPage from './Pages/PasswordRecoveryCodeRequestPage/PasswordRecoveryCodeRequestPage'
 import ConversationPage from './Pages/ConversationPage/ConversationPage'
 import ClientsAdminPage from './Pages/AdminPage/ClientsAdminPage/ClientsAdminPage'
+import ListingsAdminPage from './Pages/AdminPage/ListingsAdminPage/ListingsAdminPage'
+import ModerationAdminPage from './Pages/AdminPage/ModerationAdmin/ModerationAdmin'
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
@@ -491,6 +493,20 @@ function App() {
           path={`/clients-admin`}
           element={
             <ClientsAdminPage/>
+          }>
+        </Route>
+
+        <Route 
+          path={`/listings-admin`}
+          element={
+            <ListingsAdminPage/>
+          }>
+        </Route>
+
+        <Route 
+          path={`/add-new-ads-as-admin`}
+          element={
+            <ModerationAdminPage/>
           }>
         </Route>
 
