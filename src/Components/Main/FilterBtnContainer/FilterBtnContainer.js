@@ -3,14 +3,19 @@ import './FilterBtnContainer.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 import { conditions } from '../../../const/Сonditions/Сonditions'
+import { useItemsContext } from "../../../contexts/ItemsContext";
 
-function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, handleCityPriceAndConditionChange, resetAllfilters}) {
+function FilterBtnContainer({getAllItems, resetAllfilters}) {
     const { language } = React.useContext(LanguageContext)
-    const [cityFromInput, setCityFromInput] = React.useState('')
-    const [lowPriceFromInput, setLowPriceFromInput] = React.useState('')
-    const [highPriceFromInput, setHighPriceFromInput] = React.useState('')
-    const [conditionFromInput, setConditionFromInput] = React.useState('')
 
+    const {
+      currentFilters, setCurrentFilters, limit,
+      city, setCity,
+      lowPrice, setLowPrice,
+      highPrice, setHighPrice,
+      condition, setCondition,
+      title, setTitle,
+    } = useItemsContext();
     const { en, rus, hebrew } = choose;
 
     let translatedContext = '';
@@ -23,38 +28,24 @@ function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, ha
     }
 
   function handleSearchByCity(e) {
-    setCityFromInput(e.target.value)
-    handleCityPriceAndConditionChange(e.target.value, lowPriceFromInput, highPriceFromInput, conditionFromInput)
+    setCity(e.target.value)
   }
 
   function handleSearchByLowPriceFromInput(e) {
-    setLowPriceFromInput(e.target.value)
-    handleCityPriceAndConditionChange(cityFromInput, e.target.value, highPriceFromInput, conditionFromInput)
+    setLowPrice(e.target.value)
   }
 
   function handleSearchByHighPriceFromInput(e) {
-    setHighPriceFromInput(e.target.value)
-    handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, e.target.value, conditionFromInput)
+    setHighPrice(e.target.value)
   }
 
   function handleSearchByConditionFromInput(e) {
-    setConditionFromInput(e.target.value)
-    handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, highPriceFromInput, e.target.value)
+    setCondition(e.target.value)
   }
-/*
-  function onSearch() {
-    handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, highPriceFromInput, conditionFromInput)
-    handleGetItemsByFilter()
-  }*/
 
-  function deleteAllFilters() {
-    setCityFromInput('')
-    setLowPriceFromInput(0)
-    setHighPriceFromInput(0)
-    setConditionFromInput('')
+  function handleResetAllFilters() {
     resetAllfilters()
-    getAllItems()
-    resetTitle()
+    getAllItems({ page: 1, limit, filters: {} }) 
   }
 
     return(
@@ -65,19 +56,19 @@ function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, ha
                 <input 
                     className="filterBtnContainer__input-price"
                     placeholder='от'
-                    value={lowPriceFromInput}
+                    value={lowPrice}
                     onChange={handleSearchByLowPriceFromInput}
                 >
                 </input>
                 <input 
                     className="filterBtnContainer__input-price"
                     placeholder='до'
-                    value={highPriceFromInput}
+                    value={highPrice}
                     onChange={handleSearchByHighPriceFromInput}
                 >
                 </input>
               </div>
-              <div className="filterBtnContainer__btn-price" onClick={deleteAllFilters}>Сбросить фильтры</div>
+              <div className="filterBtnContainer__btn-price" onClick={handleResetAllFilters}>Сбросить фильтры</div>
             </div>
 
             <div className="filterBtnContainer__inputs-container">
@@ -85,7 +76,7 @@ function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, ha
               <input 
                 className="filterBtnContainer__input-city"
                 placeholder='Город'
-                value={cityFromInput}
+                value={city}
                 onChange={handleSearchByCity}
               >
               </input>
@@ -93,7 +84,7 @@ function FilterBtnContainer({resetTitle, getAllItems, handleGetItemsByFilter, ha
               <select 
                 className='filterBtnContainer__input' 
                 onChange={handleSearchByConditionFromInput}
-                value={conditionFromInput}
+                value={condition}
               >
                 <option value="">Выбрать состояние</option>
 

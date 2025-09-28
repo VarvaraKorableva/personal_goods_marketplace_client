@@ -12,6 +12,15 @@ export const ItemsProvider = ({ children }) => {
   const [isPageItemsLoading, setIsPageItemsLoading] = useState(false);
   const [myImages, setMyImages] = useState([])
   const [selectedItem, setSelectedItem] = useState([])
+  const [currentFilters, setCurrentFilters] = useState({})
+
+  const [city, setCity] = useState('') 
+  const [lowPrice, setLowPrice] = useState(0) 
+  const [highPrice, setHighPrice] = useState(0) 
+  const [condition, setCondition] = useState('') 
+  const [title, setTitle] = useState('') 
+
+  const limit = 20
 
   return (
     <ItemsContext.Provider
@@ -30,6 +39,13 @@ export const ItemsProvider = ({ children }) => {
         setMyImages,
         selectedItem,
         setSelectedItem,
+        currentFilters, setCurrentFilters,
+        limit,
+        city, setCity,
+        lowPrice, setLowPrice,
+        highPrice, setHighPrice,
+        condition, setCondition,
+        title, setTitle,
       }}
     >
       {children}

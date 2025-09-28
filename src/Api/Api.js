@@ -104,21 +104,54 @@ export const getUserItems = (owner_id) => {
   })
       .then(checkResponse) 
 };
-
-export const getItemsByCategory = (category_id) => {
-  return fetch(`${BASE_URL}/items/categoryId/${category_id}`, {
-      credentials: 'include',
+export const getItems = async ({ page = 1, limit = 20, filters = {}, categoryId, recursive } = {}) => {
+    const query = new URLSearchParams();
+  
+    // пагинация
+    query.append("page", page);
+    query.append("limit", limit);
+  
+    // категории
+    if (categoryId) query.append("categoryId", categoryId);
+    if (recursive) query.append("recursive", "true");
+  
+    // фильтры — отдельно каждый ключ
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
+        query.append(key, value);
+      }
+    });
+  
+    const res = await fetch(`${BASE_URL}/items/all/getItems?${query.toString()}`, {
+      credentials: "include",
       method: "GET",
       headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
       },
-  })
-      .then(checkResponse) 
-};
+    });
+  
+    return checkResponse(res);
+  };
+  
+/*
+export const getItems = async (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    const res = await fetch(`${BASE_URL}/items/all/getItems?${query}`, {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+    return checkResponse(res);
+  };
+*/
+  
 
 //получение айтемов при первом нажатии на родительскую категорию
-export const getItemsBySubCategoriesByParentId = (parent_id) => {
+/*export const getItemsBySubCategoriesByParentId = (parent_id) => {
     return fetch(`${BASE_URL}/items/getItemsBySubCategoriesByParentId/${parent_id}`, {
         credentials: 'include',
         method: "GET",
@@ -129,7 +162,7 @@ export const getItemsBySubCategoriesByParentId = (parent_id) => {
     })
         .then(checkResponse) 
   };
-
+*/
 export const getItemById = (item_id) => {
   return fetch(`${BASE_URL}/items/all/${item_id}`, {
       credentials: 'include',
@@ -153,9 +186,9 @@ export const getUserById = (user_id) => {
   })
       .then(checkResponse) 
 };
-
+//не исп
 export const getAllItems = ({ page = 1, limit = 20 }) => {
-    return fetch(`${BASE_URL}/items/all/${page}/${limit}`, {
+    return fetch(`${BASE_URL}/items/all/test/${page}/${limit}`, {
       credentials: 'include',
       method: "GET",
       headers: {
@@ -164,7 +197,7 @@ export const getAllItems = ({ page = 1, limit = 20 }) => {
       },
     })
     .then(checkResponse);
-  };
+};
   
 
 export const deleteItem = (item_id) => {
@@ -485,7 +518,7 @@ export const updateIsReserved = ( item_id, user_id ) => {
     })
         .then(checkResponse)
 };  
-
+/*
 export const getItemsByFilter = (filters) => {
     const queryString = new URLSearchParams(filters).toString();
     return fetch(`${BASE_URL}/items/getItemsByFilter?${queryString}`, {
@@ -497,7 +530,7 @@ export const getItemsByFilter = (filters) => {
         },
     })
         .then(checkResponse) 
-};    
+}; */   
 
 
 ///deleteConversation
@@ -626,7 +659,6 @@ export const createCategory = (data) => {
         .then(checkResponse)
         
 };
-///
 
 export const updateCategorySlug = (category_id, slug) => {
     return fetch(`${BASE_URL}/category/updatecategoryslug`, {

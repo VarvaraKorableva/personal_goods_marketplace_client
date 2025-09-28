@@ -12,8 +12,8 @@ function CategoryPage({
     openDeletePopup, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
     itemsSecondPageSearch,
-    getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved,
+    openFirstMessagePopup,
+    handleUpdateIsReserved, getItemsByCategoryId
 }) {
     const {
         openLoading,
@@ -46,12 +46,7 @@ function CategoryPage({
       
           if (currentCategory) {
             chooseCategory(currentCategory);
-      
-            if (currentCategory.parent_id) {
-              getItemsByCategoryCategoryId(currentCategory.category_id);
-            } else {
-              getItemsByParentId(currentCategory.category_id);
-            }
+            getItemsByCategoryId(currentCategory.category_id)
           }
         }
       }, [rest, categories]);  
@@ -67,8 +62,7 @@ function CategoryPage({
                         category={subCategory} 
                         categories={categories}
                         onChooseCategory={chooseCategory}
-                        getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
-                        getItemsByParentId={getItemsByParentId}
+                        
                     />
                   ))
                 }

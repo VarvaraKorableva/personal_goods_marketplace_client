@@ -101,30 +101,29 @@ function App() {
   } = useUser({openLoading, closeLoading, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup});
 
   const {
-    resetAllfilters,
-    handleGetItemsByFilter,
-    handleCityPriceAndConditionChange,
-    handleTitleChange,
-  } = useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup,});
-
-  const {
     getAllItems,
     deleteMyAd,
     getMyItems,
     getItemById, 
-    getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
     handleAddAdSubmit,
-    getItemsByCategoryCategoryId,
+    getItemsByCategoryId,
   } = useItem({
     openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
   })
 
+  const {
+    resetAllfilters,
+    handleGetItemsByFilter,
+  } = useFilters({getAllItems,});
+
+
+
   const { 
     handleScroll 
   } = useScroll({ 
-    getAllItems, 
+    getAllItems,
   });
 
   const {
@@ -227,7 +226,6 @@ function App() {
           onSendBtn={sendVerificationCode}
           isRegError={isRegError}
           isLoading={isLoading}
-
           isVerificationCodeSent={isVerificationCodeSent}
           isVerificationCodeSentMessage={isVerificationCodeSentMessage}
           verifyCode={verifyCode}
@@ -284,12 +282,8 @@ function App() {
               deleteFromFavorites={deleteFromFavorites}
               isLoggin={isLoggin}
               openFirstMessagePopup={openFirstMessagePopup}
-              getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
-              getItemsByParentId={getItemsByParentId}
               handleUpdateIsReserved={handleUpdateIsReserved}
               handleGetItemsByFilter={handleGetItemsByFilter}
-              handleTitleChange={handleTitleChange}
-              handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
               resetAllfilters={resetAllfilters}
               getAllItems={getAllItems}
               handleScroll={handleScroll}
@@ -310,17 +304,13 @@ function App() {
               openDeletePopup={openDeletePopup}
               addToFavorites={addToFavorites}
               deleteFromFavorites={deleteFromFavorites}
-              getItemById={getItemById} 
-              
+              getItemById={getItemById}    
               itemsSecondPageSearch={itemsSecondPageSearch}
               isLoggin={isLoggin}
-              
-              
-              getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
-              getItemsByParentId={getItemsByParentId}
               openFirstMessagePopup={openFirstMessagePopup}
               handleUpdateIsReserved={handleUpdateIsReserved}
               adsCategoryName={adsCategoryName}
+              getItemsByCategoryId={getItemsByCategoryId}
             />
           }
         />
@@ -329,7 +319,6 @@ function App() {
           path='/items/:item_id' 
           element={
             <CardPage 
-              
               getItemById={getItemById}
               getUserById={getUserById}
               userInfo={userInfo}

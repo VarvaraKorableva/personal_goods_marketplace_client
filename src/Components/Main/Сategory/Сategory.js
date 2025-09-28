@@ -2,24 +2,11 @@ import './Сategory.css'
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {LanguageContext} from '../../../contexts/TranslationContext'
-import choose from '../../../const/HeaderLan'
-import { useEffect } from 'react';
 
-function Category({category, onChooseCategory, getItemsByCategoryCategoryId, getItemsByParentId, categories}) {
+function Category({category}) {
     let { slug } = useParams();
     const { language } = React.useContext(LanguageContext)
     const { "*": rest } = useParams(); 
-
-    function handleChoose() {
-      onChooseCategory(category)
-      { 
-        category.parent_id ?
-        
-          getItemsByCategoryCategoryId(category.category_id)
-        : 
-          getItemsByParentId(category.category_id)
-      }
-    }
 
     const path = rest ? rest.split("/") : [];
     

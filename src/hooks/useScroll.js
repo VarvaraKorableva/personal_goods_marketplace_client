@@ -13,7 +13,8 @@ export default function useScroll({
     isPageItemsLoading,
     setIsPageItemsLoading,
     page,
-    setPage
+    setPage,
+    currentFilters, setCurrentFilters, limit
   } = useItemsContext();
 
   const pageRef = React.useRef(page);
@@ -29,11 +30,10 @@ const handleScroll = React.useCallback(() => {
   if (isBottom() && !isLoadingRef.current && lastFourtyItems.length < totalCountOfAds) {
     const nextPage = pageRef.current + 1;
 
-    // сразу блокируем
     isLoadingRef.current = true;
     setIsPageItemsLoading(true);
 
-    getAllItems(nextPage).finally(() => {
+    getAllItems({ page: nextPage, limit, filters: currentFilters }).finally(() => {
       isLoadingRef.current = false;
       setIsPageItemsLoading(false);
     });
@@ -41,6 +41,7 @@ const handleScroll = React.useCallback(() => {
     setPage(nextPage);
   }
 }, [lastFourtyItems, totalCountOfAds, getAllItems, setPage, setIsPageItemsLoading]);
+
 
 
 

@@ -57,25 +57,11 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
     } else if (language === 'hebrew') {
       translatedContext = hebrew;
     }
-
-    console.log('selectedItem', selectedItem)
     
     useEffect(() => {
         getItemById(item_id);
 
     }, []);
-
-    const goBack = () => {
-        navigate(-1);
-    };
-    
-    function getUser() {
-        Api.getUserById(selectedItem[0].owner_id)
-            .then((res) => {
-                setUserInfo(res)
-            })    
-            .catch(error => console.error('Error fetching user:', error));
-    }
 
     if(selectedItem.length === 0) {
         return <p>Loading ...</p>;
@@ -194,7 +180,8 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             </div>
                             }
 
-                            {selectedItem[0].owner_telegram?
+
+                            {selectedItem[0].owner_telegram && (selectedItem[0].owner_telegram !== currentUser.telegram)?
                               <a 
                                 className="btn" 
                                 href={`https://t.me/${selectedItem[0].owner_telegram}`} 
@@ -206,6 +193,9 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             :
                               <></>
                             }
+
+
+
                         </div>
                         {
                             isLoggin?
