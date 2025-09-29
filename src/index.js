@@ -7,15 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ItemsProvider } from "./contexts/ItemsContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext"
+import { FiltersProvider } from "./contexts/FiltersContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ItemsProvider>
+    <FiltersProvider>
     <FavoritesProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </FavoritesProvider>
+    </FiltersProvider>
   </ItemsProvider>
 );
 

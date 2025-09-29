@@ -3,19 +3,21 @@ import './FilterBtnContainer.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 import { conditions } from '../../../const/Сonditions/Сonditions'
-import { useItemsContext } from "../../../contexts/ItemsContext";
+//import { useItemsContext } from "../../../contexts/ItemsContext";
+import { useFiltersContext } from "../../../contexts/FiltersContext";
+import { ITEMS_LIMIT } from "../../../const/helper";
 
 function FilterBtnContainer({getAllItems, resetAllfilters}) {
     const { language } = React.useContext(LanguageContext)
+    const limit = ITEMS_LIMIT
 
     const {
-      currentFilters, setCurrentFilters, limit,
       city, setCity,
       lowPrice, setLowPrice,
       highPrice, setHighPrice,
       condition, setCondition,
-      title, setTitle,
-    } = useItemsContext();
+    } = useFiltersContext();
+
     const { en, rus, hebrew } = choose;
 
     let translatedContext = '';
@@ -47,6 +49,8 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
     resetAllfilters()
     getAllItems({ page: 1, limit, filters: {} }) 
   }
+
+  console.log('City component rendered');
 
     return(
         <div className="filterBtnContainer__container">

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useItemsContext } from '../contexts/ItemsContext';
+import { useFiltersContext } from "../contexts/FiltersContext";
+import { ITEMS_LIMIT } from "../const/helper";
 
 export default function useScroll({ 
   getAllItems, getItemsByCategoryId
@@ -7,21 +9,23 @@ export default function useScroll({
 
   const {
     lastFourtyItems,
-    setLastFourtyItems,
     totalCountOfAds,
-    setTotalCountOfAds,
     isPageItemsLoading,
     setIsPageItemsLoading,
     page,
     setPage,
-    currentFilters, setCurrentFilters, limit,
     categoryPage, setCategoryPage,
-    startItemsSecondPage, setStartItemsSecondPage,
-    itemsSecondPageSearch, setItemsSecondPageSearch,
+    startItemsSecondPage,
     isCategoryPageItemsLoading, setIsCategoryPageItemsLoading,
-    categoryId, setCategoryId,
-    totalCategoryCountOfAds, setTotalCategoryCountOfAds,
+    categoryId,
+    totalCategoryCountOfAds,
   } = useItemsContext();
+
+  const {
+    currentFilters,
+  } = useFiltersContext();
+
+  const limit = ITEMS_LIMIT
 
   const pageRef = React.useRef(page);
   const isLoadingRef = React.useRef(isPageItemsLoading);

@@ -3,13 +3,14 @@ import './MainSearchEngine.css'
 import {LanguageContext} from '../../../contexts/TranslationContext'
 import choose from '../../../const/mainContainer'
 import { LuSettings2 } from "react-icons/lu";
-import { useItemsContext } from "../../../contexts/ItemsContext";
+import { useFiltersContext } from "../../../contexts/FiltersContext";
+import { ITEMS_LIMIT } from "../../../const/helper";
 
 function MainSearchEngine({ getAllItems, handleGetItemsByFilter, handleFilterBtnClick, resetAllfilters }) {
-
+    const limit = ITEMS_LIMIT
     const {
-        currentFilters, limit, title, setTitle,
-      } = useItemsContext();
+        title, setTitle,
+      } = useFiltersContext();
 
     const { language } = React.useContext(LanguageContext)
     const { en, rus, hebrew } = choose;

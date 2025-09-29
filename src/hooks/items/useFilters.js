@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { useItemsContext } from "../../contexts/ItemsContext";
+import { useFiltersContext } from "../../contexts/FiltersContext";
 import * as Api from '../../Api/Api'
+import { ITEMS_LIMIT } from "../../const/helper";
 
 export default function useFilters({ getAllItems, }) {
+  const limit = ITEMS_LIMIT
   const {
     setPage,
-    setCurrentFilters, limit,
+  } = useItemsContext();
+
+  const {
     city, setCity,
     lowPrice, setLowPrice,
     highPrice, setHighPrice,
     condition, setCondition,
     title, setTitle,
-  } = useItemsContext();
-
+    setCurrentFilters,
+  } = useFiltersContext();
 
     const resetAllfilters = () => {
         setCity('')

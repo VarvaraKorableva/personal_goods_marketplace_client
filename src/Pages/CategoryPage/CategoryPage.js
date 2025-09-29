@@ -7,6 +7,8 @@ import BackBtn from '../../UK-kit/BackBtn'
 import useCategory from "../../hooks/category/useCategory"
 import useLoading from "../../hooks/useLoading"
 import { useItemsContext } from '../../contexts/ItemsContext';
+import { useFiltersContext } from "../../contexts/FiltersContext";
+import { ITEMS_LIMIT } from "../../const/helper";
 
 function CategoryPage({
     openDeletePopup, isLoggin,
@@ -15,34 +17,17 @@ function CategoryPage({
     openFirstMessagePopup,
     handleUpdateIsReserved, getItemsByCategoryId
 }) {
-
+    const limit = ITEMS_LIMIT
     const {
-        lastFourtyItems,
-        setLastFourtyItems,
-        itemsAfterSearch,
-        setItemsAfterSearch,
-        totalCountOfAds,
-        setTotalCountOfAds,
-        page,
-        setPage,
-        isPageItemsLoading,
-        setIsPageItemsLoading,
-        myImages,
-        setMyImages,
-        selectedItem,
-        setSelectedItem,
-        limit,
-        city, setCity,
-        lowPrice, setLowPrice,
-        highPrice, setHighPrice,
-        condition, setCondition,
-        title, setTitle,
-        categoryPage, setCategoryPage,
-        currentFilters,
-        categoryId, setCategoryId,
-        itemsSecondPageSearch, setItemsSecondPageSearch,
+        setCategoryPage,
+        setCategoryId,
+        itemsSecondPageSearch,
         totalCategoryCountOfAds,
     } = useItemsContext();
+
+    const {
+        currentFilters,
+      } = useFiltersContext();
 
     const {
         openLoading,
@@ -75,7 +60,6 @@ function CategoryPage({
       
           if (currentCategory) {
             chooseCategory(currentCategory);
-            //getItemsByCategoryId(currentCategory.category_id)
             setCategoryId(currentCategory.category_id)
             const categoryId = currentCategory.category_id
             setCategoryPage(1);

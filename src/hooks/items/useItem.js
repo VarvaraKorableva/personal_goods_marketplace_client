@@ -95,14 +95,13 @@ export default function useItem({
     setIsCategoryPageItemsLoading(true)
     openLoading()
     try {
-      //const res = await Api.getItemsByCategoryRecursive(category_id)
       const res = await Api.getItems({       
         page,
         limit,
         filters,
         categoryId,
         recursive, 
-      })//{ categoryId: 5, recursive: true }
+      })
       if (page === 1) {
         // если первая страница — сбрасываем список
         setStartItemsSecondPage(res.result);
