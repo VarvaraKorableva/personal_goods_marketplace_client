@@ -8,25 +8,20 @@ export default function useItem({
 }) {
 
   const {
-    lastFourtyItems,
     setLastFourtyItems,
-    itemsAfterSearch,
     setItemsAfterSearch,
-    totalCountOfAds,
     setTotalCountOfAds,
-    page,
-    setPage,
-    isPageItemsLoading,
     setIsPageItemsLoading,
     myImages,
     setMyImages,
-    selectedItem,
     setSelectedItem,
+    startItemsSecondPage, setStartItemsSecondPage,
+    itemsSecondPageSearch, setItemsSecondPageSearch,
+    setIsCategoryPageItemsLoading,
+    categoryId, setCategoryId,
+    setTotalCategoryCountOfAds,
   } = useItemsContext();
-
-  const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
-  const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
-  const limit = 20;
+  
 
   const navigate = useNavigate()
 
@@ -59,13 +54,12 @@ export default function useItem({
       }) 
   }
 
-  async function getAllItems(page = 1, limit = 20) {
+  async function getAllItems({ page = 1, limit = 20, filters = {} }) {
     setIsPageItemsLoading(true);
     openLoading();
-
+    
     try {
-      const res = await Api.getAllItems({ page, limit });
-      
+      const res = await Api.getItems({ page, limit, filters })
       if(page == 1) {
         setTotalCountOfAds(res.totalCount);
         setLastFourtyItems(res.result);
@@ -76,8 +70,6 @@ export default function useItem({
         setItemsAfterSearch(prevItems => [...prevItems, ...res.result]);
       }
       closeLoading();
-      //console.log("page:", page, res.result);
-      //window.dispatchEvent(new Event('resize'));
       setIsPageItemsLoading(false);
       
     } catch (err) {
@@ -98,14 +90,31 @@ export default function useItem({
       closeLoading()
     })
   }
-
-  async function getItemsByParentId(category_id) {
+//получаем айтомы для все категорий в том числе детей внуков и правнуков
+  async function getItemsByCategoryId({ page, limit, filters = {}, categoryId, recursive = true }) {
+    setIsCategoryPageItemsLoading(true)
     openLoading()
     try {
-      const res = await Api.getItemsByCategoryRecursive(category_id)
-      //const res = await Api.getItemsBySubCategoriesByParentId(parent_id)
-      setStartItemsSecondPage(res)
-      setItemsSecondPageSearch(res)
+      //const res = await Api.getItemsByCategoryRecursive(category_id)
+      const res = await Api.getItems({       
+        page,
+        limit,
+        filters,
+        categoryId,
+        recursive, 
+      })//{ categoryId: 5, recursive: true }
+      if (page === 1) {
+        // если первая страница — сбрасываем список
+        setStartItemsSecondPage(res.result);
+        setItemsSecondPageSearch(res.result);
+        setTotalCategoryCountOfAds(res.totalCount)
+      } else {
+        // если следующая страница — добавляем к текущим
+        setStartItemsSecondPage(prev => [...prev, ...res.result]);
+        setItemsSecondPageSearch(prev => [...prev, ...res.result]);
+        setTotalCategoryCountOfAds(res.totalCount)
+      }
+      setIsCategoryPageItemsLoading(false)
       closeLoading()
     } catch (err) {
       console.log(err);
@@ -162,29 +171,14 @@ export default function useItem({
     })
   }
 
-  async function getItemsByCategoryCategoryId(category_id) {
-    openLoading()
-    try {
-      const res = await Api.getItemsByCategoryRecursive(category_id)
-      //const res = await Api.getItemsByCategory(category_id)
-      setStartItemsSecondPage(res)
-      setItemsSecondPageSearch(res)
-      closeLoading()
-    } catch (err) {
-      console.log(err);
-      closeLoading()
-    }
-  }
-
   return {
     getAllItems,
     deleteMyAd,
     getMyItems,
     getItemById, 
-    getItemsByParentId,
     startItemsSecondPage,
     itemsSecondPageSearch,
     handleAddAdSubmit,
-    getItemsByCategoryCategoryId,
+    getItemsByCategoryId,
   };
 }

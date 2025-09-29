@@ -4,7 +4,6 @@ import MainSearchEngine from './MainSearchEngine/MainSearchEngine'
 import ItemsContainer from './ItemsContainer/ItemsContainer'
 import FilterBtnContainer from './FilterBtnContainer/FilterBtnContainer'
 import './Main.css'
-//import useScroll from "../../hooks/useScroll"
 import { useItemsContext } from "../../contexts/ItemsContext";
 
 function Main({
@@ -13,75 +12,57 @@ function Main({
     categories, onChooseCategory,
     getItemById, addToFavorites,
     deleteFromFavorites, openDeletePopup, 
-    getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved, handleGetItemsByFilter, handleTitleChange, handleCityPriceAndConditionChange,
+    openFirstMessagePopup,
+    handleUpdateIsReserved, handleGetItemsByFilter,
     resetAllfilters, handleScroll,
     getCategory, userId, getMyFavorites,
 }) {
 
     const {
         lastFourtyItems,
-        setLastFourtyItems,
         itemsAfterSearch,
-        setItemsAfterSearch,
         totalCountOfAds,
-        setTotalCountOfAds,
-        page,
-        setPage,
-        isPageItemsLoading,
-        setIsPageItemsLoading,
-      } = useItemsContext();
+        currentFilters,
+        limit
+    } = useItemsContext();
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
-
-    function getTitle(keyWord) {
-        setSearchByKeyWord(keyWord)
-    }  
 
     function handleFilterBtnClick() {
         setIsFilterBtnClicked(!isFilterBtnClicked)
     }
 
-    function resetTitle(){
-        setSearchByKeyWord('')
-    }
-
-      React.useEffect(()=>{
+    React.useEffect(()=>{
         getCategory()
         if(userId) {
           getMyFavorites(userId, lastFourtyItems)
         }
         if (lastFourtyItems.length === 0) {
-            getAllItems(1);
+            getAllItems({ page: 1, limit, filters: currentFilters }) 
           }
-      },[])
+    },[])
     
-      React.useEffect(() => {
+    React.useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
         
-      }, [handleScroll]);
+    }, [handleScroll]);
 
     return(
         <section className='main__section'> {/*Только на главной странице категории, поисковик и объявления*/}
             <MainSearchEngine
-                handleTitleChange={handleTitleChange}
                 handleGetItemsByFilter={handleGetItemsByFilter}
-                getTitle={getTitle}
                 handleFilterBtnClick={handleFilterBtnClick}
                 getAllItems={getAllItems}
-                resetTitle={resetTitle}
+                resetAllfilters={resetAllfilters}
             />
             {
                 isFilterBtnClicked?
             
-                <FilterBtnContainer 
-                    handleGetItemsByFilter={handleGetItemsByFilter}
-                    handleCityPriceAndConditionChange={handleCityPriceAndConditionChange}
+                <FilterBtnContainer  
                     resetAllfilters={resetAllfilters}
                     getAllItems={getAllItems}
-                    resetTitle={resetTitle}
                 />
                 :
                 <></>
@@ -90,8 +71,6 @@ function Main({
                 onChooseCategory={onChooseCategory}
                 categories={categories}
                 categoriesToRender={categoriesToRender}
-                getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
-                getItemsByParentId={getItemsByParentId}
             />
             {itemsAfterSearch.length?
 

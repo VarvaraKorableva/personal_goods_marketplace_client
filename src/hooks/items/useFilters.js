@@ -1,71 +1,43 @@
 import { useState } from "react";
-import * as Api from '../../Api/Api'
 import { useItemsContext } from "../../contexts/ItemsContext";
+import * as Api from '../../Api/Api'
 
-export default function useFilters({openLoading, closeLoading, setPopupMessage, openSuccessfulActionPopup, }) {
+export default function useFilters({ getAllItems, }) {
   const {
-    lastFourtyItems,
-    setLastFourtyItems,
-    itemsAfterSearch,
-    setItemsAfterSearch,
-    totalCountOfAds,
-    setTotalCountOfAds,
-    page,
     setPage,
-    isPageItemsLoading,
-    setIsPageItemsLoading,
+    setCurrentFilters, limit,
+    city, setCity,
+    lowPrice, setLowPrice,
+    highPrice, setHighPrice,
+    condition, setCondition,
+    title, setTitle,
   } = useItemsContext();
 
-    const [city, setCity] = useState('') 
-    const [lowPrice, setLowPrice] = useState(0) 
-    const [highPrice, setHighPrice] = useState(0) 
-    const [condition, setCondition] = useState('') 
-    const [title, setTitle] = useState('') 
 
     const resetAllfilters = () => {
         setCity('')
         setLowPrice(0)
         setHighPrice(0)
         setCondition('')
+        setTitle('')
+        setCurrentFilters({})
       }
     
       const handleGetItemsByFilter = () => {
-        openLoading()
         const filters = {
-          city: city,
-          lowPrice: lowPrice,
-          highPrice: highPrice,
-          condition: condition,
-          title: title?.trim().replace(/\s+/g, " ") || "",
+          city: city?.trim() || undefined,
+          lowPrice: lowPrice > 0 ? lowPrice : undefined,
+          highPrice: highPrice > 0 ? highPrice : undefined,
+          condition: condition || undefined,
+          title: title?.trim().replace(/\s+/g, " ") || undefined
         };
-    
-        Api.getItemsByFilter(filters)
-        .then((res) => {
-          setItemsAfterSearch(res)
-          closeLoading()
-        })
-        .catch((err) => {
-          closeLoading()
-          setPopupMessage("Something wrong, plese try again")
-          openSuccessfulActionPopup()
-        })
-      }
-
-      function handleCityPriceAndConditionChange(cityFromInput, lowPriceFromInput, highPriceFromInput, conditionFromInput) {
-        setCity(cityFromInput)
-        setLowPrice(lowPriceFromInput)
-        setHighPrice(highPriceFromInput)
-        setCondition(conditionFromInput)
-      }
-
-      function handleTitleChange(keyWord) {
-        setTitle(keyWord)
+        setPage(1);
+        setCurrentFilters(filters);
+        getAllItems({ page: 1, limit, filters });
       }
 
   return {
         resetAllfilters,
         handleGetItemsByFilter,
-        handleCityPriceAndConditionChange,
-        handleTitleChange,
   };
 }

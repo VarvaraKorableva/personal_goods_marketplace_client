@@ -6,15 +6,44 @@ import './CategoryPage.css'
 import BackBtn from '../../UK-kit/BackBtn'
 import useCategory from "../../hooks/category/useCategory"
 import useLoading from "../../hooks/useLoading"
-
+import { useItemsContext } from '../../contexts/ItemsContext';
 
 function CategoryPage({
     openDeletePopup, isLoggin,
     getItemById, addToFavorites, deleteFromFavorites, 
-    itemsSecondPageSearch,
-    getItemsByCategoryCategoryId, getItemsByParentId, openFirstMessagePopup,
-    handleUpdateIsReserved,
+    handleCategoryScroll,
+    openFirstMessagePopup,
+    handleUpdateIsReserved, getItemsByCategoryId
 }) {
+
+    const {
+        lastFourtyItems,
+        setLastFourtyItems,
+        itemsAfterSearch,
+        setItemsAfterSearch,
+        totalCountOfAds,
+        setTotalCountOfAds,
+        page,
+        setPage,
+        isPageItemsLoading,
+        setIsPageItemsLoading,
+        myImages,
+        setMyImages,
+        selectedItem,
+        setSelectedItem,
+        limit,
+        city, setCity,
+        lowPrice, setLowPrice,
+        highPrice, setHighPrice,
+        condition, setCondition,
+        title, setTitle,
+        categoryPage, setCategoryPage,
+        currentFilters,
+        categoryId, setCategoryId,
+        itemsSecondPageSearch, setItemsSecondPageSearch,
+        totalCategoryCountOfAds,
+    } = useItemsContext();
+
     const {
         openLoading,
         closeLoading,
@@ -46,17 +75,28 @@ function CategoryPage({
       
           if (currentCategory) {
             chooseCategory(currentCategory);
-      
-            if (currentCategory.parent_id) {
-              getItemsByCategoryCategoryId(currentCategory.category_id);
-            } else {
-              getItemsByParentId(currentCategory.category_id);
-            }
+            //getItemsByCategoryId(currentCategory.category_id)
+            setCategoryId(currentCategory.category_id)
+            const categoryId = currentCategory.category_id
+            setCategoryPage(1);
+            getItemsByCategoryId({
+                page: 1,
+                limit,
+                filters: currentFilters,
+                categoryId,
+                recursive: true,
+            });
           }
         }
       }, [rest, categories]);  
 
     
+      React.useEffect(() => {
+        window.addEventListener('scroll', handleCategoryScroll);
+        return () => window.removeEventListener('scroll', handleCategoryScroll);
+        
+    }, [handleCategoryScroll]);
+
     return(
         <section className='categoryPage-main-container'>
             <BackBtn/>
@@ -67,8 +107,7 @@ function CategoryPage({
                         category={subCategory} 
                         categories={categories}
                         onChooseCategory={chooseCategory}
-                        getItemsByCategoryCategoryId={getItemsByCategoryCategoryId}
-                        getItemsByParentId={getItemsByParentId}
+                        
                     />
                   ))
                 }
@@ -76,13 +115,14 @@ function CategoryPage({
             {itemsSecondPageSearch.length?
                 <>
                     <h2 className='categoryPage__ads-length-title'>Все объявления в категории {adsCategoryName}</h2>
-                    <h2 className='categoryPage__ads-length-title'>Количество объявлений {itemsSecondPageSearch.length}</h2>
+                    <h2 className='categoryPage__ads-length-title'>Количество объявлений {totalCategoryCountOfAds}</h2>
                 </>
             :
                 <h2 className='categoryPage__ads-length-title'>В категории {adsCategoryName}, не добавлено ни одного объявления :(</h2>
             }
             <ul className='categoryPage-listings-container'>
-                {[...itemsSecondPageSearch].reverse().map((item) => (
+                {/*{[...itemsSecondPageSearch].reverse().map((item) => (*/}
+                {itemsSecondPageSearch.map((item) => (
                     <OneAd
                         key={item.item_id} 
                         getItemById={getItemById} 
