@@ -8,30 +8,19 @@ export default function useItem({
 }) {
 
   const {
-    lastFourtyItems,
     setLastFourtyItems,
-    itemsAfterSearch,
     setItemsAfterSearch,
-    totalCountOfAds,
     setTotalCountOfAds,
-    page,
-    setPage,
-    isPageItemsLoading,
     setIsPageItemsLoading,
     myImages,
     setMyImages,
-    selectedItem,
     setSelectedItem,
-    limit,
-    city, setCity,
-    lowPrice, setLowPrice,
-    highPrice, setHighPrice,
-    condition, setCondition,
-    title, setTitle,
+    startItemsSecondPage, setStartItemsSecondPage,
+    itemsSecondPageSearch, setItemsSecondPageSearch,
+    setIsCategoryPageItemsLoading,
+    categoryId, setCategoryId,
+    setTotalCategoryCountOfAds,
   } = useItemsContext();
-
-  const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
-  const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
   
 
   const navigate = useNavigate()
@@ -71,7 +60,6 @@ export default function useItem({
     
     try {
       const res = await Api.getItems({ page, limit, filters })
-      console.log('test', filters)
       if(page == 1) {
         setTotalCountOfAds(res.totalCount);
         setLastFourtyItems(res.result);
@@ -103,12 +91,30 @@ export default function useItem({
     })
   }
 //получаем айтомы для все категорий в том числе детей внуков и правнуков
-  async function getItemsByCategoryId(category_id) {
+  async function getItemsByCategoryId({ page, limit, filters = {}, categoryId, recursive = true }) {
+    setIsCategoryPageItemsLoading(true)
     openLoading()
     try {
-      const res = await Api.getItemsByCategoryRecursive(category_id)
-      setStartItemsSecondPage(res)
-      setItemsSecondPageSearch(res)
+      //const res = await Api.getItemsByCategoryRecursive(category_id)
+      const res = await Api.getItems({       
+        page,
+        limit,
+        filters,
+        categoryId,
+        recursive, 
+      })//{ categoryId: 5, recursive: true }
+      if (page === 1) {
+        // если первая страница — сбрасываем список
+        setStartItemsSecondPage(res.result);
+        setItemsSecondPageSearch(res.result);
+        setTotalCategoryCountOfAds(res.totalCount)
+      } else {
+        // если следующая страница — добавляем к текущим
+        setStartItemsSecondPage(prev => [...prev, ...res.result]);
+        setItemsSecondPageSearch(prev => [...prev, ...res.result]);
+        setTotalCategoryCountOfAds(res.totalCount)
+      }
+      setIsCategoryPageItemsLoading(false)
       closeLoading()
     } catch (err) {
       console.log(err);

@@ -121,9 +121,10 @@ function App() {
 
 
   const { 
-    handleScroll 
+    handleScroll,
+    handleCategoryScroll,
   } = useScroll({ 
-    getAllItems,
+    getAllItems, getItemsByCategoryId
   });
 
   const {
@@ -311,6 +312,7 @@ function App() {
               handleUpdateIsReserved={handleUpdateIsReserved}
               adsCategoryName={adsCategoryName}
               getItemsByCategoryId={getItemsByCategoryId}
+              handleCategoryScroll={handleCategoryScroll}
             />
           }
         />
