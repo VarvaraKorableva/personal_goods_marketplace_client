@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -134,35 +134,6 @@ export const getItems = async ({ page = 1, limit = 20, filters = {}, categoryId,
     return checkResponse(res);
   };
   
-/*
-export const getItems = async (params = {}) => {
-    const query = new URLSearchParams(params).toString();
-    const res = await fetch(`${BASE_URL}/items/all/getItems?${query}`, {
-      credentials: "include",
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      }
-    });
-    return checkResponse(res);
-  };
-*/
-  
-
-//получение айтемов при первом нажатии на родительскую категорию
-/*export const getItemsBySubCategoriesByParentId = (parent_id) => {
-    return fetch(`${BASE_URL}/items/getItemsBySubCategoriesByParentId/${parent_id}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse) 
-  };
-*/
 export const getItemById = (item_id) => {
   return fetch(`${BASE_URL}/items/all/${item_id}`, {
       credentials: 'include',
@@ -320,53 +291,6 @@ export const createConversation = ( {conversation_owner_id, item_owner_id, item_
     })
         .then(checkResponse)
 };
-/*
-export const getItemsByCategoryRecursive = (category_id) => {
-    return fetch(`${BASE_URL}/items/getItemsByCategoryRecursive/${category_id}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse) 
-  };*/
-
-///getItemsByCategoryRecursive/:category_id
-
-//получение всех посл сообщений из всех конв по 1 юзеру
-/*
-never use
-export const getLastMessagesFromEveryConversationForUser = (user_id) => {
-    return fetch(`${BASE_URL}/conversations/getLastMessagesForUser/${user_id}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse) 
-  }; */
-//getLastMessagesForUser
-
-
-//never use
-/*
-export const getAllUserConversations = (user_id) => {
-    return fetch(`${BASE_URL}/conversations/get_all_user_conversations/${user_id}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse) 
-  };  */
-
-
 
 ///messages
 export const getLastMessageFromEveryConversation = ( user_id ) => {
@@ -518,21 +442,7 @@ export const updateIsReserved = ( item_id, user_id ) => {
     })
         .then(checkResponse)
 };  
-/*
-export const getItemsByFilter = (filters) => {
-    const queryString = new URLSearchParams(filters).toString();
-    return fetch(`${BASE_URL}/items/getItemsByFilter?${queryString}`, {
-        credentials: 'include',
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-             "Content-Type": "application/json",
-        },
-    })
-        .then(checkResponse) 
-}; */   
-
-
+  
 ///deleteConversation
 
 export const updateConversationIsDeleted = ( user_id, conversation_id ) => {
