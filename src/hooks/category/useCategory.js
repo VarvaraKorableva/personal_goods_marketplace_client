@@ -8,6 +8,35 @@ export default function useCategory({closeLoading, openLoading, }) {
     const [adsCategoryName, setAdsCategoryName] = React.useState('') 
 
     async function getCategory() {
+      openLoading();
+      const savedCategories = localStorage.getItem('category');
+    
+      if (savedCategories) {
+        try {
+          const categoriesSaved = JSON.parse(savedCategories);
+          setCategories(categoriesSaved);
+          setCategoriesToRender(categoriesSaved);
+        } catch (e) {
+          console.error("Ошибка парсинга category из localStorage:", e);
+          localStorage.removeItem('category'); // очищаем битые данные
+        }
+        closeLoading();
+      } else {
+        try {
+          const res = await Api.getCategory();
+          localStorage.setItem('category', JSON.stringify(res));
+          setCategories(res);
+          setCategoriesToRender(res);
+          closeLoading();
+        } catch (err) {
+          console.log(err);
+          closeLoading();
+        }
+      }
+    }
+    
+/*
+    async function getCategory() {
         openLoading()
         const savedCategories = localStorage.getItem('category');
 
@@ -31,7 +60,7 @@ export default function useCategory({closeLoading, openLoading, }) {
       }
 
     }
-
+*/
     const chooseCategory = (category) => {
         setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
         let myCatToRender = []
