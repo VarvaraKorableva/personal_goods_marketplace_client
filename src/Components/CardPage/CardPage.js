@@ -108,23 +108,26 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                 <BackBtn/>
                 <div className="cardPage-container">
 
-                <div className="cardPage__main-pic-wrapper">
+                <ul className="cardPage__main-pic-wrapper">
                     {selectedItem[0].images?
-                        selectedItem[0].images.length > 1?
-                        <ImageSlider 
-                            allImagesForOneItem={selectedItem[0].images}>
-                        </ImageSlider>
-                        : 
-                        <img className="cardPage__main-pic" alt = {selectedItem.title} src={selectedItem[0].images[0]}></img>
+                        (
+                            selectedItem[0].images.map((i, index) => (
+                                <li key={index} className="cardPage__main-pic-container">
+                                    <img className="cardPage__main-pic" alt = {selectedItem.title} src={i}></img>
+                                </li>
+                            ))
+                        )
                     : 
-                        <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>
+                        <li className="cardPage__main-pic-wrapper">
+                            <img className="cardPage__no-pic" alt = 'no pic' src={noPictures}></img>
+                        </li>
                     }
-                </div>
+                </ul>
 
                     <div className="cardPage-info-container">
                         <div className="cardPage-info-wrapper">
                             {selectedItem[0].reserved?
-                                <Button>Зарезервировано</Button>
+                                <Button className="cardPage-res-btn">Зарезервировано</Button>
                             :
                                 <></>
                             }
@@ -174,10 +177,9 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             isLoggin && currentUser.user_id === selectedItem[0].owner_id ?
                                 <></>
                             :
-                            <div className="cardPage__info-about-user">
-                                
+                            <Button className="cardPage__info-about-user">
                                 <Link to={`/users/${selectedItem[0].owner_id}`} className="cardPage-link">{translatedContext.seeAllUserAds} &rarr;</Link>                       
-                            </div>
+                            </Button>
                             }
 
 
@@ -210,12 +212,12 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                                         <div className="cardPage__btn-container">
                                         {isLiked? 
                                     
-                                           <button onClick={hundleDeleteFromFavorites} className="btn">{translatedContext.btn.deleteFromFavBtn}</button>
+                                           <Button onClick={hundleDeleteFromFavorites} >{translatedContext.btn.deleteFromFavBtn}</Button>
                                         :
-                                           <button onClick={handleAddToFavorites} className="btn">{translatedContext.btn.addToFavBtn}</button>
+                                           <Button onClick={handleAddToFavorites} >{translatedContext.btn.addToFavBtn}</Button>
                                         }
                                     
-                                        <button className="btn" onClick={handleAddMessagePopupOpen}>{translatedContext.btn.writeAMessageBtn}</button>
+                                        <Button  onClick={handleAddMessagePopupOpen}>{translatedContext.btn.writeAMessageBtn}</Button>
                                         </div>
                                     }
                                 </div>

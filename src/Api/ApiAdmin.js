@@ -1,12 +1,3 @@
-/*
-item_router.get('/itemsAdmin/admin/userId/:owner_id', getAllItemsByUserIdAdmin)
-item_router.get('/admin/all/:page/:limit', getAllItemsAdmin)
-item_router.get('/admin/all/:item_id', getItemByIdAdmin)
-item_router.patch('/admin/:item_id', deleteItemAdmin)
-item_router.get('/admin/getItemsByCategoryRecursive/:category_id', getItemsByCategoryRecursiveAdmin)
-
-item_router.patch('/admin/updateModerated/:item_id', updateModeratedAdmin)
-*/
 //export const BASE_URL = '//localhost:3001';
 export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
