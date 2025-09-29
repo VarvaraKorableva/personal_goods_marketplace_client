@@ -4,11 +4,10 @@
     background-color: transparent;
     color: #1f1f1f;
     border: 1px solid #e4e6e7;
-    
     cursor: pointer;
     width: fit-content;
     padding: 10px;
-    margin: 10px;
+    margin: 0;
     box-sizing: border-box;
     text-decoration: none;
     font-family: "Source Serif 4", serif;

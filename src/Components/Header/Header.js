@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
+import Container from '../../UK-kit/Container/Container'
 
 function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages, onOpenBurgerMenuPopup}) {
 const currentUser = React.useContext(CurrentUserContext)
@@ -43,8 +44,8 @@ function handleOpenBurgerMenuPopup() {
 }
 
 return (
-  <div className='header_container'>
-    <div className='header'>
+  <Container as='header' baseClassName='wrapper' className='header_container'>
+    <Container as='div' baseClassName='container' className='header'>
     <Link to={`/`} className='header_logo-container'>
       {/*<div className='header_logo-img'></div>
       <h1 className='header_logo'>Personal <span className='header_logo-name'></span> marketplace</h1> Personal goods marketplace */}
@@ -118,13 +119,9 @@ return (
       </div>
       
     </div>
-    </div>
-  </div>  
+    </Container>
+  </Container>  
 )
 }
 
 export default Header;
-
-/*
-<button className='header__langpic' onClick={onChangeLanguageClick}></button>
-*/
