@@ -50,6 +50,8 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
     getAllItems({ page: 1, limit, filters: {} }) 
   }
 
+  console.log('City component rendered');
+
     return(
         <div className="filterBtnContainer__container">
             <div className="filterBtnContainer__price-wrapper">

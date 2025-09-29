@@ -7,7 +7,6 @@ import BackBtn from '../../UK-kit/BackBtn'
 import './MyPage.css'
 import Button from '../../UK-kit/Button/Button'
 import { TbEdit } from "react-icons/tb";
-import { MY_PAGE_ITEMS_LIMIT } from "../../const/helper";
 
 function MyPage({ 
   openEditPopup, 
@@ -27,7 +26,7 @@ function MyPage({
   const [isWhyImportantClicked, setIsWhyImportantClicked] = React.useState(false)
   const { language } = React.useContext(LanguageContext)
 
-  const limit = MY_PAGE_ITEMS_LIMIT
+  const [limit, setLimit] = React.useState(5)
 
   const { en, rus, hebrew } = choose;
   let translatedContext = '';
@@ -122,14 +121,6 @@ function MyPage({
         </div>
 
         <div className="myPage__listings-wrapper">
-          {/*<h3 className="myPage__title">
-            {translatedContext.myListingsTitle} ({filteredAds.length}):
-          </h3>
-          
-                        <button className='myPage_add-new-ad-btn' onClick={handleAddAdClick}>
-                {translatedContext.addNewAdBtnName}
-              </button>
-          */}
 
           {myAds.length === 0 ? (
             <div className="myPage__add-ad-container">

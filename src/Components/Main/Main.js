@@ -49,10 +49,12 @@ function Main({
     },[])
     
     React.useEffect(() => {
+        console.log('useEffect from main')
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
         
     }, [handleScroll]);
+
 
     return(
         <section className='main__section'> {/*Только на главной странице категории, поисковик и объявления*/}
