@@ -7,8 +7,8 @@ item_router.get('/admin/getItemsByCategoryRecursive/:category_id', getItemsByCat
 
 item_router.patch('/admin/updateModerated/:item_id', updateModeratedAdmin)
 */
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 
 export const checkResponse = (res) => {
     if (res.ok) {
