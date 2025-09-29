@@ -53,6 +53,7 @@ import ClientsAdminPage from './Pages/AdminPage/ClientsAdminPage/ClientsAdminPag
 import ListingsAdminPage from './Pages/AdminPage/ListingsAdminPage/ListingsAdminPage'
 import ModerationAdminPage from './Pages/AdminPage/ModerationAdmin/ModerationAdmin'
 
+
 function App() {
   const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
   const userId = currentUser.user_id
@@ -60,8 +61,8 @@ function App() {
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
-  const [limit, setLimit] = React.useState(5)
-  const addAds = () => setLimit(limit + 5);
+  
+  
   const location = useLocation();
 
   const {
@@ -383,8 +384,6 @@ function App() {
                 getItemById={getItemById}
                 addToFavorites={addToFavorites} 
                 deleteFromFavorites={deleteFromFavorites}
-                limit={limit}
-                addAds={addAds}
                 handleUpdateIsReserved={handleUpdateIsReserved}
                 
               />

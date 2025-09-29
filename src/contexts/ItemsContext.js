@@ -12,20 +12,20 @@ export const ItemsProvider = ({ children }) => {
   const [isPageItemsLoading, setIsPageItemsLoading] = useState(false);
   const [myImages, setMyImages] = useState([])
   const [selectedItem, setSelectedItem] = useState([])
-  const [currentFilters, setCurrentFilters] = useState({})
+  
   const [categoryPage, setCategoryPage] = useState(1);
-  const [city, setCity] = useState('') 
+/*  
+const [currentFilters, setCurrentFilters] = useState({})
+const [city, setCity] = useState('') 
   const [lowPrice, setLowPrice] = useState(0) 
   const [highPrice, setHighPrice] = useState(0) 
   const [condition, setCondition] = useState('') 
-  const [title, setTitle] = useState('') 
+const [title, setTitle] = useState('') */
   const [startItemsSecondPage, setStartItemsSecondPage] = useState([])
   const [itemsSecondPageSearch, setItemsSecondPageSearch] = useState([])
   const [isCategoryPageItemsLoading, setIsCategoryPageItemsLoading] = useState(false);
   const [categoryId, setCategoryId] = useState('')
   const [totalCategoryCountOfAds, setTotalCategoryCountOfAds] = useState(0);
-
-  const limit = 20
 
   return (
     <ItemsContext.Provider
@@ -44,13 +44,12 @@ export const ItemsProvider = ({ children }) => {
         setMyImages,
         selectedItem,
         setSelectedItem,
-        currentFilters, setCurrentFilters,
-        limit,
+        /*currentFilters, setCurrentFilters,
         city, setCity,
         lowPrice, setLowPrice,
         highPrice, setHighPrice,
         condition, setCondition,
-        title, setTitle,
+        title, setTitle,*/
         categoryPage, setCategoryPage,
         startItemsSecondPage, setStartItemsSecondPage,
         itemsSecondPageSearch, setItemsSecondPageSearch,

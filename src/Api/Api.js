@@ -320,7 +320,7 @@ export const createConversation = ( {conversation_owner_id, item_owner_id, item_
     })
         .then(checkResponse)
 };
-
+/*
 export const getItemsByCategoryRecursive = (category_id) => {
     return fetch(`${BASE_URL}/items/getItemsByCategoryRecursive/${category_id}`, {
         credentials: 'include',
@@ -331,7 +331,7 @@ export const getItemsByCategoryRecursive = (category_id) => {
         },
     })
         .then(checkResponse) 
-  };
+  };*/
 
 ///getItemsByCategoryRecursive/:category_id
 

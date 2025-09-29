@@ -5,6 +5,8 @@ import ItemsContainer from './ItemsContainer/ItemsContainer'
 import FilterBtnContainer from './FilterBtnContainer/FilterBtnContainer'
 import './Main.css'
 import { useItemsContext } from "../../contexts/ItemsContext";
+import { useFiltersContext } from "../..//contexts/FiltersContext";
+import { ITEMS_LIMIT } from "../../const/helper";
 
 function Main({
     categoriesToRender, isLoggin, 
@@ -17,14 +19,17 @@ function Main({
     resetAllfilters, handleScroll,
     getCategory, userId, getMyFavorites,
 }) {
+    const limit = ITEMS_LIMIT
 
     const {
         lastFourtyItems,
         itemsAfterSearch,
         totalCountOfAds,
-        currentFilters,
-        limit
     } = useItemsContext();
+
+    const {
+        currentFilters,
+      } = useFiltersContext();
 
     const [searchByKeyWord, setSearchByKeyWord] = React.useState('')    
     const [isFilterBtnClicked, setIsFilterBtnClicked] = React.useState(false) 
