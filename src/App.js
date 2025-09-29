@@ -55,7 +55,16 @@ import ModerationAdminPage from './Pages/AdminPage/ModerationAdmin/ModerationAdm
 
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
+  //const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
+  const [currentUser, setCurrentUser] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem('user');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      console.error("Ошибка парсинга localStorage user:", e);
+      return {};
+    }
+  });
   const userId = currentUser.user_id
   const [myAds, setMyAds] = React.useState([])
   const [receiverId, setReceiverId] = React.useState('')
