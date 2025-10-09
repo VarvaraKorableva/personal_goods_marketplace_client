@@ -12,7 +12,7 @@ const en = {
     serviceName: 'Add the name of the service you provide',
     description: 'Add a description here',
     serviceDescription: 'Add a description of the service here',
-    price: 'Add a Price',
+    price: "Enter the item price in shekels (if you set the price to 0, a 'Free' badge will be added)",
     servicePrice: 'Add a Price',
 
     place: 'Where can you give the goods (city)',
@@ -78,7 +78,7 @@ const rus = {
     serviceName: 'Добавьте название услуги, которую вы предлагаете',
     description: 'Добавьте описание товара',
     serviceDescription: 'Добавьте описание услуги, которую вы предлагаете',
-    price: 'Укажите стоимость товара (если указать стоимость 0, добавится бейдж - "Бесплатно")',
+    price: 'Укажите стоимость товара в шекелях (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     servicePrice: 'Укажите стоимость услуги (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     place: 'Где можно забрать товар (город)',
     
@@ -142,7 +142,7 @@ const hebrew = {
     serviceName: 'Add the name of the service you provide',
     description: 'Add a description here',
     serviceDescription: 'Add a description of the service here',
-    price: 'Add a Price',
+    price: "Enter the item price in shekels (if you set the price to 0, a 'Free' badge will be added)",
     servicePrice: 'Add a Price',
     cityServices: 'Where will the service be provided',
     place: 'Where can you give the goods (city)',

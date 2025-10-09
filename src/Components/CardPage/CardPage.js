@@ -100,7 +100,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
     }
 
     const isLiked = favorite.some((i) => i.item_id === selectedItem[0].item_id)
-
+    console.log('selectedItem[0].owner_telegram', selectedItem[0].owner_telegram)
     return(
         <section className="cardPage-section">
             
@@ -183,18 +183,16 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             }
 
 
-                            {selectedItem[0].owner_telegram && (selectedItem[0].owner_telegram !== currentUser.telegram)?
-                              <a 
-                                className="btn" 
-                                href={`https://t.me/${selectedItem[0].owner_telegram}`} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                              >
-                                {translatedContext.btn.messageTheSellerOnTelegram}
-                              </a>
-                            :
-                              <></>
-                            }
+                                {selectedItem[0].owner_telegram && selectedItem[0].owner_telegram !== currentUser.telegram && (
+                                <a
+                                    className="btn"
+                                    href={`https://t.me/${selectedItem[0].owner_telegram.replace(/^@/, '').replace(/\s+/g, '')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {translatedContext.btn.messageTheSellerOnTelegram}
+                                </a>
+                                )}
 
 
 
