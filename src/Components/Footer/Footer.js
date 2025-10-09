@@ -2,7 +2,7 @@ import React from 'react'
 import './Footer.css'
 import { Link } from 'react-router-dom'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
-
+import Container from '../../UK-kit/Container/Container'
 
 function Footer({handleLogout, isLoggin}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -11,8 +11,10 @@ function Footer({handleLogout, isLoggin}) {
     handleLogout()
 }
     return (
-        <footer className="footer">
-          <div className="footer-container">
+      
+      
+        <Container as='footer' baseClassName='wrapper' className='footer'>
+          <Container as='div' baseClassName='container' className='footer-container'>
             <div className='footer_logo-img'></div>  
             
             <div className="footer-links-container">
@@ -33,8 +35,8 @@ function Footer({handleLogout, isLoggin}) {
                   <></>
                 }
             </div>  
-          </div>
-        </footer>
+          </Container>
+        </Container>
     )
 
 }
