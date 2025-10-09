@@ -136,3 +136,56 @@
     align-items: center;
     width: 100%;
 }
+
+
+
+@media screen and (max-width: 480px) {
+    .OneFavCard__container {
+        width: 150px;
+    }
+
+    .OneFavCard__container_unactive {
+        width: 150px;
+    }
+
+    .OneFavCard__wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .OneFavCard__main-pic-wrapper {
+        width: 100%;
+        height: 130px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .OneFavCard__container {
+        width: 145px;
+    }
+
+    .OneFavCard__container_unactive {
+        width: 145px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .OneFavCard__container {
+        width: 135px;
+    }
+
+    .OneFavCard__container_unactive {
+        width: 135px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .OneFavCard__container {
+        width: 125px;
+    }
+
+    .OneFavCard__container_unactive {
+        width: 125px;
+    }
+}
+

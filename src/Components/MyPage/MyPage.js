@@ -7,6 +7,7 @@ import BackBtn from '../../UK-kit/BackBtn'
 import './MyPage.css'
 import Button from '../../UK-kit/Button/Button'
 import { TbEdit } from "react-icons/tb";
+import Container from '../../UK-kit/Container/Container'
 
 function MyPage({ 
   openEditPopup, 
@@ -75,6 +76,7 @@ function MyPage({
 
   return (
     <section>
+      
       <BackBtn/>
       <div className="myPage__container">
         <div className="myPage__info-container">
@@ -156,6 +158,7 @@ function MyPage({
           )}
         </div>
       </div>
+      
     </section>
   )
 }

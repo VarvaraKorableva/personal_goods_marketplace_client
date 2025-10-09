@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../../UK-kit/Button/Button'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
+import Container from '../../UK-kit/Container/Container'
+import './AdminPage.css'
 
 function AdminPage() {
     const currentUser = React.useContext(CurrentUserContext)
@@ -12,10 +14,11 @@ function AdminPage() {
     }
 
     return(
-        <>
+        <Container as='section' baseClassName='wrapper'>
+        <Container as='div' baseClassName='container' className='admin__container'>
             <h1 className='page-title'>Admin page</h1>
 
-            <div>
+            <div className='admin__btn-container'>
                 <Button as={Link} to="/category-admin">
                     Категории
                 </Button>
@@ -29,7 +32,8 @@ function AdminPage() {
                     Модерация
                 </Button>
             </div>
-        </>
+        </Container>
+        </Container>
 
     )
 }

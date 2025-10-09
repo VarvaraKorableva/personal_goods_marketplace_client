@@ -1,5 +1,7 @@
 //export const BASE_URL = '//localhost:3001';
 export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//const BASE_UR = process.env.REACT_APP_BASE_URL_LOCAL;
+//const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const checkResponse = (res) => {
     if (res.ok) {
