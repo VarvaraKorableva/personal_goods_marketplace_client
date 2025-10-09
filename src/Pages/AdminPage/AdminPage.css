@@ -1,0 +1,11 @@
+.admin__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin__btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

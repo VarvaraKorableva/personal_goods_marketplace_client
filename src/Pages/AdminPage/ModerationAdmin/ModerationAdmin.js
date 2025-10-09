@@ -1,11 +1,11 @@
-//
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import Button from '../../../UK-kit/Button/Button'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import NotFoundPage from '../../NotFoundPage/NotFoundPage'
 import * as Api from '../../../Api/ApiAdmin'
 import './ModerationAdmin.css'
+import Container from '../../../UK-kit/Container/Container'
+import '../AdminPage.css'
 
 function ModerationAdminPage() {
     const currentUser = React.useContext(CurrentUserContext)
@@ -42,7 +42,8 @@ function ModerationAdminPage() {
     }
 
     return(
-        <>
+      <Container as='section' baseClassName='wrapper'>
+      <Container as='div' baseClassName='container' className='admin__container'>
             <h1 className='page-title'>Модерация page</h1>
             <Button onClick={getAllItemsAdmin}>Посмотреть что есть на модерации</Button>
             <p>Тут я планирую просмотр и удалние объявлений, модерация</p>
@@ -53,8 +54,8 @@ function ModerationAdminPage() {
                 <li>изменить все функции фильтрации и отдачи айтемов(только тех которые с модерацией тру) добавлено</li>
                 <li>при выводе айтема делать проверку на прошел ли модерацию, если нет писать что модерация не пройдена </li>
                 <li>изменить текст саксес попапа- объявление будет добавленоб после прохождения модерации</li>
-                <li>на стр мои объявления показывать только где модерация пройдена - тру и сосздать знопку, показать объявления на модерации 
-                    присылать ли сообщение не пройдена модерация - причина
+                <li><strong>на стр мои объявления показывать только где модерация пройдена - тру и сосздать знопку, показать объявления на модерации 
+                    присылать ли сообщение не пройдена модерация - причина</strong>
                 </li>
                 <li>на стр модерации добавить ф-ции изменения модерация с фолс на тру</li>
                 <li>изменить правила добавления объявлений на сайт добавить про модерацию</li>
@@ -87,7 +88,8 @@ function ModerationAdminPage() {
                 ))}
             </ul>
 
-        </>
+        </Container>
+        </Container>
 
     )
 }
