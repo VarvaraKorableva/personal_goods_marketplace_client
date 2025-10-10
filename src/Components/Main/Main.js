@@ -49,7 +49,6 @@ function Main({
     },[])
     
     React.useEffect(() => {
-        console.log('useEffect from main')
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
         

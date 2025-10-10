@@ -101,7 +101,7 @@ function App() {
     itemIdDelete,
     handleAddAdClick,
     isGood,
-  } = usePopup({setReceiverId, myAds, setItemId,});
+  } = usePopup({setReceiverId, myAds, setItemId, currentUser});
 
   const {
     getUserById,

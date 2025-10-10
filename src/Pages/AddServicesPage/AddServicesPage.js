@@ -429,11 +429,11 @@ return (
       >
         <option value="">{translatedContext.choiseAServices}</option>
           {language === 'rus' ?
-            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 6))).map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
             ))
           :
-            categories.filter((category) => (category.is_good === false && (category.parent_id == 31))).map((item) => (
+            categories.filter((category) => (category.is_good === false && (category.parent_id == 6))).map((item) => (
               <option key={item.category_id} value={item.category_id}>{item.name}</option>
             ))
           }
@@ -529,13 +529,13 @@ return (
         <option value="">{translatedContext.cityServices}</option>
 
           {language === 'rus' ?
-            cities.rus.map((item) => (
-              <option key={item} value={item}>{item}</option>
+            cities.rus.map((item, index) => (
+              <option key={index} value={item}>{item}</option>
             ))
             
             :
-            cities.en.map((item) => (
-              <option key={item} value={item}>{item}</option>
+            cities.en.map((item, index) => (
+              <option key={index} value={item}>{item}</option>
             ))
           }
       </select>

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
-import * as Api from '../../Api/Api'
-import { useItemsContext } from '../../contexts/ItemsContext';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+//import * as Api from '../../Api/Api'
+//import { useItemsContext } from '../../contexts/ItemsContext';
 
-export default function usePopups({setReceiverId, myAds, setItemId,}) {
+export default function usePopups({setReceiverId, myAds, setItemId, currentUser}) {
   const navigate = useNavigate()
 
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
@@ -57,6 +57,7 @@ export default function usePopups({setReceiverId, myAds, setItemId,}) {
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
+    console.log(console.log('currentUser', currentUser))
     if (myAds.length >= 20) {
       setSuccessfulActionPopup(true)
       setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${myAds.length}`)

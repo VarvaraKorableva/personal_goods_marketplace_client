@@ -100,7 +100,6 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
     }
 
     const isLiked = favorite.some((i) => i.item_id === selectedItem[0].item_id)
-    console.log('selectedItem[0].owner_telegram', selectedItem[0].owner_telegram)
     return(
         <section className="cardPage-section">
             

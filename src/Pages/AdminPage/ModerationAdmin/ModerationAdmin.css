@@ -6,8 +6,16 @@
     flex-direction: column;
     width: 100%;
     padding: 10px;
+    box-sizing: border-box;
     gap: 10px;
     position: relative;
+}
+.ModerationAdminPage__wrapper {
+    padding: 0;
+    display: flex;
+    max-width: 100%;
+    gap: 10px;
+    flex-direction: column;
 }
 
 .ModerationAdminPage__container {
@@ -15,8 +23,6 @@
     display: flex;
     flex-direction: column;
     max-width: 800px;
-    gap: 10px;
-
     margin: auto;
 }
 
@@ -24,6 +30,7 @@
     margin: 0;
     font-size: 18px;
     text-align: left;
+    color: #1f1f1f;
 }
 
 .ModerationAdminPage__img-container {
@@ -40,4 +47,27 @@
 
 .ModerationAdminPage__no-consent-btn {
     width: fit-content;
+}    
+
+.ModerationAdminPage-pic {
+    width: 300px;
+    height: 400px;
+
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1000px) {
+    .ModerationAdminPage__container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        gap: 10px;
+    
+        margin: auto;
+    }
+
+    .ModerationAdminPage__img-container {
+        flex-wrap: wrap;
+    }
 }    
