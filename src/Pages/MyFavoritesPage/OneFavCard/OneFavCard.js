@@ -71,13 +71,13 @@ function OneFavCard({ item, deleteFromFavorites }) {
 
             <div className="OneFavCard__wrapper"> 
 
-            <div className="OneFavCard__main-pic-wrapper">
+            <Link to={`/items/${item.item_id}`} className="OneFavCard__main-pic-wrapper">
                 {item.images ?
                   <img className="OneFavCard__main-pic" alt = {item.title} src={item.images[0]}></img>
                 : 
                   <img className="OneFavCard__no-pic" alt = 'no pic' src={noPictures}></img>
                 }
-            </div>
+            </Link>
             
             <div className="OneFavCard__text-container">
                 <div className="OneFavCard__title-and-like-container">
