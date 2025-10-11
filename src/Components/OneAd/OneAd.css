@@ -4,8 +4,6 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    width: 200px;
     align-items: center;
     position: relative;
     height: 335px;
@@ -295,7 +293,6 @@
 
     .oneAdd__container {
         height: 285px;
-        margin: 5px;
     }
 
     .oneAdd__main-pic {
@@ -308,9 +305,7 @@
     .oneAdd__pic-and-info-container {
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 122px;
-
-        
+        margin-top: 122px; 
     }
 
     .oneAdd__main-pic-wrapper {
@@ -332,7 +327,6 @@
     }
 
     .oneAdd__container {
-        width: 180px;
         padding: 8px;
         padding-top: 0px;
         padding-left: 0;
@@ -380,7 +374,7 @@
     }
 
     .oneAdd__container {
-        width: 160px;
+        /*width: 160px;*/
         padding: 8px;
         padding-top: 0px;
         padding-left: 0;
@@ -404,7 +398,7 @@
 
 @media screen and (max-width: 340px) {
     .oneAdd__container {
-        width: 140px;
+        /*width: 140px;*/
     }
 }
 

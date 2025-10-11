@@ -132,9 +132,9 @@ function MyPage({
               </button>
             </div>
           ) : (
-            <>
+            
 
-              <ul className="myPage-listings-container">
+              <Container as='ul' baseClassName='listings-container'>
                 {filteredAds.slice(0, limit).map((item) => (
                   <OneAd 
                     key={item.item_id} 
@@ -147,8 +147,8 @@ function MyPage({
                     handleUpdateIsReserved={handleUpdateIsReserved}
                   />
                 ))}
-              </ul>
-            </>
+              </Container>
+            
           )}
 
           {filteredAds.length > limit && (

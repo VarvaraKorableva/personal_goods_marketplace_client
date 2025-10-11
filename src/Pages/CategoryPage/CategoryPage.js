@@ -9,6 +9,7 @@ import useLoading from "../../hooks/useLoading"
 import { useItemsContext } from '../../contexts/ItemsContext';
 import { useFiltersContext } from "../../contexts/FiltersContext";
 import { ITEMS_LIMIT } from "../../const/helper";
+import Container from '../../UK-kit/Container/Container'
 
 function CategoryPage({
     openDeletePopup, isLoggin,
@@ -104,7 +105,7 @@ function CategoryPage({
             :
                 <h2 className='categoryPage__ads-length-title'>В категории {adsCategoryName}, не добавлено ни одного объявления :(</h2>
             }
-            <ul className='categoryPage-listings-container'>
+            <Container as='ul' baseClassName='listings-container'>
                 {/*{[...itemsSecondPageSearch].reverse().map((item) => (*/}
                 {itemsSecondPageSearch.map((item) => (
                     <OneAd
@@ -120,7 +121,7 @@ function CategoryPage({
                     />    
                     
                 ))}
-            </ul>
+            </Container>
         </section>
     )
 }
