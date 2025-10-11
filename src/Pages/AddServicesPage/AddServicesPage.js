@@ -5,9 +5,11 @@ import '../AddAdPage/AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
-import {cities} from '../../const/Cities/cities'
 import BackBtn from '../../UK-kit/BackBtn'
 import CityInput from '../../Components/Forms/CityInput/CityInput'
+import TitletInputField from '../../Components/Forms/TitletInputField/TextInputField'
+import DiscriptionField from '../../Components/Forms/DiscriptionField/DiscriptionField'
+import PriceInputField from '../../Components/Forms/PriceInputField/PriceInputField'
 
 function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -98,10 +100,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   }
 
   const formRef = React.useRef(null);
-
-  const goBack = () => {
-    navigate(-1);
-  };
 
   const handleImgFirstLinkChange = async (event) => {
     openLoading()
@@ -319,18 +317,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
     }
   };
 
-  const handleCityChange = (e) => {
-    if(e.target.value){
-      setCity(e.target.value)
-      setIsCitySelected(true)
-      setCityErrorMessage('')
-    } else {
-      setCity('')
-      setIsCitySelected(false)
-      setCityErrorMessage(`${translatedContext.errors.cityErrorMessage.errorMessage}`)
-    }
-  }
-
   const handleSelectServicesChange = (e) => {
     if(e.target.value !== "") {
       setIsCategorySelected(true)
@@ -426,7 +412,6 @@ return (
       <select 
         className='addAdPage__select' 
         onChange={handleSelectServicesChange}
-        //value={}
       >
         <option value="">{translatedContext.choiseAServices}</option>
           {language === 'rus' ?
@@ -475,52 +460,43 @@ return (
       <></>
       }
 
-      <label className='popup__inputname'>{translatedContext.serviceName}<span className='popup__inputname-span'>*</span>  
-        <input
-          className='popup__input'
-          name='title'
-          type='text'
-          value={title}
-          onChange={handleTitleChange}
-        ></input>
-      </label>
+      <TitletInputField
+        label={translatedContext.serviceName}
+        name="title"
+        value={title}
+        isValid={isTitleSelected}
+        errorMessage={titleErrorMessage}
+        required={true}
+        setIsTitleSelected={setIsTitleSelected}
+        setTitleErrorMessage={setTitleErrorMessage}
+        setTitle={setTitle}
+        translatedContext={translatedContext}
+      />
 
-      {isTitleSelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{titleErrorMessage}</span>
-      }
+      <DiscriptionField
+        label={translatedContext.serviceDescription}
+        name="description"
+        value={description}
+        isValid={isDescriptionSelected}
+        errorMessage={descriptionErrorMessage}
+        required={false}
+        setIsValid={setIsDescriptionSelected}
+        setErrorMessage={setDescriptionErrorMessage}
+        setValue={setDescription}
+        translatedContext={translatedContext}
+      />
 
-      <label className='popup__inputname'>{translatedContext.serviceDescription}</label>
-        <textarea
-          className='popup__input-description'
-          name='description'
-          type='text'
-          value={description}
-          onChange={handledesDriptionChange}
-        ></textarea>
-       
-       {isDescriptionSelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{descriptionErrorMessage}</span>
-      }
-
-      <label className='popup__inputname'>{translatedContext.servicePrice}<span className='popup__inputname-span'>*</span>
-        <input
-          className='popup__input'
-          name='price'
-          type='text'
-          value={price}
-          onChange={handlePriceChange}
-        ></input>
-      </label>
-
-      {isPriceSelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{priceErrorMessage}</span>
-      }
+      <PriceInputField
+        label={translatedContext.servicePrice}
+        name="price"
+        value={price}
+        isValid={isPriceSelected}
+        errorMessage={priceErrorMessage}
+        setIsValid={setIsPriceSelected}
+        setErrorMessage={setPriceErrorMessage}
+        setValue={setPrice}
+        translatedContext={translatedContext}
+      />
 
       <CityInput
         language={language} 
@@ -531,6 +507,7 @@ return (
         setIsCitySelected={setIsCitySelected} 
         cityErrorMessage={cityErrorMessage} 
         setCityErrorMessage={setCityErrorMessage}
+        good={false}
       />    
 
       <label className='popup__inputname margin'>{translatedContext.picture}</label>
