@@ -109,7 +109,7 @@ function MyPage({
         </div>
 
         {/* 🔑 Кнопки фильтров */}
-        <div className='myPage__btn-wrapper'>
+        <Container as='div' baseClassName='container'  className='myPage__btn-wrapper'>
           {filters.map(filter => (
             <Button 
               key={filter.value} 
@@ -120,7 +120,7 @@ function MyPage({
             </Button>
           ))}
           <Button onClick={handleAddAdClick}>Добавить объявление</Button>
-        </div>
+        </Container>
 
         <div className="myPage__listings-wrapper">
 
@@ -152,7 +152,7 @@ function MyPage({
           )}
 
           {filteredAds.length > limit && (
-            <Button onClick={handleAddMoreAds}>
+            <Button onClick={handleAddMoreAds} className="addMoreAdsBtn__style">
               {translatedContext.addMoreAdsBtn}
             </Button>
           )}

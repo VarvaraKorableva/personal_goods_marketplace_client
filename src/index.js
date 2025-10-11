@@ -8,9 +8,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { ItemsProvider } from "./contexts/ItemsContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext"
 import { FiltersProvider } from "./contexts/FiltersContext"
+import { LanguageProvider } from "./contexts/TranslationContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <LanguageProvider>
   <ItemsProvider>
     <FiltersProvider>
     <FavoritesProvider>
@@ -20,6 +22,7 @@ root.render(
     </FavoritesProvider>
     </FiltersProvider>
   </ItemsProvider>
+  </LanguageProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

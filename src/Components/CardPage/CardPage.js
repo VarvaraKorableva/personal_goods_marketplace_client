@@ -20,30 +20,12 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
     const favorite_collector_id = currentUser.user_id
 
     const {
-        lastFourtyItems,
-        setLastFourtyItems,
-        itemsAfterSearch,
-        setItemsAfterSearch,
-        totalCountOfAds,
-        setTotalCountOfAds,
-        page,
-        setPage,
-        isPageItemsLoading,
-        setIsPageItemsLoading,
-        myImages,
-        setMyImages,
         selectedItem,
-        setSelectedItem,
       } = useItemsContext();
 
     const {
         favorite, 
-        setFavorite, 
-        favoriteItems,
-        setFavoriteItems
     } = useFavorites();
-
-    const [userInfo, setUserInfo] = React.useState([])
 
     const { language } = React.useContext(LanguageContext)
 
