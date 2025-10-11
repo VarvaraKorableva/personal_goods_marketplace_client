@@ -1,7 +1,9 @@
-import { useState } from "react";
+import React from "react";
 import * as Api from '../../Api/Api'
 import { useNavigate } from 'react-router-dom'
 import { useItemsContext } from '../../contexts/ItemsContext';
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/AppData'
 
 export default function useItem({
   openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
@@ -18,11 +20,21 @@ export default function useItem({
     startItemsSecondPage, setStartItemsSecondPage,
     itemsSecondPageSearch, setItemsSecondPageSearch,
     setIsCategoryPageItemsLoading,
-    categoryId, setCategoryId,
     setTotalCategoryCountOfAds,
   } = useItemsContext();
-  
 
+  const { language } = React.useContext(LanguageContext)
+
+  const { en, rus, hebrew } = choose;
+
+  let translatedContext = '';
+  if (language === 'en') {
+    translatedContext = en;
+  } else if (language === 'rus') {
+    translatedContext = rus;
+  } else if (language === 'hebrew') {
+    translatedContext = hebrew;
+  }
   const navigate = useNavigate()
 
   const deleteMyAd = (item_id) => {
@@ -136,7 +148,7 @@ export default function useItem({
         .then((res) => {
           setMyImages([res[0], ...myImages])
           closeAllPopups()
-          setPopupMessage("Ad added successful!")
+          setPopupMessage(`${translatedContext.successfulMessage}`)
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           //adCountIncrement(userId)
@@ -148,13 +160,13 @@ export default function useItem({
         })
         .catch((err)=> {
           closeAllPopups()
-          setPopupMessage("Something wrong, plese try again")
+          setPopupMessage(`${translatedContext.wrongMessage}`)
           openSuccessfulActionPopup()
           closeLoading()
         })
       }else {
           closeAllPopups()
-          setPopupMessage("Ad added successful!")
+          setPopupMessage(`${translatedContext.successfulMessage}`)
           setMyAds([res, ...myAds])
           openSuccessfulActionPopup()
           //adCountIncrement(userId)
@@ -164,7 +176,7 @@ export default function useItem({
     })
     .catch((err)=> {
       closeAllPopups()
-      setPopupMessage("Something wrong, please try again")
+      setPopupMessage(`${translatedContext.wrongMessage}`)
       openSuccessfulActionPopup()
       closeLoading()
     })

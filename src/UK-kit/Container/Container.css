@@ -5,8 +5,36 @@
 }
 
 .container {
-    width: 1100px;
+    max-width: 1100px;
     display: flex;
     padding-left: 10px;
     padding-right: 10px;
+    box-sizing: border-box;
 }
+
+.listings-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media screen and (max-width: 900px) {
+    .listings-container {
+        gap: 5px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .listings-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+

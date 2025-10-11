@@ -205,7 +205,7 @@ function App() {
 
   return (
     
-    <LanguageProvider>
+    
     <CurrentUserContext.Provider value={currentUser}>  
     <Header 
         isLoggin={isLoggin} 
@@ -576,7 +576,6 @@ function App() {
     </div>
     <Footer handleLogout={handleLogout} isLoggin={isLoggin}></Footer>
     </CurrentUserContext.Provider>  
-    </LanguageProvider>
     
   );
 }

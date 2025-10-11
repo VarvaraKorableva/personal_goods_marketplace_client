@@ -2,6 +2,7 @@ import OneAd from '../../OneAd/OneAd'
 import './ItemsContainer.css';
 import { useItemsContext } from "../../../contexts/ItemsContext";
 import { useFavorites } from "../../../contexts/FavoritesContext"
+import Container from '../../../UK-kit/Container/Container'
 
 function ItemsContainer({
     isLoggin,
@@ -13,26 +14,14 @@ function ItemsContainer({
     
     const {
         favorite, 
-        setFavorite, 
-        favoriteItems,
-        setFavoriteItems
     } = useFavorites();
 
     const {
-        lastFourtyItems,
-        setLastFourtyItems,
         itemsAfterSearch,
-        setItemsAfterSearch,
-        totalCountOfAds,
-        setTotalCountOfAds,
-        page,
-        setPage,
-        isPageItemsLoading,
-        setIsPageItemsLoading,
       } = useItemsContext();
 
     return(
-        <ul className="itemsContainer-listings-container">
+        <Container as='ul' baseClassName='listings-container'>
             {itemsAfterSearch.map((item) => (
                 <OneAd 
                     key={item.item_id} 
@@ -49,7 +38,7 @@ function ItemsContainer({
                     updateItemCity={updateItemCity}
                 />
             ))}
-            </ul>
+        </Container>
     )
 }
 

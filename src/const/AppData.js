@@ -5,7 +5,7 @@ const en = {
 }
 
 const rus = {
-    successfulMessage: 'Объявление добавлено успешно',
+    successfulMessage: 'Объявление добавлено успешно!',
     wrongMessage: 'Что-то пошло не так, попробуйте еще раз',
 }
 

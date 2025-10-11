@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import noPictures from '../../images/nopictures.png'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
-//import { useItemsContext } from "../../contexts/ItemsContext";
 import { useFavorites } from "../../contexts/FavoritesContext"
 import Button from '../../UK-kit/Button/Button'
 

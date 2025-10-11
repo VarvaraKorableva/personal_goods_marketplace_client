@@ -1,0 +1,23 @@
+.autocomplete-dropdown {
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.autocomplete-dropdown-city {
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #f1f1f1;
+    font-weight: 300;
+}

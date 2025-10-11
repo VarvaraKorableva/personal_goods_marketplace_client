@@ -13,6 +13,7 @@ const en = {
     description: 'Add a description here',
     serviceDescription: 'Add a description of the service here',
     price: "Enter the item price in shekels (if you set the price to 0, a 'Free' badge will be added)",
+    inputPlace: 'Start typing a city',
     servicePrice: 'Add a Price',
 
     place: 'Where can you give the goods (city)',
@@ -81,7 +82,7 @@ const rus = {
     price: 'Укажите стоимость товара в шекелях (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     servicePrice: 'Укажите стоимость услуги (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     place: 'Где можно забрать товар (город)',
-    
+    inputPlace: 'Начинайте вводить город',
     cityServices: 'Укажите место, где будет оказана услуга',
     picture: 'Добавить фотографии',
 
@@ -146,6 +147,7 @@ const hebrew = {
     servicePrice: 'Add a Price',
     cityServices: 'Where will the service be provided',
     place: 'Where can you give the goods (city)',
+    inputPlace: 'Start typing a city',
     picture: 'Add a Picture',
     addBtn: 'Add the Ad',
     changeBtn: 'Edit',

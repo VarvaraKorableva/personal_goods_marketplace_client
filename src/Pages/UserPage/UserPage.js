@@ -4,6 +4,7 @@ import OneAd from '../../Components/OneAd/OneAd'
 import './UserPage.css'
 import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
+import Container from '../../UK-kit/Container/Container'
 
 function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
 
@@ -37,7 +38,7 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
 
             <div>
                 <h3>Все объявления {userInfo[0].username}</h3>
-                <ul className="userPage-listings-container">
+                <Container as='ul' baseClassName='listings-container'>
                     {moderatedAds.map((item) => (
                         <OneAd 
                             key={item.item_id} 
@@ -51,7 +52,7 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
                             openFirstMessagePopup={openFirstMessagePopup}
                         />
                     ))}
-                </ul>
+                </Container>
             </div>
         </section>
 
