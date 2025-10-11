@@ -7,6 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
 import {cities} from '../../const/Cities/cities'
 import BackBtn from '../../UK-kit/BackBtn'
+import CityInput from '../../Components/Forms/CityInput/CityInput'
 
 function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -521,32 +522,18 @@ return (
         <span className='popup__mistake-msg'>{priceErrorMessage}</span>
       }
 
-      <select 
-        className='addAdPage__select' 
-        onChange={handleCityChange}
-        value={city}
-      >
-        <option value="">{translatedContext.cityServices}</option>
+      <CityInput
+        language={language} 
+        translatedContext={translatedContext}
+        city={city} 
+        setCity={setCity} 
+        isCitySelected={isCitySelected} 
+        setIsCitySelected={setIsCitySelected} 
+        cityErrorMessage={cityErrorMessage} 
+        setCityErrorMessage={setCityErrorMessage}
+      />    
 
-          {language === 'rus' ?
-            cities.rus.map((item, index) => (
-              <option key={index} value={item}>{item}</option>
-            ))
-            
-            :
-            cities.en.map((item, index) => (
-              <option key={index} value={item}>{item}</option>
-            ))
-          }
-      </select>
-
-      {isCitySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{cityErrorMessage}</span>
-      }
-
-<label className='popup__inputname'>{translatedContext.picture}</label>
+      <label className='popup__inputname margin'>{translatedContext.picture}</label>
 
       
 <span className='popup__inputmistake'>{errorImgMessage}</span>
