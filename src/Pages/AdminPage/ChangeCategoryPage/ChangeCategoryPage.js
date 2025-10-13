@@ -190,7 +190,7 @@ function ChangeCategoryPage() {
     return(
         <>
             <h1>Add Category Page</h1>
-            <>
+            <div className='btn__container'>
                 <Button onClick={handleCreateCategory}>Добавить категорию</Button> {/*onClick={openAddCategoryAdminForm}*/}
                 <Button onClick={handleCreateSubCategory}>Добавить суб категорию</Button> {/*onClick={openSubAddCategoryAdminForm}*/}
                 <Button onClick={openDeleteCategoryAdminForm}>Удалить Категорию</Button> {/*onClick={openDeleteCategoryAdminForm}*/}
@@ -199,7 +199,7 @@ function ChangeCategoryPage() {
                 <Button onClick={onUpdateCategoryNameRus}>Изменить название категории rus</Button>
                 <Button onClick={onUpdateCategoryNameEng}>Изменить название категории eng</Button>
                 <Button onClick={onUpdateCategorySlug}>Изменить Slug</Button>
-            </>
+            </div>
             
             {
                 deleteCategoryAdminFormOpen ? (

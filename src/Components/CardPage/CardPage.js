@@ -165,14 +165,14 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
 
 
                                 {selectedItem[0].owner_telegram && selectedItem[0].owner_telegram !== currentUser.telegram && (
-                                <a
-                                    className="btn"
+                                <Button as="a"
+                                    className="cardPage__btn-container"
                                     href={`https://t.me/${selectedItem[0].owner_telegram.replace(/^@/, '').replace(/\s+/g, '')}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
                                     {translatedContext.btn.messageTheSellerOnTelegram}
-                                </a>
+                                </Button>
                                 )}
 
 

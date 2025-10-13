@@ -5,7 +5,15 @@
     max-width: 1000px;
     padding: 20px;
     box-sizing: border-box;
-    
+}
+
+.btn__container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+    padding: 15px;
 }
 
 .categoryCardAdmin {

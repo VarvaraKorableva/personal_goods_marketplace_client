@@ -68,8 +68,21 @@ function ModerationAdminPage() {
                         : 
                         <></>
                         }
+                        <>
+                        <form className='ModerationAdminPage__form'>
+                          
+                          <Button className='ModerationAdminPage__no-consent-btn'>Удалить</Button>
+                          
+                          <input
+                            className="popup__input"
+                            type="text"
+                          >
+                          </input>
 
-                        <Button className='ModerationAdminPage__no-consent-btn'>не одобрять, удалить</Button>
+                          <Button className='ModerationAdminPage__no-consent-btn'>Отправить сообщение</Button>
+                        </form>
+                        </>
+                        
                     </li>
                 ))}
             </ul>

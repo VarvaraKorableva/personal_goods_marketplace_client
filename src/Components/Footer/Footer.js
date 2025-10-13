@@ -23,12 +23,12 @@ function Footer({handleLogout, isLoggin}) {
                 <Link className='footer__link' to={'/not-ready-page'}>Сообщить об ошибке в работе приложения</Link>
                 <Link className='footer__link' to={'/not-ready-page'}>Предложить улучшения для приложения</Link>
 
-                {
+                {/*{
                   currentUser.email === process.env.REACT_APP_ADMIN ? 
                     <Link className='footer__link' to={'/admin'}>Админ</Link>
                   :
                     <></>
-                }
+                }*/}
                 {isLoggin?
                   <button onClick={onLogout} className='footer__link'>Выйти из приложения</button>
                 :
