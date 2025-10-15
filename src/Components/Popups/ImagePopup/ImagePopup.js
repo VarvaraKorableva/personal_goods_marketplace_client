@@ -17,6 +17,7 @@ function ImagePopup({ imgLink, onClose, isOpen }) {
           <img src={imgLink}
             alt='pic'
             className='popup__picture'
+            
           />
         </div>
       </div>
