@@ -44,6 +44,7 @@ import ChoiceOfProductOrServicePopup from './Components/Popups/ChoiceOfProductOr
 import SuccessfulActionPopup from './Components/Popups/SuccessfulActionPopup/SuccessfulActionPopup'
 import FirstMessagePopup from './Components/Popups/FirstMessagePopup/FirstMessagePopup'
 import BurgerMenuPopup from './Components/Popups/BurgerMenuPopup/BurgerMenuPopup'
+import ImagePopup from './Components/Popups/ImagePopup/ImagePopup'
 import AddServicesPage from './Pages/AddServicesPage/AddServicesPage'
 import NotReadyPage from './Pages/NotReadyPage/NotReadyPage'
 import RecoverPasswordPage from './Pages/RecoverPasswordPage/RecoverPasswordPage'
@@ -101,6 +102,9 @@ function App() {
     itemIdDelete,
     handleAddAdClick,
     isGood,
+    openImgLinkPopup,
+    imgLink,
+    isImglinkPopup
   } = usePopup({setReceiverId, myAds, setItemId, currentUser});
 
   const {
@@ -339,6 +343,8 @@ function App() {
               openDeletePopup={openDeletePopup}
               openFirstMessagePopup={openFirstMessagePopup} 
               openEditPopup={openEditPopup}
+              openImgLinkPopup={openImgLinkPopup}
+              
             />
           }
         />
@@ -569,6 +575,14 @@ function App() {
         deleteMyAd={deleteMyAd}
         itemIdDelete={itemIdDelete}
       />
+
+      <ImagePopup
+        imgLink={imgLink}
+        isOpen={isImglinkPopup}
+        onClose={closeAllPopups}
+      />
+
+      
 
       <Preloader 
         isLoading={isLoading}
