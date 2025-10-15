@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 export default function usePopups({setReceiverId, myAds, setItemId, currentUser}) {
   const navigate = useNavigate()
 
+  const [isImglinkPopup, setIsImglinkPopup] = React.useState(false)
+  const [imgLink, setImgLink] = React.useState('')
   const [isChoiceOfProductOrServicePopup, setIsChoiceOfProductOrServicePopup] = React.useState(false)
   const [isSuccessfulActionPopup, setSuccessfulActionPopup] = React.useState(false)
   const [isFirstMessagePopup, setIsFirstMessagePopup] = React.useState(false)
@@ -19,6 +21,7 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
   const [itemIdDelete, setItemIdDelete] = React.useState(0)
   const [isGood, setIsGood] = React.useState(true)
   
+  
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
@@ -29,6 +32,14 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
     setIsBurgerMenuPopup(false)
     setIsEditPopup(false)
     setIsDeletePopup(false)
+    setIsImglinkPopup(false)
+  }
+
+  function openImgLinkPopup(link) {
+    setIsImglinkPopup(true)
+    setImgLink(link)
+
+    console.log(link)
   }
 
   function openSuccessfulActionPopup() {
@@ -99,6 +110,9 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
     itemIdDelete,
     handleAddAdClick,
     isGood,
+    openImgLinkPopup,
+    imgLink,
+    isImglinkPopup
   };
 
 };

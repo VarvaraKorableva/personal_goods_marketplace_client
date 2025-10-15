@@ -13,7 +13,7 @@ import { useFavorites } from "../../contexts/FavoritesContext"
 import { useItemsContext } from "../../contexts/ItemsContext"
 import Button from '../../UK-kit/Button/Button'
 
-function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
+function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup, openImgLinkPopup}) {
     let { item_id } = useParams();
     const navigate = useNavigate()
     const currentUser = React.useContext(CurrentUserContext)
@@ -93,7 +93,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                     {selectedItem[0].images?
                         (
                             selectedItem[0].images.map((i, index) => (
-                                <li key={index} className="cardPage__main-pic-container">
+                                <li key={index} className="cardPage__main-pic-container" onClick={() => openImgLinkPopup(i)}>
                                     <img className="cardPage__main-pic" alt = {selectedItem.title} src={i}></img>
                                 </li>
                             ))
