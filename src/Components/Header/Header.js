@@ -6,7 +6,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/HeaderLan'
 import Container from '../../UK-kit/Container/Container'
 
-function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages, onOpenBurgerMenuPopup}) {
+function Header({isLoggin, onAdPopup, unreadbleMessages, getUnreadbleMessages, onOpenBurgerMenuPopup, getMyItems}) {
 const currentUser = React.useContext(CurrentUserContext)
 
 const userId = currentUser.user_id
@@ -37,6 +37,7 @@ if (language === 'en') {
 function handleAddAdClick() {
   onAdPopup()
   getUnreadbleMessages(userId)
+  getMyItems(userId)
 }
 
 function handleOpenBurgerMenuPopup() {
