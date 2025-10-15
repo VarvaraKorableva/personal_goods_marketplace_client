@@ -71,7 +71,7 @@ function App() {
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
-  
+  console.log('currentUser', currentUser)
   const location = useLocation();
 
   const {
@@ -217,6 +217,7 @@ function App() {
         unreadbleMessages={unreadbleMessages}
         getUnreadbleMessages={getUnreadbleMessages}
         onOpenBurgerMenuPopup={openBurgerMenuPopup}
+        getMyItems={getMyItems}
     />
 
     <div className='App'>

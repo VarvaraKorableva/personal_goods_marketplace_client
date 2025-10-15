@@ -1,5 +1,5 @@
-export const BASE_URL = '//localhost:3001';
-//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+//export const BASE_URL = '//localhost:3001';
+export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 //const BASE_UR = process.env.REACT_APP_BASE_URL_LOCAL;
 //const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -374,7 +374,7 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conv
     })
         .then(checkResponse)
 };
-
+/*
 export const adCountIncrement = ( user_id ) => {
 
     return fetch(`${BASE_URL}/users/adCountIncrement/${user_id}`, {
@@ -400,7 +400,7 @@ export const adCountDecrement = ( user_id ) => {
     })
         .then(checkResponse)
 };
-
+*/
 export const sendVerificationCode = ( email ) => {
     return fetch(`${BASE_URL}/verification/sendVerificationCode`, {
         credentials: 'include',

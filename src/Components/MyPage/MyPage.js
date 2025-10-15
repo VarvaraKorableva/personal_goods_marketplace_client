@@ -21,7 +21,7 @@ function MyPage({
   deleteFromFavorites, 
   handleUpdateIsReserved 
 }) {
-
+  console.log('myAds', myAds)
   const currentUser = React.useContext(CurrentUserContext)
   const userId = currentUser.user_id
   const [isWhyImportantClicked, setIsWhyImportantClicked] = React.useState(false)

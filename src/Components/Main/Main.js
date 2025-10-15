@@ -54,7 +54,7 @@ function Main({
         
     }, [handleScroll]);
 
-
+console.log('itemsAfterSearch', itemsAfterSearch)
     return(
         <section className='main__section'> {/*Только на главной странице категории, поисковик и объявления*/}
             <MainSearchEngine

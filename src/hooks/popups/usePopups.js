@@ -68,7 +68,6 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
-    console.log(console.log('currentUser', currentUser))
     if (myAds.length >= 20) {
       setSuccessfulActionPopup(true)
       setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${myAds.length}`)
