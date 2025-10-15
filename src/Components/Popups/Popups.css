@@ -1,11 +1,4 @@
-.popup__container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 15;
-  }
-  
-  .popup {
+.popup {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,7 +11,7 @@
       visibility: hidden;
       opacity: 0;
       height: 0;
-      transition: visibility 1s, opacity 1s;
+      transition: visibility 1s, opacity 0.6s ease;
       box-sizing: border-box;
   }
   
@@ -30,7 +23,6 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0,0,0,.5);
-      /*backdrop-filter: blur();*/
       position: fixed;
       top: 0;
       left: 0;
@@ -38,7 +30,8 @@
       bottom: 0;
       visibility: visible;
       opacity: 1;
-      transition: visibility 1s, opacity 1s;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      
     }
   
     .popup__close-button {
@@ -80,18 +73,7 @@
       padding-right: 36px;
       padding-bottom: 37px;
       padding-top: 34px;
-    }
-    
-    @media screen and (max-width: 600px) {
-      .popup__form {
-        width: calc(282px - (22px*2));
-        min-height: calc(322px - (25px*2));
-        padding-left: 22px;
-        padding-right: 22px;
-        padding-bottom: 25px;
-        padding-top: 25px;
-      }
-    }  
+    } 
   
     .popup__input {
       color: black;
@@ -150,13 +132,6 @@
       padding: 0;
       font-weight: 400;
       font-size: 14px;
-  }
-  
-  @media screen and (max-width: 450px) {
-    .add-ad-popup__btn {
-      width: 100%;
-      font-size: 12px;
-    }
   }
   
   .popup__btn_active {
@@ -288,16 +263,6 @@
   padding-top: 34px;
 }
 
-@media screen and (max-width: 600px) {
-  .popup__message-container {
-    width: calc(282px - (22px*2));
-    padding-left: 22px;
-    padding-right: 22px;
-    padding-bottom: 25px;
-    padding-top: 25px;
-  }
-}  
-
 .popup__container {
   display: flex;
   flex-direction: column;
@@ -305,39 +270,22 @@
 }
 
 .popup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-    transition: visibility 1s, opacity 1s;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 15;
 }
 
 .popup__opened {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 1s, opacity 1s;
-  }
+  opacity: 1;
+  pointer-events: all;
+}
 
   .popup__close-button-successfulActionPopup {
     /*background-image: url(../../images/Close_Icon.png);*/
@@ -393,17 +341,6 @@
     padding-top: 34px;
   }
 
-  @media screen and (max-width: 600px) {
-    .firstMessagePopup__form {
-      width: calc(282px - (22px*2));
-      min-height: calc(322px - (25px*2));
-      padding-left: 22px;
-      padding-right: 22px;
-      padding-bottom: 25px;
-      padding-top: 25px;
-    }
-  }  
-
   .firstMessagePopup__text {
     width: 90%;
     height: 300px;
@@ -434,12 +371,6 @@
     font-size: 14px;
   }
 
-  @media screen and (max-width: 450px) {
-    .firstMessagePopup__btn {
-      width: 100%;
-    }
-  }
-
   .firstMessagePopup__btn_active {
     background-color: black;
     color: #fff;
@@ -458,13 +389,6 @@
     cursor: pointer;
     transition: 2s ease;
     opacity: 1;
-  }
-  
-  @media screen and (max-width: 450px) {
-    .firstMessagePopup__btn_active {
-      width: 100%;
-      font-size: 12px;
-    }
   }
   
   .firstMessagePopup__btn_active:hover {
@@ -506,25 +430,6 @@
   padding-right: 36px;
   padding-bottom: 37px;
   padding-top: 34px;
-}
-
-@media screen and (max-width: 600px) {
-  .oneConversationPopup__wrapper {
-    width: calc(400px - (36px*2));
-    margin: auto;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .oneConversationPopup__wrapper {
-    width: calc(300px - (15px*2));
-    margin: auto;
-
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-  }
 }
 
 .oneConversationPopup__form {
@@ -647,13 +552,6 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 500px) {
-  .oneConversationPopup__userName {
-    color: #1f1f1f;
-    width: 100px;
-  }
-}
-
 .oneConversationPopup__text {
   text-align: start;
   font-size: 16px;
@@ -680,31 +578,27 @@
   padding-top: 34px;
 }
 
-@media screen and (max-width: 600px) {
-  .editItemPopup__form {
-    width: calc(282px - (22px*2));
-    padding-left: 22px;
-    padding-right: 22px;
-    padding-bottom: 25px;
-    padding-top: 25px;
-  }
-}  
+.popup__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 15;
+}
 
 .popup__picture-container {
   display: flex;
   flex-direction: column;
   max-width: 90vw;
   max-height: 1000px;
-  align-self: flex-start;
   position: relative;
-  margin-top: 100px;
 }
 
 .popup__picture {
   width: 100%;
-  max-height: calc(75vh);
-  margin-right: 45px;
-}
+  max-height: 75vh;
+  border-radius: 10px;
+  object-fit: contain;
+} 
 
 @media screen and (max-width: 600px) {
   .popup__picture {
@@ -713,5 +607,73 @@
 
   .popup__picture-container {
     width: 90vw;
+  }
+
+  .editItemPopup__form {
+    width: calc(282px - (22px*2));
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+
+  .oneConversationPopup__wrapper {
+    width: calc(400px - (36px*2));
+    margin: auto;
+  }
+  .firstMessagePopup__form {
+    width: calc(282px - (22px*2));
+    min-height: calc(322px - (25px*2));
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  .popup__message-container {
+    width: calc(282px - (22px*2));
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  .popup__form {
+    width: calc(282px - (22px*2));
+    min-height: calc(322px - (25px*2));
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+} 
+
+@media screen and (max-width: 500px) {
+  .oneConversationPopup__wrapper {
+    width: calc(300px - (15px*2));
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+
+  .oneConversationPopup__userName {
+    color: #1f1f1f;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .add-ad-popup__btn {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .firstMessagePopup__btn {
+    width: 100%;
+  }
+
+  .firstMessagePopup__btn_active {
+    width: 100%;
+    font-size: 12px;
   }
 }

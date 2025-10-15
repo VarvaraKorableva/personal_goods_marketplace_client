@@ -6,6 +6,7 @@ import { conditions } from '../../../const/Сonditions/Сonditions'
 //import { useItemsContext } from "../../../contexts/ItemsContext";
 import { useFiltersContext } from "../../../contexts/FiltersContext";
 import { ITEMS_LIMIT } from "../../../const/helper";
+import { cities } from '../../../const/Cities/cities'
 
 function FilterBtnContainer({getAllItems, resetAllfilters}) {
     const { language } = React.useContext(LanguageContext)
@@ -73,6 +74,7 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
               <div className="filterBtnContainer__btn-price" onClick={handleResetAllFilters}>Сбросить фильтры</div>
             </div>
 
+{/*
             <div className="filterBtnContainer__inputs-container">
 
               <input 
@@ -82,6 +84,22 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
                 onChange={handleSearchByCity}
               >
               </input>
+*/}
+            <div className="filterBtnContainer__inputs-container">
+            <select
+                className="filterBtnContainer__input-city"
+                value={city}
+                onChange={handleSearchByCity}
+              >
+                <option value="">Выберите город</option>
+                {cities.rus.map((c, index) => (
+                  <option key={index} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+
+
 
               <select 
                 className='filterBtnContainer__input' 
