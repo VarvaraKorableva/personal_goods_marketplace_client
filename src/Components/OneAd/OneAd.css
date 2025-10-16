@@ -134,6 +134,11 @@
     font-size: 14px;
 }
 
+.oneAdd__city_icon {
+    margin-right: 5px;
+    color: #1f1f1f;
+}
+
 .oneAdd__time {
     margin-bottom: 0;
     margin-top: 0;

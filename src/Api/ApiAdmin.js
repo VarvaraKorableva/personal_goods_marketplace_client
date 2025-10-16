@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001'
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001'
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 //const BASE_UR = process.env.REACT_APP_BASE_URL_LOCAL;
 //const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -35,4 +35,16 @@ export const updateModeratedAdmin = (item_id,  moderated) => {
         body: JSON.stringify({ item_id, moderated }),
     })
     .then(checkResponse);
+};
+
+export const getItemsByReasonAdmin = ({ reason }) => {
+  return fetch(`${BASE_URL}/itemsAdmin/admin?reason=${encodeURIComponent(reason)}`, {
+    credentials: 'include',
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+  .then(checkResponse);
 };
