@@ -104,9 +104,14 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 0.3,
+                /*maxSizeMB: 0.3,
                 maxWidthOrHeight: 400, 
-                useWebWorker: true,     
+                useWebWorker: true,  */  
+                maxSizeMB: 0.5,         // ~500 КБ
+                maxWidthOrHeight: 1200,  // достаточная детализация
+                useWebWorker: true,
+                initialQuality: 0.85,    // хорошее качество
+                fileType: "image/webp",
             };
 
             try {
@@ -127,9 +132,11 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 0.3,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
+              maxSizeMB: 0.5,         // ~500 КБ
+              maxWidthOrHeight: 1200,  // достаточная детализация
+              useWebWorker: true,
+              initialQuality: 0.85,    // хорошее качество
+              fileType: "image/webp",    
             };
 
             try {
@@ -150,9 +157,11 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 0.3,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
+              maxSizeMB: 0.5,         // ~500 КБ
+              maxWidthOrHeight: 1200,  // достаточная детализация
+              useWebWorker: true,
+              initialQuality: 0.85,    // хорошее качество
+              fileType: "image/webp",   
             };
 
             try {
@@ -173,9 +182,11 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
         const file = event.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 0.3,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
+              maxSizeMB: 0.5,         // ~500 КБ
+              maxWidthOrHeight: 1200,  // достаточная детализация
+              useWebWorker: true,
+              initialQuality: 0.85,    // хорошее качество
+              fileType: "image/webp",    
             };
 
             try {
@@ -206,7 +217,7 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
 
     if (firstFile || secondFile || thirdFile || fourthFile) {
       const formData = new FormData()
-      formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
+      formData.append('firstFile', firstFile);
       formData.append('secondFile', secondFile);
       formData.append('thirdFile', thirdFile);
       formData.append('fourthFile', fourthFile);
