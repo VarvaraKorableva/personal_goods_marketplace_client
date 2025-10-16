@@ -36,3 +36,15 @@ export const updateModeratedAdmin = (item_id,  moderated) => {
     })
     .then(checkResponse);
 };
+
+export const getItemsByReasonAdmin = ({ reason }) => {
+  return fetch(`${BASE_URL}/itemsAdmin/admin?reason=${encodeURIComponent(reason)}`, {
+    credentials: 'include',
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+  .then(checkResponse);
+};

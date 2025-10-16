@@ -5,11 +5,8 @@
     align-items: center;
     margin: auto;
     position: relative;
-    margin-top: 40px;
+    margin-top: 50px;
 }
-
-
-
 
 .MainSearchEngine-input {
     width: 100%;
@@ -27,7 +24,6 @@
     background-color: #1f1f1f;
     border: 2px solid #1f1f1f;
     color: #fff;
-    
     cursor: pointer;
     font-size: 16px;
 }
@@ -65,12 +61,11 @@
 
 @media screen and (max-width: 630px) {
     .MainSearchEngine-form {
-        /*width: calc(100% - 40px);*/
         width: 95%;
         min-width: 260px;
         margin-left: 20px;
         margin-right: 20px;
-        margin-top: 10px;
+        margin-top: 40px;
     }
 
     .MainSearchEngine-filter-btn {

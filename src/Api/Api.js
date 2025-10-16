@@ -173,7 +173,7 @@ export const getAllItems = ({ page = 1, limit = 20 }) => {
 };
   
 
-export const deleteItem = (item_id) => {
+export const deleteItem = (item_id, reason) => {
   return fetch(`${BASE_URL}/items/${item_id}`, {
       credentials: 'include',
       method: "PATCH",
@@ -181,6 +181,7 @@ export const deleteItem = (item_id) => {
           "Accept": "application/json",
           "Content-Type": "application/json",
       },
+      body: JSON.stringify({ reason }),
   })
       .then(checkResponse) 
 };

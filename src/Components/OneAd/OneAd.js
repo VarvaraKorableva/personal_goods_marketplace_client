@@ -7,6 +7,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Timing'
 import { useFavorites } from "../../contexts/FavoritesContext"
 import Button from '../../UK-kit/Button/Button'
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 function OneAd({
     isLoggin, item, getItemById, 
@@ -137,7 +138,10 @@ function OneAd({
                     : <></>}
                 </div>
                 <p className="oneAdd__price">{item.price} ₪</p>
-                <p className="oneAdd__city">{item.city}</p>
+                <p className="oneAdd__city">
+                  <FaMapMarkerAlt className="oneAdd__city_icon"></FaMapMarkerAlt>
+                  {item.city}
+                </p>
 
                 {/*
                   isLoggin?

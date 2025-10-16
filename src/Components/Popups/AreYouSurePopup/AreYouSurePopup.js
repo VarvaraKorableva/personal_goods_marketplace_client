@@ -1,28 +1,75 @@
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import React from 'react'
+import { FaCheckCircle } from "react-icons/fa";
+import React, { useEffect, useState } from 'react'
 import '../Popups.css'
 
 function AreYouSurePopup({onClose, isOpen, deleteMyAd, itemIdDelete}) {
+  const [selectedReason, setSelectedReason] = useState('');
+  const [valid, setValid] = useState(false);
 
-    function handleDeleteAd() {
-        deleteMyAd(itemIdDelete)
+  function handleDeleteAd() {
+    deleteMyAd(itemIdDelete, selectedReason);
+  }
+
+  const reasons = [
+    'Продал на «ГУДС»',
+    'Продал где-то еще',
+    'Передумал продавать',
+    'Другая причина'
+  ];
+
+  useEffect(() => {
+    if (!selectedReason) {
+      setValid(false);
+    } else {
+      setValid(true);
     }
+  }, [selectedReason]);
   
   return (
-      <div className={`popup ${isOpen && 'popup__opened'}`}>
+    <div className={`popup ${isOpen && 'popup__opened'}`}>
       <div className="popup__container">
-          <IoMdCloseCircleOutline 
-            className="popup__close-button" 
-            type="button" 
-            onClick={onClose}
-          />
-      <h2 className="popup__title-ChoiceOfProductOrServicePopup">Вы уверены, что хотите удалить объявление?</h2>
-      <div className='popup__container-ChoiceOfProductOrServicePopup'>
-          <button onClick={handleDeleteAd} className='popup_choice_btn' type="button">Да</button>
-          <button onClick={onClose} className='popup_choice_btn' type="button">Нет</button>
-      </div> 
+        <IoMdCloseCircleOutline 
+          className="popup__close-button" 
+          type="button" 
+          onClick={onClose}
+        />
+
+        <div className="popup__reasons-wrapper">
+          <h2 className="popup__title_black">
+            Выберите причину, по которой вы удаляете объявление:
+          </h2>
+          <div className="popup__reasons-container">
+            {reasons.map((reason, i) => (
+              <div
+                key={i}
+                className={`popup__reason ${selectedReason === reason ? 'popup__reason_selected' : ''}`}
+                onClick={() => setSelectedReason(reason)}
+              >
+                <span>{reason}</span>
+                {selectedReason === reason && (
+                  <FaCheckCircle className="popup__reason-check" />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className='popup_choice_btn_container'>
+            <button 
+              onClick={handleDeleteAd} 
+              className={`popup_choice_btn_disabled ${valid ? 'popup_choice_btn' : ''}`} 
+              type="button" 
+              disabled={!valid}
+            >
+              Удалить
+            </button>
+            <button onClick={onClose} className='popup_choice_btn' type="button">
+              Отмена
+            </button>
+          </div>
+        </div>
       </div>
-      </div>
-    )
-  }
-export default AreYouSurePopup
+    </div>
+  );
+}
+
+export default AreYouSurePopup;

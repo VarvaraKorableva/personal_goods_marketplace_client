@@ -31,6 +31,9 @@ function AdminPage() {
                 <Button as={Link} to="/add-new-ads-as-admin">
                     Модерация
                 </Button>
+                <Button as={Link} to="/items-admin-page">
+                    Посмотреть удаленные объявления
+                </Button>
             </div>
         </Container>
         </Container>

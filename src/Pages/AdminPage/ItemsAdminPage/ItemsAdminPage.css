@@ -1,0 +1,12 @@
+.ItemsAdminPage__number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    max-width: 50px;
+    border-radius: 30px;
+    background-color: brown;
+    color: #fff;
+    margin: auto;
+    margin-top: 50px;
+}

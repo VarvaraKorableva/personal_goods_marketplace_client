@@ -37,9 +37,9 @@ export default function useItem({
   }
   const navigate = useNavigate()
 
-  const deleteMyAd = (item_id) => {
+  const deleteMyAd = (item_id, reason) => {
     openLoading()
-    Api.deleteItem(item_id)
+    Api.deleteItem(item_id, reason)
     .then((res) => {
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
       setLastFourtyItems((state) => state.filter((item) => item.item_id !== item_id))

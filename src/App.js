@@ -53,6 +53,7 @@ import ConversationPage from './Pages/ConversationPage/ConversationPage'
 import ClientsAdminPage from './Pages/AdminPage/ClientsAdminPage/ClientsAdminPage'
 import ListingsAdminPage from './Pages/AdminPage/ListingsAdminPage/ListingsAdminPage'
 import ModerationAdminPage from './Pages/AdminPage/ModerationAdmin/ModerationAdmin'
+import ItemsAdminPage from './Pages/AdminPage/ItemsAdminPage/ItemsAdminPage'
 
 
 function App() {
@@ -512,6 +513,13 @@ function App() {
           path={`/add-new-ads-as-admin`}
           element={
             <ModerationAdminPage/>
+          }>
+        </Route>
+
+        <Route 
+          path={`/items-admin-page`}
+          element={
+            <ItemsAdminPage/>
           }>
         </Route>
 
