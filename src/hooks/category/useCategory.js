@@ -9,7 +9,7 @@ export default function useCategory({closeLoading, openLoading, }) {
 
     async function getCategory() {
       openLoading();
-      const savedCategories = localStorage.getItem('category');
+      /*const savedCategories = localStorage.getItem('category');
     
       if (savedCategories) {
         try {
@@ -21,10 +21,10 @@ export default function useCategory({closeLoading, openLoading, }) {
           localStorage.removeItem('category'); // очищаем битые данные
         }
         closeLoading();
-      } else {
+      } else {*/
         try {
           const res = await Api.getCategory();
-          localStorage.setItem('category', JSON.stringify(res));
+          //localStorage.setItem('category', JSON.stringify(res));
           setCategories(res);
           setCategoriesToRender(res);
           closeLoading();
@@ -32,7 +32,7 @@ export default function useCategory({closeLoading, openLoading, }) {
           console.log(err);
           closeLoading();
         }
-      }
+      //}
     }
     
 /*
