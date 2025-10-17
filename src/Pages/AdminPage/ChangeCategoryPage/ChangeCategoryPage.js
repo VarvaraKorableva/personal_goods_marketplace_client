@@ -63,14 +63,14 @@ function ChangeCategoryPage() {
       }; 
 
       const handleCreateSubCategory = () => {
-        /*createCategoryAdmin({
-            name: "Homemade Food",
+        createCategoryAdmin({
+            name: "Other",
             is_good: true,
-!!!!!!            parent_id: null, ///добавить
-            image_url: "https://images.unsplash.com/photo-1500816159285-731ab12cbd82?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTB8fEhvbWVtYWRlJTIwRm9vZHxlbnwwfHwwfHx8MA%3D%3D",
-            slug: "homemade-food",
-            name_rus: "Домашняя еда"
-        }); */
+            parent_id: 12,
+            image_url: "https://images.unsplash.com/photo-1605642634357-80a58f89af26?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fGVsZWN0cm9uaWNzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400",
+            slug: "electronics-other",
+            name_rus: "Другое"
+        }); 
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 
