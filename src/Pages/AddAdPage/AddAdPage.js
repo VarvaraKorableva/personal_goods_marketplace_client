@@ -82,7 +82,14 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const addSecondPicRef = React.useRef(null);
   const addThirdPicRef = React.useRef(null);
   const addFourthPicRef = React.useRef(null);
-  const [files, setFiles] = React.useState([firstFile, secondFile, thirdFile, fourthFile])
+
+  const options = {
+    maxSizeMB: 1.0,
+    maxWidthOrHeight: 1600,
+    useWebWorker: true,
+    initialQuality: 0.9,
+    fileType: "image/webp",
+};
 
   const { language } = React.useContext(LanguageContext)
 
@@ -99,21 +106,11 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
 
   const formRef = React.useRef(null);
  
+
   const handleImgFirstLinkChange = async (event) => {
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-                /*maxSizeMB: 0.3,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,  */  
-                maxSizeMB: 0.5,         // ~500 КБ
-                maxWidthOrHeight: 1200,  // достаточная детализация
-                useWebWorker: true,
-                initialQuality: 0.85,    // хорошее качество
-                fileType: "image/webp",
-            };
-
             try {
                 const compressedImage = await imageCompression(file, options);
                 setFirstFile(compressedImage);
@@ -131,14 +128,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-              maxSizeMB: 0.5,         // ~500 КБ
-              maxWidthOrHeight: 1200,  // достаточная детализация
-              useWebWorker: true,
-              initialQuality: 0.85,    // хорошее качество
-              fileType: "image/webp",    
-            };
-
             try {
                 const compressedImage = await imageCompression(file, options);
                 setSecondFile(compressedImage);
@@ -156,14 +145,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-              maxSizeMB: 0.5,         // ~500 КБ
-              maxWidthOrHeight: 1200,  // достаточная детализация
-              useWebWorker: true,
-              initialQuality: 0.85,    // хорошее качество
-              fileType: "image/webp",   
-            };
-
             try {
                 const compressedImage = await imageCompression(file, options);
                 setThirdFile(compressedImage);
@@ -181,14 +162,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-              maxSizeMB: 0.5,         // ~500 КБ
-              maxWidthOrHeight: 1200,  // достаточная детализация
-              useWebWorker: true,
-              initialQuality: 0.85,    // хорошее качество
-              fileType: "image/webp",    
-            };
-
             try {
                 const compressedImage = await imageCompression(file, options);
                 setFourthFile(compressedImage);
