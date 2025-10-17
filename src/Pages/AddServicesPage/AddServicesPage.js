@@ -90,6 +90,14 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
 
   const { en, rus, hebrew } = choose;
 
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1600,
+    useWebWorker: true,
+    initialQuality: 0.9,
+    fileType: 'image/webp',
+  }
+
   let translatedContext = '';
   if (language === 'en') {
     translatedContext = en;
@@ -105,11 +113,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
-            };
 
             try {
                 const compressedImage = await imageCompression(file, options);
@@ -128,11 +131,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
-            };
 
             try {
                 const compressedImage = await imageCompression(file, options);
@@ -151,11 +149,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
-            };
 
             try {
                 const compressedImage = await imageCompression(file, options);
@@ -174,11 +167,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
     openLoading()
         const file = event.target.files[0];
         if (file) {
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 400, 
-                useWebWorker: true,     
-            };
 
             try {
                 const compressedImage = await imageCompression(file, options);
@@ -192,21 +180,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
             }
         }
   };
-
-  function handledesDriptionChange(e) {
-    if(e.target.value.length > 900) {
-      setIsDescriptionSelected(false)
-      setDescriptionErrorMessage('Длинна описания не может превышать 900 символов')
-    } else if(e.target.value) {
-      setIsDescriptionSelected(true)
-      setDescriptionErrorMessage('')
-      setDescription(e.target.value)
-    } else {
-      setIsDescriptionSelected(true)
-      setDescriptionErrorMessage('')
-      setDescription('')
-    }
-  }
 
   function handleServicesSubmit(e) {
     e.preventDefault();
@@ -278,44 +251,6 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
       setThirdFile(null)
       setFourthFile(null)
   }
-
-  const handleTitleChange = (e) => {
-    if(e.target.value.length > 40) {
-      setIsTitleSelected(false)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessageToLong}`)
-      setTitle(e.target.value)
-    } else if (e.target.value.length < 3) {
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessageToSmall}`)
-      setIsTitleSelected(false)
-      setTitle(e.target.value)
-    } else if(!e.target.value) {
-      setIsTitleSelected(false)
-      setTitleErrorMessage(`${translatedContext.errors.titleErrorMessage.errorMessage}`)
-      setTitle(e.target.value)
-    } else {
-      setIsTitleSelected(true)
-      setTitleErrorMessage('')
-      setTitle(e.target.value[0].toUpperCase() + e.target.value.slice(1))
-    }
-  }
-
-  const handlePriceChange = (e) => {
-    if (!e.target.value) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
-      setPrice('')
-    } else if(!(/^\d*$/.test(e.target.value))) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
-    } else if (e.target.value.length > 10) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageToLongs}`)
-    } else {
-      setIsPriceSelected(true)
-      setPrice(e.target.value)
-      setPriceErrorMessage('')
-    }
-  };
 
   const handleSelectServicesChange = (e) => {
     if(e.target.value !== "") {
