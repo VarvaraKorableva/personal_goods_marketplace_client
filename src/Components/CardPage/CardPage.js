@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './CardPage.css'
-import * as Api from '../../Api/Api'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/CardPageData'
 import noPictures from '../../images/nopictures.png'
-import ImageSlider from './ImageSlider.js'
 import { TbEdit } from "react-icons/tb";
 import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
 import { useItemsContext } from "../../contexts/ItemsContext"
 import Button from '../../UK-kit/Button/Button'
+import Container from '../../UK-kit/Container/Container'
 
 function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup, openImgLinkPopup}) {
     let { item_id } = useParams();
-    const navigate = useNavigate()
     const currentUser = React.useContext(CurrentUserContext)
     const favorite_collector_id = currentUser.user_id
 
@@ -86,6 +84,8 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
         <section className="cardPage-section">
             
             <div className="cardPage-main-container">
+            {/*<section as='section'  className="cardPage-section">
+            <div as='div' baseClassName='container' className="cardPage-main-container">*/}
                 <BackBtn/>
                 <div className="cardPage-container">
 
