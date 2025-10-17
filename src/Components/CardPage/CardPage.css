@@ -61,11 +61,9 @@
 .cardPage-section {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: start;
+    justify-content: flex-start;
     width: 100%;
-    margin: 0;
-    margin-left: 0;
 }
 
 .cardPage-main-container {
@@ -75,9 +73,12 @@
     align-items: start;
     border-radius: 10px;
     padding: 20px;
-    width: calc(100% - 20px);
-    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    max-width: 1100px;
     box-sizing: border-box;
+    align-self: flex-start;
 }
 
 .cardPage-info {
