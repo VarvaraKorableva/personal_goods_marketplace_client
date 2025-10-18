@@ -63,14 +63,14 @@ function ChangeCategoryPage() {
       }; 
 
       const handleCreateSubCategory = () => {
-        createCategoryAdmin({
+        /*createCategoryAdmin({
             name: "Other",
             is_good: true,
             parent_id: 12,
             image_url: "https://images.unsplash.com/photo-1605642634357-80a58f89af26?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fGVsZWN0cm9uaWNzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400",
             slug: "electronics-other",
             name_rus: "Другое"
-        }); 
+        }); */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 
