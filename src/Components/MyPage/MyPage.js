@@ -21,7 +21,7 @@ function MyPage({
   deleteFromFavorites, 
   handleUpdateIsReserved 
 }) {
-  console.log('myAds', myAds)
+
   const currentUser = React.useContext(CurrentUserContext)
   const userId = currentUser.user_id
   const [isWhyImportantClicked, setIsWhyImportantClicked] = React.useState(false)
@@ -59,8 +59,8 @@ function MyPage({
 
   // 🔑 Фильтры
   const filters = [
-    { label: "Активные объявления", value: "active", condition: ad => ad.moderated === true },
-    { label: "На проверке модератором", value: "pending", condition: ad => ad.moderated === false },
+    { label: `${translatedContext.btnNames.activeAdsBtn}`, value: "active", condition: ad => ad.moderated === true },
+    //{ label: "На проверке модератором", value: "pending", condition: ad => ad.moderated === false },
     //{ label: "Завершенные", value: "deleted", condition: ad => ad.deleted === true },
     //
     // сюда можно добавить ещё до 5
@@ -73,11 +73,12 @@ function MyPage({
     const currentFilter = filters.find(f => f.value === selectedFilter);
     return currentFilter && currentFilter.condition ? currentFilter.condition(ad) : true;
   });
-
+//myPage__wrapper
   return (
-    <section>
+    <section className='myPage__section'>
       
-      <BackBtn/>
+      
+      <BackBtn className='backBtn_margin-left'/>
       <div className="myPage__container">
         <div className="myPage__info-container">
           <div className="myPage__avatar-container">
@@ -119,7 +120,7 @@ function MyPage({
               {filter.label}
             </Button>
           ))}
-          <Button onClick={handleAddAdClick}>Добавить объявление</Button>
+          <Button onClick={handleAddAdClick}>{translatedContext.btnNames.addAdBtn}</Button>
         </Container>
 
         <div className="myPage__listings-wrapper">

@@ -10,12 +10,14 @@ const en = {
     btnNames: {
         addTelegram: 'Add Telegram',
         whyDoesThisMatter: 'Why does this matter?',
+        activeAdsBtn: 'Active Listings',
+        addAdBtn: 'Add Listing',
     },
     whyAddTelegramIsImportant: 'Add your Telegram so buyers can contact you faster — this increases your chances of a successful sale.',
 }
 
 const rus = {
-    changeAvatarBtn: 'Изменить аватар',
+    changeAvatarBtn: 'Изменить аватар', 
     myListingsTitle: 'Добавлено ', 
     logOutBtn: 'Выйти из приложения',
     addMoreAdsBtn: 'Посмотреть остальные',
@@ -25,12 +27,15 @@ const rus = {
     btnNames: {
         addTelegram: 'Добавить телеграм',
         whyDoesThisMatter: 'Почему это важно?',
+        activeAdsBtn: 'Активные объявления',
+        addAdBtn: 'Добавить объявление',
     },
     whyAddTelegramIsImportant: 'Добавьте Telegram, чтобы покупатели могли быстрее связаться с вами — это увеличивает шансы на успешную продажу.',
 }
 
 const hebrew = {
     changeAvatarBtn: 'Change Avatar',
+    
     myListingsTitle: 'Listings added ',
     logOutBtn: 'Log out',
     addMoreAdsBtn: 'View more',
@@ -40,6 +45,8 @@ const hebrew = {
     btnNames: {
         addTelegram: 'Add Telegram',
         whyDoesThisMatter: 'Why does this matter?',
+        activeAdsBtn: 'Active Listings',
+        addAdBtn: 'Add Listing',
     },
     whyAddTelegramIsImportant: 'Add your Telegram so buyers can contact you faster — this increases your chances of a successful sale.',
 }

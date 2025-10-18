@@ -70,7 +70,7 @@ return (
 
           <Link  to={`/my_favorites`} className='burgerMenuPopup_link' onClick={handleGetUnreadbleMessages}>
             <button className='burgerMenuPopup_favorite-btn'></button>
-            <button className='burgerMenuPopup_add-announcement-btn'>Избранное</button>
+            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.favoritesBtn}</button>
           </Link>
 
           <Link to={`/users/${userId}/messages`} className='burgerMenuPopup_link burgerMenuPopup_link-message-container' onClick={onClose}>
@@ -80,8 +80,13 @@ return (
                 :
                 <></>
             }     
-            <button className='burgerMenuPopup_add-announcement-btn'>Мои сообщения</button>
+            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.myMessagesBtn}</button>
           </Link>
+
+          <div className='header__lang-container burgerMenuPopup_link'>
+            <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active':'header__lang-btn'}>RU</button>
+            <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active':'header__lang-btn'}>EN</button>
+          </div>
         </div>
       :  
       isLoggin ?

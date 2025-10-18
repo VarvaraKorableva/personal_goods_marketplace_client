@@ -80,7 +80,7 @@ function ConversationPage({
         <section>
         
         <div className="conversationPage__wrapper">
-            <BackBtn/>
+            <BackBtn className='backBtn_margin-left'/>
            <div className="conversationPage__info-container">
                <div className="conversationPage__title-container">
                 <h3 className="conversationPage__title">{itemTitle.title}</h3>

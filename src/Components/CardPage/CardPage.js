@@ -44,7 +44,14 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
     }, []);
 
     if(selectedItem.length === 0) {
-        return <p>Loading ...</p>;
+        return (  
+        <div className="cardPage__centr-container">
+            <p>Объявление не найдено или удалено.</p>
+            <Button className="cardPage__info-about-user">
+                <Link to={`/`} className="cardPage-link">Вернуться на главную страницу</Link>                       
+            </Button>
+        </div>
+        );
     } 
 
     function hundleDeleteMyAd() {

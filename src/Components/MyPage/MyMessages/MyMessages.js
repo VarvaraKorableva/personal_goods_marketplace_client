@@ -35,7 +35,7 @@ function MyMessages({ getOneConversation, markMessagesAsRead, onConversation }) 
     
     return(
         <section className="my-messages__section">
-            <BackBtn/>
+            <BackBtn className='backBtn_margin-left'/>
             {lastMessages.length?  
                 <ul className="message__wrapper">
                 

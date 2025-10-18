@@ -241,6 +241,16 @@
     margin-left: 10px; 
 }
 
+.cardPage__centr-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 200px;
+    max-width: 300px;
+}
+
 @media screen and (max-width: 1000px) {
     .cardPage__main-pic-wrapper {
         grid-template-columns: 200px 200px;

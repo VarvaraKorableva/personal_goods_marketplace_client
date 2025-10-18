@@ -16,7 +16,7 @@
     height: 110px;
     border-radius: 50%;
     border: 2px solid rgb(255, 140, 0);
-    border: 2px solid #e4e6e7;
+    border: 2px solid var(--light-grey-color);
 }
 
 .category-pic {

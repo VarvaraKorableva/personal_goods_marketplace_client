@@ -7,6 +7,8 @@ import './Main.css'
 import { useItemsContext } from "../../contexts/ItemsContext";
 import { useFiltersContext } from "../..//contexts/FiltersContext";
 import { ITEMS_LIMIT } from "../../const/helper";
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/mainContainer'
 
 function Main({
     categoriesToRender, isLoggin, 
@@ -19,6 +21,19 @@ function Main({
     resetAllfilters, handleScroll,
     getCategory, userId, getMyFavorites,
 }) {
+    const { language } = React.useContext(LanguageContext)
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
+
     const limit = ITEMS_LIMIT
 
     const {
@@ -54,7 +69,6 @@ function Main({
         
     }, [handleScroll]);
 
-console.log('itemsAfterSearch', itemsAfterSearch)
     return(
         <section className='main__section'> {/*Только на главной странице категории, поисковик и объявления*/}
             <MainSearchEngine
@@ -81,13 +95,13 @@ console.log('itemsAfterSearch', itemsAfterSearch)
             {itemsAfterSearch.length?
 
             (searchByKeyWord.length?
-            <h2 className='main__title'>Объявления по запросу «{searchByKeyWord}»</h2>
+            <h2 className='main__title'>{translatedContext.searchResultsTitle} «{searchByKeyWord}»</h2>
             :
-            <h2 className='main__title'>Количество объявлений на сайте {totalCountOfAds}</h2>
+            <h2 className='main__title'>{translatedContext.totalAdsTitle} {totalCountOfAds}</h2>
             )
 
             :
-            <h2 className='main__title'>Объявлений не найдено</h2>
+            <h2 className='main__title'>{translatedContext.noAdsMessage}</h2>
 
             }
 
