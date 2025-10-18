@@ -43,7 +43,7 @@
 
 .filterBtnContainer__input-price {
     width: calc(45% - 10px);
-    border: 1px solid #e4e6e7;
+    border: 1px solid var(--light-grey-color);
     border-radius: 10px;
     height: 27px;
     margin-top: 5px;
@@ -55,7 +55,7 @@
 
 .filterBtnContainer__input {
     width: 100%;
-    border: 1px solid #e4e6e7;
+    border: 1px solid var(--light-grey-color);
     border-radius: 10px;
     height: 34px;
     padding: 0;
@@ -73,7 +73,7 @@
 
 .filterBtnContainer__input-city {
     width: calc(100% - 10px);
-    border: 1px solid #e4e6e7;
+    border: 1px solid var(--light-grey-color);
     border-radius: 10px;
     height: 34px;
     padding: 0;
@@ -106,7 +106,7 @@
     border-radius: 10px;
     background-color: transparent;
     color: black;
-    border: 1px solid #e4e6e7;
+    border: 1px solid var(--light-grey-color);
     cursor: pointer;
     height: 34px;
     

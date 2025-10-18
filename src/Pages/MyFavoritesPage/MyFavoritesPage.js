@@ -62,7 +62,7 @@ function MyFavoritesPage({ deleteFromFavorites,}) {
 
     return(
         <div className="myFavoritesPage-main-container">
-            <BackBtn/>
+            <BackBtn className='backBtn_margin-left'/>
             <h3>{translatedContext.myFavoriteTitle}</h3>
             <ul className="myFavoritesPage-listings-container">
                 {favorite.map((item) => (

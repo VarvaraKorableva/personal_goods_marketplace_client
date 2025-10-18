@@ -3,7 +3,7 @@ export const conditions =
     rus:[
         "Hовое", "Идеальное", "Хорошее", "Среднее", "Плохое",
     ],
-    eng: [
+    en: [
         "New", "Excellent", "Good", "Average", "Poor",    
     ],
 }

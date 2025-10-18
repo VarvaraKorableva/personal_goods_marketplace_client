@@ -29,7 +29,7 @@ function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemB
     
     return(
         <section className='userPage_main-container'>
-            <BackBtn/>
+            <BackBtn className='backBtn_margin-left'/>
             <div className="userPage-user-info-container">
                 <div className="userPage-user-info-pic"></div>
                 <p className="userPage-user-info-name">{userInfo[0].username}</p>

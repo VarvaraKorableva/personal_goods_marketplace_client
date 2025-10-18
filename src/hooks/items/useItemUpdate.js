@@ -1,35 +1,35 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import * as Api from '../../Api/Api'
-import { useItemsContext } from '../../contexts/ItemsContext';
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/Popups/Popup'
 
 export default function useItemUpdate(userId, {openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, setIsReserved, isReserved,}) {
+  const { language } = React.useContext(LanguageContext)
 
-  const {
-    lastFourtyItems,
-    setLastFourtyItems,
-    itemsAfterSearch,
-    setItemsAfterSearch,
-    totalCountOfAds,
-    setTotalCountOfAds,
-    page,
-    setPage,
-    isPageItemsLoading,
-    setIsPageItemsLoading,
-  } = useItemsContext();
+  const { en, rus, hebrew } = choose;
+
+  let translatedContext = '';
+  if (language === 'en') {
+    translatedContext = en;
+  } else if (language === 'rus') {
+    translatedContext = rus;
+  } else if (language === 'hebrew') {
+    translatedContext = hebrew;
+  }
 
   const updateDescription = (item_id, description) => {
     openLoading()
     Api.updateDescription(item_id, description)
     .then((res) => {
       closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      setPopupMessage(translatedContext.messagesPopup.changesSaved)
       openSuccessfulActionPopup()
       closeLoading()
     })
     .catch((err) => {
       closeAllPopups()
       closeLoading()
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage(translatedContext.messagesPopup.somethingWrong)
       openSuccessfulActionPopup()
     })
   }
@@ -39,14 +39,14 @@ export default function useItemUpdate(userId, {openLoading, closeLoading, closeA
     Api.updatePrice(item_id, price)
     .then((res) => {
       closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      setPopupMessage(translatedContext.messagesPopup.changesSaved)
       openSuccessfulActionPopup()
       closeLoading()
     })
     .catch((err) => {
       closeAllPopups()
       closeLoading()
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage(translatedContext.messagesPopup.somethingWrong)
       openSuccessfulActionPopup()
     })
   }
@@ -56,14 +56,14 @@ export default function useItemUpdate(userId, {openLoading, closeLoading, closeA
     Api.updateItemCity(item_id, city)
     .then((res) => {
       closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      setPopupMessage(translatedContext.messagesPopup.changesSaved)
       openSuccessfulActionPopup()
       closeLoading()
     })
     .catch((err) => {
       closeAllPopups()
       closeLoading()
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage(translatedContext.messagesPopup.somethingWrong)
       openSuccessfulActionPopup()
     })
   }
@@ -73,14 +73,14 @@ export default function useItemUpdate(userId, {openLoading, closeLoading, closeA
     Api.updateCondition(item_id, condition)
     .then((res) => {
       closeAllPopups()
-      setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+      setPopupMessage(translatedContext.messagesPopup.changesSaved)
       openSuccessfulActionPopup()
       closeLoading()
     })
     .catch((err) => {
       closeAllPopups()
       closeLoading()
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage(translatedContext.messagesPopup.somethingWrong)
       openSuccessfulActionPopup()
     })
   }
@@ -92,7 +92,7 @@ export default function useItemUpdate(userId, {openLoading, closeLoading, closeA
     })
     .catch((err) => {
       console.log(err)
-      setPopupMessage("Something wrong, plese try again")
+      setPopupMessage(translatedContext.messagesPopup.somethingWrong)
     })
   }
 

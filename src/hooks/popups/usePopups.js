@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-//import * as Api from '../../Api/Api'
-//import { useItemsContext } from '../../contexts/ItemsContext';
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/Popups/Popup'
 
-export default function usePopups({setReceiverId, myAds, setItemId, currentUser}) {
+export default function usePopups({setReceiverId, myAds, setItemId}) {
   const navigate = useNavigate()
 
   const [isImglinkPopup, setIsImglinkPopup] = React.useState(false)
@@ -21,7 +21,18 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
   const [itemIdDelete, setItemIdDelete] = React.useState(0)
   const [isGood, setIsGood] = React.useState(true)
   
-  
+  const { language } = React.useContext(LanguageContext)
+
+  const { en, rus, hebrew } = choose;
+
+  let translatedContext = '';
+  if (language === 'en') {
+    translatedContext = en;
+  } else if (language === 'rus') {
+    translatedContext = rus;
+  } else if (language === 'hebrew') {
+    translatedContext = hebrew;
+  }
 
   function closeAllPopups() {
     setIsChoiceOfProductOrServicePopup(false)
@@ -70,7 +81,7 @@ export default function usePopups({setReceiverId, myAds, setItemId, currentUser}
   function handleChoiceOfProductOrServicePopupClick() {
     if (myAds.length >= 20) {
       setSuccessfulActionPopup(true)
-      setPopupMessage(`Можно добавлять не более 20 объявлений, у вас добавлено ${myAds.length}`)
+      setPopupMessage(`${translatedContext.messagesPopup.maxAdsPopupMessage} ${myAds.length}`)
     } else {
       setIsChoiceOfProductOrServicePopup(true)
     }

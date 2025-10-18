@@ -570,7 +570,7 @@
   width: 50%;
   min-height: fit-content;
 
-  border: 1px solid #e4e6e7;
+  border: 1px solid var(--light-grey-color);
   background-color: transparent;
 
   color:rgba(0, 0, 0, 0.6);

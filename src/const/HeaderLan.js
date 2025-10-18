@@ -5,7 +5,8 @@ const en = {
     registraion: 'SignUp',
     addNewAddBtnName: 'Place an ad',
     mainPage: 'Main Page',
-    
+    favoritesBtn: 'Favorites',
+    myMessagesBtn: 'My Messages',
 }
 
 const rus = {
@@ -15,16 +16,19 @@ const rus = {
     registraion: 'Зарегистрироваться', 
     addNewAddBtnName: 'Добавить объявление',
     mainPage: 'Главная страница',
+    favoritesBtn: 'Избранное',
+    myMessagesBtn: 'Мои сообщения',
 }
 
 const hebrew = {
     logout: 'להתנתק',
     mypage: 'העמוד שלי',
     login: 'התחברות',
-
     registraion: 'רישום',
-    addNewAddBtnName: 'Добавить объявление - текст на иврите',
+    addNewAddBtnName: 'Place an ad',
     mainPage: 'Main Page',
+    favoritesBtn: 'מועדפים',
+    myMessagesBtn: 'הודעות שלי',
 }
 
 const choose = { en, rus, hebrew };

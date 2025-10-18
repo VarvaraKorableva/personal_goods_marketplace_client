@@ -1,16 +1,16 @@
 
 const en = {
-    successfulMessage: 'Your ad was added successfully! It will appear after moderation.',
+    successfulMessage: 'Your ad was added successfully!',
     wrongMessage: 'Something wrong, please try again',
 }
 
 const rus = {
-    successfulMessage: 'Объявление успешно добавлено! Оно появится на сайте после модерации.',
+    successfulMessage: 'Объявление успешно добавлено!',
     wrongMessage: 'Что-то пошло не так, попробуйте еще раз',
 }
 
 const hebrew = {
-    successfulMessage: 'Your ad was added successfully! It will appear after moderation.',
+    successfulMessage: 'Your ad was added successfully!',
     wrongMessage: 'Something wrong, plese try again',
 }
 

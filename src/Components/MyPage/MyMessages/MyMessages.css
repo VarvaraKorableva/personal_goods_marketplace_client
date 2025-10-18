@@ -3,62 +3,41 @@
 }
 
 .message__wrapper {
-    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 800px;
+    width: 100%;
+    max-width: 1100px;
     box-sizing: border-box;
     margin: auto;
     margin-top: 0;
     margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
     position: relative;
-}
-
-@media screen and (max-width: 900px) {
-    .message__wrapper {
-        width: calc(100% - 80px); 
-        margin: 40px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .message__wrapper {
-        width: calc(100% - 40px); 
-        margin: 20px;
-    }
+    gap: 10px;
 }
 
 .message__container {
     list-style-type: none;
     padding: 10px;
-    margin-bottom: 10px;
     width: 100%;
-    height: 80px;
-    border: 1px solid #e4e6e7;
+    max-width: 1100px;
+    box-sizing: border-box;
+    height: 100px;
+    border: 1px solid var(--light-grey-color);
     border-radius: 20px;
     box-shadow: 0 3px 6px #999;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-}
-
-@media screen and (max-width: 550px) {
-    .message__container {
-        height: 60px; 
-    }
+    justify-content: center;
 }
 
 .message__container:hover {
-    height: 85px;
-    background-color: #e4e6e7;
-}
-
-@media screen and (max-width: 550px) {
-    .message__container:hover {
-        height: 62px; 
-    }
+    height: 105px;
+    background-color: var(--light-grey-color);
 }
 
 .my-messages__no-length-text {
@@ -71,7 +50,6 @@
     min-height: 80vh;
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -81,120 +59,75 @@
 .message__text {
     margin: 0;
     margin-top: 10px;
-    width: 100%;
+    width: 90%;
+    max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     text-align: start;
-}
-
-@media screen and (max-width: 550px) {
-    .message__text {
-        font-size: 12px;
-    }
 } 
 
 .message__item-info-container {
     display: flex;
+    gap: 10px;
     justify-content: flex-start;
     align-items: center;
     height: 30%;
     color: black;
     font-weight: 700;
-    width: 100%;
-    border-bottom: 1px solid #e4e6e7;;
+    max-width: 100%;
+    border-bottom: 1px solid var(--light-grey-color);
 }
-
-@media screen and (max-width: 550px) {
-    .message__item-info-container {
-        font-size: 12px;
-    }
-} 
 
 .message__item-info-wrapper {
     display: flex;
     margin: 0;
     position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 20px;
 }
 
 .message__sender-name {
     margin: 0;
-    margin-right: 20px;
-    width: 100px;
+    width: 30%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     text-align: start;
 }
-
-@media screen and (max-width: 550px) {
-    .message__sender-name {
-        width: 80px;
-        margin-right: 10px;
-    }
-} 
 
 .message__item-name {
     margin: 0;
-    margin-right: 20px;
-    width: 100px;
+    width: 30%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     text-align: start;
-}
-
-@media screen and (max-width: 550px) {
-    .message__item-name {
-        width: 80px;
-        margin-right: 10px;
-    }
 }
 
 .message__item-price {
     margin: 0;
-    margin-right: 20px;
-    width: 70px;
+    width: 30%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     text-align: start;
 }
 
-@media screen and (max-width: 550px) {
-    .message__item-price {
-        width: 60px;
-        margin-right: 10px;
-    }
-}
-
 .one-message__wrapper {
-    width: 80%;
-}
-
-@media screen and (max-width: 450px) {
-    .one-message__wrapper {
-        width: 70%; 
-    }
+    width: 100%;
 }
 
 .message__item-pic {
     border-radius: 50%;
-    
-    width: 80px;
-    height: 80px; 
-
+    width: 78px;
+    height: 78px; 
     object-fit: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media screen and (max-width: 550px) {
-    .message__item-pic {
-        width: 60px;
-        height: 60px; 
-    }
 }
 
 .message__no-pic-container {
@@ -203,13 +136,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media screen and (max-width: 550px) {
-    .message__no-pic-container {
-        width: 60px;
-        height: 60px; 
-    }
+    border-radius: 50%;
 }
 
 .message__no-pic {
@@ -222,25 +149,17 @@
     width: 80px;
     height: 80px; 
     margin: 0;
-    border: 1px solid #e4e6e7;;
-    margin-right: 10px;
+    border: 1px solid var(--light-grey-color);
     cursor: pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-@media screen and (max-width: 550px) {
-    .message__main-pic-wrapper {
-        width: 60px;
-        height: 60px; 
-    }
-}
-
 .message__container-link {
     text-decoration: none;
     color: black;
+    width: 80%;
 }
 
 .message__unread-message-badge {
@@ -282,12 +201,14 @@
 }
 
 .message__delete_btn:hover {
-    opacity: 1;
+    opacity: 1 !important;
+    border: 1px solid #1f1f1f;
+    background-color: #1f1f1f;
+    color: #fff;
 }
 
 .message__btn-container {
     position: absolute;
-    
     bottom: 5px;
     right: 5px;
     height: 55px;
@@ -295,4 +216,64 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+    .message__item-info-wrapper {
+        gap: 10px;
+    }
+    .message__item-name {
+        width: 30%;
+    }
+
+    .message__item-price {
+        width: 20%;
+    }
+
+    .message__sender-name {
+        width: 30%;
+    }
+
+    .message__main-pic-wrapper {
+        width: 60px;
+        height: 60px; 
+    }
+
+    .message__no-pic-container {
+        width: 60px;
+        height: 60px; 
+    }
+
+    .message__item-pic {
+        width: 58px;
+        height: 58px; 
+    }
+
+    .message__item-info-container {
+        font-size: 12px;
+    }
+
+    .message__text {
+        font-size: 12px;
+        max-width: 80%;
+        width: 80%;
+    }
+
+    .message__container {
+        height: 80px;
+    }
+    .message__container:hover {
+        height: 82px; 
+    }
+
+    .message__btn-container {
+        bottom: 0px;
+        right: 0px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .one-message__wrapper {
+        width: 100%; 
+    }
 }
