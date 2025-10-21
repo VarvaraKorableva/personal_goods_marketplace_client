@@ -49,8 +49,6 @@ export default function usePopups({setReceiverId, myAds, setItemId}) {
   function openImgLinkPopup(link) {
     setIsImglinkPopup(true)
     setImgLink(link)
-
-    console.log(link)
   }
 
   function openSuccessfulActionPopup() {

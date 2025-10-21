@@ -10,7 +10,6 @@ import '../AdminPage.css'
 function ModerationAdminPage() {
     const currentUser = React.useContext(CurrentUserContext)
     const [allUnModeratedItems, setAllUnModeratedItems] = React.useState([])
-    console.log('allUnModeratedItems', allUnModeratedItems)
 
     if (currentUser.email !== process.env.REACT_APP_ADMIN) {
         return <NotFoundPage></NotFoundPage>
