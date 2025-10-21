@@ -1,9 +1,13 @@
 
-.addAdPage__section {
-    display: flex;
+.addAdPage__wrapper {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: center;   
+}
+
+.addAdPage__container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .addAdPage__title {

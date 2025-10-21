@@ -1,25 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './Login.css'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Login'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Preloader from '../../Components/Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function Login({ isLoginError, onLogin, isLoading }) {
+function Login({ isLoginError, onLogin, isLoading, isLoggin }) {
+  const navigate = useNavigate()
+  const [isValid, setIsValid] = React.useState(false)
 
-const [isValid, setIsValid] = React.useState(false)
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
-const [email, setEmail] = React.useState('')
-const [password, setPassword] = React.useState('')
+  const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
+  const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
 
-const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
-const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
+  const [errorEmail, setErrorEmail] = React.useState(true)
+  const [errorPassword, setErrorPassword] = React.useState(true)
 
-const [errorEmail, setErrorEmail] = React.useState(true)
-const [errorPassword, setErrorPassword] = React.useState(true)
-
-const { language } = React.useContext(LanguageContext)
+  const { language } = React.useContext(LanguageContext)
 
   const { en, rus, hebrew } = choose;
 
@@ -31,6 +31,12 @@ const { language } = React.useContext(LanguageContext)
   } else if (language === 'hebrew') {
     translatedContext = hebrew;
   }
+
+  useEffect(() => {
+    if (isLoggin) {
+      navigate('/')
+    }
+  }, [isLoggin, navigate])
 
   function handleSubmit(e) {
     e.preventDefault();

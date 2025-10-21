@@ -1,13 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import './Registration.css'
-import { Link } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../../Components/Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function Registration({onRegister, isRegError, isLoading}){
 
+function Registration({onRegister, isRegError, isLoading, isLoggin}){
+  const navigate = useNavigate()
 const [username, setName] = React.useState('')
 const [email, setEmail] = React.useState('')
 const [password, setPassword] = React.useState('')
@@ -35,6 +36,12 @@ const { en, rus, hebrew } = choose;
   } else if (language === 'hebrew') {
     translatedContext = hebrew;
   }
+
+  useEffect(() => {
+    if (isLoggin) {
+      navigate('/')
+    }
+  }, [isLoggin, navigate])
 
 const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.alreadyRegisteredError)  
 

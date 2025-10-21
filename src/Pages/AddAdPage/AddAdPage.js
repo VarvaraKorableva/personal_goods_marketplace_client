@@ -11,11 +11,11 @@ import CityInput from '../../Components/Forms/CityInput/CityInput'
 import TitletInputField from '../../Components/Forms/TitletInputField/TextInputField'
 import DiscriptionField from '../../Components/Forms/DiscriptionField/DiscriptionField'
 import PriceInputField from '../../Components/Forms/PriceInputField/PriceInputField'
+import Container from '../../UK-kit/Container/Container'
 
 function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
-  const navigate = useNavigate()
 
   const [firstFile, setFirstFile] = React.useState(null);
   const [secondFile, setSecondFile] = React.useState(null);
@@ -241,24 +241,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
       setThirdFile(null)
       setFourthFile(null)
   }
- 
-  const handlePriceChange = (e) => {
-    if (!e.target.value) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
-      setPrice('')
-    } else if(!(/^\d*$/.test(e.target.value))) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
-    } else if (e.target.value.length > 10) {
-      setIsPriceSelected(false)
-      setPriceErrorMessage(`Цена не может содержать более 10 цифр`)
-    } else {
-      setIsPriceSelected(true)
-      setPrice(e.target.value)
-      setPriceErrorMessage('')
-    }
-  };
 
   const handleConditionChange = (e) => {
     if(e.target.value){
@@ -367,8 +349,9 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   }
   
 return (
-    <section className="addAdPage__section">
-      <BackBtn/>
+    <Container as='section' baseClassName='wrapper' className="addAdPage__wrapper">
+    <Container as='div' baseClassName='container' className='addAdPage__container'>
+      <BackBtn className='backBtn_margin-top'/>
       <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
       <form 
         ref={formRef}
@@ -652,8 +635,8 @@ return (
           {translatedContext.addBtn}
       </button>
     </form>
-
-    </section>
+    </Container>
+    </Container>
   )
 }
 
