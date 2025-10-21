@@ -55,22 +55,22 @@ return (
 
           <Link to={`/`} className='burgerMenuPopup_link' onClick={handleGetUnreadbleMessages}>
             <div className='burgerMenuPopup_add-main-page-pic'></div>
-            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.mainPage}</button>
+            <button className='burgerMenuPopup_add-announcement-btn font'>{translatedContext.mainPage}</button>
           </Link>
 
           <div className='burgerMenuPopup_add-announcement-container'>
             <div className='burgerMenuPopup_add-announcement-btn-pic' onClick={handleAddAdClick}></div>
-            <button className='burgerMenuPopup_add-announcement-btn' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
+            <button className='burgerMenuPopup_add-announcement-btn font' onClick={handleAddAdClick}>{translatedContext.addNewAddBtnName}</button>
           </div> 
 
           <Link to={`/users/${userId}`} className='burgerMenuPopup_link' onClick={handleGetUnreadbleMessages}>
             <div className='burgerMenuPopup_add-mypage-pic'></div>
-            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.mypage}</button>
+            <button className='burgerMenuPopup_add-announcement-btn font'>{translatedContext.mypage}</button>
           </Link>
 
           <Link  to={`/my_favorites`} className='burgerMenuPopup_link' onClick={handleGetUnreadbleMessages}>
             <button className='burgerMenuPopup_favorite-btn'></button>
-            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.favoritesBtn}</button>
+            <button className='burgerMenuPopup_add-announcement-btn font'>{translatedContext.favoritesBtn}</button>
           </Link>
 
           <Link to={`/users/${userId}/messages`} className='burgerMenuPopup_link burgerMenuPopup_link-message-container' onClick={onClose}>
@@ -80,48 +80,43 @@ return (
                 :
                 <></>
             }     
-            <button className='burgerMenuPopup_add-announcement-btn'>{translatedContext.myMessagesBtn}</button>
+            <button className='burgerMenuPopup_add-announcement-btn font'>{translatedContext.myMessagesBtn}</button>
           </Link>
 
           <div className='header__lang-container burgerMenuPopup_link'>
-            <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active':'header__lang-btn'}>RU</button>
-            <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active':'header__lang-btn'}>EN</button>
+            <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
+            <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
           </div>
         </div>
       :  
       isLoggin ?
         <div className='burgerMenuPopup_wrapper'>
           <Link to={`/users/`} className='burgerMenuPopup_login-link' onClick={handleGetUnreadbleMessages}>
-            <p className='burgerMenuPopup_login-link'>{translatedContext.mypage}</p>
+            <p className='burgerMenuPopup_login-link font'>{translatedContext.mypage}</p>
           </Link>
         </div>
          
       :
       !isLoggin  && location.pathname === '/signup-first-stage'?
-      <Link to="/signin" className='burgerMenuPopup_login-link' onClick={onClose}>
+       
+      <Link to="/signin" className='burgerMenuPopup_login-link font' onClick={onClose}>
         <p>{translatedContext.login}</p>
       </Link>
       :
       !isLoggin && location.pathname === '/signin'?
-      <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link' onClick={onClose}>
+      <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
         <p>{translatedContext.registraion}</p>
       </Link>
       :
       <div className='burgerMenuPopup__links-container'>
-        <Link to="/signin" className='burgerMenuPopup_registraion-link' onClick={onClose}>
+        <Link to="/signin" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
           <p>{translatedContext.login}</p>
         </Link>
-        <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link' onClick={onClose}>
+        <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
           <p>{translatedContext.registraion}</p>
         </Link>
       </div>
       }
-      {/*
-      <div className='burgerMenuPopup__lang-container'>
-        <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>RU</button>
-        <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'burgerMenuPopup__lang-btn_active':'burgerMenuPopup__lang-btn'}>EN</button>
-      </div>*/}
-      
     </div>
     
   </div>

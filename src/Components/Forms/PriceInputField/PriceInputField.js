@@ -20,7 +20,7 @@ export default function PriceInputField({
       setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
       setValue('')
     } else if (!/^\d*$/.test(val)) {
-      setIsValid(false)
+      //setIsValid(false)
       setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
     } else if (val.length > 10) {
       setIsValid(false)

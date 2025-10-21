@@ -69,7 +69,6 @@
     }
   
     .popup__reason {
-      font-size: 18px;
       margin: 0;
       display: flex;
       justify-content: center;
@@ -251,15 +250,7 @@
   width: calc(430px - (36px*2));
   display: flex;
   margin: auto;
-
   margin-bottom: 20px;
-}
-
-@media screen and (max-width: 600px) {
-  .popup__title-ChoiceOfProductOrServicePopup {
-    font-size: 20px;
-    width: calc(282px - (22px*2));
-  }  
 }
 
 .popup__reasons-wrapper {
@@ -379,13 +370,6 @@
     top: 10px;
     right: 10px;
   }
-
-  @media screen and (max-width: 600px) {
-    .popup__close-button-successfulActionPopup {
-      right: -10px;
-      top: -10px;
-    }
-  }  
   
   .popup__close-button-successfulActionPopup-button:hover {
     opacity: 60%;
@@ -679,6 +663,20 @@
 } 
 
 @media screen and (max-width: 600px) {
+  .popup__title_black {
+    font-size: 20px;
+  }
+
+  .popup__close-button-successfulActionPopup {
+    right: -10px;
+    top: -10px;
+  }
+
+  .popup__title-ChoiceOfProductOrServicePopup {
+    font-size: 20px;
+    width: calc(282px - (22px*2));
+  }  
+
   .popup__picture {
      margin: 0;
   }
