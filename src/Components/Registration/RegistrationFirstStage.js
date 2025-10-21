@@ -1,18 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './Registration.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
 
-function RegistrationFirstStage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed}){
-
-const [email, setEmail] = React.useState('')
-const [code, setCode] = React.useState('')
-const [username, setName] = React.useState('')
-const [password, setPassword] = React.useState('')
-const [telegram, setTelegram] = React.useState('')
+function RegistrationFirstStage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed, isLoggin}){
+  const navigate = useNavigate()
+  const [email, setEmail] = React.useState('')
+  const [code, setCode] = React.useState('')
+  const [username, setName] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [telegram, setTelegram] = React.useState('')
 
 const [isAgreement, setIsAgreement] = React.useState(false)
 
@@ -43,6 +43,12 @@ const { en, rus, hebrew } = choose;
   } else if (language === 'hebrew') {
     translatedContext = hebrew;
   }
+
+  useEffect(() => {
+    if (isLoggin) {
+      navigate('/')
+    }
+  }, [isLoggin, navigate])
 
 const [errorRegMessage, setErrorRegMessage] = React.useState(translatedContext.alreadyRegisteredError)  
 

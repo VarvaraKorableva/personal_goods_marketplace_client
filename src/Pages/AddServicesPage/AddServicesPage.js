@@ -10,6 +10,7 @@ import CityInput from '../../Components/Forms/CityInput/CityInput'
 import TitletInputField from '../../Components/Forms/TitletInputField/TextInputField'
 import DiscriptionField from '../../Components/Forms/DiscriptionField/DiscriptionField'
 import PriceInputField from '../../Components/Forms/PriceInputField/PriceInputField'
+import Container from '../../UK-kit/Container/Container'
 
 function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -334,8 +335,9 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   }
 
 return (
-    <section className="addAdPage__section">
-    <BackBtn/>
+  <Container as='section' baseClassName='wrapper' className="addAdPage__wrapper">
+  <Container as='div' baseClassName='container' className='addAdPage__container'>
+    <BackBtn className='backBtn_margin-top'/>
     <h2 className="addAdPage__title">{translatedContext.adANewService}</h2>
     <form 
       ref={formRef}
@@ -560,7 +562,8 @@ return (
           {translatedContext.addBtn}
       </button>
     </form>
-    </section>
+    </Container>
+    </Container>
 )
 }
 

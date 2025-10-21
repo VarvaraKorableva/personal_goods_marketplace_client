@@ -1,0 +1,53 @@
+.logo-container {
+    text-decoration: none;
+    height: 30px;
+    border-radius: 30px;
+    padding: 10px;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.logo {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 70px;
+    height: 70px;
+    background-image: url(../../images/goodslogo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+@media screen and (max-width: 550px) {
+    .logo {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+  
+  @media screen and (max-width: 360px) { 
+    .logo-img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  @media screen and (max-width: 310px) {
+    .logo {
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 276px) {
+    .logo {
+      font-size: 10px;
+    }
+  }

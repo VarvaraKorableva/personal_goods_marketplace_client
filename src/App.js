@@ -218,6 +218,7 @@ function App() {
         getUnreadbleMessages={getUnreadbleMessages}
         onOpenBurgerMenuPopup={openBurgerMenuPopup}
         getMyItems={getMyItems}
+        currentUser={currentUser}
     />
 
     <div className='App'>
@@ -237,17 +238,18 @@ function App() {
         <Route
           path="/signup-first-stage"
           element={
-        <RegistrationFirstStage
-          onSendBtn={sendVerificationCode}
-          isRegError={isRegError}
-          isLoading={isLoading}
-          isVerificationCodeSent={isVerificationCodeSent}
-          isVerificationCodeSentMessage={isVerificationCodeSentMessage}
-          verifyCode={verifyCode}
-          isEmailConfirmed={isEmailConfirmed}
-          onRegister={handleRegSubmit}
-        />
-        }>
+            <RegistrationFirstStage
+              onSendBtn={sendVerificationCode}
+              isRegError={isRegError}
+              isLoading={isLoading}
+              isVerificationCodeSent={isVerificationCodeSent}
+              isVerificationCodeSentMessage={isVerificationCodeSentMessage}
+              verifyCode={verifyCode}
+              isEmailConfirmed={isEmailConfirmed}
+              onRegister={handleRegSubmit}
+              isLoggin={isLoggin}
+            />
+            }>
         </Route>
 
         <Route
@@ -257,6 +259,7 @@ function App() {
               onLogin={handleLoginSubmit}
               isLoginError={isLoginError}
               isLoading={isLoading}
+              isLoggin={isLoggin}
             />
           }>
         </Route>

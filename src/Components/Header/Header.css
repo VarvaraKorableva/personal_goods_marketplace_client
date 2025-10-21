@@ -14,14 +14,6 @@
     margin: auto;
 }  
   
-.header_logo {
-    color: black;
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0;
-    text-decoration: none;
-}
-  
 .header_wrapper {
     display: flex;
     justify-content: space-between;
@@ -39,23 +31,12 @@
     font-size: 16px;
     font-weight: 700;
 }
-  .header_login-link:hover{
+
+.header_login-link:hover{
     opacity: 0.5;
-  }
+}
   
-  @media screen and (max-width: 336px) {
-    .header_login-link {
-      font-size: 10px;
-    }
-  }
-  
-  @media screen and (max-width: 319px) {
-    .header_login-link {
-      font-size: 8px;
-    }
-  }
-  
-  .header_registraion-link {
+.header_registraion-link {
     color: black;
     cursor: pointer;
     margin: 0;
@@ -64,12 +45,13 @@
     font-size: 16px;
     font-weight: 700;
     margin-right: 10px;
-  }
-  .header_registraion-link:hover{
+}
+
+.header_registraion-link:hover{
     opacity: 0.5;
-  }
+}
   
-  .header_LogOut-btn {
+.header_LogOut-btn {
     color: black;
     cursor: pointer;
     margin: 0;
@@ -77,39 +59,21 @@
     background-color: transparent;
     font-size: 12px;
     font-weight: 700;
-  }
+}
   
-  .header_LogOut-btn:hover{
+.header_LogOut-btn:hover{
     opacity: 0.5;
-  }
+}
   
-  @media screen and (max-width: 325px) {
-    .header_LogOut-btn {
-      font-size: 10px;
-    }
-  }
-  
-  @media screen and (max-width: 319px) {
-    .header_LogOut-btn {
-      font-size: 8px;
-    }
-  }
-  
-  .header__langpic:hover {
+.header__langpic:hover {
     opacity: 0.6;
     transition: 1s;
-  }
+}
   
-  .header__langpic-container {
+.header__langpic-container {
     display: flex;
     align-items: center;
-  }
-
-  @media screen and (max-width: 950px) {
-    .header__langpic-container {
-      display: none;
-    }
-  }
+}
 
 .header_logo-container {
     text-decoration: none;
@@ -269,19 +233,6 @@
     position: relative;
 }
 
-.header_logo-img {
-    width: 70px;
-    height: 70px;
-    background-image: url(../../images/goodslogo.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.header_logo-name {
-    color: rgb(127, 127, 197);
-}
-
 .header__burger-menu-messages-badge {
     border-radius: 50%;
     background-color: #cc2b1d;
@@ -298,6 +249,9 @@
 }
 
 @media screen and (max-width: 950px) {
+  .header__langpic-container {
+    display: none;
+  }
   .header__burger-menu {
     display: flex;
     background-image: url(../../images/burgermenuicon.png);
@@ -312,33 +266,30 @@
   }
 }
 
-@media screen and (max-width: 550px) {
-  .header_logo {
-    font-size: 16px;
-    font-weight: 700;
-  }
-}
-
 @media screen and (max-width: 360px) {
   .header_container {
     height: 60px;
   }
-  
-  .header_logo-img {
-    width: 60px;
-    height: 60px;
-  }
 }
 
-@media screen and (max-width: 310px) {
-  .header_logo {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 276px) {
-  .header_logo {
+@media screen and (max-width: 336px) {
+  .header_login-link {
     font-size: 10px;
   }
 }
 
+@media screen and (max-width: 325px) {
+  .header_LogOut-btn {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .header_LogOut-btn {
+    font-size: 8px;
+  }
+
+  .header_login-link {
+    font-size: 8px;
+  }
+}
