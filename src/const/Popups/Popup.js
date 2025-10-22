@@ -3,6 +3,7 @@ const en = {
       popupTitle: 'What ad would you like to add?',
       goodsBtn: 'Goods',
       servicesBtn: 'Services',
+      realEstateBtn: 'Real Estate',
       changesSaved: "Changes received, you'll see them on the site soon",
       somethingWrong: "Something went wrong, please try again",
     },
@@ -29,6 +30,7 @@ const en = {
       popupTitle: 'Какое объявление вы хотите добавить?',
       goodsBtn: 'Товары',
       servicesBtn: 'Услуги',
+      realEstateBtn: 'Недвижимость',
     },
     messagesPopup: {
       maxAdsPopupMessage: 'Можно добавлять не более 20 объявлений, у вас добавлено',
@@ -53,6 +55,7 @@ const en = {
       popupTitle: 'What ad would you like to add?',
       goodsBtn: 'Goods',
       servicesBtn: 'Services',
+      realEstateBtn: 'Real Estate',
     },
     messagesPopup: {
       maxAdsPopupMessage: 'You can add up to 20 listings, you have added',

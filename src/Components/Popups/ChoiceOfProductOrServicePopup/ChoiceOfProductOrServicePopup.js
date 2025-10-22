@@ -29,19 +29,28 @@ function ChoiceOfProductOrServicePopup({onClose, isOpen, onAdBtn}) {
     onAdBtn(data)
   }
 
+  function handleRealEstateBtn() {
+    const data = true
+    const realEstate = true
+    onAdBtn(data, realEstate)
+  }
+
 return (
     
     <div className={`popup ${isOpen && 'popup__opened'}`}>
     <div className="popup__container">
+    <div className='popup__container-ChoiceOfProductOrServicePopup'>
+
         <IoMdCloseCircleOutline 
           className="popup__close-button" 
           type="button" 
           onClick={onClose}
         />
-    <h2 className="popup__title-ChoiceOfProductOrServicePopup">{translatedContext.chooseListingTypePopup.popupTitle}</h2>
-    <div className='popup__container-ChoiceOfProductOrServicePopup'>
-        <button onClick={handleGoodBtn} className='popup_choice_btn'>{translatedContext.chooseListingTypePopup.goodsBtn}</button>
-        <button onClick={handleServicesBtn} className='popup_choice_btn'>{translatedContext.chooseListingTypePopup.servicesBtn}</button>
+    <h2 className="popup__title_black">{translatedContext.chooseListingTypePopup.popupTitle}</h2>
+    
+        <button onClick={handleGoodBtn} className='popup__reason font'>{translatedContext.chooseListingTypePopup.goodsBtn}</button>
+        <button onClick={handleServicesBtn} className='popup__reason font'>{translatedContext.chooseListingTypePopup.servicesBtn}</button>
+        <button onClick={handleRealEstateBtn} className='popup__reason font'>{translatedContext.chooseListingTypePopup.realEstateBtn}</button>
     </div>  
     </div>
     </div>

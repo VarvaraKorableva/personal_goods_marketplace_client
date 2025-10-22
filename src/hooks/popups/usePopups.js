@@ -84,8 +84,8 @@ export default function usePopups({setReceiverId, myAds, setItemId}) {
       setIsChoiceOfProductOrServicePopup(true)
     }
   }
-
-  function handleAddAdClick(data){
+/*
+  function handleAddAdClick(data, realEstate = false){
     setIsGood(data)
 
     data?
@@ -94,7 +94,25 @@ export default function usePopups({setReceiverId, myAds, setItemId}) {
     navigate(`/add-new-service`)
     
     closeAllPopups()
-  }
+  }*/
+
+  function handleAddAdClick(data, realEstate = false, commercial = false, land = false) {
+    setIsGood(data);
+  
+    if (data) {
+      if (realEstate) {
+        navigate(`/add-real-estate`);
+      } else if (commercial) {
+        navigate(`/add-commercial`); ///можно будет добавить сюда
+      } else if (land) {
+        navigate(`/add-land`); ///можно будет добавить сюда
+      } else {
+        navigate(`/add-ad`);
+      }
+    } else {
+      navigate(`/add-new-service`);
+    }
+  }  
 
   return {
     closeAllPopups,

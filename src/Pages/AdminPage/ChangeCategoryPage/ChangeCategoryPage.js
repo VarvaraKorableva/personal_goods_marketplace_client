@@ -17,14 +17,13 @@ function ChangeCategoryPage() {
     const [addCategoryAdminFormOpen, setAddCategoryAdminFormOpen] = React.useState(true)
     const [addSubCategoryAdminFormOpen, setAddSubCategoryAdminFormOpen] = React.useState(false)
     const [deleteCategoryAdminFormOpen, setDeleteCategoryAdminFormOpen] = React.useState(false)
-
+console.log('categories', categories)
 
     function openAddCategoryAdminForm() {
         setAddCategoryAdminFormOpen(true)
         setAddSubCategoryAdminFormOpen(false)
         setDeleteCategoryAdminFormOpen(false)
     }
-
 
     function openSubAddCategoryAdminForm() {
         setAddCategoryAdminFormOpen(false)
@@ -52,24 +51,26 @@ function ChangeCategoryPage() {
       
       const handleCreateCategory = () => {
         /*createCategoryAdmin({
-            name: "Homemade Food",
-            is_good: true,
-            parent_id: null,
-            image_url: "https://images.unsplash.com/photo-1500816159285-731ab12cbd82?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTB8fEhvbWVtYWRlJTIwRm9vZHxlbnwwfHwwfHx8MA%3D%3D",
-            slug: "homemade-food",
-            name_rus: "Домашняя еда"
+          name: "Real estate",
+          name_rus: "Недвижимость",
+          is_good: true,
+          parent_id: null,
+          image_url: "https://plus.unsplash.com/premium_photo-1737200670622-4ab7cd09de62?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fCVEMCU5RCVEMCVCNSVEMCVCNCVEMCVCMiVEMCVCOCVEMCVCNiVEMCVCOCVEMCVCQyVEMCVCRSVEMSU4MSVEMSU4MiVEMSU4Q3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
+          slug: "real-estate",
+          isRealEstate: false,
         }); */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       }; 
 
       const handleCreateSubCategory = () => {
-        /*createCategoryAdmin({
-            name: "Other",
-            is_good: true,
-            parent_id: 12,
-            image_url: "https://images.unsplash.com/photo-1605642634357-80a58f89af26?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fGVsZWN0cm9uaWNzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400",
-            slug: "electronics-other",
-            name_rus: "Другое"
+       /*createCategoryAdmin({
+        name: "For rent",
+        name_rus: "Аренда",
+        is_good: true,
+        parent_id: "125", // 🔹 та же ссылка на родителя
+        image_url: "https://media.istockphoto.com/id/1300816777/photo/house-for-rent-text-on-wood-blocks.jpg?s=1024x1024&w=is&k=20&c=EVmCxH5gbGolBz7JPeEQoEXr13yJYWFHVmSlV1AREa8=",
+        slug: "real-estate-property-for-rent",
+        isRealEstate: true
         }); */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
@@ -117,8 +118,8 @@ function ChangeCategoryPage() {
         setMessage("")
         try {
           const result = await Api.updateCategoryImg(
-            2,
-            "https://images.unsplash.com/photo-1563662931846-29b0af7443ff?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTcxfHxoZWVsc3xlbnwwfHwwfHx8MA%3D%3D"
+            125,
+            "https://images.unsplash.com/photo-1724436977642-ed745373401e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE0fHwlRDElODAlRDAlQjAlRDAlQjclRDAlQkQlRDAlQkUlRDElODYlRDAlQjIlRDAlQjUlRDElODIlRDAlQkQlRDElOEIlRDAlQjklMjAlRDAlQjQlRDAlQkUlRDAlQkN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=400"
           );
           // в случае успеха
           setMessage("Изменение прошло")
@@ -223,6 +224,7 @@ function ChangeCategoryPage() {
                                     <p>category_id = {i.category_id}</p>
                                     <p>{i.name_rus}</p>
                                     <p>parent_id = {i.parent_id}</p>
+                                    <p>isRealEstate = {i.isRealEstate}</p>
                                 </li>
                             ))
                     ) : (

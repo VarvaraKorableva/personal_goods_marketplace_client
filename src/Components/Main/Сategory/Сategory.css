@@ -2,13 +2,27 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    justify-content: center;
     align-items: center;
     list-style-type: none;
     width: 120px;
     height: 180px;
-    margin: 5px;
-    margin-bottom: 10px;
+    /*margin: 5px;*/
     cursor: pointer;
+}
+
+.category-title {
+    font-size: 16px;
+    margin-bottom: 0;
+    width: 115px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 🔹 теперь 2 строки */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    line-height: 1.2;
+    height: calc(1.2em * 2);
 }
 
 .category-pic-container {
@@ -31,11 +45,6 @@
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
 }
 
-.category-title {
-    font-size: 18px;
-    margin-bottom: 0;
-}
-
 .category-title:hover {
     opacity: 0.7;
 }
@@ -43,13 +52,20 @@
 .category__link {
     text-decoration: none;
     color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 @media screen and (max-width: 800px) {
     .category-container {
-        width: 110px;
+        width: 105px;
         height: 170px;
-        margin-bottom: 5px;
+    }
+
+    .category-title {
+        font-size: 14px;
+        width: 110px;
     }
 
     .category-pic-container {
@@ -61,21 +77,17 @@
         width: 106px;
         height: 106px;
     }
-
-    .category-title {
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 600px) {
     .category-title {
-        font-size: 14px;
+        font-size: 12px;
+        width: 85px;
     }
 
     .category-container {
         width: 90px;
         height: 140px;
-        margin-bottom: 5px;
     }
 
     .category-pic-container {
@@ -92,13 +104,13 @@
 @media screen and (max-width: 400px) {
     .category-title {
         margin-top: 0px;
-        font-size: 12px;
+        font-size: 10px;
+        width: 76px;
     }
 
     .category-container {
         width: 80px;
         height: 110px;
-       
     }
 
     .category-pic-container {
@@ -113,10 +125,13 @@
 }
 
 @media screen and (max-width: 380px) {
-
     .category-container {
         width: 75px;
         height: 110px;
+    }
+
+    .category-title {
+        width: 74px;
     }
 
     .category-pic-container {

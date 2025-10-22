@@ -228,7 +228,16 @@
     margin-top: 10px;
     color: rgb(10, 91, 50);
   }
-
+.popup_choiceAdd_btn {
+  background-color: black;
+  color: #fff;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  transition: all 0.3s ease;
+}
 .popup_choice_btn {
   background-color: black;
   color: #fff;
@@ -270,8 +279,10 @@
 
 .popup__container-ChoiceOfProductOrServicePopup {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: space-between;
-  width: calc(430px - (36px*2));
+  width: 100%;
   height: fit-content;
   background-color: #fff;
   color: black;

@@ -81,18 +81,3 @@ function AreYouSurePopup({onClose, isOpen, deleteMyAd, itemIdDelete}) {
 }
 
 export default AreYouSurePopup;
-
-/*
-{translatedContext.areYouSurePopup.reasons}
-    areYouSurePopup: {
-      popupTitle: 'Выберите причину, по которой вы удаляете объявление:',
-      deleteBtn: 'Удалить',
-      cancelBtn: 'Отмена',
-      reasons: [
-        'Продал на «ГУДС»',
-        'Продал где-то еще',
-        'Передумал продавать',
-        'Другая причина'
-      ],
-
-*/
