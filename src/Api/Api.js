@@ -89,7 +89,9 @@ export const createItem = (otherData) => {
       description: otherData.description,
       size: otherData.size,
       color: otherData.color, 
-      condition: otherData.condition,        
+      condition: otherData.condition,  
+      is_real_estate: otherData.isRealEstate,
+      is_rent: otherData.isRent     
     })
   })
     .then(checkResponse);
@@ -542,7 +544,8 @@ export const createCategory = (data) => {
         parent_id: data.parent_id,
         image_url: data.image_url,
         slug: data.slug,
-        name_rus: data.name_rus,        
+        name_rus: data.name_rus,   
+        is_real_estate: data.isRealEstate     
       })
     })
       .then(checkResponse);

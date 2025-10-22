@@ -33,6 +33,7 @@ import Preloader from './Components/Preloader/Preloader'
 import AdminPage from './Pages/AdminPage/AdminPage'
 import ChangeCategoryPage from './Pages/AdminPage/ChangeCategoryPage/ChangeCategoryPage'
 import AddAdPage from './Pages/AddAdPage/AddAdPage'
+import AddRealEstatePage from './Pages/AddRealEstatePage/AddRealEstatePage'
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
@@ -358,6 +359,23 @@ function App() {
           element={
             <ProtectedRoute isLoggin={isLoggin}>
               <AddAdPage
+                categories={categories}
+                onAddAd={handleAddAdSubmit}
+                isLoggin={isLoggin}
+                isGood={isGood}
+                isLoading={isLoading}
+                openLoading={openLoading}
+                closeLoading={closeLoading}
+              />
+            </ProtectedRoute>
+          }>
+        </Route> 
+
+        <Route
+          path={`/add-real-estate`}
+          element={
+            <ProtectedRoute isLoggin={isLoggin}>
+              <AddRealEstatePage
                 categories={categories}
                 onAddAd={handleAddAdSubmit}
                 isLoggin={isLoggin}

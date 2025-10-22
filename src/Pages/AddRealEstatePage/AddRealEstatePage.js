@@ -1,11 +1,12 @@
+//AddRealEstatePage
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import imageCompression from 'browser-image-compression';
-import './AddAdPage.css'
+import './AddRealEstatePage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
-import { conditions } from '../../const/Сonditions/Сonditions'
+import { propertyCondition } from '../../const/Сonditions/PropertyCondition'
 import BackBtn from '../../UK-kit/BackBtn'
 import CityInput from '../../Components/Forms/CityInput/CityInput'
 import TitletInputField from '../../Components/Forms/TitletInputField/TextInputField'
@@ -13,7 +14,7 @@ import DiscriptionField from '../../Components/Forms/DiscriptionField/Discriptio
 import PriceInputField from '../../Components/Forms/PriceInputField/PriceInputField'
 import Container from '../../UK-kit/Container/Container'
 
-function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
+function AddRealEstatePage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
 
@@ -21,6 +22,8 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const [secondFile, setSecondFile] = React.useState(null);
   const [thirdFile, setThirdFile] = React.useState(null);
   const [fourthFile, setFourthFile] = React.useState(null);
+
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
 
   const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
@@ -197,17 +200,17 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
       formData.append('thirdFile', thirdFile);
       formData.append('fourthFile', fourthFile);
 
-      onAddAd({
+      onAddAd({ 
         title,
         owner_id: owner_id,
-        category_id: Number(id),
+        category_id: Number(selectedCategory.category_id),
         city,
         price,
         description,
         size, 
         color, 
         condition,
-        isRealEstate,
+        isRealEstate: true,
         isRent,
         formData,
       });
@@ -222,7 +225,7 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
         size, 
         color, 
         condition,
-        isRealEstate,
+        isRealEstate: true,
         isRent,
       });
 
@@ -241,7 +244,7 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
 
       setIsRealEstate(false)
       setIsRent(false)
-
+      setSelectedCategory(null)
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)
 
@@ -263,59 +266,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
     }
   }
 
-  const handleSelectChange = (e) => {
-    setSelectedCategoryId(e.target.value)
-    
-    setSubCategory(categories.filter((category) => category.parent_id == e.target.value))
-
-    categories.filter((category) => category.parent_id == e.target.value).length ?
-      setHaveSubCategory(true)
-    :
-      setHaveSubCategory(false)
-      setHaveSecondSubCategory(false)
-
-    if(e.target.value) {
-      setIsCategorySelected(true)
-      setIsSecondCategorySelected(false)
-      setCategoryErrorMessage('')
-    } else {
-      setIsCategorySelected(false)
-      setIsSecondCategorySelected(false)
-      setCategoryErrorMessage(`${translatedContext.errors.categoryErrorMessage.errorMessage}`)
-    }
-  };
-
-  const handleSubCategoryChange = (e) => {
-    if(e.target.value) {
-      setIsSecondCategorySelected(true)
-      setSelectedSubCategoryId(e.target.value)
-    
-      setSecondSubCategory(categories.filter((category) => category.parent_id == e.target.value))
-
-      setSecondCategoryErrorMessage('')
-  
-      categories.filter((category) => category.parent_id == e.target.value).length ?
-        setHaveSecondSubCategory(true)
-      :
-        setHaveSecondSubCategory(false)
-
-    } else {
-      setIsSecondCategorySelected(false)
-      setSecondCategoryErrorMessage(`${translatedContext.errors.secondCategoryErrorMessage.errorMessage}`)
-    }
-  }
-
-  const handleSecondSubCategoryChange = (e) => {
-    if (e.target.value) {
-      setIsThirdSubCategorySelected(true)
-      setSelectedThirdSubCategoryId(e.target.value)
-      setThirdSubCategoryErrorMessage('')
-    } else {
-      setIsThirdSubCategorySelected(false)
-      setThirdSubCategoryErrorMessage(`${translatedContext.errors.thirdSubCategoryErrorMessage.errorMessage}`)
-    }
-    
-  }
 
   React.useEffect(() => {
     if (isGood === false) {
@@ -323,28 +273,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
     } 
   }, [])
 
-  React.useEffect(() => {
-    haveSubCategory?
-
-        haveSecondSubCategory?
-
-            (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isThirdSubCategorySelected && isDescriptionSelected)?
-              setIsValid(true)
-            :
-              setIsValid(false)
-        :
-            (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isSecondCategorySelected && isDescriptionSelected)?
-              setIsValid(true)
-            :
-              setIsValid(false)      
-    :
-      (isCategorySelected && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isDescriptionSelected)?
-        setIsValid(true)
-      :
-        setIsValid(false) 
-
-  }, [haveSubCategory, haveSecondSubCategory, isCategorySelected, isTitleSelected, isConditionSelected, isPriceSelected, isCitySelected, isSecondCategorySelected, isThirdSubCategorySelected, isDescriptionSelected])
-  
   function deleteAddedFile(numberOfPic) {
     if(numberOfPic == 1){
       setFirstFile(null)
@@ -356,106 +284,45 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
       setFourthFile(null)
     }
   }
+
+  function handleCategorySelect(item) {
+    console.log('Selected category:', item);
+    setSelectedCategory(item); // или setFormData(prev => ({...prev, category_id: item.category_id}))
+  }
+
+  console.log('categories:', categories);
   
 return (
     <Container as='section' baseClassName='wrapper' className="addAdPage__wrapper">
     <Container as='div' baseClassName='container' className='addAdPage__container'>
       <BackBtn className='backBtn_margin-top'/>
-      <h2 className="addAdPage__title">{translatedContext.adANewGood}</h2>
+      <h2 className="addAdPage__title">Добавить объявление о недвижимости</h2>
       <form 
         ref={formRef}
         className='addAdPage__form'
         encType="multipart/form-data"
         onSubmit={handleSubmit}>
 
-        <label className='popup__inputname'>{translatedContext.choiseACategory}<span className='popup__inputname-span'>*</span></label> 
-        <select 
-          className='addAdPage__select' 
-          onChange={handleSelectChange}
-          //value={selectedCategoryId}
-          >
-          <option value="">{translatedContext.choiseACategory}</option>
+        <label className='popup__inputname'>
+          {translatedContext.choiseACategory}
+          <span className='popup__inputname-span'>*</span>
+        </label> 
 
-          {language === 'rus' ?
-            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
-            ))
-            
-            :
-            categories.filter((category) => (category.is_good && (category.parent_id === null))).map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-            ))
-          }
+        <div className='realEstate__btn-container'>
 
-        </select>
-
-        {isCategorySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{categoryErrorMessage}</span>
-      }
-
-      {isCategorySelected && haveSubCategory?
-      <>
-      <label className='popup__inputname'>{translatedContext.choiseASubCategory}</label>
-      <select className='addAdPage__select' onChange={handleSubCategoryChange}>
-        <option value="">{translatedContext.choiseASubCategory}</option>
-        {language === 'rus' ?
-            subCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
-            ))
-          :
-            subCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-            ))
-        } 
-      </select>
-
-      {isSecondCategorySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{secondCategoryErrorMessage}</span>
-      }
-      </>
-      :
-      <></>
-      }  
-
-      {isSecondCategorySelected && haveSecondSubCategory?
-      <>
-      <label className='popup__inputname'>{translatedContext.choiseASecondSubCategoryGoods}</label>
-      <select className='addAdPage__select' onChange={handleSecondSubCategoryChange}>
-        <option value="">{translatedContext.choiseASecondSubCategoryGoods}</option>
-        {language === 'rus' ?
-            secondSubCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name_rus}</option>
-            ))
-          :
-            secondSubCategory
-            .filter((category) => category.is_good && category.parent_id !== null) // Фильтруем по is_good и наличию родительской категории
-            .map((item) => (
-              <option key={item.category_id} value={item.category_id}>{item.name}</option>
-            ))
-        } 
-      </select>
-
-      {isThirdSubCategorySelected?
-        <span className='popup__mistake-msg'></span>
-      : 
-        <span className='popup__mistake-msg'>{thirdSubCategoryErrorMessage}</span>
-      }
-
-      </>
-      :
-      <></>
-      }  
-
+        {categories
+          .filter(c => c.is_real_estate && c.parent_id)
+          .map(item => (
+            <button
+              key={item.category_id}
+              type="button"
+              className={selectedCategory?.category_id === item.category_id ? 'realEstate__btn_active' : 'realEstate__btn'}
+              onClick={() => handleCategorySelect(item)}
+            >
+              {language === 'rus' ? item.name_rus : item.name}
+            </button>
+        ))}
+        </div>
       <TitletInputField
         label={translatedContext.name}
         name="title"
@@ -474,15 +341,15 @@ return (
         onChange={handleConditionChange}
         value={condition}
       >
-        <option value="">{translatedContext.condition}</option>
+        <option value="">{translatedContext.propertyCondition}</option>
 
           {language === 'rus' ?
-            conditions.rus.map((item) => (
+            propertyCondition.rus.map((item) => (
               <option key={item} value={item}>{item}</option>
             ))
             
             :
-            conditions.en.map((item) => (
+            propertyCondition.en.map((item) => (
               <option key={item} value={item}>{item}</option>
             ))
           }
@@ -529,6 +396,7 @@ return (
         cityErrorMessage={cityErrorMessage} 
         setCityErrorMessage={setCityErrorMessage}
         good={true}
+        realEstate={true}
       />
 
       <label className='popup__inputname margin'>{translatedContext.picture}</label>
@@ -649,4 +517,4 @@ return (
   )
 }
 
-export default AddAdPage;
+export default AddRealEstatePage;
