@@ -58,20 +58,22 @@ console.log('categories', categories)
           image_url: "https://plus.unsplash.com/premium_photo-1737200670622-4ab7cd09de62?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fCVEMCU5RCVEMCVCNSVEMCVCNCVEMCVCMiVEMCVCOCVEMCVCNiVEMCVCOCVEMCVCQyVEMCVCRSVEMSU4MSVEMSU4MiVEMSU4Q3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
           slug: "real-estate",
           isRealEstate: false,
+          isRent: false,
         }); */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       }; 
 
       const handleCreateSubCategory = () => {
-       /*createCategoryAdmin({
-        name: "For rent",
+       createCategoryAdmin({
+        /*name: "For rent",
         name_rus: "Аренда",
         is_good: true,
         parent_id: "125", // 🔹 та же ссылка на родителя
         image_url: "https://media.istockphoto.com/id/1300816777/photo/house-for-rent-text-on-wood-blocks.jpg?s=1024x1024&w=is&k=20&c=EVmCxH5gbGolBz7JPeEQoEXr13yJYWFHVmSlV1AREa8=",
         slug: "real-estate-property-for-rent",
-        isRealEstate: true
-        }); */
+        isRealEstate: false,
+        isRent: false,*/
+        }); 
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 

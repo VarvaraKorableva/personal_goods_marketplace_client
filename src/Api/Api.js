@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
+export const BASE_URL = '//localhost:3001';
+//export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
 //const BASE_UR = process.env.REACT_APP_BASE_URL_LOCAL;
 //const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -545,7 +545,8 @@ export const createCategory = (data) => {
         image_url: data.image_url,
         slug: data.slug,
         name_rus: data.name_rus,   
-        is_real_estate: data.isRealEstate     
+        is_real_estate: data.isRealEstate,
+        is_rent: data.isRent,
       })
     })
       .then(checkResponse);
