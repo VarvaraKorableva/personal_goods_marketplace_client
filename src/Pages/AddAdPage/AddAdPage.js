@@ -22,10 +22,7 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const [thirdFile, setThirdFile] = React.useState(null);
   const [fourthFile, setFourthFile] = React.useState(null);
 
-  const [errorNameMessage, setErrorNameMessage] = React.useState('')
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
-  const [errorPriceMessage, setErrorPriceMessage] = React.useState('')
-  const [errorDreamLinkMessage, setErrorDreamLinkMessage] = React.useState('')
   
   const [selectedCategoryId, setSelectedCategoryId] = React.useState(null)
   const [selectedSubCategoryId, setSelectedSubCategoryId] = React.useState(null)
@@ -35,22 +32,18 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const [subCategory, setSubCategory] = React.useState([])
   const [secondSubCategory, setSecondSubCategory] = React.useState([])
 
-  const [thirdSubCategory, setThirdSubCategory] = React.useState([])
-  const [thirdSubCategoryId, setThirdSubCategoryId] = React.useState(null)
-  const [thirdCategoryId, setThirdCategoryId] = React.useState(null)
-
   const [haveSubCategory, setHaveSubCategory] = React.useState(false)
   const [haveSecondSubCategory, setHaveSecondSubCategory] = React.useState(false)
 
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
-  const [img, setImg] = React.useState(null)
+
   const [price, setPrice] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [size, setSize] = React.useState('')
   const [color, setColor] = React.useState('')
   const [condition, setCondition] = React.useState('') 
-  const [isRealEstate, setIsRealEstate] = React.useState(false) ////////не работаю с этим (на потом) в базе есть
+  const [isRealEstate, setIsRealEstate] = React.useState(false)
   const [isRent, setIsRent] = React.useState(false)
 
   const [isValid, setIsValid] = React.useState(false)

@@ -2,16 +2,6 @@
     min-height: 80vh;
 }
 
-.categoryPage-categories-container{
-    padding: 0;
-    max-width: 800px;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    margin-top: 40px;
-    justify-content: center;
-}
-
 .categoryPage__ads-length-title {
     font-size: 14px;
     max-width: 95%;
@@ -19,11 +9,3 @@
     margin-right: 0px;
     margin-top: 30px;
 }
-
-@media screen and (max-width: 500px) {
-    .categoryPage-categories-container {
-        margin-top: 0;
-        padding: 0 10px;
-    }
-}
-

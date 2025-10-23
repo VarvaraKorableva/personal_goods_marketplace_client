@@ -545,7 +545,8 @@ export const createCategory = (data) => {
         image_url: data.image_url,
         slug: data.slug,
         name_rus: data.name_rus,   
-        is_real_estate: data.isRealEstate     
+        is_real_estate: data.isRealEstate,
+        is_rent: data.isRent,
       })
     })
       .then(checkResponse);

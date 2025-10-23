@@ -85,7 +85,7 @@ function CategoryPage({
     return(
         <section className='categoryPage-main-container'>
             <BackBtn className='backBtn_margin-left'/>
-            <ul className='categoryPage-categories-container'>
+            <ul className='MainCategories-container'>
                 {categoriesToRender.map((subCategory) => (
                     <Category 
                         key={subCategory.category_id} 

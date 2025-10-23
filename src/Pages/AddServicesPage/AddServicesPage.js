@@ -53,6 +53,8 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
   const [size, setSize] = React.useState('')
   const [color, setColor] = React.useState('')
   const [condition, setCondition] = React.useState('')
+  const [isRealEstate, setIsRealEstate] = React.useState(false)
+  const [isRent, setIsRent] = React.useState(false)
 
   const [isValid, setIsValid] = React.useState(false)
 
@@ -213,6 +215,8 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
         size, 
         color, 
         condition,
+        isRealEstate,
+        isRent,
         formData,
       });
     } else {
@@ -226,6 +230,8 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
         size, 
         color, 
         condition,
+        isRealEstate,
+        isRent,
       });
     }
 
@@ -243,6 +249,8 @@ function AddServicesPage({onAddAd, categories, isGood, isLoggin, openLoading, cl
       setSize('')
       setColor('')
       setCondition('')
+      setIsRealEstate(false)
+      setIsRent(false)
 
       setIsCategorySelected(false)
       setIsSecondCategorySelected(false)

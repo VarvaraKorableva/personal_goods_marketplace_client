@@ -266,13 +266,6 @@ function AddRealEstatePage({onAddAd, categories, isGood, openLoading, closeLoadi
     }
   }
 
-
-  React.useEffect(() => {
-    if (isGood === false) {
-        setSelectedCategoryId(categories.filter((category) => category.is_good === false))
-    } 
-  }, [])
-
   function deleteAddedFile(numberOfPic) {
     if(numberOfPic == 1){
       setFirstFile(null)
@@ -286,11 +279,17 @@ function AddRealEstatePage({onAddAd, categories, isGood, openLoading, closeLoadi
   }
 
   function handleCategorySelect(item) {
-    console.log('Selected category:', item);
+    setIsRent(item.is_rent)
     setSelectedCategory(item); // или setFormData(prev => ({...prev, category_id: item.category_id}))
   }
 
-  console.log('categories:', categories);
+  React.useEffect(() => {
+      (selectedCategory && isTitleSelected && isConditionSelected && isPriceSelected && isCitySelected && isDescriptionSelected)?
+        setIsValid(true)
+      :
+        setIsValid(false) 
+
+  }, [selectedCategory, isTitleSelected, isConditionSelected, isPriceSelected, isCitySelected, isDescriptionSelected])
   
 return (
     <Container as='section' baseClassName='wrapper' className="addAdPage__wrapper">
