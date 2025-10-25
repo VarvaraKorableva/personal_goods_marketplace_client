@@ -1,7 +1,8 @@
 import React from 'react'
-import { conditions } from '../../../const/Сonditions/Сonditions'
 
 function ConditionSelect({
+  label,
+  conditions,
   language,
   translatedContext,
   condition,
@@ -31,7 +32,7 @@ function ConditionSelect({
         onChange={handleConditionChange}
         value={condition}
       >
-        <option value="">{translatedContext.condition}</option>
+        <option value="">{label}</option>
 
         {language === 'rus'
           ? conditions.rus.map((item) => (

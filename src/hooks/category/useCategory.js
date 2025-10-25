@@ -24,7 +24,7 @@ export default function useCategory({closeLoading, openLoading, }) {
       } else {*/
         try {
           const res = await Api.getCategory();
-          //localStorage.setItem('category', JSON.stringify(res));
+          localStorage.setItem('category', JSON.stringify(res));
           setCategories(res);
           setCategoriesToRender(res);
           closeLoading();
