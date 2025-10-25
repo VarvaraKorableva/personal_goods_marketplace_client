@@ -1,17 +1,16 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import imageCompression from 'browser-image-compression';
 import './AddAdPage.css'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
-import { conditions } from '../../const/Сonditions/Сonditions'
 import BackBtn from '../../UK-kit/BackBtn'
 import CityInput from '../../Components/Forms/CityInput/CityInput'
 import TitletInputField from '../../Components/Forms/TitletInputField/TextInputField'
 import DiscriptionField from '../../Components/Forms/DiscriptionField/DiscriptionField'
 import PriceInputField from '../../Components/Forms/PriceInputField/PriceInputField'
 import Container from '../../UK-kit/Container/Container'
+import ConditionSelect from '../../Components/Forms/ConditionSelect/ConditionSelect'
 
 function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
@@ -244,18 +243,6 @@ function AddAdPage({onAddAd, categories, isGood, openLoading, closeLoading}) {
       setFourthFile(null)
   }
 
-  const handleConditionChange = (e) => {
-    if(e.target.value){
-      setCondition(e.target.value)
-      setIsConditionSelected(true)
-      setConditionErrorMessage('')
-    } else {
-      setCondition('')
-      setIsConditionSelected(false)
-      setConditionErrorMessage(`${translatedContext.errors.conditionErrorMessage.errorMessage}`)
-    }
-  }
-
   const handleSelectChange = (e) => {
     setSelectedCategoryId(e.target.value)
     
@@ -461,32 +448,16 @@ return (
         setTitle={setTitle}
         translatedContext={translatedContext}
       />
-
-      <select 
-        className='addAdPage__select margin' 
-        onChange={handleConditionChange}
-        value={condition}
-      >
-        <option value="">{translatedContext.condition}</option>
-
-          {language === 'rus' ?
-            conditions.rus.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))
-            
-            :
-            conditions.en.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))
-          }
-      </select>
-
-      {isConditionSelected?
-        <span className='popup__mistake-msg margin'></span>
-      : 
-        <span className='popup__mistake-msg margin'>{conditionErrorMessage}</span>
-      }
-
+      <ConditionSelect
+        language={language}
+        translatedContext={translatedContext}
+        condition={condition}
+        setCondition={setCondition}
+        isConditionSelected={isConditionSelected}
+        setIsConditionSelected={setIsConditionSelected}
+        conditionErrorMessage={conditionErrorMessage}
+        setConditionErrorMessage={setConditionErrorMessage}
+      />
       <DiscriptionField
         label={translatedContext.description}
         name="description"
@@ -499,7 +470,6 @@ return (
         setValue={setDescription}
         translatedContext={translatedContext}
       />
-
       <PriceInputField
         label={translatedContext.price}
         name="price"
@@ -511,7 +481,6 @@ return (
         setValue={setPrice}
         translatedContext={translatedContext}
       />
-
       <CityInput
         language={language} 
         translatedContext={translatedContext}
