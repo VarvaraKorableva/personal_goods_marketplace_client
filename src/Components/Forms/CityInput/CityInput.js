@@ -2,7 +2,7 @@ import { useState } from "react";
 import { cities } from '../../../const/Cities/cities'
 import './CityInput.css'
 
-function CityInput({ language, translatedContext, city, setCity, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
+function CityInput({label, language, translatedContext, city, setCity, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
   const [filteredCities, setFilteredCities] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -34,16 +34,8 @@ function CityInput({ language, translatedContext, city, setCity, isCitySelected,
 
   return (
     <div className="city-autocomplete" style={{ position: "relative" }}>
-       <label className='popup__inputname'>
-           {good && realEstate?
-             translatedContext.placeRealEstate
-           :
-           good?
-           translatedContext.place 
-           :
-             translatedContext.cityServices
-            }
-        <span className='popup__inputname-span'>*</span> 
+      <label className='popup__inputname'>
+        {label} <span className='popup__inputname-span'>*</span> 
       <input
         type="text"
         className="addAdPage__select"

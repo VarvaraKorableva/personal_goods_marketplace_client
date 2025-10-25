@@ -92,17 +92,17 @@
   
   .popup__input-btn {
       color: rgba(0, 0, 0, 0.6);
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 100%;
       background-color: transparent;
       border: 1px solid rgba(0, 0, 0, 0.6);
-      
+      margin-top: 0;
       border-radius: 10px;
-      margin: 10px;
+      /*margin: 10px;*/
       
       cursor: pointer;
-      padding-left: 10px;
-      padding-right: 10px;
+      /*padding-left: 10px;
+      padding-right: 10px;*/
       box-sizing: border-box;
   }
   
@@ -361,8 +361,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
+
+    border: 1px solid blueviolet;
 }  
 
 .popup__compressed-pic {
@@ -398,6 +399,11 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* две равные колонки */
+  gap: 10px;
+  aspect-ratio: 1 / 1;
 }
 
 .popup__input-pic {

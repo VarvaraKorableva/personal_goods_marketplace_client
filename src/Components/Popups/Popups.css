@@ -150,7 +150,7 @@
       font-size: 12px;
       padding: 3px;
     }
-  
+  /*
   .popup__input-btn {
       color: rgba(0, 0, 0, 0.6);
       width: 100%;
@@ -170,7 +170,7 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 0.8);
   }
-  
+  */
   .add-ad-popup__btn {
       color: #ccc;
       border: 1px solid #ccc;
