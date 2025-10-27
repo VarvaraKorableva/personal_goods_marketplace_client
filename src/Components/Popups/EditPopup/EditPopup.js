@@ -209,7 +209,7 @@ function EditPopup ({
               title === 'price' ?
               <>
               <input 
-                className='popup__input'
+                className='input'
                 onChange={handlePriceChange} 
                 value={text}
               >

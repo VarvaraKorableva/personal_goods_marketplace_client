@@ -73,7 +73,7 @@ function ModerationAdminPage() {
                           <Button className='ModerationAdminPage__no-consent-btn'>Удалить</Button>
                           
                           <input
-                            className="popup__input"
+                            className="input"
                             type="text"
                           >
                           </input>

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../Forms/Forms.css'
 
 export default function PriceInputField({
   label,
@@ -12,20 +13,26 @@ export default function PriceInputField({
   setValue,
   translatedContext
 }) {
+
+  const [isError, setIsError] = React.useState(false)
+
   const handleChange = (e) => {
     const val = e.target.value
 
     if (!val) {
       setIsValid(false)
+      setIsError(true)
       setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessage}`)
       setValue('')
     } else if (!/^\d*$/.test(val)) {
-      //setIsValid(false)
+      setIsError(true)
       setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageOnlyNumbers}`)
     } else if (val.length > 10) {
+      setIsError(true)
       setIsValid(false)
-      setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageToLongs}`)
+      setErrorMessage(`${translatedContext.errors.priceErrorMessage.errorMessageToLong}`)
     } else {
+      setIsError(false)
       setIsValid(true)
       setErrorMessage('')
       setValue(val)
@@ -33,12 +40,13 @@ export default function PriceInputField({
   }
 
   return (
-    <div className="price-input-field">
-      <label className="popup__inputname">
+    <div className="input-container">
+      <label className="inputname">
         {label}
-        {required && <span className="popup__inputname-span">*</span>}
+        {required && <span className="inputname-span">*</span>}
         <input
-          className="popup__input"
+          className="input"
+          //className={`input ${isError ? 'input_error' : ''}`}
           name={name}
           type="text"
           value={value}

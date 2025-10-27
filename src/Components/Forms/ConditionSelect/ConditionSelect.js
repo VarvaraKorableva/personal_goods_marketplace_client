@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../Forms/Forms.css'
 
 function ConditionSelect({
   label,
@@ -12,6 +13,7 @@ function ConditionSelect({
   conditionErrorMessage,
   setConditionErrorMessage
 }) {
+  //const [isError, setIsError] = React.useState(false)
 
   const handleConditionChange = (e) => {
     if (e.target.value) {
@@ -26,13 +28,15 @@ function ConditionSelect({
   }
 
   return (
-    <>
+    <div className='input-container'>
+      <label className="inputname">{label} <span className="inputname-span">*</span> </label>
       <select 
         className='addAdPage__select margin' 
         onChange={handleConditionChange}
         value={condition}
       >
-        <option value="">{label}</option>
+        
+        <option value="">{label} </option>
 
         {language === 'rus'
           ? conditions.rus.map((item) => (
@@ -49,7 +53,7 @@ function ConditionSelect({
       ) : (
         <span className='popup__mistake-msg margin'>{conditionErrorMessage}</span>
       )}
-    </>
+    </div>
   )
 }
 

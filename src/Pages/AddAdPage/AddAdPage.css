@@ -30,16 +30,17 @@
     padding-left: 36px;
     padding-right: 36px;
     padding-bottom: 37px;
-    padding-top: 34px;
+    padding-top: 0;
     }
     
 @media screen and (max-width: 600px) {
     .addAdPage__form {
-        width: 280px;
-        padding-left: 22px;
-        padding-right: 22px;
+        width: 100%;
+        max-width: 430px;
+        padding-left: 0;
+        padding-right: 0;
         padding-bottom: 25px;
-        padding-top: 25px;
+        padding-top: 0;
     }
 }  
   .popup__input-description {
@@ -65,30 +66,6 @@
     font-size: 12px;
     padding: 3px;
   }
-    .popup__input {
-      color: black;
-      width: 100%;
-      height: 46px;
-      background-color: transparent;
-      border: 1px solid rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      margin-top: 10px;
-      margin-bottom: 0px;
-      cursor: pointer;
-      padding-left: 10px;
-      padding-right: 10px;
-      box-sizing: border-box;
-    }
-    
-    .popup__input:hover {
-      border: 2px solid rgba(0, 0, 0, 0.6);
-    } 
-  
-    .popup__input::placeholder {
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 12px;
-      padding: 3px;
-    }
   
   .popup__input-btn {
       color: rgba(0, 0, 0, 0.6);
@@ -158,14 +135,6 @@
     font-size: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
-    color: rgb(181, 71, 71);
-  }
-  
-  .popup__inputname {
-    font-size: 10px;
-  }
-  
-  .popup__inputname-span {
     color: rgb(181, 71, 71);
   }
   
@@ -336,7 +305,7 @@
   }
 
   .addAdPage__select {
-    color: black;
+    color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 46px;
     background-color: transparent;
@@ -392,18 +361,6 @@
 
   width: 20px;
   height: 20px;
-}
-
-.popup__files-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* две равные колонки */
-  gap: 10px;
-  aspect-ratio: 1 / 1;
 }
 
 .popup__input-pic {

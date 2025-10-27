@@ -40,7 +40,7 @@ function EditField({ title, language, text, onChange, errorMessage }) {
     return (
       <>
         <input
-          className="popup__input"
+          className="input"
           onChange={onChange}
           value={text}
           placeholder={language === "rus" ? "Введите цену" : "Enter price"}
@@ -54,7 +54,7 @@ function EditField({ title, language, text, onChange, errorMessage }) {
     return (
       <>
         <input
-          className="popup__input"
+          className="input"
           onChange={onChange}
           value={text}
           placeholder={language === "rus" ? "Введите Telegram" : "Enter Telegram"}

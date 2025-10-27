@@ -1,5 +1,6 @@
 import React from 'react'
 import imageCompression from 'browser-image-compression'
+import '../../Forms/Forms.css'
 
 function ImagesUpload({
   translatedContext,
@@ -98,11 +99,11 @@ function ImagesUpload({
   }
 
   return (
-    <>
-      <label className='popup__inputname margin'>{translatedContext.picture}</label>
+    <div className='input-container'>
+      <label className='inputname'>{translatedContext.picture}</label>
       <span className='popup__inputmistake'>{errorImgMessage}</span>
 
-      <div className='popup__files-container'>
+      <div className='files-container'>
         {/* 1 */}
         {firstFile ? (
           <div className='popup__compressed-pic-wrapper'>
@@ -191,7 +192,7 @@ function ImagesUpload({
           </>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
