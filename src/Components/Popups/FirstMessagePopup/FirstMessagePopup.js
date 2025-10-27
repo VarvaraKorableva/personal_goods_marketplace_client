@@ -49,7 +49,7 @@ function FirstMessagePopup ({onClose, isOpen, createNewMessage}) {
 
     return(
         <div className={`popup ${isOpen && 'popup__opened'}`}>
-        <div className="popup__container">
+        <div className="popup__container firstMessagePopup__wrapper">
             {/*<button 
               className="popup__close-button" 
               type="button" 

@@ -1,0 +1,44 @@
+.sticky-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 10px 20px;
+    background-color: #FBBB00;
+    background-color: rgb(208,208,208);
+    color: #1f1f1f;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: none;
+    opacity: 0;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    
+  }
+
+  .sticky-button:hover {
+    padding: 20px 5px;
+    border-radius: 50%;
+    border: 2px solid rgb(236, 91, 181);
+  }
+  
+  .sticky-button.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    z-index: 22;
+  }
+ /*b  
+.arrowUp {
+ ackground-image: url(../../images/arrowwhite.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+
+  transform: rotate(-180deg);
+}  */
+  
