@@ -55,7 +55,7 @@ import ClientsAdminPage from './Pages/AdminPage/ClientsAdminPage/ClientsAdminPag
 import ListingsAdminPage from './Pages/AdminPage/ListingsAdminPage/ListingsAdminPage'
 import ModerationAdminPage from './Pages/AdminPage/ModerationAdmin/ModerationAdmin'
 import ItemsAdminPage from './Pages/AdminPage/ItemsAdminPage/ItemsAdminPage'
-
+import StickyButton from './Components/StickyButton/StickyButton'
 
 function App() {
   //const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
@@ -618,6 +618,7 @@ function App() {
       />
     </div>
     <Footer handleLogout={handleLogout} isLoggin={isLoggin}></Footer>
+    <StickyButton></StickyButton>
     </CurrentUserContext.Provider>  
     
   );
