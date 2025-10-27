@@ -1,6 +1,6 @@
 //DiscriptionField
 import React from 'react'
-import './DiscriptionField.css'
+import '../../Forms/Forms.css'
 
 export default function DiscriptionField({
   label,
@@ -34,10 +34,10 @@ export default function DiscriptionField({
   }
 
   return (
-    <div className="text-area-field">
-      <label className="popup__inputname">
+    <div className="input-container">
+      <label className="inputname">
         {label}
-        {required && <span className="popup__inputname-span">*</span>}
+        {required && <span className="inputname-span">*</span>}
         <textarea
           className="popup__input-description"
           name={name}

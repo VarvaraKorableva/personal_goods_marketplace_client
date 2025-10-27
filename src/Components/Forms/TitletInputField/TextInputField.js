@@ -1,5 +1,5 @@
 import React from 'react'
-import './TitletInputField.css'
+import '../../Forms/Forms.css'
 
 export default function TitletInputField({
     label,
@@ -13,6 +13,7 @@ export default function TitletInputField({
     setTitle,
     translatedContext
   }) {
+    //const [isError, setIsError] = React.useState(false)
 
     const handleTitleChange = (e) => {
       if(e.target.value.length > 40) {
@@ -35,12 +36,12 @@ export default function TitletInputField({
     }
 
     return (
-      <div className="text-input-field">
-        <label className="popup__inputname">
+      <div className="input-container">
+        <label className="inputname">
           {label}
-          {required && <span className="popup__inputname-span">*</span>}
+          {required && <span className="inputname-span">*</span>}
           <input
-            className="popup__input"
+            className="input"
             name={name}
             type="text"
             value={value}

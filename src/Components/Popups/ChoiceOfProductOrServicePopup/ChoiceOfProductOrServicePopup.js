@@ -22,17 +22,20 @@ function ChoiceOfProductOrServicePopup({onClose, isOpen, onAdBtn}) {
   function handleGoodBtn() {
     const data = true
     onAdBtn(data)
+    onClose()
   }
 
   function handleServicesBtn() {
     const data = false
     onAdBtn(data)
+    onClose()
   }
 
   function handleRealEstateBtn() {
     const data = true
     const realEstate = true
     onAdBtn(data, realEstate)
+    onClose()
   }
 
 return (

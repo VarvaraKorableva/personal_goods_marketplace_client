@@ -160,6 +160,7 @@ return (
       className='addAdPage__form'
       encType="multipart/form-data"
       onSubmit={handleServicesSubmit}>
+
       <CategorySelect
         categories={categories}
         language={language}

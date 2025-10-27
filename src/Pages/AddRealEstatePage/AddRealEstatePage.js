@@ -1,5 +1,8 @@
 import React from 'react'
 import './AddRealEstatePage.css'
+import '../AddAdPage/AddAdPage.css'
+import '../../Components/Forms/Forms.css'
+
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AddAdPageData'
@@ -141,9 +144,9 @@ return (
         encType="multipart/form-data"
         onSubmit={handleSubmit}>
 
-        <label className='popup__inputname'>
+        <label className='inputname'>
           {translatedContext.choiseACategory}
-          <span className='popup__inputname-span'>*</span>
+          <span className='inputname-span'>*</span>
         </label>
 
         <div className='realEstate__btn-container'>
@@ -188,7 +191,7 @@ return (
           setConditionErrorMessage={setConditionErrorMessage}
         />
         <DiscriptionField
-          label={translatedContext.description}
+          label={translatedContext.propertyDescription}
           name="description"
           value={description}
           isValid={isDescriptionSelected}
