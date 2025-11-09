@@ -22,7 +22,6 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
   });
   const [file, setFile] = React.useState(null);
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
-
   const [firstFile, setFirstFile] = React.useState(null);
   const [secondFile, setSecondFile] = React.useState(null);
   const [thirdFile, setThirdFile] = React.useState(null);

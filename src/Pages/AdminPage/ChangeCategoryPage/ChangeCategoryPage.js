@@ -17,7 +17,6 @@ function ChangeCategoryPage() {
     const [addCategoryAdminFormOpen, setAddCategoryAdminFormOpen] = React.useState(true)
     const [addSubCategoryAdminFormOpen, setAddSubCategoryAdminFormOpen] = React.useState(false)
     const [deleteCategoryAdminFormOpen, setDeleteCategoryAdminFormOpen] = React.useState(false)
-console.log('categories', categories)
 
     function openAddCategoryAdminForm() {
         setAddCategoryAdminFormOpen(true)
@@ -64,16 +63,16 @@ console.log('categories', categories)
       }; 
 
       const handleCreateSubCategory = () => {
-       createCategoryAdmin({
-        /*name: "For rent",
-        name_rus: "Аренда",
-        is_good: true,
-        parent_id: "125", // 🔹 та же ссылка на родителя
-        image_url: "https://media.istockphoto.com/id/1300816777/photo/house-for-rent-text-on-wood-blocks.jpg?s=1024x1024&w=is&k=20&c=EVmCxH5gbGolBz7JPeEQoEXr13yJYWFHVmSlV1AREa8=",
-        slug: "real-estate-property-for-rent",
-        isRealEstate: false,
-        isRent: false,*/
-        }); 
+       /*createCategoryAdmin({
+        name: "Tours",
+        name_rus: "Экскурсии",
+        is_good: false,
+        parent_id: "6", // родительская категория "Услуги"
+        image_url: "https://plus.unsplash.com/premium_photo-1697729849426-8bb60531c6c9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjF8fCVEMSU4RCVEMCVCQSVEMSU4MSVEMCVCQSVEMSU4MyVEMSU4MCVEMSU4MSVEMCVCOCVEMCVCOCUyMCVEMCVCRiVEMCVCRSUyMCVEMCVCOCVEMCVCNSVEMSU4MCVEMSU4MyVEMSU4MSVEMCVCMCVEMCVCQiVEMCVCOCVEMCVCQyVEMSU4M3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
+        slug: "tours",
+        is_real_estate: false,
+        is_rent: false,
+        });  */
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 

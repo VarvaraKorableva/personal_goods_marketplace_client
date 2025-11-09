@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/Popups/Popup'
 
-export default function usePopups({setReceiverId, myAds, setItemId}) {
+export default function usePopups({setReceiverId, myAds, myAdsCount, setItemId}) {
   const navigate = useNavigate()
 
   const [isImglinkPopup, setIsImglinkPopup] = React.useState(false)
@@ -77,24 +77,13 @@ export default function usePopups({setReceiverId, myAds, setItemId}) {
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
-    if (myAds.length >= 20) {
+    if (myAds.length >= 5) {
       setSuccessfulActionPopup(true)
       setPopupMessage(`${translatedContext.messagesPopup.maxAdsPopupMessage} ${myAds.length}`)
     } else {
       setIsChoiceOfProductOrServicePopup(true)
     }
   }
-/*
-  function handleAddAdClick(data, realEstate = false){
-    setIsGood(data)
-
-    data?
-    navigate(`/add-ad`) 
-    :
-    navigate(`/add-new-service`)
-    
-    closeAllPopups()
-  }*/
 
   function handleAddAdClick(data, realEstate = false, commercial = false, land = false) {
     setIsGood(data);

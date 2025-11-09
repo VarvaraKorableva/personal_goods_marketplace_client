@@ -38,7 +38,6 @@
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
-    font-size: 14px;
 }
   
 .input:hover {
@@ -56,4 +55,8 @@
 
 .input_error:hover {
     border: 2px solid red;
+}
+
+.popup__input-description {
+    font-size: 16px;
 }

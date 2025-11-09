@@ -39,7 +39,7 @@ export default function DiscriptionField({
         {label}
         {required && <span className="inputname-span">*</span>}
         <textarea
-          className="popup__input-description"
+          className="popup__input-description input font"
           name={name}
           value={value}
           onChange={handleChange}

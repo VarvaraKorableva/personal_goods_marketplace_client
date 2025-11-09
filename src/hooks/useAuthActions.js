@@ -6,20 +6,11 @@ import { useItemsContext } from "../contexts/ItemsContext";
 export default function useAuthActions({ 
     resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
     getMyFavorites, getUnreadbleMessages, 
-    setMyAds, currentUser, setCurrentUser
+    setMyAds, setMyAdsCount, currentUser, setCurrentUser
  }) {
  
   const {
       lastFourtyItems,
-      setLastFourtyItems,
-      itemsAfterSearch,
-      setItemsAfterSearch,
-      totalCountOfAds,
-      setTotalCountOfAds,
-      page,
-      setPage,
-      isPageItemsLoading,
-      setIsPageItemsLoading,
     } = useItemsContext();
 
     const [isLoginError, setIsLoginError] = useState(false)
@@ -76,7 +67,7 @@ export default function useAuthActions({
           setSuccessfulActionPopup(true)
           setPopupMessage('Что-то пошло не так :(')
         })
-      }
+    }
 
     const handleLogout = () => {
         setIsLoggin(false)
@@ -84,9 +75,9 @@ export default function useAuthActions({
         localStorage.removeItem('user')
         localStorage.removeItem('category')
         setCurrentUser({})
+        setMyAdsCount(0)
         resetFavorites()
         setMyAds([])
-
         navigate(`/`)
     }
 
@@ -101,7 +92,7 @@ export default function useAuthActions({
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)
           setCurrentUser(res.user)
-          
+          setMyAdsCount(res.user.ad_count)
           localStorage.setItem('user', JSON.stringify(res.user))
           const favorite_collector_id = res.user.user_id
           getMyFavorites(favorite_collector_id, lastFourtyItems)
@@ -118,7 +109,7 @@ export default function useAuthActions({
             }, 3000)
           }
         })
-      }
+    }
 
     const handleRegSubmit = (userData) => {
         openLoading()
@@ -132,9 +123,9 @@ export default function useAuthActions({
         .then((data) => {
           setIsRegError(false)
           setCurrentUser(data.user)
-          
           localStorage.setItem('user', JSON.stringify(data.user))
           setMyAds([]);
+          
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)
           navigate(`/`)
@@ -172,8 +163,6 @@ export default function useAuthActions({
           }
       })
     }
-
-
 
   return {
     sendVerificationCode,

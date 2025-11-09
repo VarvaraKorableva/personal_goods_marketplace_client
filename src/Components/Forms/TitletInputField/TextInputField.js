@@ -41,7 +41,7 @@ export default function TitletInputField({
           {label}
           {required && <span className="inputname-span">*</span>}
           <input
-            className="input"
+            className="input font"
             name={name}
             type="text"
             value={value}

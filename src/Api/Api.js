@@ -377,9 +377,8 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conv
     })
         .then(checkResponse)
 };
-/*
-export const adCountIncrement = ( user_id ) => {
 
+export const adCountIncrement = ( user_id ) => {
     return fetch(`${BASE_URL}/users/adCountIncrement/${user_id}`, {
         credentials: 'include',
         method: "PATCH",
@@ -392,7 +391,6 @@ export const adCountIncrement = ( user_id ) => {
 };
 
 export const adCountDecrement = ( user_id ) => {
-      
     return fetch(`${BASE_URL}/users/adCountDecrement/${user_id}`, {
         credentials: 'include',
         method: "PATCH",
@@ -403,7 +401,7 @@ export const adCountDecrement = ( user_id ) => {
     })
         .then(checkResponse)
 };
-*/
+
 export const sendVerificationCode = ( email ) => {
     return fetch(`${BASE_URL}/verification/sendVerificationCode`, {
         credentials: 'include',
