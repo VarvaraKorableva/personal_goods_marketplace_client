@@ -6,7 +6,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/AppData'
 
 export default function useItem({
-  openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
+  openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, currentUser, setPopupMessage, myAds, myAdsCount, setMyAdsCount, setMyAds,
 }) {
 
   const {
@@ -36,12 +36,14 @@ export default function useItem({
     translatedContext = hebrew;
   }
   const navigate = useNavigate()
-
+/*
   const deleteMyAd = (item_id, reason) => {
     openLoading()
     Api.deleteItem(item_id, reason)
     .then((res) => {
+      
       setMyAds((state) => state.filter((item) => item.item_id !== item_id))
+      setMyAdsCount(prev => prev - 1);
       setLastFourtyItems((state) => state.filter((item) => item.item_id !== item_id))
       setItemsAfterSearch((state) => state.filter((item) => item.item_id !== item_id))
       setItemsSecondPageSearch((state) => state.filter((item) => item.item_id !== item_id))
@@ -53,6 +55,44 @@ export default function useItem({
       closeLoading()
     })
   }
+
+  const deleteMyAd = (item_id, reason) => {
+    openLoading();
+    Api.deleteItem(item_id, reason)
+      .then(() => Api.adCountDecrement(currentUser.user_id))
+      .then(() => {
+        setMyAds(prev => prev.filter(item => item.item_id !== item_id));
+        setMyAdsCount(prev => prev - 1);
+        setLastFourtyItems(prev => prev.filter(item => item.item_id !== item_id));
+        setItemsAfterSearch(prev => prev.filter(item => item.item_id !== item_id));
+        setItemsSecondPageSearch(prev => prev.filter(item => item.item_id !== item_id));
+        closeAllPopups();
+      })
+      .catch(err => console.error(err))
+      .finally(() => closeLoading());
+  };
+  
+*/
+
+const deleteMyAd = async (item_id, reason) => {
+  try {
+    openLoading();
+
+    await Api.deleteItem(item_id, reason);
+    await Api.adCountDecrement(currentUser.user_id);
+
+    setMyAds(prev => prev.filter(item => item.item_id !== item_id));
+    setMyAdsCount(prev => prev - 1);
+    setLastFourtyItems(prev => prev.filter(item => item.item_id !== item_id));
+    setItemsAfterSearch(prev => prev.filter(item => item.item_id !== item_id));
+    setItemsSecondPageSearch(prev => prev.filter(item => item.item_id !== item_id));
+    closeAllPopups();
+  } catch (err) {
+    console.error(err);
+  } finally {
+    closeLoading();
+  }
+};
 
   const getItemById = (item_id) => { 
     openLoading()
@@ -95,6 +135,7 @@ export default function useItem({
     Api.getUserItems(owner_id)
     .then((res) => {
       setMyAds(res.reverse())
+      setMyAdsCount(setMyAds.length)
       closeLoading()
     })
     .catch((err) => {
@@ -132,12 +173,14 @@ export default function useItem({
       closeLoading()
     }
   }
-
+/*
   function handleAddAdSubmit(data) {
     openLoading()
     const { formData, ...otherData } = data;
     Api.createItem(otherData)
     .then((res)=> {
+      setMyAdsCount(prev => prev + 1);
+      Api.adCountIncrement(userId)
       if(formData) {
         const id = res.item_id
         const str_item_id = Number(id)
@@ -150,6 +193,7 @@ export default function useItem({
           closeAllPopups()
           setPopupMessage(`${translatedContext.successfulMessage}`)
           setMyAds([res, ...myAds])
+          setMyAdsCount(prev => prev + 1);
           openSuccessfulActionPopup()
           //adCountIncrement(userId)
           closeLoading()
@@ -181,6 +225,42 @@ export default function useItem({
       closeLoading()
     })
   }
+*/
+
+async function handleAddAdSubmit(data) {
+  openLoading();
+  
+  try {
+    const { formData, ...otherData } = data;
+    const res = await Api.createItem(otherData);
+    const id = res.item_id;
+
+    //await Api.adCountIncrement(currentUser.user_id);
+    //setMyAdsCount(prev => prev + 1);
+
+    if (formData) {
+      formData.append('str_item_id', Number(id));
+      formData.append('user_id', currentUser.user_id);
+      
+      const uploadRes = await Api.uploadMultipleFiles(formData);
+      setMyImages(prev => [uploadRes[0], ...prev]);
+    }
+
+    setMyAds(prev => [res, ...prev]);
+    closeAllPopups();
+    setPopupMessage(translatedContext.successfulMessage);
+    openSuccessfulActionPopup();
+    navigate(`/users/${currentUser.user_id}`);
+    
+  } catch (err) {
+    console.error(err);
+    closeAllPopups();
+    setPopupMessage(translatedContext.wrongMessage);
+    openSuccessfulActionPopup();
+  } finally {
+    closeLoading();
+  }
+}
 
   return {
     getAllItems,

@@ -80,7 +80,7 @@ function AddAdPage({onAddAd, openLoading, closeLoading}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    
     if (firstFile || secondFile || thirdFile || fourthFile) {
       const formData = new FormData()
       formData.append('firstFile', firstFile);

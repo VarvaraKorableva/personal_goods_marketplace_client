@@ -45,7 +45,7 @@ export default function PriceInputField({
         {label}
         {required && <span className="inputname-span">*</span>}
         <input
-          className="input"
+          className="input font"
           //className={`input ${isError ? 'input_error' : ''}`}
           name={name}
           type="text"

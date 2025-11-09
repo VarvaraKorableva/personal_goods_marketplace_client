@@ -8,7 +8,7 @@ const en = {
       somethingWrong: "Something went wrong, please try again",
     },
     messagesPopup: {
-      maxAdsPopupMessage: 'You can add up to 20 listings, you have added',
+      maxAdsPopupMessage: 'You can add up to 10 listings, you have added',
       changesSaved: "Changes received, you'll see them on the site soon",
       somethingWrong: "Something went wrong, please try again",
     },
@@ -33,7 +33,7 @@ const en = {
       realEstateBtn: 'Недвижимость',
     },
     messagesPopup: {
-      maxAdsPopupMessage: 'Можно добавлять не более 20 объявлений, у вас добавлено',
+      maxAdsPopupMessage: 'Можно добавлять не более 10 объявлений, у вас добавлено',
       changesSaved: "Изменения получены, скоро вы сможете их увидеть на сайте",
       somethingWrong: "Что-то пошло не так, попробуйте ещё раз",
     },
@@ -58,7 +58,7 @@ const en = {
       realEstateBtn: 'Real Estate',
     },
     messagesPopup: {
-      maxAdsPopupMessage: 'You can add up to 20 listings, you have added',
+      maxAdsPopupMessage: 'You can add up to 10 listings, you have added',
       changesSaved: "השינויים נשמרו, תראו אותם באתר בקרוב",
       somethingWrong: "משהו השתבש, נסה שוב",
     },

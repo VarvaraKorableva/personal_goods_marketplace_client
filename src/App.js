@@ -10,6 +10,7 @@ import useUser from "./hooks/useUser"
 import useLoading from "./hooks/useLoading"
 import useScroll from "./hooks/useScroll";
 
+import * as Api from './Api/Api'
 import './App.css'
 
 import React, { useEffect } from 'react'
@@ -61,15 +62,23 @@ function App() {
   //const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
   const [currentUser, setCurrentUser] = React.useState(() => {
     try {
-      const saved = localStorage.getItem('user');
-      return saved ? JSON.parse(saved) : {};
+      if (!localStorage.getItem('user')){
+        console.log('нет айди');
+        return {};
+      } else {
+        const saved = localStorage.getItem('user');
+        return JSON.parse(saved); 
+      }
     } catch (e) {
       console.error("Ошибка парсинга localStorage user:", e);
       return {};
     }
   });
   const userId = currentUser.user_id
-  const [myAds, setMyAds] = React.useState([])
+  const [myAds, setMyAds] = React.useState([]);
+  const [myAdsCount, setMyAdsCount] = React.useState(myAds.length);
+  //console.log('currentUser', currentUser)
+  //console.log('myAdsCount', myAdsCount)
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
@@ -106,7 +115,7 @@ function App() {
     openImgLinkPopup,
     imgLink,
     isImglinkPopup
-  } = usePopup({setReceiverId, myAds, setItemId, currentUser});
+  } = usePopup({setReceiverId, myAds, myAdsCount, setItemId, currentUser});
 
   const {
     getUserById,
@@ -124,15 +133,13 @@ function App() {
     handleAddAdSubmit,
     getItemsByCategoryId,
   } = useItem({
-    openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, userId, setPopupMessage, myAds, setMyAds,
+    openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, currentUser, setPopupMessage, myAds, myAdsCount, myAdsCount, setMyAdsCount, setMyAds,
   })
 
   const {
     resetAllfilters,
     handleGetItemsByFilter,
   } = useFilters({getAllItems,});
-
-
 
   const { 
     handleScroll,
@@ -172,7 +179,7 @@ function App() {
     getUnreadbleMessages,
     unreadbleMessages,
   } = useMessages(
-    userId, {
+      userId, {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
     });
@@ -193,7 +200,7 @@ function App() {
 
   } = useAuthActions({
     resetFavorites, openLoading, closeAllPopups, closeLoading, setSuccessfulActionPopup, setPopupMessage,
-    getMyFavorites, getUnreadbleMessages, setMyAds, currentUser, setCurrentUser
+    getMyFavorites, getUnreadbleMessages, setMyAds, setMyAdsCount, currentUser, setCurrentUser
   })
 
   const {
@@ -208,9 +215,46 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  useEffect(() => {
+    console.log('user', userId)
+    if(userId) {
+      getMyItems(userId)
+    }
+  },[])
+  /*
+    React.useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          if (!storedUser || !storedUser.user_id) {
+            console.warn("❗ Нет user_id в localStorage");
+            return;
+          }
+    
+          const user = await Api.getUserById(storedUser.user_id);
+    
+          if (user) {
+            // Проверим, что API вернул именно объект
+            if (Array.isArray(user)) {
+              // Если вдруг вернулся массив — берём первый элемент
+              localStorage.setItem('user', JSON.stringify(user[0]));
+            } else {
+              localStorage.setItem('user', JSON.stringify(user));
+            }
+          } else {
+            console.warn("⚠️ Ответ пустой — user не найден");
+          }
+        } catch (err) {
+          console.error("❌ Ошибка при получении пользователя:", err);
+        }
+      };
+    
+      fetchUser();
+    }, []);*/
+    
+    
+  
   return (
-    
-    
     <CurrentUserContext.Provider value={currentUser}>  
     <Header 
         isLoggin={isLoggin} 
@@ -414,6 +458,7 @@ function App() {
                 onAdPopup={handleChoiceOfProductOrServicePopupClick}
                 getMyItems={getMyItems}
                 myAds={myAds}
+                myAdsCount={myAdsCount}
                 openDeletePopup={openDeletePopup}
                 
                 isLoggin={isLoggin}
@@ -471,6 +516,7 @@ function App() {
               getUserById={getUserById}
               userInfo={userInfo}
               myAds={myAds}
+              myAdsCount={myAdsCount}
               getMyItems={getMyItems}
               getItemById={getItemById}
               isLoggin={isLoggin}

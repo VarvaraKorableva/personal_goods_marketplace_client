@@ -15,6 +15,7 @@ function MyPage({
   isLoggin, 
   getMyItems, 
   myAds, 
+  myAdsCount,
   openDeletePopup, 
   getItemById, 
   addToFavorites, 
@@ -134,7 +135,6 @@ function MyPage({
             </div>
           ) : (
             
-
               <Container as='ul' baseClassName='listings-container'>
                 {filteredAds.slice(0, limit).map((item) => (
                   <OneAd 

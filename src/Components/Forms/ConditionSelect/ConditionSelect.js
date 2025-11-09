@@ -31,7 +31,7 @@ function ConditionSelect({
     <div className='input-container'>
       <label className="inputname">{label} <span className="inputname-span">*</span> </label>
       <select 
-        className='addAdPage__select margin' 
+        className='addAdPage__select margin font' 
         onChange={handleConditionChange}
         value={condition}
       >

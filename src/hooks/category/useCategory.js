@@ -61,8 +61,10 @@ export default function useCategory({closeLoading, openLoading, }) {
 
     }
 */
+/*
     const chooseCategory = (category) => {
         setCategoriesToRender(categories.filter((item) => item.parent_id === category.category_id)) 
+
         let myCatToRender = []
         findAllCategoryGrandChildren(category, myCatToRender) 
         setAdsCategoryName(category.name_rus)
@@ -80,6 +82,37 @@ export default function useCategory({closeLoading, openLoading, }) {
       }
       return myCatToRenderNew
     }
+*/
+
+const chooseCategory = (category) => {
+  if (!category) return;
+
+  // фильтруем подкатегории
+  const filtered = categories.filter(
+    (item) => item.parent_id === category.category_id
+  );
+
+  // если нет подкатегорий — просто ставим пустой массив
+  if (!filtered || !filtered.length) {
+    setCategoriesToRender([]);
+  } else {
+    // сортируем: "Other" всегда в конце
+    const sorted = [...filtered].sort((a, b) => {
+      if (a.name === "Other") return 1;
+      if (b.name === "Other") return -1;
+      return 0;
+    });
+
+    setCategoriesToRender(sorted);
+  }
+
+  // остальная логика остаётся как была
+  let myCatToRender = [];
+  //findAllCategoryGrandChildren(category, myCatToRender);
+  setAdsCategoryName(category.name_rus);
+};
+
+
 
   return {
     getCategory,

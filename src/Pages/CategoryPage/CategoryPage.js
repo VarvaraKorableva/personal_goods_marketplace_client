@@ -44,7 +44,6 @@ function CategoryPage({
         adsCategoryName,
       } = useCategory({closeLoading, openLoading, });
 
-
     const { "*": rest } = useParams(); // <-- вытаскиваем хвост
     const slugs = rest ? rest.split("/") : [];
   
@@ -92,7 +91,6 @@ function CategoryPage({
                         category={subCategory} 
                         categories={categories}
                         onChooseCategory={chooseCategory}
-                        
                     />
                   ))
                 }

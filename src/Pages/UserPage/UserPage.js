@@ -6,7 +6,7 @@ import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
 import Container from '../../UK-kit/Container/Container'
 
-function UserPage({allImages, getUserById, userInfo, myAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
+function UserPage({allImages, getUserById, userInfo, myAds, myAdsCount, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
 
     const {
         favorite, 

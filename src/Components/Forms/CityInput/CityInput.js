@@ -40,7 +40,7 @@ function CityInput({label, language, translatedContext, city, setCity, isCitySel
         {label} <span className='inputname-span'>*</span> 
       <input
         type="text"
-        className="addAdPage__select"
+        className="addAdPage__select font"
         placeholder={translatedContext.inputPlace}
         value={city}
         onChange={handleCityChange}
