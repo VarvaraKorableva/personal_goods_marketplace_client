@@ -77,8 +77,7 @@ function App() {
   const userId = currentUser.user_id
   const [myAds, setMyAds] = React.useState([]);
   const [myAdsCount, setMyAdsCount] = React.useState(myAds.length);
-  //console.log('currentUser', currentUser)
-  //console.log('myAdsCount', myAdsCount)
+  const [userAds, setUserAds] = React.useState([]);
   const [receiverId, setReceiverId] = React.useState('')
   const [itemId, setItemId] = React.useState('') //используется по попапов и для айтемс, поэтому нельзя выносить отдельно
   const [isReserved, setIsReserved] = React.useState(false)
@@ -133,7 +132,7 @@ function App() {
     handleAddAdSubmit,
     getItemsByCategoryId,
   } = useItem({
-    openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, currentUser, setPopupMessage, myAds, myAdsCount, myAdsCount, setMyAdsCount, setMyAds,
+    setUserAds, userId, openLoading, closeLoading, closeAllPopups, openSuccessfulActionPopup, currentUser, setPopupMessage, myAds, myAdsCount, myAdsCount, setMyAdsCount, setMyAds,
   })
 
   const {
@@ -216,43 +215,10 @@ function App() {
   }, [location]);
 
   useEffect(() => {
-    console.log('user', userId)
     if(userId) {
       getMyItems(userId)
     }
   },[])
-  /*
-    React.useEffect(() => {
-      const fetchUser = async () => {
-        try {
-          const storedUser = JSON.parse(localStorage.getItem('user'));
-          if (!storedUser || !storedUser.user_id) {
-            console.warn("❗ Нет user_id в localStorage");
-            return;
-          }
-    
-          const user = await Api.getUserById(storedUser.user_id);
-    
-          if (user) {
-            // Проверим, что API вернул именно объект
-            if (Array.isArray(user)) {
-              // Если вдруг вернулся массив — берём первый элемент
-              localStorage.setItem('user', JSON.stringify(user[0]));
-            } else {
-              localStorage.setItem('user', JSON.stringify(user));
-            }
-          } else {
-            console.warn("⚠️ Ответ пустой — user не найден");
-          }
-        } catch (err) {
-          console.error("❌ Ошибка при получении пользователя:", err);
-        }
-      };
-    
-      fetchUser();
-    }, []);*/
-    
-    
   
   return (
     <CurrentUserContext.Provider value={currentUser}>  
@@ -515,8 +481,7 @@ function App() {
               deleteFromFavorites={deleteFromFavorites}
               getUserById={getUserById}
               userInfo={userInfo}
-              myAds={myAds}
-              myAdsCount={myAdsCount}
+              userAds={userAds}
               getMyItems={getMyItems}
               getItemById={getItemById}
               isLoggin={isLoggin}

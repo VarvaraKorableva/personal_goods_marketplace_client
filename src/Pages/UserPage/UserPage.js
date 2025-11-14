@@ -6,7 +6,7 @@ import BackBtn from '../../UK-kit/BackBtn'
 import { useFavorites } from "../../contexts/FavoritesContext"
 import Container from '../../UK-kit/Container/Container'
 
-function UserPage({allImages, getUserById, userInfo, myAds, myAdsCount, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
+function UserPage({allImages, getUserById, userInfo, userAds, getMyItems, getItemById, addToFavorites, isLoggin, deleteFromFavorites, openFirstMessagePopup}) {
 
     const {
         favorite, 
@@ -21,12 +21,12 @@ function UserPage({allImages, getUserById, userInfo, myAds, myAdsCount, getMyIte
         getMyItems(Number(owner_id.owner_id))
     }, []);
 
-    if(userInfo.length === 0 || myAds.length === 0) {
+    if(userInfo.length === 0 || userAds.length === 0) {
         return <p>Loading ...</p>;
     }
 
-    const moderatedAds = myAds.filter(ad => ad.moderated === true);
-    
+    //const moderatedAds = myAds.filter(ad => ad.moderated === true);
+    const moderatedAds = userAds;
     return(
         <section className='userPage_main-container'>
             <BackBtn className='backBtn_margin-left'/>
