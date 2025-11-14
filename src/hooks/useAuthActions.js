@@ -92,7 +92,7 @@ export default function useAuthActions({
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)
           setCurrentUser(res.user)
-          setMyAdsCount(res.user.ad_count)
+          //setMyAdsCount(res.user.ad_count)
           localStorage.setItem('user', JSON.stringify(res.user))
           const favorite_collector_id = res.user.user_id
           getMyFavorites(favorite_collector_id, lastFourtyItems)
@@ -125,7 +125,6 @@ export default function useAuthActions({
           setCurrentUser(data.user)
           localStorage.setItem('user', JSON.stringify(data.user))
           setMyAds([]);
-          
           setIsLoggin(true)
           localStorage.setItem('isLogin', true)
           navigate(`/`)
