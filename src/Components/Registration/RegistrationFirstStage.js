@@ -106,8 +106,6 @@ function handleRegSubmit(e) {
     setErrorCode(true) 
   }
 
-  //setTelegram
-
   const handleTelegramChange = (e) => {
       setTelegram(e.target.value);
   };
@@ -234,7 +232,7 @@ function handleRegSubmit(e) {
       :
       <>
         {isEmailConfirmed?
-              <form 
+          <form 
                 className='form'
                 onSubmit={handleRegSubmit}
               >
@@ -270,7 +268,6 @@ function handleRegSubmit(e) {
                     />
                   </label>
                   
-        
                   <label className='register__inputname'>{translatedContext.password}<span className='register__inputname-span'>*</span>
                     <input className='register__input'
                       required
@@ -285,7 +282,6 @@ function handleRegSubmit(e) {
                   </label>
                   <span className='register__inputmistake'>{errorPasswordMessage}</span>
 
-                  
                   <div className="register__agreement">
                       <input
                         type="checkbox"
@@ -333,17 +329,20 @@ function handleRegSubmit(e) {
                   <p className='register__subtitle'>{translatedContext.question}
                   <Link className='register__entrylink' to="/signin"> {translatedContext.signin}</Link></p>
                 </div>
-            </form>
+          </form>
         :
           <>
-            <Heading>{translatedContext.greetings}</Heading>
-            <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
+            {/*<Heading>{translatedContext.greetings}</Heading>
+            <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>*/}
 
             {
               isVerificationCodeSent?
                 <form 
                   className='form'
-                  onSubmit={onVerifyCode}>
+                  onSubmit={onVerifyCode}
+                >
+                  <Heading>{translatedContext.greetings}</Heading>
+                  <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
 
                   <fieldset className='fieldset'>
                     <p>Код отправлен на электронную почту {email}</p>
@@ -377,7 +376,10 @@ function handleRegSubmit(e) {
 
                 <form 
                   className='form' 
-                  onSubmit={handleSubmit}>
+                  onSubmit={handleSubmit}
+                >
+                  <Heading>{translatedContext.greetings}</Heading>
+                  <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>
 
                   <fieldset className='fieldset'>
                     <label className='register__inputname'>{translatedContext.verificationEmailLabel}

@@ -4,7 +4,7 @@
     min-height: 83vh;
     justify-content: center;
     align-items: center;
-   }
+}
 
 .login__form {
   width: 396px;
@@ -68,8 +68,6 @@
      flex-direction: column;
      padding: 0;
      border: none;
-
-     border: 1px solid red;
    }
 
    .login__inputname {

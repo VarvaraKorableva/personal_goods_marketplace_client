@@ -67,6 +67,10 @@
         margin-bottom: 20px;
         align-items: flex-start;
     }
+
+    .footer__link {
+        font-size: 12px;
+    }
   }
 
   .footer_logo-img {

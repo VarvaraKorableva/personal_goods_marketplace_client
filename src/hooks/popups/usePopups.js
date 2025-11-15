@@ -77,7 +77,7 @@ export default function usePopups({setReceiverId, myAds, myAdsCount, setItemId})
   }
 
   function handleChoiceOfProductOrServicePopupClick() {
-    if (myAds.length >= 5) {
+    if (myAds.length >= 20) {
       setSuccessfulActionPopup(true)
       setPopupMessage(`${translatedContext.messagesPopup.maxAdsPopupMessage} ${myAds.length}`)
     } else {

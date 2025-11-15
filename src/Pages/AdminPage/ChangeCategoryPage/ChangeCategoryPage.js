@@ -222,6 +222,7 @@ function ChangeCategoryPage() {
                         {categories?.length > 0 ? (
                             categories.map((i) => (
                                 <li key={i.category_id} className="categoryCardAdmin">
+                                    <img src={i.image_url} className="category-pic"></img>
                                     <p>category_id = {i.category_id}</p>
                                     <p>{i.name_rus}</p>
                                     <p>parent_id = {i.parent_id}</p>
