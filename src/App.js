@@ -39,6 +39,8 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import MyFavoritesPage from './Pages/MyFavoritesPage/MyFavoritesPage'
 import UserPage from './Pages/UserPage/UserPage'
 import CardPage from './Components/CardPage/CardPage'
+import PrivacyPolicyPage from './Pages/PrivacyPolicyPage/PrivacyPolicyPage'
+import AboutGoodsPage from './Pages/AboutGoodsPage/AboutGoodsPage'
 
 import EditPopup from './Components/Popups/EditPopup/EditPopup'
 import AreYouSurePopup from './Components/Popups/AreYouSurePopup/AreYouSurePopup'
@@ -566,6 +568,23 @@ function App() {
           element={
             <NotReadyPage />
           }>
+        </Route>
+
+        <Route
+          path={`/privacy-policy`}
+          element={
+            <PrivacyPolicyPage/>
+          }
+        >
+        </Route>
+
+        <Route
+          path={`/about-Goods`}
+          element={
+            <AboutGoodsPage/>
+          }
+        >
+
         </Route>
 
       </Routes>

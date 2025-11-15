@@ -15,18 +15,21 @@ function RegistrationFirstStage({onRegister, onSendBtn, isRegError, isLoading, i
   const [telegram, setTelegram] = React.useState('')
 
 const [isAgreement, setIsAgreement] = React.useState(false)
+const [isPolicyAgreement, setIsPolicyAgreement] = React.useState(false)
 
 const [errorEmailMessage, setErrorEmailMessage] = React.useState('')
 const [errorCodeMessage, setErrorCodeMessage] = React.useState('')
 const [errorPasswordMessage, setErrorPasswordMessage] = React.useState('')
 const [errorNameMessage, setErrorNameMessage] = React.useState('')
 const [errorAgreementMessage, setErrorAgreementMessage] = React.useState('')
+const [errorPolicyAgreementMessage, setErrorPolicyAgreementMessage] = React.useState('')
 
 const [errorEmail, setErrorEmail] = React.useState(true)
 const [errorCode, setErrorCode] = React.useState(true)
 const [errorName, setErrorName] = React.useState(true)
 const [errorPassword, setErrorPassword] = React.useState(true)
 const [errorAgreement, setErrorAgreement] = React.useState(true)
+const [errorPolicyAgreement, setErrorPolicyAgreement] = React.useState(true)
 
 const [isValid, setIsValid] = React.useState(false);
 
@@ -75,12 +78,14 @@ function handleRegSubmit(e) {
   setErrorPasswordMessage('')
   setErrorNameMessage('')
   setErrorAgreementMessage('')
+  setErrorPolicyAgreementMessage('')
 
   setErrorEmail(true)
   setErrorCode(true)
   setErrorName(true)
   setErrorPassword(true) 
   setErrorAgreement(true)
+  setErrorPolicyAgreement(true)
 
   setIsValid(false)
 }
@@ -194,6 +199,17 @@ function handleRegSubmit(e) {
   }
   }
 
+  const handlePolicyAgreementChange = (e) => {
+    if(e.target.checked) {
+      setIsPolicyAgreement(e.target.checked) 
+      setErrorPolicyAgreement(false)
+    } else {
+      setIsPolicyAgreement(e.target.checked) 
+      setErrorPolicyAgreement(true)
+      setErrorPolicyAgreementMessage("Укажите, что вы согласны с политикой обработки персональных данных")
+    }
+    }
+
   React.useEffect(() => {
     if (errorEmail || errorCode) {
       setIsValid(false)
@@ -204,12 +220,12 @@ function handleRegSubmit(e) {
 
 
   React.useEffect(() => {
-    if (errorName || errorPassword || errorAgreement) {
+    if (errorName || errorPassword || errorAgreement || errorPolicyAgreement) {
       setIsValid(false)
     } else {
       setIsValid(true)
     }
-  }, [errorName, errorPassword, errorAgreement])
+  }, [errorName, errorPassword, errorAgreement, errorPolicyAgreement])
 
   return (
     <section className='register'>
@@ -280,6 +296,19 @@ function handleRegSubmit(e) {
                       />
                          
                       <Link to="/publication-rules" target="_blank" className="register__agreement__link">Согласие с правилами размещения объявлений</Link>
+                      
+                  </div>
+
+                  <div className="register__agreement">
+                      <input
+                        type="checkbox"
+                        name="termsAgreement"
+                        required
+                        className="register__agreement__input"
+                        onChange={handlePolicyAgreementChange}
+                      />
+                         
+                      <Link to="/privacy-policy" target="_blank" className="register__agreement__link">Согласие с политикой обработки персональных данных</Link>
                       
                   </div>
                   <span className='register__inputmistake'>{errorAgreementMessage}</span>

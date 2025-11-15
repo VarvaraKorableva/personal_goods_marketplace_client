@@ -1,31 +1,22 @@
 .rulesPublicationsPage__section {
     min-height: 70vh;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
-@media screen and (max-width: 500px) {
-    .rulesPublicationsPage__section {
-        padding-top: 0px;
-    }
-} 
 
 .rulesPublicationsPage__title {
     margin-top: 50px;
     margin-bottom: 10px;
-    font-size: 20px;
-}
-
-@media screen and (max-width: 500px) {
-    .rulesPublicationsPage__title {
-        font-size: 18px;
-        margin-top: 30px;
-    }
+    font-size: 26px;
+    text-transform: uppercase;
+    color: rgb(16,21,133);
 }
 
 .rulesPublicationsPage__subtitle {
-    font-size: 10px;
+    font-size: 14px;
     margin-top: 0;
-    
 }
 
 .rulesPublicationsPage__rules-wrapper {
@@ -34,9 +25,9 @@
     flex-direction: column;
     margin: auto;
     justify-content: flex-start;
-    align-items: center;
-
+    align-items: flex-start;
     max-width: 800px;
+    
 }
 
 .rulesPublicationsPage__rule-container {
@@ -44,11 +35,99 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .rulesPublicationsPage__rule-subtitle {
+    font-size: 18px;
+}
+
+.rulesPublicationsPage__text {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: start;
+    align-self: flex-start;
     font-size: 16px;
+}
+
+.cards__container {
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0;
+    justify-content: center;
+    align-self: center;
+}
+
+.cards__oneCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    padding: 15px;
+    list-style-type: none;
+    background-color: rgb(140,186,255);
+}
+
+.rulesPublicationsPage__sectionTitle {
+    text-transform: uppercase;
+    font-size: 22px;
+    color: rgb(16,21,133);
+}
+
+.cards__subtitle {
+    font-size: 20px;
+    margin-top: 0;
+    color: rgb(16,21,133);
+    margin-bottom: 0;
+}
+
+.goal__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    align-self: center;
+}
+
+.goal__card {
+    border: 1px solid var(--light-grey-color);
+    color: rgb(16,21,133);
+    border-radius: 10px;
+    padding: 20px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 500px) {
+    .goal__container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .goal__card {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .rulesPublicationsPage__sectionTitle {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .cards__container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -57,10 +136,17 @@
     }
 }
 
-.rulesPublicationsPage__text {
-    margin: 0;
-    text-align: start;
-    font-size: 14px;
+@media screen and (max-width: 500px) {
+    .rulesPublicationsPage__section {
+        padding-top: 0px;
+    }
+} 
+
+@media screen and (max-width: 500px) {
+    .rulesPublicationsPage__title {
+        font-size: 20px;
+        margin-top: 30px;
+    }
 }
 
 @media screen and (max-width: 500px) {
