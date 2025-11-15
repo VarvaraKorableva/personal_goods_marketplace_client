@@ -23,8 +23,8 @@ function AreYouSurePopup({onClose, isOpen, deleteMyAd, itemIdDelete}) {
   }
   function handleDeleteAd() {
     deleteMyAd(itemIdDelete, selectedReason);
-
     setValid(false)
+    setSelectedReason('')
   }
 
   useEffect(() => {
