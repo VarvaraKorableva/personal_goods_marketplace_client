@@ -28,11 +28,16 @@
 }
 
 .register__agreement__input {
-  border: 1px solid #1f1f1f;
+  border: none;
   border-radius: 8px;
   margin-right: 10px;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
+
+
+  align-self: flex-start;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }  
    
 @media screen and (max-width: 500px) {
@@ -56,66 +61,65 @@
     flex-direction: column;
   }
   
-  @media screen and (max-width: 500px) {
+@media screen and (max-width: 500px) {
     .registrationFirstStage__form  {
       width: 300px;
       margin-bottom: 30px;
     }
-  }
+}
   
-  @media screen and (max-width: 450px) {
+@media screen and (max-width: 450px) {
     .registrationFirstStage__form  {
       width: 260px;
-    }
-  } 
+  }
+} 
    
-   .register__logo {
+.register__logo {
       color: black;
       font-size: 1rem;
       text-decoration: none;
-   }
+}
    
-   .register__logo:hover {
+.register__logo:hover {
       opacity: 0.8;
-   }
+}
 
-   .register__logolink {
+.register__logolink {
       text-decoration: none;
-   }
+}
 
-  .registrationFirstStage__title {
+.registrationFirstStage__title {
     font-size: 24px;
     font-weight: 500;
     margin-top: 40px;
     margin-bottom: 40px;
     color: black;
-  } 
+} 
 
-  @media screen and (max-width: 450px) {
+@media screen and (max-width: 450px) {
     .registrationFirstStage__title  {
       margin: auto;
       margin-bottom: 0;
       margin-top: 20px;
       font-size: 22px;
     }
-  }
+}
    
-   .register__title {
-     font-size: 30px;
-     font-weight: 500;
-     color: black;
-     margin-bottom: 0;
-     margin-top: 0;
-     /*margin-bottom: 50px;*/
-   }
+.register__title {
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+}
    
-   @media screen and (max-width: 450px) {
-     .register__title  {
+@media screen and (max-width: 450px) {
+    .register__title  {
        margin: auto;
        margin-bottom: 0;
        margin-top: 0;
-     }
-   }
+    }
+}
 
    .register__title-stage {
     font-size: 20px;
@@ -141,20 +145,12 @@
     }
   }
 
-  /*
-  @media screen and (max-width: 500px) {
-    .registrationFirstStage__form  {
-      width: 300px;
-      margin-bottom: 30px;
-    }
+  .register__btnText {
+    max-width: 250px;
+    align-self: center;
+    text-align: center;
+    margin: auto;
   }
-  
-  @media screen and (max-width: 450px) {
-    .registrationFirstStage__form  {
-      width: 260px;
-    }
-  } 
-  */
 
   .register__greetingsText {
     margin-top: 10px;
@@ -380,6 +376,9 @@
   font-weight: 400;
   font-size: 14px;
   transition: 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 450px) {

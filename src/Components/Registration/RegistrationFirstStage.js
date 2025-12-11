@@ -5,6 +5,7 @@ import {LanguageContext} from '../../contexts/TranslationContext'
 import choose from '../../const/RegistrationPageLanguage'
 import Preloader from '../Preloader/Preloader'
 import Heading from '../../UK-kit/Heading/Heading'
+import { FaCheckCircle } from "react-icons/fa";
 
 function RegistrationFirstStage({onRegister, onSendBtn, isRegError, isLoading, isVerificationCodeSentMessage, isVerificationCodeSent, verifyCode, isEmailConfirmed, isLoggin}){
   const navigate = useNavigate()
@@ -185,15 +186,16 @@ function handleRegSubmit(e) {
     }
     setPassword(e.target.value);
   };
-
+/*
   const handleAgreementChange = (e) => {
   if(e.target.checked) {
     setIsAgreement(e.target.checked) 
     setErrorAgreement(false)
+    setErrorAgreementMessage("")
   } else {
     setIsAgreement(e.target.checked) 
     setErrorAgreement(true)
-    setErrorAgreementMessage("Укажите, что вы согласны с правилами размещения объявлений")
+    setErrorAgreementMessage("Укажите, что вы согласны с правилами размещения объявлений и политикой обработки персональных данных")
   }
   }
 
@@ -201,13 +203,16 @@ function handleRegSubmit(e) {
     if(e.target.checked) {
       setIsPolicyAgreement(e.target.checked) 
       setErrorPolicyAgreement(false)
+      setErrorAgreement(false)
+      setErrorAgreementMessage("")
     } else {
       setIsPolicyAgreement(e.target.checked) 
       setErrorPolicyAgreement(true)
-      setErrorPolicyAgreementMessage("Укажите, что вы согласны с политикой обработки персональных данных")
+      setErrorAgreement(true)
+      setErrorAgreementMessage("Укажите, что вы согласны с правилами размещения объявлений и политикой обработки персональных данных")
     }
     }
-
+*/
   React.useEffect(() => {
     if (errorEmail || errorCode) {
       setIsValid(false)
@@ -218,12 +223,12 @@ function handleRegSubmit(e) {
 
 
   React.useEffect(() => {
-    if (errorName || errorPassword || errorAgreement || errorPolicyAgreement) {
+    if (errorName || errorPassword) { //|| errorAgreement || errorPolicyAgreement
       setIsValid(false)
     } else {
       setIsValid(true)
     }
-  }, [errorName, errorPassword, errorAgreement, errorPolicyAgreement])
+  }, [errorName, errorPassword])// errorAgreement, errorPolicyAgreement
 
   return (
     <section className='register'>
@@ -283,6 +288,18 @@ function handleRegSubmit(e) {
                   <span className='register__inputmistake'>{errorPasswordMessage}</span>
 
                   <div className="register__agreement">
+                    <FaCheckCircle className="register__agreement__input"></FaCheckCircle>
+                    <Link to="/publication-rules" target="_blank" className="register__agreement__link">Согласие с правилами размещения объявлений</Link>
+                  </div>
+
+                  <div className="register__agreement">
+                    <FaCheckCircle className="register__agreement__input"></FaCheckCircle>
+                    <Link to="/privacy-policy" target="_blank" className="register__agreement__link">Согласие с политикой обработки персональных данных</Link>
+                  </div>
+
+                  
+                {/** 
+                  <div className="register__agreement">
                       <input
                         type="checkbox"
                         name="termsAgreement"
@@ -308,10 +325,14 @@ function handleRegSubmit(e) {
                       
                   </div>
                   <span className='register__inputmistake'>{errorAgreementMessage}</span>
+
+                */}  
                 </fieldset>
         
                 {isRegError && !isRegErrorEmailChanging?
-                    <span className='register__inputmistake'>{errorRegMessage}</span>
+                   
+                      <span className='register__inputmistake'>{errorRegMessage}</span>
+           
                   : 
                     <></>
                 }
@@ -336,7 +357,7 @@ function handleRegSubmit(e) {
             <p className='register__title-stage'>{translatedContext.firstStepTitle}</p>*/}
 
             {
-              isVerificationCodeSent?
+              isVerificationCodeSent || isRegError?
                 <form 
                   className='form'
                   onSubmit={onVerifyCode}
@@ -400,7 +421,9 @@ function handleRegSubmit(e) {
                     className={`'register__verification-btn' ${isValid? 'register-verification__btn_active': 'register-verification__btn'}`}
                     disabled={!isValid}
                   >
-                    {translatedContext.verificationEmailButton} {email}
+                    <p className='register__btnText'>
+                      {translatedContext.verificationEmailButton} {email}
+                    </p>
                   </button>
 
                 </form>

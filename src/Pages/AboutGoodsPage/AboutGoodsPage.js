@@ -7,7 +7,7 @@ export default function AboutGoodsPage() {
     <section className="rulesPublicationsPage__section">
 
       <h1 className="rulesPublicationsPage__title">О проекте — Goods</h1>
-      <p className="rulesPublicationsPage__text font">
+      <p className="rulesPublicationsPage__text font_Mulish">
         <strong style={{ color: 'rgb(16, 21, 133)', fontSize: '24px' }}>Goods</strong> — это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
         Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов.
       </p>
@@ -29,21 +29,21 @@ export default function AboutGoodsPage() {
     <ul className="cards__container">
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Удобство</h3>
-        <p className="rulesPublicationsPage__text font">
+        <p className="rulesPublicationsPage__text font_Mulish">
           Интуитивно понятный интерфейс, простая форма добавления объявлений и продуманная структура каталога.
         </p>
       </li>
 
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Персональный подход</h3>
-        <p className="rulesPublicationsPage__text font">
+        <p className="rulesPublicationsPage__text font_Mulish">
           Goods — это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением.
         </p>
       </li>
 
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Безопасность и прозрачность</h3>
-        <p className="rulesPublicationsPage__text font">
+        <p className="rulesPublicationsPage__text font_Mulish">
           Мы внимательно относимся к защите данных. Все персональные данные обрабатываются в соответствии с законодательством Израиля, 
           а серверы находятся в регионе Франкфурт, что обеспечивает стабильность и высокий уровень безопасности.
         </p>
@@ -51,7 +51,7 @@ export default function AboutGoodsPage() {
 
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Быстрая модерация</h3>
-        <p className="rulesPublicationsPage__text font">
+        <p className="rulesPublicationsPage__text font_Mulish">
           Мы стремимся к тому, чтобы на платформе размещались только честные предложения. Объявления проходят быструю проверку и модерацию.
         </p>
       </li>
@@ -59,7 +59,7 @@ export default function AboutGoodsPage() {
     </ul>
       {/* Для кого */}
       <h2 className="rulesPublicationsPage__sectionTitle">Для кого создан проект?</h2>
-      <p className="rulesPublicationsPage__text font">
+      <p className="rulesPublicationsPage__text font_Mulish">
         Goods подходит всем, кто хочет:
       </p>
       <ul className="rulesPublicationsPage__text">
@@ -87,7 +87,7 @@ export default function AboutGoodsPage() {
 */}
       {/* Связь */}
       <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
-      <p className="rulesPublicationsPage__text font">
+      <p className="rulesPublicationsPage__text font_Mulish">
         Если у вас есть вопросы или предложения — мы всегда открыты для обратной связи.  
         Мы стремимся развивать платформу и делать её лучше для вас. 
       </p>
