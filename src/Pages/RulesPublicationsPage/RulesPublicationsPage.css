@@ -51,6 +51,7 @@
     text-align: start;
     align-self: flex-start;
     font-size: 18px;
+    padding: 0;
 }
 
 .rulesPublicationsPage__maintext {
@@ -84,9 +85,14 @@
 
 .rulesPublicationsPage__sectionTitle {
     text-transform: uppercase;
-    font-size: 22px;
+    font-size: 26px;
     color: rgb(16,21,133);
     font-family: "Mulish", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
 }
 
 .cards__subtitle {
@@ -114,9 +120,16 @@
     padding: 20px;
     list-style-type: none;
     display: flex;
-    flex-direction: column;
+    gap: 20px;
     text-align: start;
     font-size: 18px;
+}
+
+.goal__card__gaps {
+    display: flex;
+    padding: 0;
+    gap: 20px;
+    flex-direction: column;
 }
 
 .about__container {
@@ -135,11 +148,104 @@
     background-size: contain;
     margin: 0;
   }
+
+.rulesPublicationsPage__sectionTitle__container {
+    width: 100%;
+    height: 150px;
+    background-image: url(../../images/AboutPageImages/GoodsTitleBG.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    display: flex;
+}  
+
+.goal__card__smallpic__container {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goal__card__vpic {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/AboutPageImages/v.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.goal__card__smallpic10 {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/AboutPageImages/pics/10.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.goal__card__smallpic12 {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/AboutPageImages/pics/12.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.goal__card__smallpic13 {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/AboutPageImages/pics/13.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.goal__card__smallpic14 {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/AboutPageImages/pics/14.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+
 @media screen and (max-width: 1000px) {
     .about__logo {
         width: 200px;
         height: 200px;
-}}  
+    }
+
+    .rulesPublicationsPage__sectionTitle__container {
+        height: 100px;
+    } 
+
+}  
 
 @media screen and (max-width: 850px) {
     .about__container {
@@ -167,7 +273,7 @@
 
 @media screen and (max-width: 500px) {
     .rulesPublicationsPage__sectionTitle {
-        font-size: 18px;
+        font-size: 22px;
     }
 }
 

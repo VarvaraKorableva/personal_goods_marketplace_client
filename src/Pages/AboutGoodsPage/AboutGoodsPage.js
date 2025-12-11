@@ -15,19 +15,23 @@ export default function AboutGoodsPage() {
         
       </div>
       {/* Цель */}
-      <h2 className="rulesPublicationsPage__sectionTitle">Наша цель</h2>
+      <div className="rulesPublicationsPage__sectionTitle__container">
+        <h2 className="rulesPublicationsPage__sectionTitle">Наша цель</h2>
+      </div>
       <p className="rulesPublicationsPage__text">
         Мы стремимся создать пространство, где каждый пользователь может легко:
       </p>
       <ul className="goal__container">
-        <li className="goal__card">Разместить объявление о продаже товара</li>
-        <li className="goal__card">Найти нужную вещь по честной цене</li>
-        <li className="goal__card">Быстро связаться с продавцом или покупателем</li>
-        <li className="goal__card">Пользоваться платформой без лишних действий и сложностей</li>
+        <li className="goal__card"><div className="goal__card__vpic"></div><p>Разместить объявление о продаже товара</p></li>
+        <li className="goal__card"><div className="goal__card__vpic"></div><p>Найти нужную вещь по честной цене</p></li>
+        <li className="goal__card"><div className="goal__card__vpic"></div><p>Быстро связаться с продавцом или покупателем</p></li>
+        <li className="goal__card"><div className="goal__card__vpic"></div><p>Пользоваться платформой без лишних действий и сложностей</p></li>
       </ul>
 
       {/* Почему Goods */}
-      <h2 className="rulesPublicationsPage__sectionTitle">Почему Goods?</h2>
+      <div className="rulesPublicationsPage__sectionTitle__container">
+        <h2 className="rulesPublicationsPage__sectionTitle">Почему ГУДС?</h2>
+      </div>
     <ul className="cards__container">
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Удобство</h3>
@@ -39,7 +43,7 @@ export default function AboutGoodsPage() {
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Персональный подход</h3>
         <p className="rulesPublicationsPage__text font_Mulish">
-          Goods — это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением.
+          ГУУС - это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением.
         </p>
       </li>
 
@@ -60,15 +64,31 @@ export default function AboutGoodsPage() {
 
     </ul>
       {/* Для кого */}
-      <h2 className="rulesPublicationsPage__sectionTitle">Для кого создан проект?</h2>
+      
+        <h2 className="rulesPublicationsPage__sectionTitle">Для кого создан проект?</h2>
+      
       <p className="rulesPublicationsPage__text font_Mulish">
         Goods подходит всем, кто хочет:
       </p>
-      <ul className="rulesPublicationsPage__text">
-        <li >Продать личные вещи;</li>
-        <li >Купить что-то выгодно;</li>
-        <li >Разместить товары своего небольшого бизнеса;</li>
-        <li >Вести продажи без сложных настроек и технических знаний.</li>
+      <ul className="rulesPublicationsPage__text goal__card__gaps">
+        <li className="goal__card__smallpic__container">
+          <div className="goal__card__smallpic10"></div>
+            Продать личные вещи;
+          
+          </li>
+        <li className="goal__card__smallpic__container">
+          <div className="goal__card__smallpic12"></div>
+          Купить что-то выгодно;
+
+        </li>
+        <li className="goal__card__smallpic__container">
+          <div className="goal__card__smallpic13"></div>
+          Разместить товары своего небольшого бизнеса;
+        </li>
+        <li className="goal__card__smallpic__container">
+          <div className="goal__card__smallpic14"></div>
+          Вести продажи без сложных настроек и технических знаний.
+        </li>
       </ul>
 
       {/* Планы 
@@ -88,13 +108,15 @@ export default function AboutGoodsPage() {
       </p>
 */}
       {/* Связь */}
-      <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
+      
+        <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
+      
       <p className="rulesPublicationsPage__text font_Mulish">
-        Если у вас есть вопросы или предложения — мы всегда открыты для обратной связи.  
+        Если у вас есть вопросы или предложения - мы всегда открыты для обратной связи.  
         Мы стремимся развивать платформу и делать её лучше для вас. 
       </p>
 
-      <Link to={`/`} className="rulesPublicationsPage__sectionTitle">Посмотреть объявления</Link>
+      <Link to={`/`} className="rulesPublicationsPage__sectionTitle margin_top_50px">Посмотреть объявления</Link>
 
     </section>
   );
