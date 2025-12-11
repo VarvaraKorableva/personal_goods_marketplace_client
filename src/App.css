@@ -29,6 +29,10 @@
   font-weight: 400;
 }
 
+.margin_top_50px {
+  margin-top: 50px;
+}
+
 .btn {
   cursor: pointer;
   border-radius: 30px;
