@@ -3,11 +3,12 @@
     font-weight: 500;
     margin-bottom: 40px;
     color: black;
+    /*font-family: "Mulish", sans-serif;*/
   }
 
   @media screen and (max-width: 450px) {
     .heading  {
       margin: auto;
-      margin-bottom: 80px;
+      margin-bottom: 40px;
     }
   }

@@ -23,6 +23,12 @@
   font-weight: 400;
 }
 
+.font_Mulish {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .btn {
   cursor: pointer;
   border-radius: 30px;
@@ -100,11 +106,23 @@
 
 @media screen and (max-width: 500px) {
   .form  {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .form  {
     width: 300px;
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 330px) {
+  .form  {
+    width: 280px;
+  }
+}
+
+@media screen and (max-width: 300px) {
   .form  {
     width: 260px;
   }

@@ -28,7 +28,7 @@ function RulesPublicationsPage() {
                 <li className="rulesPublicationsPage__rule-container">
                     <h3 className="rulesPublicationsPage__rule-subtitle">2.Модерация объявлений</h3>
                     <p className="rulesPublicationsPage__text">
-                        Все объявления проходят обязательную модерацию. Администрация вправе 
+                        Администрация вправе 
                         удалить или отклонить объявление без объяснения причин, если оно 
                         нарушает правила или законодательство.
                     </p>

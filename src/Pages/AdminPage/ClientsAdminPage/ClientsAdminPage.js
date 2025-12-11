@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
-
+import './ClientsAdminPage.css'
 import { Link, useLocation } from 'react-router-dom'
 import Button from '../../../UK-kit/Button/Button'
 import NotFoundPage from '../../NotFoundPage/NotFoundPage'
@@ -35,14 +35,14 @@ function ClientsAdminPage() {
         <h2>ClientsAdminPage</h2>
         <Button onClick={getAllUsers}>Посмотреть всех пользователей</Button>
         <p>{`Count of users: ${count}`}</p>
-        <ul>
+        <ul className='clientsAdminPage__wrapper'>
           {allUsers.map((i) => (
-            <li key={i.user_id}>
-              <p>{`user_id: ${i.user_id}`}</p>
-              <p>{`Name: ${i.username}`}</p>
-              <p>{`email: ${i.email}`}</p>
+            <li key={i.user_id} className='clientsAdminPage__container'>
+              <p className='clientsAdminPage__text'>{`user_id: ${i.user_id}`}</p>
+              <p className='clientsAdminPage__text'>Name:</p><p className='clientsAdminPage__text'>{i.username}</p>
+              {/*<p className='clientsAdminPage__text'>email:</p><p className='clientsAdminPage__text'>{i.email}</p>
               <p>{`created_at: ${i.created_at}`}</p>
-              <p>{`ad_count: ${i.ad_count}`}</p>
+              <p className='clientsAdminPage__text'>ad_count:</p><p className='clientsAdminPage__text'>{i.ad_count}</p>*/}
             </li>
           ))}
         </ul>

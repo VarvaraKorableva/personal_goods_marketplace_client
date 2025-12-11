@@ -12,11 +12,13 @@
     font-size: 26px;
     text-transform: uppercase;
     color: rgb(16,21,133);
+    font-family: "Mulish", sans-serif;
 }
 
 .rulesPublicationsPage__subtitle {
     font-size: 14px;
     margin-top: 0;
+    font-family: "Mulish", sans-serif;
 }
 
 .rulesPublicationsPage__rules-wrapper {
@@ -40,6 +42,7 @@
 
 .rulesPublicationsPage__rule-subtitle {
     font-size: 18px;
+    font-family: "Mulish", sans-serif;
 }
 
 .rulesPublicationsPage__text {
@@ -75,6 +78,7 @@
     text-transform: uppercase;
     font-size: 22px;
     color: rgb(16,21,133);
+    font-family: "Mulish", sans-serif;
 }
 
 .cards__subtitle {
@@ -82,6 +86,7 @@
     margin-top: 0;
     color: rgb(16,21,133);
     margin-bottom: 0;
+    font-family: "Mulish", sans-serif;
 }
 
 .goal__container {
@@ -105,6 +110,8 @@
     text-align: start;
     font-size: 18px;
 }
+
+
 
 @media screen and (max-width: 500px) {
     .goal__container {
@@ -151,6 +158,6 @@
 
 @media screen and (max-width: 500px) {
     .rulesPublicationsPage__text {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
