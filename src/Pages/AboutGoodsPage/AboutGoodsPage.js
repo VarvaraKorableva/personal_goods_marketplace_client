@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 export default function AboutGoodsPage() {
   return (
     <section className="rulesPublicationsPage__section">
+      <div className="about__container">
+      <div className="about__logo"></div>
+        <p className="rulesPublicationsPage__maintext font_Mulish">
+          ГУДС - это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
+          Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов.
+        </p>
 
-      <h1 className="rulesPublicationsPage__title">О проекте — Goods</h1>
-      <p className="rulesPublicationsPage__text font_Mulish">
-        <strong style={{ color: 'rgb(16, 21, 133)', fontSize: '24px' }}>Goods</strong> — это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
-        Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов.
-      </p>
-
+        
+      </div>
       {/* Цель */}
       <h2 className="rulesPublicationsPage__sectionTitle">Наша цель</h2>
       <p className="rulesPublicationsPage__text">
