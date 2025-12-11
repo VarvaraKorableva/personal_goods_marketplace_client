@@ -6,7 +6,7 @@ function Logo() {
 
     return (
         <Link to={`/`} className='logo-container'>
-            <h1 className='logo'>Personal</h1>
+            {/*<h1 className='logo'>Personal</h1>*/}
             <div className='logo-img'></div>
             <h1 className='logo'>Marketplace</h1>
         </Link> 
