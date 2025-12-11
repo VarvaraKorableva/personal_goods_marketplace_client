@@ -50,9 +50,17 @@
     margin-bottom: 10px;
     text-align: start;
     align-self: flex-start;
-    font-size: 16px;
+    font-size: 18px;
 }
 
+.rulesPublicationsPage__maintext {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: start;
+    align-self: center;
+    font-size: 18px;
+    max-width: 600px;
+}
 .cards__container {
     max-width: 800px;
     display: grid;
@@ -111,7 +119,40 @@
     font-size: 18px;
 }
 
+.about__container {
+    display: flex;
+    gap: 20px;
+}
 
+.about__logo {
+    width: 400px;
+    height: 400px;
+    background-image: url(../../images/aboutlogo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+    background-size: contain;
+    margin: 0;
+  }
+@media screen and (max-width: 1000px) {
+    .about__logo {
+        width: 200px;
+        height: 200px;
+}}  
+
+@media screen and (max-width: 850px) {
+    .about__container {
+        flex-direction: column;
+    }
+
+    .rulesPublicationsPage__maintext {
+        margin-bottom: 20px;
+        text-align: center;
+        align-self: center;
+        font-size: 18px;
+    }
+} 
 
 @media screen and (max-width: 500px) {
     .goal__container {
@@ -120,7 +161,7 @@
     }
 
     .goal__card {
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 
@@ -139,7 +180,7 @@
 
 @media screen and (max-width: 500px) {
     .rulesPublicationsPage__rule-subtitle {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -158,6 +199,6 @@
 
 @media screen and (max-width: 500px) {
     .rulesPublicationsPage__text {
-        font-size: 14px;
+        font-size: 16px;
     }
 }

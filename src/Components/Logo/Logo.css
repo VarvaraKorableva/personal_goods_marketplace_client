@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
 } 
 
 .logo {
@@ -14,12 +15,13 @@
     font-size: 20px;
     font-weight: 700;
     margin: 0;
+    
     text-decoration: none;
 }
 
 .logo-img {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background-image: url(../../images/goodslogo.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -31,23 +33,27 @@
       font-size: 16px;
       font-weight: 700;
     }
+
+    .logo-container {
+      gap: 10px;
+    } 
   }
   
   @media screen and (max-width: 360px) { 
     .logo-img {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
     }
   }
 
   @media screen and (max-width: 310px) {
     .logo {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
   
   @media screen and (max-width: 276px) {
     .logo {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
