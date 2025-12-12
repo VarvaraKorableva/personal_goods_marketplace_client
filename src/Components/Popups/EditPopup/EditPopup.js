@@ -11,7 +11,7 @@ import EditField from "./EditField";
 function EditPopup ({
   onClose, isOpen, title, 
   updateItemCity, updatePrice, 
-  updateDescription, updateCondition, popupEditItemId, updateTelegram,
+  updateDescription, updateCondition, popupEditItemId, updateTelegram, updateUserName
 }) {
     const [text, setText] = React.useState('')
     const [isMessageText, setIsMessageText] = React.useState(false)
@@ -51,6 +51,8 @@ function EditPopup ({
           updateDescription(popupEditItemId, text)
         } else if(title === "telegram") {
           updateTelegram(userId, text)
+        } else if(title === "name") {
+          updateUserName(userId, text)
         }
         setIsMessageText(false)
         setText('')

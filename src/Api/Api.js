@@ -640,3 +640,17 @@ export const updateTelegram = (user_id, telegram) => {
     })
       .then(checkResponse);
 }  
+
+export const updateUserName = (user_id, username) => {
+    return fetch(`${BASE_URL}/users/updateusername`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ user_id, username }),
+    })
+      .then(checkResponse);
+}  
+

@@ -58,6 +58,10 @@ function MyPage({
     openEditPopup(userId, "telegram")
   }
 
+  function openChangeNamePopup() {
+    openEditPopup(userId, "name")
+  }
+
   // 🔑 Фильтры
   const filters = [
     { label: `${translatedContext.btnNames.activeAdsBtn}`, value: "active", condition: ad => ad.moderated === true },
@@ -88,7 +92,11 @@ function MyPage({
             </div>
           </div>
           <div className="myPage__info-wrapper">
-            <p className="myPage__name">{currentUser.username}</p>
+              <button className="myPage__btn-container">
+                <TbEdit className="cardPage-edit-icon" onClick={openChangeNamePopup}/>
+                <p className="myPage__name font">{currentUser.username}</p>
+              </button>
+            
             {currentUser.telegram ? (
               <button className="myPage__btn-container">
                 <TbEdit className="cardPage-edit-icon" onClick={openAddTelegramPopup}/>
