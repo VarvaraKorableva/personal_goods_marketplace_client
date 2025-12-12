@@ -62,6 +62,7 @@ const en = {
         price: 'Price',
         description: 'Description',
         telegram: 'Telegram',
+        name: 'Name',
     },
     editPopupBtn: {
         changeBtn: 'Change'
@@ -131,6 +132,7 @@ const rus = {
         price: 'цену',
         description: 'описание',
         telegram: 'Telegram',
+        name: 'Имя',
     },
     editPopupBtn: {
         changeBtn: 'Изменить'

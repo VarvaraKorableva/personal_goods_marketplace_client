@@ -10,14 +10,11 @@ import useUser from "./hooks/useUser"
 import useLoading from "./hooks/useLoading"
 import useScroll from "./hooks/useScroll";
 
-import * as Api from './Api/Api'
 import './App.css'
 
 import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import {CurrentUserContext} from './contexts/CurrentUserContext'
-
-import { LanguageProvider } from './contexts/TranslationContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 
 import Registration from './Components/Registration/Registration'
@@ -61,7 +58,6 @@ import ItemsAdminPage from './Pages/AdminPage/ItemsAdminPage/ItemsAdminPage'
 import StickyButton from './Components/StickyButton/StickyButton'
 
 function App() {
-  //const [currentUser, setCurrentUser] = React.useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {})
   const [currentUser, setCurrentUser] = React.useState(() => {
     try {
       if (!localStorage.getItem('user')){
@@ -122,6 +118,7 @@ function App() {
     getUserById,
     userInfo,
     updateTelegram,
+    updateUserName,
   } = useUser({openLoading, closeLoading, openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup});
 
   const {
@@ -183,7 +180,7 @@ function App() {
       userId, {
       openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup, 
       setReceiverId, setItemId, setSuccessfulActionPopup, receiverId, itemId, setIsReserved,
-    });
+  });
 
   const {
     sendVerificationCode,
@@ -626,6 +623,7 @@ function App() {
         updateCondition={updateCondition}
         popupEditItemId={popupEditItemId}
         updateTelegram={updateTelegram}
+        updateUserName={updateUserName}
       />
 
       <AreYouSurePopup
@@ -641,11 +639,10 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      
-
       <Preloader 
         isLoading={isLoading}
       />
+
     </div>
     <Footer handleLogout={handleLogout} isLoggin={isLoggin}></Footer>
     <StickyButton></StickyButton>

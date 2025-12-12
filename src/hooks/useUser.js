@@ -36,11 +36,29 @@ export default function useUser({ openLoading, closeLoading, closeAllPopups, set
           openSuccessfulActionPopup()
         })
       }
+      
+      function updateUserName(user_id, username) {
+        openLoading()
+        Api.updateUserName(user_id, username)
+        .then((res) => {
+          closeAllPopups()
+          setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+          openSuccessfulActionPopup()
+          closeLoading()
+        })
+        .catch((err) => {
+          closeAllPopups()
+          closeLoading()
+          setPopupMessage("Something wrong, plese try again")
+          openSuccessfulActionPopup()
+        })
+      }
 
   return {
     getUserById,
     userInfo,
     updateTelegram,
+    updateUserName,
   };
 
 };

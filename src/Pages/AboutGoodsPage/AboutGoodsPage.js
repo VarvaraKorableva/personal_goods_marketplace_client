@@ -1,5 +1,6 @@
 import React from "react";
 import '../RulesPublicationsPage/RulesPublicationsPage.css'
+import './AboutGoodsPage.css'
 import { Link } from 'react-router-dom';
 
 export default function AboutGoodsPage() {
@@ -116,7 +117,7 @@ export default function AboutGoodsPage() {
         Мы стремимся развивать платформу и делать её лучше для вас. 
       </p>
 
-      <Link to={`/`} className="rulesPublicationsPage__sectionTitle margin_top_50px">Посмотреть объявления</Link>
+      <Link to={`/`} className="aboutGoodsPage__link">Посмотреть объявления <div className="aboutGoodsPage__link__arrow"></div></Link>
 
     </section>
   );
