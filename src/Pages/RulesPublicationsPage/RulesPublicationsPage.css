@@ -52,6 +52,8 @@
     align-self: flex-start;
     font-size: 18px;
     padding: 0;
+
+    line-height: normal;
 }
 
 .rulesPublicationsPage__maintext {
@@ -72,15 +74,25 @@
     align-self: center;
 }
 
+.aboutGoodsPage__title {
+    margin: 0;
+    margin-bottom: 25px;
+    text-align: start;
+    align-self: flex-start;
+    font-size: 18px;
+    padding: 0;
+}
+
 .cards__oneCard {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border: 1px solid #f1f1f1;
+    border: 1px solid rgb(140,186,255);
+    box-shadow: 0 4px 12px rgba(140, 186, 255, 0.3);
     border-radius: 10px;
     padding: 15px;
     list-style-type: none;
-    background-color: rgb(140,186,255);
+    background-color: transparent;
 }
 
 .rulesPublicationsPage__sectionTitle {
@@ -243,6 +255,8 @@
 
     .rulesPublicationsPage__sectionTitle__container {
         height: 100px;
+        margin-top: 25px;
+        margin-bottom: 25px;
     } 
 
 }  
@@ -257,6 +271,11 @@
         text-align: center;
         align-self: center;
         font-size: 18px;
+    }
+
+    .about__logo {
+        width: 300px;
+        height: 300px;
     }
 } 
 
@@ -308,3 +327,10 @@
         font-size: 16px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .about__logo {
+        width: 250px;
+        height: 250px;
+    }
+}    

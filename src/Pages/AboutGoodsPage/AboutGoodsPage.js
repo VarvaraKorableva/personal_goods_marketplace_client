@@ -8,8 +8,8 @@ export default function AboutGoodsPage() {
       <div className="about__container">
       <div className="about__logo"></div>
         <p className="rulesPublicationsPage__maintext font_Mulish">
-          ГУДС - это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
-          Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов.
+          ГУДС Израиль- это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
+          Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов в Израиле.
         </p>
 
         
@@ -43,7 +43,7 @@ export default function AboutGoodsPage() {
       <li className="cards__oneCard">
         <h3 className="cards__subtitle">Персональный подход</h3>
         <p className="rulesPublicationsPage__text font_Mulish">
-          ГУУС - это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением.
+          ГУУДС Израиль - это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением.
         </p>
       </li>
 
@@ -67,7 +67,7 @@ export default function AboutGoodsPage() {
       
         <h2 className="rulesPublicationsPage__sectionTitle">Для кого создан проект?</h2>
       
-      <p className="rulesPublicationsPage__text font_Mulish">
+      <p className="aboutGoodsPage__title font_Mulish">
         Goods подходит всем, кто хочет:
       </p>
       <ul className="rulesPublicationsPage__text goal__card__gaps">
@@ -78,16 +78,16 @@ export default function AboutGoodsPage() {
           </li>
         <li className="goal__card__smallpic__container">
           <div className="goal__card__smallpic12"></div>
-          Купить что-то выгодно;
+            Купить что-то выгодно;
 
         </li>
         <li className="goal__card__smallpic__container">
           <div className="goal__card__smallpic13"></div>
-          Разместить товары своего небольшого бизнеса;
+            Разместить товары своего небольшого бизнеса;
         </li>
         <li className="goal__card__smallpic__container">
           <div className="goal__card__smallpic14"></div>
-          Вести продажи без сложных настроек и технических знаний.
+            Вести продажи без сложных настроек и технических знаний.
         </li>
       </ul>
 
@@ -109,7 +109,7 @@ export default function AboutGoodsPage() {
 */}
       {/* Связь */}
       
-        <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
+      <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
       
       <p className="rulesPublicationsPage__text font_Mulish">
         Если у вас есть вопросы или предложения - мы всегда открыты для обратной связи.  
