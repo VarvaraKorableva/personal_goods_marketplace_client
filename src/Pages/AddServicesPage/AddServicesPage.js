@@ -72,10 +72,12 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
     
     if (firstFile || secondFile || thirdFile || fourthFile) {
       const formData = new FormData()
-      formData.append('firstFile', firstFile); //, secondFile, thirdFile, fourthFile
+      formData.append('firstFile', firstFile);
       formData.append('secondFile', secondFile);
       formData.append('thirdFile', thirdFile);
       formData.append('fourthFile', fourthFile);
+
+      
 
       onAddAd({
         title,

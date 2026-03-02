@@ -38,11 +38,14 @@ function ClientsAdminPage() {
         <ul className='clientsAdminPage__wrapper'>
           {allUsers.map((i) => (
             <li key={i.user_id} className='clientsAdminPage__container'>
-              <p className='clientsAdminPage__text'>{`user_id: ${i.user_id}`}</p>
-              <p className='clientsAdminPage__text'>Name:</p><p className='clientsAdminPage__text'>{i.username}</p>
-              {/*<p className='clientsAdminPage__text'>email:</p><p className='clientsAdminPage__text'>{i.email}</p>
-              <p>{`created_at: ${i.created_at}`}</p>
-              <p className='clientsAdminPage__text'>ad_count:</p><p className='clientsAdminPage__text'>{i.ad_count}</p>*/}
+              <Link className='clientsAdminPage__container' to={`/users/${i.user_id}`}>
+                <p className='clientsAdminPage__text'>{`user_id: ${i.user_id}`}</p>
+                <p className='clientsAdminPage__text'>Name:</p><p className='clientsAdminPage__text'>{i.username}</p>
+                <p>{`created_at: ${i.created_at}`}</p>
+                {/*<p className='clientsAdminPage__text'>email:</p><p className='clientsAdminPage__text'>{i.email}</p>
+                
+                <p className='clientsAdminPage__text'>ad_count:</p><p className='clientsAdminPage__text'>{i.ad_count}</p>*/}
+              </Link>
             </li>
           ))}
         </ul>

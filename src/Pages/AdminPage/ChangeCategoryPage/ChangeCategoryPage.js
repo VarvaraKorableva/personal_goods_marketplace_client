@@ -47,32 +47,32 @@ function ChangeCategoryPage() {
             setMessage("Ошибка при создании категории")
           });
       }
-      
-      const handleCreateCategory = () => {
-        /*createCategoryAdmin({
-          name: "Real estate",
-          name_rus: "Недвижимость",
-          is_good: true,
-          parent_id: null,
-          image_url: "https://plus.unsplash.com/premium_photo-1737200670622-4ab7cd09de62?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fCVEMCU5RCVEMCVCNSVEMCVCNCVEMCVCMiVEMCVCOCVEMCVCNiVEMCVCOCVEMCVCQyVEMCVCRSVEMSU4MSVEMSU4MiVEMSU4Q3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
-          slug: "real-estate",
-          isRealEstate: false,
-          isRent: false,
-        }); */
+
+     const handleCreateCategory = () => {
+      /*createCategoryAdmin({
+        name: "Party supplies",
+        name_rus: "Всё для праздника",
+        is_good: true,
+        parent_id: null,
+        image_url: "https://plus.unsplash.com/premium_photo-1661765319272-b6d49089e41f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIxfHxjaHJpc3RtYXN8ZW58MHx8MHx8fDA%3D",
+        slug: "party-supplies",
+        isRealEstate: false,
+        isRent: false,
+      });*/
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       }; 
 
       const handleCreateSubCategory = () => {
-       /*createCategoryAdmin({
-        name: "Tours",
-        name_rus: "Экскурсии",
-        is_good: false,
-        parent_id: "6", // родительская категория "Услуги"
-        image_url: "https://plus.unsplash.com/premium_photo-1697729849426-8bb60531c6c9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjF8fCVEMSU4RCVEMCVCQSVEMSU4MSVEMCVCQSVEMSU4MyVEMSU4MCVEMSU4MSVEMCVCOCVEMCVCOCUyMCVEMCVCRiVEMCVCRSUyMCVEMCVCOCVEMCVCNSVEMSU4MCVEMSU4MyVEMSU4MSVEMCVCMCVEMCVCQiVEMCVCOCVEMCVCQyVEMSU4M3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=400",
-        slug: "tours",
-        is_real_estate: false,
-        is_rent: false,
-        });  */
+        /*createCategoryAdmin({
+          name: "Dresses",
+          name_rus: "Платья",
+          is_good: true,
+          parent_id: 55, // "Одежда"
+          image_url: "https://images.unsplash.com/photo-1572005901620-75fdc3a40941?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHBhamFtYXMlMjBjaGlsZHxlbnwwfHwwfHx8MA%3D%3D",
+          slug: "dresses",
+          isRealEstate: false,
+          isRent: false,
+        });*/
         setMessage("Аккуратнее, чтобы создать новую категорию требуется заполнить данные")
       };
 
@@ -119,8 +119,8 @@ function ChangeCategoryPage() {
         setMessage("")
         try {
           const result = await Api.updateCategoryImg(
-            125,
-            "https://images.unsplash.com/photo-1724436977642-ed745373401e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE0fHwlRDElODAlRDAlQjAlRDAlQjclRDAlQkQlRDAlQkUlRDElODYlRDAlQjIlRDAlQjUlRDElODIlRDAlQkQlRDElOEIlRDAlQjklMjAlRDAlQjQlRDAlQkUlRDAlQkN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=400"
+            133,
+            "https://images.unsplash.com/photo-1646941785701-892dc6652a3a?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjk0fHwlRDAlQjklRDAlQkUlRDAlQjMlRDAlQjB8ZW58MHx8MHx8fDA%3D"
           );
           // в случае успеха
           setMessage("Изменение прошло")
@@ -184,6 +184,22 @@ function ChangeCategoryPage() {
         const numericId = Number(id);
         deleteCategoryAdmin(numericId)
       };
+/*
+      const updateItemСategoryId = () => {
+        const item_id = 174
+        const category_id = 147
+        Api.updateItemСategoryId(item_id, category_id)
+        .then((res) => {
+          setMessage("Изменение прошло")
+        })
+        .catch((err) => {
+          setMessage("Ошибка. Изменение не прошло.")
+        })
+      }*/
+
+      function onUpdateItemCategory() {
+        //updateItemСategoryId()
+      }
 
       if (currentUser.email !== process.env.REACT_APP_ADMIN) {
         return <NotFoundPage></NotFoundPage>
@@ -201,6 +217,7 @@ function ChangeCategoryPage() {
                 <Button onClick={onUpdateCategoryNameRus}>Изменить название категории rus</Button>
                 <Button onClick={onUpdateCategoryNameEng}>Изменить название категории eng</Button>
                 <Button onClick={onUpdateCategorySlug}>Изменить Slug</Button>
+                <Button onClick={onUpdateItemCategory}>updateItemСategoryId</Button>
             </div>
             
             {

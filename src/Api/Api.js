@@ -1,7 +1,5 @@
 //export const BASE_URL = '//localhost:3001';
-export const BASE_URL = '//personal-goods-marketplace-api.onrender.com'
-//const BASE_UR = process.env.REACT_APP_BASE_URL_LOCAL;
-//const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -654,3 +652,16 @@ export const updateUserName = (user_id, username) => {
       .then(checkResponse);
 }  
 
+export const updateItemСategoryId = (item_id, category_id) => {
+  
+  return fetch(`${BASE_URL}/items/update-item-category-id/${item_id}`, {
+      credentials: 'include',
+      method: "PATCH",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ category_id }),
+  })
+  .then(checkResponse);
+};
