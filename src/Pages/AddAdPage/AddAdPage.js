@@ -14,6 +14,7 @@ import ImagesUpload from '../../Components/Forms/ImagesUpload/ImagesUpload'
 import CategorySelect from '../../Components/Forms/CategorySelect/CategorySelect'
 import { conditions } from '../../const/Сonditions/Сonditions'
 
+
 function AddAdPage({onAddAd, openLoading, closeLoading}) {
   const currentUser = React.useContext(CurrentUserContext)
   const owner_id = currentUser.user_id
@@ -31,6 +32,9 @@ function AddAdPage({onAddAd, openLoading, closeLoading}) {
 
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
+  const [city_ru, setCity_ru] = React.useState('')
+  const [city_en, setCity_en] = React.useState('')
+  const [city_he, setCity_he] = React.useState('')
 
   const [price, setPrice] = React.useState('')
   const [description, setDescription] = React.useState('')
@@ -100,7 +104,9 @@ function AddAdPage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate,
         isRent,
+        original_language:language,
         formData,
+        city_ru, city_en, city_he,
       });
     } else {
       onAddAd({
@@ -115,6 +121,8 @@ function AddAdPage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate,
         isRent,
+        original_language:language,
+        city_ru, city_en, city_he,
       });
 
     }
@@ -234,6 +242,12 @@ return (
           language={language} 
           translatedContext={translatedContext}
           city={city} 
+          city_ru={city_ru}
+          city_en={city_en}
+          city_he={city_he}
+          setCity_ru={setCity_ru}
+          setCity_en={setCity_en}
+          setCity_he={setCity_he}
           setCity={setCity} 
           isCitySelected={isCitySelected} 
           setIsCitySelected={setIsCitySelected} 
