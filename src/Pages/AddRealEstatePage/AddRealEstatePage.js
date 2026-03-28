@@ -33,6 +33,9 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
   const [errorImgMessage, setErrorImgMessage] = React.useState('')
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
+  const [city_ru, setCity_ru] = React.useState('')
+  const [city_en, setCity_en] = React.useState('')
+  const [city_he, setCity_he] = React.useState('')
   const [price, setPrice] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [size, setSize] = React.useState('')
@@ -91,7 +94,9 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate: true,
         isRent,
+        original_language:language,
         formData,
+        city_ru, city_en, city_he,
       });
     } else {
       onAddAd({
@@ -106,6 +111,8 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate: true,
         isRent,
+        original_language:language,
+        city_ru, city_en, city_he,
       });
 
     }
@@ -220,6 +227,12 @@ return (
           translatedContext={translatedContext}
           city={city} 
           setCity={setCity} 
+          city_ru={city_ru}
+          city_en={city_en}
+          city_he={city_he}
+          setCity_ru={setCity_ru}
+          setCity_en={setCity_en}
+          setCity_he={setCity_he}
           isCitySelected={isCitySelected} 
           setIsCitySelected={setIsCitySelected} 
           cityErrorMessage={cityErrorMessage} 

@@ -28,6 +28,9 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
   const [fourthFile, setFourthFile] = React.useState(null);
   const [title, setTitle] = React.useState('')
   const [city, setCity] = React.useState('')
+  const [city_ru, setCity_ru] = React.useState('')
+  const [city_en, setCity_en] = React.useState('')
+  const [city_he, setCity_he] = React.useState('')
   const [price, setPrice] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [size, setSize] = React.useState('')
@@ -77,8 +80,6 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
       formData.append('thirdFile', thirdFile);
       formData.append('fourthFile', fourthFile);
 
-      
-
       onAddAd({
         title,
         owner_id: owner_id,
@@ -91,7 +92,9 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate,
         isRent,
+        original_language:language,
         formData,
+        city_ru, city_en, city_he,
       });
     } else {
       onAddAd({
@@ -106,6 +109,8 @@ function AddServicesPage({onAddAd, openLoading, closeLoading}) {
         condition,
         isRealEstate,
         isRent,
+        original_language:language,
+        city_ru, city_en, city_he,
       });
     }
       setSelectedCategoryId(null)
@@ -214,6 +219,12 @@ return (
         translatedContext={translatedContext}
         city={city} 
         setCity={setCity} 
+        city_ru={city_ru}
+        city_en={city_en}
+        city_he={city_he}
+        setCity_ru={setCity_ru}
+        setCity_en={setCity_en}
+        setCity_he={setCity_he}
         isCitySelected={isCitySelected} 
         setIsCitySelected={setIsCitySelected} 
         cityErrorMessage={cityErrorMessage} 

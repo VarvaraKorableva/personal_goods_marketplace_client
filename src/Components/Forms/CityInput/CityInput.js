@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { cities } from '../../../const/Cities/cities'
+import { cities } from '../../../const/Cities/citiesKeys'
 import '../../Forms/Forms.css'
 import './CityInput.css'
 
-function CityInput({label, language, translatedContext, city, setCity, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
+function CityInput({label, language, translatedContext, city, setCity, city_ru, city_en, city_he, setCity_ru, setCity_en, setCity_he, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
   const [filteredCities, setFilteredCities] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   //const [isError, setIsError] = useState(false)
@@ -13,8 +13,11 @@ function CityInput({label, language, translatedContext, city, setCity, isCitySel
     setCity(value);
 
     if (value) {
-      const list = (language === "rus" ? cities.rus : cities.en).filter(item =>
+      /*const list = cities[language].filter(item =>
         item.toLowerCase().includes(value.toLowerCase())
+      );*/
+      const list = cities.filter(item =>
+        item[language].toLowerCase().includes(value.toLowerCase())
       );
       setFilteredCities(list);
       setShowDropdown(true);
@@ -27,8 +30,11 @@ function CityInput({label, language, translatedContext, city, setCity, isCitySel
     }
   };
 
-  const handleSelectCity = (cityName) => {
-    setCity(cityName);
+  const handleSelectCity = (cityObj) => {
+    setCity(cityObj[language]);
+    setCity_ru(cityObj.rus);
+    setCity_en(cityObj.en);
+    setCity_he(cityObj.he);
     setIsCitySelected(true);
     setShowDropdown(false);
     setCityErrorMessage('');
@@ -55,7 +61,7 @@ function CityInput({label, language, translatedContext, city, setCity, isCitySel
               key={index}
               onClick={() => handleSelectCity(item)}
             >
-              {item}
+              {item[language]}
             </li>
           ))}
         </ul>

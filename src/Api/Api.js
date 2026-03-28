@@ -89,7 +89,11 @@ export const createItem = (otherData) => {
       color: otherData.color, 
       condition: otherData.condition,  
       is_real_estate: otherData.isRealEstate,
-      is_rent: otherData.isRent     
+      is_rent: otherData.isRent,
+      original_language: otherData.original_language,  
+      city_ru: otherData.city_ru,
+      city_en: otherData.city_en,
+      city_he: otherData.city_he,
     })
   })
     .then(checkResponse);
