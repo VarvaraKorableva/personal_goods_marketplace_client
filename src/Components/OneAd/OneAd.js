@@ -40,6 +40,14 @@ function OneAd({
       translatedContext = hebrew;
     }
 
+    const cityByLanguage = {
+      rus: item.city_ru,
+      en: item.city_en,
+      hebrew: item.city_he
+    };
+    
+    const displayedCity = cityByLanguage[language] || item.city;
+
     function handleAddMessagePopupOpen() {
       openFirstMessagePopup(item.owner_id, item.item_id)
     }
@@ -140,7 +148,7 @@ function OneAd({
                 <p className="oneAdd__price">{item.price} ₪</p>
                 <p className="oneAdd__city">
                   <FaMapMarkerAlt className="oneAdd__city_icon"></FaMapMarkerAlt>
-                  {item.city}
+                  {displayedCity}
                 </p>
 
                 {/*
