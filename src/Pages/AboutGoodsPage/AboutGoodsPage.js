@@ -2,25 +2,87 @@ import React from "react";
 import '../RulesPublicationsPage/RulesPublicationsPage.css'
 import './AboutGoodsPage.css'
 import { Link } from 'react-router-dom';
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/RulesPages/AboutPageData'
+/*
+  const rus = {
+    mainText: `ГУДС Израиль- это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
+  Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов в Израиле.`,
+  
+    ourGoalTitle: "Наша цель",
+    ourGoalText: "Мы стремимся создать пространство, где каждый пользователь может легко:",
+    goalList: [
+      "Разместить объявление о продаже товара",
+      "Найти нужную вещь по честной цене",
+      "Быстро связаться с продавцом или покупателем",
+      "Пользоваться платформой без лишних действий и сложностей"
+    ],
+  
+    whyGoodsTitle: "Почему ГУДС?",
+    cards: [
+      {
+        subtitle: "Удобство",
+        text: "Интуитивно понятный интерфейс, простая форма добавления объявлений и продуманная структура каталога."
+      },
+      {
+        subtitle: "Персональный подход",
+        text: "ГУДС Израиль - это удобная платформа для вас. Мы делаем маркетплейс, в котором каждому пользователю удобно управлять своими объявлениями, профилем и общением."
+      },
+      {
+        subtitle: "Безопасность и прозрачность",
+        text: "Мы внимательно относимся к защите данных. Все персональные данные обрабатываются в соответствии с законодательством Израиля, а серверы находятся в регионе Франкфурт, что обеспечивает стабильность и высокий уровень безопасности."
+      },
+      {
+        subtitle: "Быстрая модерация",
+        text: "Мы стремимся к тому, чтобы на платформе размещались только честные предложения. Объявления проходят быструю проверку и модерацию."
+      }
+    ],
+  
+    forWhomTitle: "Для кого создан проект?",
+    forWhomText: "Goods подходит всем, кто хочет:",
+    forWhomList: [
+      "Продать личные вещи",
+      "Купить что-то выгодно",
+      "Разместить товары своего небольшого бизнеса",
+      "Вести продажи без сложных настроек и технических знаний"
+    ],
+  
+    contactTitle: "Связь с проектом",
+    contactText: "Если у вас есть вопросы или предложения - мы всегда открыты для обратной связи. Мы стремимся развивать платформу и делать её лучше для вас.",
+    checkAdsLink: "Посмотреть объявления"
+  };
+*/
 
 export default function AboutGoodsPage() {
+  const { language } = React.useContext(LanguageContext)
+
+  const { en, rus, hebrew } = choose;
+
+  let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+  }
+
   return (
     <section className="rulesPublicationsPage__section">
       <div className="about__container">
       <div className="about__logo"></div>
         <p className="rulesPublicationsPage__maintext font_Mulish">
-          ГУДС Израиль- это персональный маркетплейс, созданный для удобного, безопасного и простого размещения объявлений о продаже товаров.
-          Проект был создан для того, чтобы сделать процесс покупки и продажи максимально комфортным как для частных лиц, так и для небольших продавцов в Израиле.
+        {translatedContext.mainText}
         </p>
 
         
       </div>
       {/* Цель */}
       <div className="rulesPublicationsPage__sectionTitle__container">
-        <h2 className="rulesPublicationsPage__sectionTitle">Наша цель</h2>
+        <h2 className="rulesPublicationsPage__sectionTitle">{translatedContext.ourGoalTitle}</h2>
       </div>
       <p className="rulesPublicationsPage__text">
-        Мы стремимся создать пространство, где каждый пользователь может легко:
+      {translatedContext.ourGoalText}
       </p>
       <ul className="goal__container">
         <li className="goal__card"><div className="goal__card__vpic"></div><p>Разместить объявление о продаже товара</p></li>
@@ -31,7 +93,7 @@ export default function AboutGoodsPage() {
 
       {/* Почему Goods */}
       <div className="rulesPublicationsPage__sectionTitle__container">
-        <h2 className="rulesPublicationsPage__sectionTitle">Почему ГУДС?</h2>
+        <h2 className="rulesPublicationsPage__sectionTitle">{translatedContext.whyGoodsTitle}</h2>
       </div>
     <ul className="cards__container">
       <li className="cards__oneCard">
@@ -110,14 +172,13 @@ export default function AboutGoodsPage() {
 */}
       {/* Связь */}
       
-      <h2 className="rulesPublicationsPage__sectionTitle">Связь с проектом</h2>
+      <h2 className="rulesPublicationsPage__sectionTitle">{translatedContext.contactTitle}</h2>
       
       <p className="rulesPublicationsPage__text font_Mulish">
-        Если у вас есть вопросы или предложения - мы всегда открыты для обратной связи.  
-        Мы стремимся развивать платформу и делать её лучше для вас. 
+      {translatedContext.contactText}
       </p>
 
-      <Link to={`/`} className="aboutGoodsPage__link">Посмотреть объявления <div className="aboutGoodsPage__link__arrow"></div></Link>
+      <Link to={`/`} className="aboutGoodsPage__link">{translatedContext.checkAdsLink}<div className="aboutGoodsPage__link__arrow"></div></Link>
 
     </section>
   );
