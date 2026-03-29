@@ -25,8 +25,8 @@ const hebrew = {
     mypage: 'העמוד שלי',
     login: 'התחברות',
     registraion: 'רישום',
-    addNewAddBtnName: 'Place an ad',
-    mainPage: 'Main Page',
+    addNewAddBtnName: 'פרסם מודעה',
+    mainPage: 'דף הבית',
     favoritesBtn: 'מועדפים',
     myMessagesBtn: 'הודעות שלי',
 }

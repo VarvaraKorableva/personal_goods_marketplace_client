@@ -6,7 +6,7 @@ import { conditions } from '../../../const/Сonditions/Сonditions'
 //import { useItemsContext } from "../../../contexts/ItemsContext";
 import { useFiltersContext } from "../../../contexts/FiltersContext";
 import { ITEMS_LIMIT } from "../../../const/helper";
-import { cities } from '../../../const/Cities/cities'
+import { cities } from '../../../const/Cities/citiesKeys'
 
 function FilterBtnContainer({getAllItems, resetAllfilters}) {
     const { language } = React.useContext(LanguageContext)
@@ -14,6 +14,8 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
 
     const {
       city, setCity,
+      city_ru, city_en, city_he,
+      setCity_ru, setCity_en, setCity_he,
       lowPrice, setLowPrice,
       highPrice, setHighPrice,
       condition, setCondition,
@@ -30,29 +32,39 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
         translatedContext = hebrew;
     }
 
-    // Выбираем массив городов и состояний в зависимости от языка
-    const cityOptions = language === 'rus' ? cities.rus : cities.en || [];
+    const langKeyMap = {
+      rus: 'rus',
+      en: 'en',
+      hebrew: 'he'
+    };
 
-  function handleSearchByCity(e) {
-    setCity(e.target.value)
-  }
+    const currentLang = langKeyMap[language] || 'rus';
 
-  function handleSearchByLowPriceFromInput(e) {
-    setLowPrice(e.target.value)
-  }
+    //const cityOptions = cities.map(cityObj => cityObj[currentLang] || cityObj.rus);
+    const cityOptions = cities.map(cityObj => cityObj[language] || cityObj.rus);
+    
+    const conditionOptions = conditions[currentLang] || conditions.rus;
 
-  function handleSearchByHighPriceFromInput(e) {
-    setHighPrice(e.target.value)
-  }
+    function handleSearchByCity(e) {
+      setCity(e.target.value)
+    }
 
-  function handleSearchByConditionFromInput(e) {
-    setCondition(e.target.value)
-  }
+    function handleSearchByLowPriceFromInput(e) {
+      setLowPrice(e.target.value)
+    }
 
-  function handleResetAllFilters() {
-    resetAllfilters()
-    getAllItems({ page: 1, limit, filters: {} }) 
-  }
+    function handleSearchByHighPriceFromInput(e) {
+      setHighPrice(e.target.value)
+    }
+
+    function handleSearchByConditionFromInput(e) {
+      setCondition(e.target.value)
+    }
+
+    function handleResetAllFilters() {
+      resetAllfilters()
+      getAllItems({ page: 1, limit, filters: {} }) 
+    }
 
     return(
         <div className="filterBtnContainer__container">
@@ -111,7 +123,7 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
               >
                 <option value="">{translatedContext.selectCondition}</option>
 
-                    {language === 'rus' ?
+                    {/*{language === 'rus' ?
                         conditions.rus.map((item) => (
                             <option key={item} value={item}>{item}</option>
                         ))
@@ -120,7 +132,13 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
                         conditions.en.map((item) => (
                             <option key={item} value={item}>{item}</option>
                         ))
-                    }
+                    }*/}
+
+                      {conditionOptions.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
               </select>
             </div>
         </div>

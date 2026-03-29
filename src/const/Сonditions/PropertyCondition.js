@@ -15,4 +15,11 @@ export const propertyCondition = {
       "Needs renovation",
       "Under construction",
     ],
+    he: [
+      "נכס חדש",
+      "משופץ",
+      "במצב טוב",
+      "דורש שיפוץ",
+      "בתהליך בנייה",
+  ]
   }

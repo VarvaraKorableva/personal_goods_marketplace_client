@@ -34,21 +34,23 @@ const rus = {
 }
 
 const hebrew = {
-    changeAvatarBtn: 'Change Avatar',
+    changeAvatarBtn: 'שנה אווטאר',
     
-    myListingsTitle: 'Listings added ',
-    logOutBtn: 'Log out',
-    addMoreAdsBtn: 'View more',
-    noAdsMessage: "You haven't added any ads yet",
-    addNewAdBtnName: "Add listing",
-    temporaryMessage: "Soon it will be possible to add an avatar here",
+    myListingsTitle: 'מודעות שהוספו',
+    logOutBtn: 'התנתק',
+    addMoreAdsBtn: 'צפה בעוד',
+    noAdsMessage: 'עדיין לא הוספת מודעות',
+    addNewAdBtnName: 'הוסף מודעה',
+    temporaryMessage: 'בקרוב יהיה אפשר להוסיף אווטאר כאן',
+    
     btnNames: {
-        addTelegram: 'Add Telegram',
-        whyDoesThisMatter: 'Why does this matter?',
-        activeAdsBtn: 'Active Listings',
-        addAdBtn: 'Add Listing',
+        addTelegram: 'הוסף טלגרם',
+        whyDoesThisMatter: 'למה זה חשוב?',
+        activeAdsBtn: 'מודעות פעילות',
+        addAdBtn: 'הוסף מודעה',
     },
-    whyAddTelegramIsImportant: 'Add your Telegram so buyers can contact you faster — this increases your chances of a successful sale.',
+    
+    whyAddTelegramIsImportant: 'הוסף את הטלגרם שלך כדי שקונים יוכלו ליצור איתך קשר מהר יותר — זה מגדיל את הסיכויים למכירה מוצלחת.',
 }
 
 const choose = { en, rus, hebrew };

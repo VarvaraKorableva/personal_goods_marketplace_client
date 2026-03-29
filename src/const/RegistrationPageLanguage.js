@@ -87,8 +87,8 @@ const hebrew = {
     name: 'שם',
     email: 'דוא"ל',
     password: 'סיסמה',
-    telegram: 'Telegram',
-    verificationCodeLabel: 'Enter the code that was sent to your email',
+    telegram: 'טלגרם',
+    verificationCodeLabel: 'הזן את הקוד שנשלח לדוא"ל שלך',
 
     button: 'הירשם',
 
@@ -114,7 +114,7 @@ const hebrew = {
         invalidEmailFormat: '.פורמט האימייל אינו תקין',
     },
 
-    alreadyRegisteredError: 'Такой email уже зарегистрирован -изменить',
+    alreadyRegisteredError: 'האימייל הזה כבר רשום – שנה',
 }
 
 const choose = { en, rus, hebrew };

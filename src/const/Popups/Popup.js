@@ -52,13 +52,13 @@ const en = {
   
   const hebrew = {
     chooseListingTypePopup: {
-      popupTitle: 'What ad would you like to add?',
-      goodsBtn: 'Goods',
-      servicesBtn: 'Services',
-      realEstateBtn: 'Real Estate',
+      popupTitle: 'איזה מודעה תרצה להוסיף?',
+      goodsBtn: 'מוצרים',
+      servicesBtn: 'שירותים',
+      realEstateBtn: 'נדל״ן',
     },
     messagesPopup: {
-      maxAdsPopupMessage: 'You can add up to 20 listings, you have added',
+      maxAdsPopupMessage: 'ניתן להוסיף עד 20 מודעות, כבר הוספת',
       changesSaved: "השינויים נשמרו, תראו אותם באתר בקרוב",
       somethingWrong: "משהו השתבש, נסה שוב",
     },

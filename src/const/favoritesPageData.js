@@ -11,9 +11,9 @@ const rus = {
 }
 
 const hebrew = {
-    nothingAddedMessage: 'Nothing added to favorites',
-    myFavoriteTitle: 'My favorites',
-    goToHomePageBtn: 'To the home page',
+    nothingAddedMessage: 'לא נוספו מודעות למועדפים',
+    myFavoriteTitle: 'המועדפים שלי',
+    goToHomePageBtn: 'לדף הבית',
 }
 
 const choose = { en, rus, hebrew };

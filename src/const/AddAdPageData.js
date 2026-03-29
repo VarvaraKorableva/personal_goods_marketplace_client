@@ -140,30 +140,80 @@ const rus = {
 }
 
 const hebrew = {
-    adANewGood: 'Добавить новый товар',
-    adANewService: 'Ad a New Service',
-    choiseACategory: 'Choise a category',
-    choiseAServices: 'Choise a category',
-    choiseASubCategory: 'Choise a Subcategory',
-    choiseASubCategoryOfServices: 'Choise a Subcategory',
-    name: 'Add a title for the ad',
-    condition: 'Select condition',
-    propertyCondition: 'Select property condition',
-    serviceName: 'Add the name of the service you provide',
-    description: 'Add a description here',
-    serviceDescription: 'Add a description of the service here',
-    price: "Enter the item price in shekels (if you set the price to 0, a 'Free' badge will be added)",
-    propertyRentPrice: 'Enter the monthly rent price for the property (if set to 0, a "Free" badge will be added)',
-    propertyBuyPrice: 'Enter the property price (if set to 0, a "Free" badge will be added)',
-    servicePrice: 'Add a Price',
-    cityServices: 'Where will the service be provided',
-    place: 'Where can you give the goods (city)',
-    inputPlace: 'Start typing a city',
-    placeRealEstate: 'Where is the property located (city)',
-    picture: 'Add a Picture',
-    addBtn: 'Add the Ad',
-    changeBtn: 'Edit',
-    uploadPictureBtn: 'Upload picture',
+    adANewGood: 'הוסף מוצר חדש',
+    adANewService: 'הוסף שירות חדש',
+    choiseACategory: 'בחר קטגוריית מודעה',
+    choiseAServices: 'בחר קטגוריה',
+    choiseASubCategory: 'בחר קטגוריה',
+    choiseASubCategoryOfServices: 'בחר קטגוריה',
+    choiseASecondSubCategoryGoods: 'בחר קטגוריה',
+    
+    name: 'הוסף כותרת למודעה',
+    condition: 'בחר מצב המוצר',
+    propertyCondition: 'בחר מצב הנכס',
+    serviceName: 'הוסף את שם השירות שאתה מציע',
+    
+    description: 'הוסף תיאור למוצר',
+    serviceDescription: 'הוסף תיאור לשירות שאתה מציע',
+    propertyDescription: 'הוסף תיאור לנכס',
+    
+    price: 'ציין את מחיר המוצר בשקלים (אם המחיר הוא 0, יתווסף תג "חינם")',
+    servicePrice: 'ציין את מחיר השירות (אם המחיר הוא 0, יתווסף תג "חינם")',
+    propertyRentPrice: 'ציין את מחיר השכירות לחודש (אם המחיר הוא 0, יתווסף תג "חינם")',
+    propertyBuyPrice: 'ציין את מחיר הנכס (אם המחיר הוא 0, יתווסף תג "חינם")',
+    
+    place: 'איפה ניתן לאסוף את המוצר (עיר)',
+    inputPlace: 'התחל להקליד עיר',
+    cityServices: 'ציין היכן יינתן השירות',
+    picture: 'הוסף תמונות',
+    placeRealEstate: 'איפה נמצא הנכס (עיר)',
+    
+    addBtn: 'הוסף מודעה',
+    changeBtn: 'שנה',
+    uploadPictureBtn: '+',
+
+    errors: {
+        categoryErrorMessage: {
+            errorMessage: 'בחר קטגוריה',
+        },
+        secondCategoryErrorMessage: {
+            errorMessage: 'בחר תת-קטגוריה',
+        },    
+        thirdSubCategoryErrorMessage: {
+            errorMessage: 'בחר תת-קטגוריה',
+        },
+        titleErrorMessage: {
+            errorMessage: 'הוסף כותרת למודעה',
+            errorMessageToLong: 'אורך הכותרת לא יכול לעלות על 40 תווים',
+            errorMessageToSmall: 'הכותרת לא יכולה להיות קצרה מ-3 תווים',
+        },    
+        priceErrorMessage: {
+            errorMessage: 'הוסף מחיר',
+            errorMessageOnlyNumbers: 'המחיר יכול להכיל רק ספרות',
+            errorMessageToLong: 'המחיר לא יכול להכיל יותר מ-10 ספרות',
+        },
+        cityErrorMessage: {
+            errorMessage: 'הוסף עיר',
+            errorInCity: 'האם אתה בטוח שהעיר קיימת? אם כן ויש שגיאה, בחר עיר קרובה',
+        },
+        conditionErrorMessage: {
+            errorMessage: 'בחר מצב',
+        },
+    },
+
+    titles: {
+        condition: 'מצב',
+        city: 'עיר',
+        price: 'מחיר',
+        description: 'תיאור',
+        telegram: 'טלגרם',
+        name: 'שם',
+    },
+
+    editPopupBtn: {
+        changeBtn: 'שנה'
+    }
+  
 }
 
 const choose = { en, rus, hebrew };

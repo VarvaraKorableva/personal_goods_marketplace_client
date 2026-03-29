@@ -37,21 +37,22 @@ const rus = {
 }
 
 const hebrew = {
-    name: 'Name',
-    category: 'Category',
-    condition: 'Condition',
-    price: 'Price',
-    city: 'City',
-    addDescription: 'Add description',
-    seeAllUserAds: 'See all user ads',
-    description: 'Description',
-    seller: 'Seller',
+    name: 'כותרת',
+    category: 'קטגוריה',
+    condition: 'מצב',
+    price: 'מחיר',
+    city: 'עיר',
+    addDescription: 'הוסף תיאור',
+    seeAllUserAds: 'צפה בכל המודעות של המוכר',
+    description: 'תיאור',
+    seller: 'מוכר',
+    
     btn: {
-        deleteBtn: 'Delete ad',
-        deleteFromFavBtn: 'Delete from favorites',
-        addToFavBtn: 'Add to favorites',
-        writeAMessageBtn: 'Write a message',
-        messageTheSellerOnTelegram: 'Message the seller on Telegram'
+        deleteBtn: 'מחק',
+        deleteFromFavBtn: 'הסר מהמועדפים',
+        addToFavBtn: 'הוסף למועדפים',
+        writeAMessageBtn: 'כתוב הודעה',
+        messageTheSellerOnTelegram: 'כתוב למוכר בטלגרם'
     }
 }
 

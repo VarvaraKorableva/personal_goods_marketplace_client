@@ -40,13 +40,14 @@ function OneAd({
       translatedContext = hebrew;
     }
 
-    const cityByLanguage = {
-      rus: item.city_ru,
-      en: item.city_en,
-      hebrew: item.city_he
+    const langMap = {
+      rus: 'city_ru',
+      en: 'city_en',
+      hebrew: 'city_he'
     };
     
-    const displayedCity = cityByLanguage[language] || item.city;
+    const displayedCity = item[langMap[language]] || item.city_ru;
+
 
     function handleAddMessagePopupOpen() {
       openFirstMessagePopup(item.owner_id, item.item_id)

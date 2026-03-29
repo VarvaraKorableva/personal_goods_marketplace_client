@@ -3,19 +3,16 @@ import { cities } from '../../../const/Cities/citiesKeys'
 import '../../Forms/Forms.css'
 import './CityInput.css'
 
-function CityInput({label, language, translatedContext, city, setCity, city_ru, city_en, city_he, setCity_ru, setCity_en, setCity_he, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
+function CityInput({label, language, translatedContext, city, setCity, setCity_ru, setCity_en, setCity_he, isCitySelected, setIsCitySelected, cityErrorMessage, setCityErrorMessage, good, realEstate }) {
   const [filteredCities, setFilteredCities] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  //const [isError, setIsError] = useState(false)
 
   const handleCityChange = (e) => {
     const value = e.target.value;
     setCity(value);
 
     if (value) {
-      /*const list = cities[language].filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );*/
+      
       const list = cities.filter(item =>
         item[language].toLowerCase().includes(value.toLowerCase())
       );
@@ -34,7 +31,7 @@ function CityInput({label, language, translatedContext, city, setCity, city_ru, 
     setCity(cityObj[language]);
     setCity_ru(cityObj.rus);
     setCity_en(cityObj.en);
-    setCity_he(cityObj.he);
+    setCity_he(cityObj.hebrew);
     setIsCitySelected(true);
     setShowDropdown(false);
     setCityErrorMessage('');

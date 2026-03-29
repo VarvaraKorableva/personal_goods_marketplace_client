@@ -10,8 +10,8 @@ const rus = {
 }
 
 const hebrew = {
-    mainTitle: '404 Not Found Page',
-    backLinkName: 'To the home page ',
+    mainTitle: '404 – הדף לא נמצא',
+    backLinkName: 'חזרה לדף הבית',
 }
 
 const choose = { en, rus, hebrew };

@@ -6,4 +6,7 @@ export const conditions =
     en: [
         "New", "Excellent", "Good", "Average", "Poor",    
     ],
+    he: [
+        "חדש", "מצוין", "טוב", "בינוני", "גרוע",
+    ]
 }

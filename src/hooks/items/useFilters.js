@@ -12,6 +12,7 @@ export default function useFilters({ getAllItems, }) {
 
   const {
     city, setCity,
+    setCity_ru, setCity_en, setCity_he,
     lowPrice, setLowPrice,
     highPrice, setHighPrice,
     condition, setCondition,
@@ -21,6 +22,9 @@ export default function useFilters({ getAllItems, }) {
 
     const resetAllfilters = () => {
         setCity('')
+        setCity_ru('')
+        setCity_en('')
+        setCity_he('')
         setLowPrice(0)
         setHighPrice(0)
         setCondition('')
