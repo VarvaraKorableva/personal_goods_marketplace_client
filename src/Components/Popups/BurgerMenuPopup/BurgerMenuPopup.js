@@ -86,6 +86,7 @@ return (
           <div className='header__lang-container burgerMenuPopup_link'>
             <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
             <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
+            <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active font':'header__lang-btn font'}>HE</button>
           </div>
         </div>
       :  
