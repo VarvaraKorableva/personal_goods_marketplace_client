@@ -41,8 +41,8 @@ const rus = {
 }
 
 const hebrew = {
-    btnNameSearch: 'Search',
-    placeholder: 'Search by advertisements',
+    btnNameSearch: 'חפש',
+    placeholder: 'חפש לפי מודעות',
     login: 'התחברות',
     registraion: 'רישום',
     addNewAddBtnName: 'פרסום מודעה חדשה',

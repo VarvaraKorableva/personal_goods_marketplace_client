@@ -80,6 +80,7 @@ return (
             <div className='header__lang-container'>
               <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active':'header__lang-btn'}>RU</button>
               <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active':'header__lang-btn'}>EN</button>
+              <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active':'header__lang-btn'}>HE</button>
             </div>
           
         </div>

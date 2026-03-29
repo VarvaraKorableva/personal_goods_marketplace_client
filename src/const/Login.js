@@ -47,27 +47,27 @@ const rus = {
 }
 
 const hebrew = {
-    title: 'Войти в приложение - change to hebrew',
+    title: 'התחברות לאפליקציה',
     email: 'אימייל',
     password: 'סיסמה',
-    notRegisteredYet: '? עדיין לא רשום',
+    notRegisteredYet: 'עדיין לא רשומים?',
 
-    signUp: 'הירשם',
+    signUp: 'הרשמה',
 
-    button: 'התחברות',
+    button: 'התחבר',
 
     errors: {
         passwordMessage: {
-          passwordMustBeFilledIn:'יש למלא את הסיסמה',
-          passwordMustContainAtLeastCharacters: 'הסיסמה צריכה להכיל לפחות 5 תווים',
-          passwordMustNotExceedCharacters: 'הסיסמה לא יכולה להכיל יותר מ-8 תווים',
+          passwordMustBeFilledIn: 'יש למלא את השדה',
+          passwordMustContainAtLeastCharacters: 'השדה לא יכול להיות פחות מ-5 תווים',
+          passwordMustNotExceedCharacters: 'השדה לא יכול לעלות על 8 תווים',
         },
         emailMessage: {
-            emailMustBeFilledIn: 'יש למלא את כתובת האימייל',
-            invalidEmailFormat: 'פורמט האימייל אינו תקף',
+            emailMustBeFilledIn: 'יש למלא את השדה',
+            invalidEmailFormat: 'פורמט אימייל לא תקין',
         },
-        authenticationError: 'нужно добавить сообщение на иврите',
-    }, 
+        authenticationError: 'האימייל או הסיסמה שגויים, נסה שוב',
+    },
 }
 
 const choose = { en, rus, hebrew };

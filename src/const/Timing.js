@@ -16,11 +16,11 @@ const rus = {
 }
 
 const hebrew = {
-    postedToday: 'Posted today',
-    postedYesterday: 'Posted yesterday',
-    posted: 'Posted',
+    postedToday: 'פורסם היום',
+    postedYesterday: 'פורסם אתמול',
+    posted: 'פורסם',
 
-    free: 'Free',
+    free: 'חינם',
 }
 
 const choose = { en, rus, hebrew };

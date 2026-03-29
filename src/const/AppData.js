@@ -10,8 +10,8 @@ const rus = {
 }
 
 const hebrew = {
-    successfulMessage: 'Your ad was added successfully!',
-    wrongMessage: 'Something wrong, plese try again',
+    successfulMessage: 'המודעה נוספה בהצלחה!',
+    wrongMessage: 'משהו השתבש, אנא נסה שוב',
 }
 
 const choose = { en, rus, hebrew };
