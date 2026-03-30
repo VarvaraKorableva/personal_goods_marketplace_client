@@ -1,12 +1,7 @@
-export const conditions = 
-{
-    rus:[
-        "Hовое", "Идеальное", "Хорошее", "Среднее", "Плохое",
-    ],
-    en: [
-        "New", "Excellent", "Good", "Average", "Poor",    
-    ],
-    he: [
-        "חדש", "מצוין", "טוב", "בינוני", "גרוע",
-    ]
-}
+export const conditions = [
+    { rus: "Новое", en: "New", hebrew: "חדש" },
+    { rus: "Идеальное", en: "Excellent", hebrew: "מצוין" },
+    { rus: "Хорошее", en: "Good", hebrew: "טוב" },
+    { rus: "Среднее", en: "Average", hebrew: "בינוני" },
+    { rus: "Плохое", en: "Poor", hebrew: "גרוע" },
+  ];

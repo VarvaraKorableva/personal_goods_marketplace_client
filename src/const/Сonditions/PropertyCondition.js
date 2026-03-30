@@ -1,25 +1,7 @@
-//Сonditions
-
-export const propertyCondition = {
-    rus: [
-      "Новое жильё",
-      "После ремонта",
-      "Хорошее состояние",
-      "Требует ремонта",
-      "Строящееся",
-    ],
-    en: [
-      "New property",
-      "Renovated",
-      "Good condition",
-      "Needs renovation",
-      "Under construction",
-    ],
-    he: [
-      "נכס חדש",
-      "משופץ",
-      "במצב טוב",
-      "דורש שיפוץ",
-      "בתהליך בנייה",
-  ]
-  }
+export const propertyCondition = [
+  { rus: "Новое жильё", en: "New property", hebrew: "נכס חדש" },
+  { rus: "После ремонта", en: "Renovated", hebrew: "משופץ" },
+  { rus: "Хорошее состояние", en: "Good condition", hebrew: "במצב טוב" },
+  { rus: "Требует ремонта", en: "Needs renovation", hebrew: "דורש שיפוץ" },
+  { rus: "Строящееся", en: "Under construction", hebrew: "בתהליך בנייה" },
+];

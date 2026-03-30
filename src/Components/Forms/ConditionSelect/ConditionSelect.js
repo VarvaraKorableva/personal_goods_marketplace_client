@@ -11,21 +11,34 @@ function ConditionSelect({
   isConditionSelected,
   setIsConditionSelected,
   conditionErrorMessage,
-  setConditionErrorMessage
+  setConditionErrorMessage,
+  setCondition_ru,
+  setCondition_en,
+  setCondition_he,
 }) {
   //const [isError, setIsError] = React.useState(false)
 
   const handleConditionChange = (e) => {
-    if (e.target.value) {
-      setCondition(e.target.value)
-      setIsConditionSelected(true)
-      setConditionErrorMessage('')
+    const value = e.target.value;
+  
+    if (value) {
+      const selectedCondition = conditions.find(
+        (item) => item[language] === value
+      );
+      //setCondition(value);
+      setCondition(selectedCondition.en);
+      setCondition_ru(selectedCondition.rus);
+      setCondition_en(selectedCondition.en);
+      setCondition_he(selectedCondition.hebrew);
+  
+      setIsConditionSelected(true);
+      setConditionErrorMessage('');
     } else {
-      setCondition('')
-      setIsConditionSelected(false)
-      setConditionErrorMessage(translatedContext.errors.conditionErrorMessage.errorMessage)
+      setCondition('');
+      setIsConditionSelected(false);
+      setConditionErrorMessage(translatedContext.errors.conditionErrorMessage.errorMessage);
     }
-  }
+  };
 
   return (
     <div className='input-container'>
@@ -37,15 +50,11 @@ function ConditionSelect({
       >
         
         <option value="">{label} </option>
-
-        {language === 'rus'
-          ? conditions.rus.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))
-          : conditions.en.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))
-        }
+        {conditions.map((item, index) => (
+          <option key={index} value={item[language]}>
+            {item[language]}
+          </option>
+        ))}
       </select>
 
       {isConditionSelected ? (
