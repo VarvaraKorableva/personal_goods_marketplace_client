@@ -18,9 +18,8 @@ const en = {
     propertyBuyPrice: 'Enter the property price (if set to 0, a "Free" badge will be added)',
     inputPlace: 'Start typing a city',
     servicePrice: 'Add a Price',
-
+    addNewRealEstateAdTitle: 'Add a real estate listing',
     place: 'Where can you give the goods (city)',
-    
     cityServices: 'Where will the service be provided',
     picture: 'Add a Pictures',
     placeRealEstate: 'Where is the property located (city)',
@@ -89,6 +88,7 @@ const rus = {
     servicePrice: 'Укажите стоимость услуги (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     propertyRentPrice: 'Укажите стоимость аренды недвижимости в месяц (если указать стоимость 0, добавится бейдж - "Бесплатно")',
     propertyBuyPrice: 'Укажите стоимость недвижимости (если указать стоимость 0, добавится бейдж - "Бесплатно")',
+    addNewRealEstateAdTitle: 'Добавить объявление о недвижимости',
     place: 'Где можно забрать товар (город)',
     inputPlace: 'Начинайте вводить город',
     cityServices: 'Укажите место, где будет оказана услуга',
@@ -161,7 +161,7 @@ const hebrew = {
     servicePrice: 'ציין את מחיר השירות (אם המחיר הוא 0, יתווסף תג "חינם")',
     propertyRentPrice: 'ציין את מחיר השכירות לחודש (אם המחיר הוא 0, יתווסף תג "חינם")',
     propertyBuyPrice: 'ציין את מחיר הנכס (אם המחיר הוא 0, יתווסף תג "חינם")',
-    
+    addNewRealEstateAdTitle: 'הוסף מודעת נדל״ן',
     place: 'איפה ניתן לאסוף את המוצר (עיר)',
     inputPlace: 'התחל להקליד עיר',
     cityServices: 'ציין היכן יינתן השירות',

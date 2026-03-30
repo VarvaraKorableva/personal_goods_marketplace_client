@@ -54,6 +54,15 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
         );
     } 
 
+    const conditionByLanguage = {
+        rus: selectedItem[0]?.condition_ru,
+        en: selectedItem[0]?.condition_en,
+        hebrew: selectedItem[0]?.condition_he
+    };
+    
+    const displayedCondition =
+        conditionByLanguage[language] || selectedItem[0]?.condition;
+
     function hundleDeleteMyAd() {
         openDeletePopup(selectedItem[0].item_id)
     }
@@ -122,20 +131,28 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
                             <p className="cardPage-info-title">{translatedContext.category}: <span className="cardPage-info">{selectedItem[0].parent_category_name_rus}</span></p>
                             
-                            {selectedItem[0].condition.length?
+                            {(
+                                selectedItem[0].condition ||
+                                selectedItem[0].condition_ru ||
+                                selectedItem[0].condition_en ||
+                                selectedItem[0].condition_he
+                                ) ? (
                                 <div className="cardPage-info-edit-container">
-                                    {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
-                                        <button className="cardPage-edit-btn" onClick={handleOpenConditionEditPopup}>
-                                            <TbEdit className="cardPage-edit-icon"/>
-                                        </button>
-                                        :
-                                        <></>
-                                    }
-                                    <p className="cardPage-info-title">{translatedContext.condition}: <span className="cardPage-info">{selectedItem[0].condition}</span></p>
+                                    {isLoggin && currentUser.user_id === selectedItem[0].owner_id ? (
+                                    <button className="cardPage-edit-btn" onClick={handleOpenConditionEditPopup}>
+                                        <TbEdit className="cardPage-edit-icon"/>
+                                    </button>
+                                    ) : null}
+
+                                    <p className="cardPage-info-title">
+                                    {translatedContext.condition}: 
+                                    <span className="cardPage-info">{displayedCondition}</span>
+                                    </p>
                                 </div>
-                            : 
-                                <></>
-                            }
+                                ) : null}
+
+                            
+
                             <div className="cardPage-info-edit-container">
                                 {isLoggin && currentUser.user_id === selectedItem[0].owner_id?
                                     <button className="cardPage-edit-btn" onClick={handleOpenPriceEditPopup}>

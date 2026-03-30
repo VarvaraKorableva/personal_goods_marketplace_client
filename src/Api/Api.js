@@ -1,5 +1,5 @@
-//export const BASE_URL = '//localhost:3001';
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const BASE_URL = '//localhost:3001';
+//const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -94,6 +94,9 @@ export const createItem = (otherData) => {
       city_ru: otherData.city_ru,
       city_en: otherData.city_en,
       city_he: otherData.city_he,
+      condition_ru: otherData.condition_ru,
+      condition_en: otherData.condition_en,
+      condition_he: otherData.condition_he,
     })
   })
     .then(checkResponse);

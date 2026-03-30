@@ -32,18 +32,8 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
         translatedContext = hebrew;
     }
 
-    const langKeyMap = {
-      rus: 'rus',
-      en: 'en',
-      hebrew: 'he'
-    };
-
-    const currentLang = langKeyMap[language] || 'rus';
-
-    //const cityOptions = cities.map(cityObj => cityObj[currentLang] || cityObj.rus);
     const cityOptions = cities.map(cityObj => cityObj[language] || cityObj.rus);
-    
-    const conditionOptions = conditions[currentLang] || conditions.rus;
+    const conditionOptions = conditions.map(item => item[language] || item.rus);
 
     function handleSearchByCity(e) {
       setCity(e.target.value)
@@ -89,17 +79,6 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
               <div className="filterBtnContainer__btn-price" onClick={handleResetAllFilters}>{translatedContext.resetFilters}</div>
             </div>
 
-{/*
-            <div className="filterBtnContainer__inputs-container">
-
-              <input 
-                className="filterBtnContainer__input-city"
-                placeholder='Город'
-                value={city}
-                onChange={handleSearchByCity}
-              >
-              </input>
-*/}
             <div className="filterBtnContainer__inputs-container">
             <select
                 className="filterBtnContainer__input-city"
@@ -114,26 +93,12 @@ function FilterBtnContainer({getAllItems, resetAllfilters}) {
                 ))}
               </select>
 
-
-
               <select 
                 className='filterBtnContainer__input' 
                 onChange={handleSearchByConditionFromInput}
                 value={condition}
               >
                 <option value="">{translatedContext.selectCondition}</option>
-
-                    {/*{language === 'rus' ?
-                        conditions.rus.map((item) => (
-                            <option key={item} value={item}>{item}</option>
-                        ))
-            
-                    :
-                        conditions.en.map((item) => (
-                            <option key={item} value={item}>{item}</option>
-                        ))
-                    }*/}
-
                       {conditionOptions.map((item) => (
                         <option key={item} value={item}>
                           {item}

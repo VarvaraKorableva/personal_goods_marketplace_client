@@ -41,6 +41,9 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
   const [size, setSize] = React.useState('')
   const [color, setColor] = React.useState('')
   const [condition, setCondition] = React.useState('') 
+  const [condition_ru, setCondition_ru] = React.useState('')
+  const [condition_en, setCondition_en] = React.useState('')
+  const [condition_he, setCondition_he] = React.useState('')
   const [isRealEstate, setIsRealEstate] = React.useState(false)
   const [isRent, setIsRent] = React.useState(false)
   const [isValid, setIsValid] = React.useState(false)
@@ -97,6 +100,7 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
         original_language:language,
         formData,
         city_ru, city_en, city_he,
+        condition_ru, condition_en, condition_he,
       });
     } else {
       onAddAd({
@@ -113,6 +117,7 @@ function AddRealEstatePage({onAddAd, openLoading, closeLoading}) {
         isRent,
         original_language:language,
         city_ru, city_en, city_he,
+        condition_ru, condition_en, condition_he,
       });
 
     }
@@ -144,7 +149,7 @@ return (
     <Container as='section' baseClassName='wrapper' className="addAdPage__wrapper">
     <Container as='div' baseClassName='container' className='addAdPage__container'>
       <BackBtn className='backBtn_margin-top'/>
-      <h2 className="addAdPage__title">Добавить объявление о недвижимости</h2>
+      <h2 className="addAdPage__title">{translatedContext.addNewRealEstateAdTitle}</h2>
       <form 
         ref={formRef}
         className='addAdPage__form'
@@ -196,6 +201,9 @@ return (
           setIsConditionSelected={setIsConditionSelected}
           conditionErrorMessage={conditionErrorMessage}
           setConditionErrorMessage={setConditionErrorMessage}
+          setCondition_ru={setCondition_ru}
+          setCondition_en={setCondition_en}
+          setCondition_he={setCondition_he}
         />
         <DiscriptionField
           label={translatedContext.propertyDescription}
