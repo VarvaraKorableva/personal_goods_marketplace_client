@@ -59,9 +59,36 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
         en: selectedItem[0]?.condition_en,
         hebrew: selectedItem[0]?.condition_he
     };
+
+    const langKey = {
+        rus: 'title_ru',
+        en: 'title_en',
+        hebrew: 'title_he'
+    };
+
+    const langDescriptionKey = {
+        rus: 'description_ru',
+        en: 'description_en',
+        hebrew: 'description_he'
+    };
+
+    const langMap = {
+        rus: 'city_ru',
+        en: 'city_en',
+        hebrew: 'city_he'
+    };
+
+    const langConditionMap = {
+        rus: 'condition_ru',
+        en: 'condition_en',
+        hebrew: 'condition_he'
+    };
+      
+    const displayedCity = selectedItem[0][langMap[language]] || selectedItem[0].city;
+    const displayedCondition = selectedItem[0][langConditionMap[language]] || selectedItem[0].condition;
     
-    const displayedCondition =
-        conditionByLanguage[language] || selectedItem[0]?.condition;
+    {/*const displayedCondition =
+conditionByLanguage[language] || selectedItem[0]?.condition;*/}
 
     function hundleDeleteMyAd() {
         openDeletePopup(selectedItem[0].item_id)
@@ -128,7 +155,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                             :
                                 <></>
                             }
-                            <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0].title}</span></p>
+                            <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0][langKey[language]] || selectedItem[0].title}</span></p>
                             <p className="cardPage-info-title">{translatedContext.category}: <span className="cardPage-info">{selectedItem[0].parent_category_name_rus}</span></p>
                             
                             {(
@@ -172,7 +199,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                                     :
                                     <></>
                                 }
-                                <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{selectedItem[0].city}</span></p>
+                                <p className="cardPage-info-title">{translatedContext.city}: <span className="cardPage-info">{displayedCity}</span></p>
                             </div>
 
 
@@ -255,7 +282,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
                         }
                         <p className="cardPage-info">{translatedContext.description}:</p>
                     </div>
-                    <p className="cardPage-info-description">{selectedItem[0].description}</p>
+                    <p className="cardPage-info-description">{selectedItem[0][langDescriptionKey[language]] || selectedItem[0].description}</p>
                 </div>
                 }
             </div>

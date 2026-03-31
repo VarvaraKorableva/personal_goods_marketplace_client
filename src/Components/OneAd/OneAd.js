@@ -45,8 +45,14 @@ function OneAd({
       en: 'city_en',
       hebrew: 'city_he'
     };
+
+    const langKey = {
+      rus: 'title_ru',
+      en: 'title_en',
+      hebrew: 'title_he'
+    };
     
-    const displayedCity = item[langMap[language]] || item.city_ru;
+    const displayedCity = item[langMap[language]] || item.city;
 
 
     function handleAddMessagePopupOpen() {
@@ -130,7 +136,9 @@ function OneAd({
             <div className="oneAdd__pic-and-info-container"> 
             
               <div className="oneAdd__text-container">
-              <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>{item.title}</Link>
+              <Link to={`/items/${item.item_id}`} className="oneAdd__title" onClick={handleClick}>
+                {item[langKey[language]] || item.title}
+              </Link>
               
                 <div className="oneAdd__title-and-like-container">
                     {isLoggin? 
