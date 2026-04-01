@@ -52,6 +52,7 @@ function ChangeCategoryPage() {
       /*createCategoryAdmin({
         name: "Party supplies",
         name_rus: "Всё для праздника",
+        name_he: "",
         is_good: true,
         parent_id: null,
         image_url: "https://plus.unsplash.com/premium_photo-1661765319272-b6d49089e41f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIxfHxjaHJpc3RtYXN8ZW58MHx8MHx8fDA%3D",
@@ -66,6 +67,7 @@ function ChangeCategoryPage() {
         /*createCategoryAdmin({
           name: "Dresses",
           name_rus: "Платья",
+          name_he: "",
           is_good: true,
           parent_id: 55, // "Одежда"
           image_url: "https://images.unsplash.com/photo-1572005901620-75fdc3a40941?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHBhamFtYXMlMjBjaGlsZHxlbnwwfHwwfHx8MA%3D%3D",
@@ -145,6 +147,20 @@ function ChangeCategoryPage() {
         }
       }
 
+      async function handleUpdateCategoryNameHe() {
+        setMessage("")
+        try {
+          const result = await Api.updateCategoryNameHe(
+            149, 
+            "שמלות"
+          );  
+          setMessage("Изменение прошло")
+        } catch (err) {
+          console.error(err);
+          setMessage("что-то пошло не так")
+        }
+      }
+
       async function handleUpdateCategoryNameEng() {
         setMessage("")
         try {
@@ -165,6 +181,10 @@ function ChangeCategoryPage() {
 
       function onUpdateCategoryNameRus() {
         //handleUpdateCategoryNameRus()
+      }
+
+      function onUpdateCategoryNameHe() {
+        handleUpdateCategoryNameHe()
       }
 
       function onUpdateCategoryNameEng() {
@@ -216,6 +236,7 @@ function ChangeCategoryPage() {
                 <Button onClick={onUpdateCategoryImg}>Изменить картинку категории</Button>
                 <Button onClick={onUpdateCategoryNameRus}>Изменить название категории rus</Button>
                 <Button onClick={onUpdateCategoryNameEng}>Изменить название категории eng</Button>
+                <Button onClick={onUpdateCategoryNameHe}>Изменить название категории he</Button>
                 <Button onClick={onUpdateCategorySlug}>Изменить Slug</Button>
                 <Button onClick={onUpdateItemCategory}>updateItemСategoryId</Button>
             </div>

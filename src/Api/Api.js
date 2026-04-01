@@ -113,6 +113,7 @@ export const getUserItems = (owner_id) => {
   })
       .then(checkResponse) 
 };
+
 export const getItems = async ({ page = 1, limit = 20, filters = {}, categoryId, recursive } = {}) => {
     const query = new URLSearchParams();
   
@@ -141,7 +142,7 @@ export const getItems = async ({ page = 1, limit = 20, filters = {}, categoryId,
     });
   
     return checkResponse(res);
-  };
+};
   
 export const getItemById = (item_id) => {
   return fetch(`${BASE_URL}/items/all/${item_id}`, {
@@ -179,7 +180,6 @@ export const getAllItems = ({ page = 1, limit = 20 }) => {
     .then(checkResponse);
 };
   
-
 export const deleteItem = (item_id, reason) => {
   return fetch(`${BASE_URL}/items/${item_id}`, {
       credentials: 'include',
@@ -438,7 +438,6 @@ export const verifyCode = ( email, code ) => {
         .then(checkResponse)
   };  
 
-
 export const updateIsReserved = ( item_id, user_id ) => { 
     return fetch(`${BASE_URL}/items/updateIsReserved/${item_id}/${user_id}`, {
         credentials: 'include',
@@ -517,7 +516,6 @@ export const updateCondition = (item_id, condition) => {
     })
     .then(checkResponse);
 };
-
 export const updatePassword = (email, newPassword) => {
     return fetch(`${BASE_URL}/users/updatepassword`, {
         credentials: 'include',
@@ -547,7 +545,8 @@ export const createCategory = (data) => {
         parent_id: data.parent_id,
         image_url: data.image_url,
         slug: data.slug,
-        name_rus: data.name_rus,   
+        name_rus: data.name_rus, 
+        name_he: data.name_he,  
         is_real_estate: data.isRealEstate,
         is_rent: data.isRent,
       })
@@ -632,6 +631,20 @@ export const updateCategoryNameRus = (category_id, name_rus) => {
     })
       .then(checkResponse);
 }  
+
+export const updateCategoryNameHe = (category_id, name_he) => {
+  console.log('name_he', name_he)
+  return fetch(`${BASE_URL}/category/updatenamehe`, {
+    credentials: 'include',
+    method: 'PATCH',
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ category_id, name_he }),
+  })
+    .then(checkResponse);
+} 
 
 export const updateTelegram = (user_id, telegram) => {
     return fetch(`${BASE_URL}/users/updatetelegram`, {

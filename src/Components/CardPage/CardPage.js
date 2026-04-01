@@ -19,7 +19,7 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
 
     const {
         selectedItem,
-      } = useItemsContext();
+    } = useItemsContext();
 
     const {
         favorite, 
@@ -83,6 +83,12 @@ function CardPage({ openEditPopup, openDeletePopup, getItemById, addToFavorites,
         en: 'condition_en',
         hebrew: 'condition_he'
     };
+
+    const langCategoryKey = {
+        rus: 'parent_category_name_rus',
+        en: 'parent_category_name',
+        hebrew: 'parent_category_name_he'
+    }
       
     const displayedCity = selectedItem[0][langMap[language]] || selectedItem[0].city;
     const displayedCondition = selectedItem[0][langConditionMap[language]] || selectedItem[0].condition;
@@ -156,7 +162,7 @@ conditionByLanguage[language] || selectedItem[0]?.condition;*/}
                                 <></>
                             }
                             <p className="cardPage-info-title">{translatedContext.name}: <span className="cardPage-info">{selectedItem[0][langKey[language]] || selectedItem[0].title}</span></p>
-                            <p className="cardPage-info-title">{translatedContext.category}: <span className="cardPage-info">{selectedItem[0].parent_category_name_rus}</span></p>
+                            <p className="cardPage-info-title">{translatedContext.category}: <span className="cardPage-info">{selectedItem[0][langCategoryKey[language]] || selectedItem[0].parent_category_name}</span></p>
                             
                             {(
                                 selectedItem[0].condition ||

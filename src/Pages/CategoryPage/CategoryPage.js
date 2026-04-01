@@ -10,6 +10,8 @@ import { useItemsContext } from '../../contexts/ItemsContext';
 import { useFiltersContext } from "../../contexts/FiltersContext";
 import { ITEMS_LIMIT } from "../../const/helper";
 import Container from '../../UK-kit/Container/Container'
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/CategoryData'
 
 function CategoryPage({
     openDeletePopup, isLoggin,
@@ -19,6 +21,8 @@ function CategoryPage({
     handleUpdateIsReserved, getItemsByCategoryId
 }) {
     const limit = ITEMS_LIMIT
+    const { language } = React.useContext(LanguageContext)
+
     const {
         setCategoryPage,
         setCategoryId,
@@ -46,6 +50,16 @@ function CategoryPage({
 
     const { "*": rest } = useParams(); // <-- вытаскиваем хвост
     const slugs = rest ? rest.split("/") : [];
+
+    const { en, rus, hebrew } = choose;
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
   
     useEffect(() => {
         // если категории ещё не загружены, грузим их
@@ -97,11 +111,11 @@ function CategoryPage({
             </ul>
             {itemsSecondPageSearch.length?
                 <>
-                    <h2 className='categoryPage__ads-length-title'>Все объявления в категории {adsCategoryName}</h2>
-                    <h2 className='categoryPage__ads-length-title'>Количество объявлений {totalCategoryCountOfAds}</h2>
+                    <h2 className='categoryPage__ads-length-title'>{translatedContext.allAdsInCategory} {adsCategoryName}</h2>
+                    <h2 className='categoryPage__ads-length-title'>{translatedContext.totalAds} {totalCategoryCountOfAds}</h2>
                 </>
             :
-                <h2 className='categoryPage__ads-length-title'>В категории {adsCategoryName}, не добавлено ни одного объявления :(</h2>
+                <h2 className='categoryPage__ads-length-title'>{translatedContext.noAdsInCategoryPart1} {translatedContext.noAdsInCategoryPart2}</h2>
             }
             <Container as='ul' baseClassName='listings-container'>
                 {/*{[...itemsSecondPageSearch].reverse().map((item) => (*/}
