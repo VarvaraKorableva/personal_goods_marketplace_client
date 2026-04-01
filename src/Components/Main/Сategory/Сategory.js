@@ -39,12 +39,7 @@ function Category({category}) {
               <div className="category-pic-container">
                 <img src={category.image_url} className="category-pic"></img>
               </div>
-              {category[langKey[language]] || category.name}
-              {/*language === 'rus' ?
-                <p className="category-title">{category.name_rus}</p>
-              :
-                <p className="category-title">{category.name}</p>
-    */}
+                <p className="category-title">{category[langKey[language]] || category.name}</p>
             </Link>
         </li>
     )
