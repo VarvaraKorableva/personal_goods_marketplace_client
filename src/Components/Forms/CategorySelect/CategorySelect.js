@@ -12,6 +12,12 @@ function CategorySelect({
   const [isServiceCategory, setIsServiceCategory] = useState(false)
   //const [isError, setIsError] = React.useState(false)
 
+  const langCategoryKey = {
+    rus: 'name_rus',
+    en: 'name',
+    hebrew: 'name_he'
+}
+
   useEffect(() => {
     if (!isGood) {
       // Найдём категорию "Услуги" (root с is_good = false)
@@ -70,7 +76,7 @@ function CategorySelect({
             <option value="">{label}</option>
             {options.map((item) => (
               <option key={item.category_id} value={item.category_id}>
-                {language === 'rus' ? item.name_rus : item.name}
+                {item[langCategoryKey[language]] || item.name}
               </option>
             ))}
           </select>

@@ -1,11 +1,30 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import {LanguageContext} from '../../contexts/TranslationContext'
+import choose from '../../const/CategoryData'
 import * as Api from '../../Api/Api'
 
 export default function useCategory({closeLoading, openLoading, }) {
     const [categories, setCategories] = React.useState([])
     const [categoriesToRender, setCategoriesToRender] = React.useState([])
     const [adsCategoryName, setAdsCategoryName] = React.useState('') 
+    const { language } = React.useContext(LanguageContext)
+
+    const { en, rus, hebrew } = choose;
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
+
+    const langCategoryKey = {
+      rus: 'name_rus',
+      en: 'name',
+      hebrew: 'name_he'
+  }
 
     async function getCategory() {
       openLoading();
@@ -109,7 +128,10 @@ const chooseCategory = (category) => {
   // остальная логика остаётся как была
   let myCatToRender = [];
   //findAllCategoryGrandChildren(category, myCatToRender);
-  setAdsCategoryName(category.name_rus);
+  
+  setAdsCategoryName(
+    category[langCategoryKey[language]] || category.name
+  );
 };
 
 

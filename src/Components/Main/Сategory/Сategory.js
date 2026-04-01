@@ -2,11 +2,29 @@ import './Сategory.css'
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {LanguageContext} from '../../../contexts/TranslationContext'
+import choose from '../../../const/Timing'
 
 function Category({category}) {
     let { slug } = useParams();
     const { language } = React.useContext(LanguageContext)
     const { "*": rest } = useParams(); 
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
+
+    const langKey = {
+      rus: 'name_rus',
+      en: 'name',
+      hebrew: 'name_he'
+    };
 
     const path = rest ? rest.split("/") : [];
     
@@ -21,11 +39,12 @@ function Category({category}) {
               <div className="category-pic-container">
                 <img src={category.image_url} className="category-pic"></img>
               </div>
-              {language === 'rus' ?
+              {category[langKey[language]] || category.name}
+              {/*language === 'rus' ?
                 <p className="category-title">{category.name_rus}</p>
               :
                 <p className="category-title">{category.name}</p>
-              }
+    */}
             </Link>
         </li>
     )
