@@ -134,12 +134,12 @@ function Login({ isLoginError, onLogin, isLoading, isLoggin }) {
         <button className={`'login__btn' ${isValid? 'login__btn_active': 'login__btn'}`} type='submit' disabled={!isValid}>{translatedContext.button}</button>
           <div className='login__wrapper'>
             <p className='login__subtitle'>{translatedContext.notRegisteredYet}
-              <Link className='login__entrylink' to="/signup-first-stage"> {translatedContext.signUp}</Link>
+              <Link className='login__entrylink' to="/signup-first-stage"> {translatedContext.signUp} </Link>
             </p>
           </div>
           <div className='login__wrapper'>
-            <p className='login__subtitle'>Забыли пароль?
-              <Link className='login__entrylink' to="/password-recovery-code-request">Восстановить пароль</Link>
+            <p className='login__subtitle'>{translatedContext.forgotPassword}
+              <Link className='login__entrylink' to="/password-recovery-code-request"> {translatedContext.recoverPassword} </Link>
             </p>
           </div>
         </form>

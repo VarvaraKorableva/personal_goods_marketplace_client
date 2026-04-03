@@ -356,9 +356,9 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conv
         })
     })
         .then(checkResponse)
-  };  
+};  
 
-  export const deleteMessage = (message_id) => {
+export const deleteMessage = (message_id) => {
     return fetch(`${BASE_URL}/messages/${message_id}`, {
         credentials: 'include',
         method: "DELETE",
@@ -368,9 +368,9 @@ export const addMessage = ( {receiver_id, sender_id, item_id, message_text, conv
         },
     })
         .then(checkResponse) 
-  };
+};
 
-  export const markMessagesAsRead = ( conversation_id, user_id ) => {
+export const markMessagesAsRead = ( conversation_id, user_id ) => {
       
     return fetch(`${BASE_URL}/messages/markMessagesAsRead/${conversation_id}/${user_id}`, {
         credentials: 'include',
@@ -468,7 +468,7 @@ export const updateConversationIsDeleted = ( user_id, conversation_id ) => {
         .then(checkResponse)
 };  
 
-export const updateItemCity = (item_id, city) => {
+export const updateItemCity = (item_id, city, city_ru, city_en, city_he) => {
     return fetch(`${BASE_URL}/items/updateCity/${item_id}`, {
         credentials: 'include',
         method: "PATCH",
@@ -476,10 +476,24 @@ export const updateItemCity = (item_id, city) => {
             "Accept": "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ city }),
+        body: JSON.stringify({ city, city_ru, city_en, city_he }),
     })
     .then(checkResponse);
 };
+
+export const updateItemTitle = (item_id, title, title_ru, title_en, title_he) => {
+  return fetch(`${BASE_URL}/items/updateItemTitle/${item_id}`, {
+      credentials: 'include',
+      method: "PATCH",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, title_ru, title_en, title_he }),
+  })
+  .then(checkResponse);
+};
+
 export const updatePrice = (item_id, price) => {
     return fetch(`${BASE_URL}/items/updatePrice/${item_id}`, {
         credentials: 'include',

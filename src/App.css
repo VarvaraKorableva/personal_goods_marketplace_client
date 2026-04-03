@@ -6,6 +6,11 @@
   margin: auto;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 .container__flex {
   display: flex;
   flex-wrap: wrap;

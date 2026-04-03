@@ -91,31 +91,60 @@ return (
         </div>
       :  
       isLoggin ?
+      <div className='column'>
         <div className='burgerMenuPopup_wrapper'>
           <Link to={`/users/`} className='burgerMenuPopup_login-link' onClick={handleGetUnreadbleMessages}>
             <p className='burgerMenuPopup_login-link font'>{translatedContext.mypage}</p>
           </Link>
         </div>
+        <div className='header__lang-container burgerMenuPopup_link'>
+            <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
+            <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
+            <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active font':'header__lang-btn font'}>HE</button>
+        </div>
+      </div>
          
       :
       !isLoggin  && location.pathname === '/signup-first-stage'?
-       
-      <Link to="/signin" className='burgerMenuPopup_login-link font' onClick={onClose}>
-        <p>{translatedContext.login}</p>
-      </Link>
-      :
-      !isLoggin && location.pathname === '/signin'?
-      <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
-        <p>{translatedContext.registraion}</p>
-      </Link>
-      :
-      <div className='burgerMenuPopup__links-container'>
-        <Link to="/signin" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
+      <div className='column'>
+        <Link to="/signin" className='burgerMenuPopup_login-link font' onClick={onClose}>
           <p>{translatedContext.login}</p>
         </Link>
+        <div className='header__lang-container burgerMenuPopup_link'>
+          <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
+          <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
+          <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active font':'header__lang-btn font'}>HE</button>
+        </div>
+      </div>
+      :
+      !isLoggin && location.pathname === '/signin'?
+      <div className='column'>
         <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
           <p>{translatedContext.registraion}</p>
         </Link>
+        <div className='header__lang-container burgerMenuPopup_link'>
+          <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
+          <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
+          <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active font':'header__lang-btn font'}>HE</button>
+        </div>
+      </div>
+
+      :
+      <div className='burgerMenuPopup__links-container'>
+        <div className='column'>
+          <Link to="/signin" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
+            <p>{translatedContext.login}</p>
+          </Link>
+          <Link to="/signup-first-stage" className='burgerMenuPopup_registraion-link font' onClick={onClose}>
+            <p>{translatedContext.registraion}</p>
+          </Link>
+
+          <div className='header__lang-container burgerMenuPopup_link'>
+            <button onClick={() => handleLanguageChange('rus')} className={language === 'rus'? 'header__lang-btn_active font':'header__lang-btn font'}>RU</button>
+            <button onClick={() => handleLanguageChange('en')} className={language === 'en'? 'header__lang-btn_active font':'header__lang-btn font'}>EN</button>
+            <button onClick={() => handleLanguageChange('hebrew')} className={language === 'hebrew'? 'header__lang-btn_active font':'header__lang-btn font'}>HE</button>
+          </div>
+        </div>
       </div>
       }
     </div>

@@ -135,6 +135,9 @@
     text-decoration: none;
     font-size: 12px;
     font-weight: 700;
+
+    align-self: flex-start;
+    display: flex;
   }
   .burgerMenuPopup_login-link:hover{
     opacity: 0.5;
@@ -161,6 +164,9 @@
     font-size: 12px;
     font-weight: 700;
     margin-right: 10px;
+
+    display: flex;
+    align-self: flex-start;
   }
   .burgerMenuPopup_registraion-link:hover{
     opacity: 0.5;

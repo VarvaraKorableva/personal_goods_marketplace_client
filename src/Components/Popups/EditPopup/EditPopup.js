@@ -4,7 +4,7 @@ import {LanguageContext} from '../../../contexts/TranslationContext'
 import {CurrentUserContext} from '../../../contexts/CurrentUserContext'
 import choose from '../../../const/AddAdPageData'
 import { IoMdCloseCircleOutline } from "react-icons/io"
-import { cities } from '../../../const/Cities/cities'
+import { cities } from '../../../const/Cities/citiesKeys'
 import { conditions } from '../../../const/Сonditions/Сonditions'
 import EditField from "./EditField";
 
@@ -14,6 +14,10 @@ function EditPopup ({
   updateDescription, updateCondition, popupEditItemId, updateTelegram, updateUserName
 }) {
     const [text, setText] = React.useState('')
+    const [city_ru, setCity_ru] = React.useState('')
+    const [city_en, setCity_en] = React.useState('')
+    const [city_he, setCity_he] = React.useState('')
+   
     const [isMessageText, setIsMessageText] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState('')
     const [isValid, setIsValid] = React.useState(false)
@@ -32,11 +36,20 @@ function EditPopup ({
       translatedContext = hebrew;
     }
 
+    const langKey = {
+      rus: 'rus',
+      en: 'en',
+      hebrew: 'hebrew',
+    };
+
     function handleOnClose() {
       onClose()
       setIsMessageText(false)
       setErrorMessage('')
       setText('')
+      setCity_ru('')
+      setCity_en('')
+      setCity_he('')
     }
 
     function onEditBtn(e) {
@@ -44,7 +57,7 @@ function EditPopup ({
         if(title === "condition"){
           updateCondition(popupEditItemId, text)
         } else if(title === "city") {
-          updateItemCity(popupEditItemId, text)
+          updateItemCity(popupEditItemId, text, city_ru, city_en, city_he)
         } else if(title === "price") {
           updatePrice(popupEditItemId, text)
         } else if(title === "description") {
@@ -56,11 +69,22 @@ function EditPopup ({
         }
         setIsMessageText(false)
         setText('')
+        setCity_ru('')
+        setCity_en('')
+        setCity_he('')
     }
 
     function handleChange(e) {
       const value = e.target.value;
       setText(value);
+
+      const cityObj = cities.find(c => c[langKey[language]] === value);
+
+      if (cityObj) {
+        setCity_ru(cityObj.rus);
+        setCity_en(cityObj.en);
+        setCity_he(cityObj.hebrew);
+      }
   
       if (!value) {
         setIsValid(false);

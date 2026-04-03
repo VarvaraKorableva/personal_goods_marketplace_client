@@ -51,9 +51,9 @@ export default function useItemUpdate(userId, {openLoading, closeLoading, closeA
     })
   }
 
-  const updateItemCity = (item_id, city) => {
+  const updateItemCity = (item_id, city, city_ru, city_en, city_he) => {
     openLoading()
-    Api.updateItemCity(item_id, city)
+    Api.updateItemCity(item_id, city, city_ru, city_en, city_he)
     .then((res) => {
       closeAllPopups()
       setPopupMessage(translatedContext.messagesPopup.changesSaved)

@@ -7,6 +7,8 @@ const en = {
     signUp: 'SignUp',
 
     button: 'SignIn',
+    forgotPassword: 'Forgot your password?',
+    recoverPassword: 'Recover password',
 
     errors: {
         passwordMessage: {
@@ -31,6 +33,8 @@ const rus = {
     signUp: 'Зарегистрироваться',
 
     button: 'Войти',
+    forgotPassword: 'Забыли пароль?',
+    recoverPassword: 'Восстановить пароль',
 
     errors: {
         passwordMessage: {
@@ -55,6 +59,8 @@ const hebrew = {
     signUp: 'הרשמה',
 
     button: 'התחבר',
+    forgotPassword: 'שכחת את הסיסמה?',
+    recoverPassword: 'שחזר סיסמה',
 
     errors: {
         passwordMessage: {
