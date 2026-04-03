@@ -159,7 +159,7 @@ function fake(e) {
                 className='form'
                 onSubmit={fake}
               >
-                <Heading>Восстановление пароля</Heading>
+                <Heading>{translatedContext.passwordRecovery}</Heading>
                 
                 <fieldset className='fieldset'>
                   <label className='register__inputname'>{translatedContext.email}
@@ -168,7 +168,7 @@ function fake(e) {
                   <span className='register__inputmistake'></span> 
 
 
-                  <p className='register__title-stage'>Введите новый пароль</p>
+                  <p className='register__title-stage'>{translatedContext.enterNewPassword}</p>
                     <input className='register__input'
                       required
                       name="password"
@@ -195,7 +195,7 @@ function fake(e) {
                   type="submit"
                   className={`'register__btn' ${isValid? 'register__btn_active': 'register__btn'}`}
                   disabled={!isValid}>
-                    Изменить пароль
+                    {translatedContext.changePassword}
                 </button>
 
                 <div className='register__wrapper'>
@@ -211,9 +211,9 @@ function fake(e) {
                 <form 
                   className='form'
                   onSubmit={onVerifyCode}>
-                  <Heading>Восстановление пароля</Heading>
+                  <Heading>{translatedContext.passwordRecovery}</Heading>
                   <fieldset className='fieldset'>
-                    <p>Код отправлен на электронную почту {email}</p>
+                    <p>{translatedContext.codeSent `${email}`}</p>
                     <label className='register__inputname'>{translatedContext.verificationCodeLabel}
                     <input 
                       className='register__input' 
@@ -245,10 +245,10 @@ function fake(e) {
                 <form 
                   className='form' 
                   onSubmit={handleSubmit}>
-                  <Heading>Восстановление пароля</Heading>
+                  <Heading>{translatedContext.passwordRecovery}</Heading>
 
                   <fieldset className='fieldset'>
-                    <label className='register__inputname'>Введите email, на него будет отправлен код для восстановления пароля
+                    <label className='register__inputname'>{translatedContext.enterEmail}
                     <input className='register__input'
                       required
                       name="email"

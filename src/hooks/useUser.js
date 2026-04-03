@@ -3,9 +3,23 @@ import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import * as Api from '../Api/Api'
 import { useItemsContext } from '../contexts/ItemsContext';
+import {LanguageContext} from '../contexts/TranslationContext'
+import choose from '../const/Popups/Popup'
 
 export default function useUser({ openLoading, closeLoading, closeAllPopups, setPopupMessage, openSuccessfulActionPopup}) {
+    const { language } = React.useContext(LanguageContext)
     const [userInfo, setUserInfo] = React.useState([])
+
+    const { en, rus, hebrew } = choose;
+  
+    let translatedContext = '';
+    if (language === 'en') {
+      translatedContext = en;
+    } else if (language === 'rus') {
+      translatedContext = rus;
+    } else if (language === 'hebrew') {
+      translatedContext = hebrew;
+    }
 
     function getUserById(user_id) {
         openLoading()
@@ -25,7 +39,7 @@ export default function useUser({ openLoading, closeLoading, closeAllPopups, set
         Api.updateTelegram(user_id, telegram)
         .then((res) => {
           closeAllPopups()
-          setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+          setPopupMessage(translatedContext.messagesPopup.changesSaved)
           openSuccessfulActionPopup()
           closeLoading()
         })
@@ -42,7 +56,7 @@ export default function useUser({ openLoading, closeLoading, closeAllPopups, set
         Api.updateUserName(user_id, username)
         .then((res) => {
           closeAllPopups()
-          setPopupMessage("Изменения получены, скоро вы сможете их увидеть на сайте")
+          setPopupMessage(translatedContext.messagesPopup.changesSaved)
           openSuccessfulActionPopup()
           closeLoading()
         })

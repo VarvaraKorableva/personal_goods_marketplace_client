@@ -1,9 +1,16 @@
 import React from "react";
-import { cities } from "../../../const/Cities/cities";
+import { cities } from "../../../const/Cities/citiesKeys";
 import { conditions } from "../../../const/Сonditions/Сonditions";
 import '../Popups.css'
 
 function EditField({ title, language, text, onChange, errorMessage }) {
+
+  const langKey = {
+    rus: "rus",
+    en: "en",
+    hebrew: "hebrew",
+  };
+
   if (title === "condition") {
     const options = language === "rus" ? conditions.rus : conditions.en;
     return (
@@ -21,17 +28,26 @@ function EditField({ title, language, text, onChange, errorMessage }) {
   }
 
   if (title === "city") {
-    const options = language === "rus" ? cities.rus : cities.en;
     return (
       <select className="addAdPage__select" onChange={onChange} value={text}>
         <option value="">
-          {language === "rus" ? "Выберите город" : "Choose city"}
+          {language === "rus"
+            ? "Выберите город"
+            : language === "hebrew"
+            ? "בחר עיר"
+            : "Choose city"}
         </option>
-        {options.map((item) => (
-          <option key={item} value={item}>
-            {item}
+  
+        {cities.map((city) => {
+          const value = city[langKey[language]] || city.en;
+
+        return (
+          <option key={value} value={value}>
+            {value}
           </option>
-        ))}
+  );
+})}
+
       </select>
     );
   }
